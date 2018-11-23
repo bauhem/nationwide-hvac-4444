@@ -1,0 +1,29 @@
+<div class="share">
+  <div class="share-article">
+    <div>Partager cet article</div>
+    <div class="share-container hidden">
+      <div class="div-share">
+        <div class="w-embed">
+          <a
+            class="w-inline-block share-link facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=&t="
+            title="Share on Facebook"
+            target="_blank"
+            onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"></a>
+        </div>
+        <div class="w-embed">
+          <a
+            class="w-inline-block share-link twitter"
+            href="https://twitter.com/intent/tweet?"
+            target="_blank"
+            title="Tweet"
+            onclick="window.open('https://twitter.com/intent/tweet?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' + encodeURIComponent(document.URL)); return false;"></a>
+        </div>
+        <div class="w-embed">
+          <a class="w-inline-block share-link google" href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"></a>
+        </div>
+      </div>
+    </div>
+    <div class="button-share" data-ix="open-share"><img src="../../images/share.svg" alt="" class="share-icon"><img src="../../images/close.svg" alt="" class="share-close-icon hidden"></div>
+  </div>
+</div>
