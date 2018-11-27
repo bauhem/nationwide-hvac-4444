@@ -8,7 +8,6 @@ require 'middleman-inliner'
 
 
 activate :protect_emails
-activate :blog
 
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
@@ -29,13 +28,11 @@ set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
 
-
-
 activate :robots,
   :rules => [
     {:user_agent => '*', :allow => %w(/)}
   ],
-  :sitemap => "https://www..com/sitemap.xml"
+  :sitemap => "#{config.url_root}/sitemap.xml"
 
 activate :google_analytics do |ga|
     ga.tracking_id = '' # Replace with your property ID.
@@ -69,7 +66,7 @@ ignore '/templates/*'
 
 activate :pagination
 
-
+page "/index.html", :layout => "layout"
 
 
 # Helpers
@@ -79,9 +76,11 @@ activate :pagination
 proxy "_redirects", "netlify-redirects", ignore: true
 proxy "_headers", "netlify-headers", ignore: true
 
+proxy "/ac-units", "/templates/listing.html"
 
-# Créer la page contact
-
+data.units.each do |unit|
+  proxy "/ac-units/#{unit[:AHRI]}", "/templates/detail.html"
+end
 
 helpers do
 
