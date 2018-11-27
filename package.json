@@ -1,0 +1,24 @@
+{
+  "name": "nationwide-hvac",
+  "version": "1.0.0",
+  "description": "Nationwide-HVAC Corp website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bauhem/nationwide-hvac-4444.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bauhem/nationwide-hvac-4444/issues"
+  },
+  "homepage": "https://github.com/bauhem/nationwide-hvac-4444#readme",
+  "dependencies": {
+    "airtable": "^0.5.7",
+    "jsonfile": "^5.0.0",
+    "node": "^11.2.0"
+  }
+}
