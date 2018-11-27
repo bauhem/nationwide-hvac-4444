@@ -1,0 +1,21 @@
+<a href="<%= product_uri(unit) %>" class="related-units w-inline-block">
+  <%= image_tag product_image(unit), width: 200, class: "max-width-image" %>
+  <div class="div-full-width">
+    <div class="div-flex-h align-center">
+      <div class="product-name smaller"><%= model(unit) %></div>
+      <%= image_tag brand_logo(unit), width: 80, class: "image-brand" %>
+    </div>
+    <div class="div-product-details smaller">
+      <div class="blue-text">Tons</div>
+      <div><strong><%= unit["TONS"] %></strong></div>
+    </div>
+    <div class="div-product-details smaller">
+      <div class="blue-text">SEER</div>
+      <div><strong><%= unit["SEER"] %></strong></div>
+    </div>
+    <div class="div-product-details smaller">
+      <div class="blue-text">Price</div>
+      <div><strong><%= display_price(unit) %></strong></div>
+    </div>
+  </div>
+</a>

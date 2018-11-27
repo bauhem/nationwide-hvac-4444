@@ -1,3 +1,72 @@
-<% content_for :meta do %>
-  <%= dato_meta_tags(item) %>
-<% end %>
+<div class="section-hero-interior">
+  <%= image_tag brand_logo(unit), width: 200, 'data-ix': "hereo-appear-1" %>
+</div>
+<div class="breadcrumbs">
+  <a href="/ac-units" class="breadcrumb-link">
+    A/C Units
+  </a>
+  <span class="breadcrumb-link arrow">></span>
+  <%= system_type_bc(unit) %>
+  <span class="breadcrumb-link arrow">></span>
+  <a href="#" class="breadcrumb-link active"><%= unit['CU Model'] %></a>
+</div>
+<div class="section-product-details">
+  <div class="container">
+    <div class="div-flex-h justify-start added-bot-margin">
+      <div class="div-40">
+        <!-- TODO - Add slider here-->
+        <%= image_tag product_image(unit) %>
+      </div>
+      <div class="div-60">
+        <h3 class="cta-heading no-bot-margin">
+          <strong><%= model(unit) %></strong></h3>
+        <div class="price"><%= display_price(unit) %></div>
+        <div>
+          <div class="div-product-details">
+            <div class="blue-text">Tons</div>
+            <div><strong><%= unit['Tons'] %></strong></div>
+          </div>
+        </div>
+        <div class="div-product-details">
+          <div class="blue-text">SEER</div>
+          <div><strong><%= unit['SEER'] %></strong></div>
+        </div>
+        <% if unit['CU Model'] %>
+          <div class="div-product-details">
+            <div class="blue-text">Condenser</div>
+            <div><strong><%= unit['CU Model'] %></strong></div>
+          </div>
+        <% end %>
+        <% if unit['AHU Model'] %>
+          <div class="div-product-details">
+            <div class="blue-text">Air Handler</div>
+            <div><strong><%= unit['AHU Model'] %></strong></div>
+          </div>
+        <% end %>
+        <% if unit['Heater model'] %>
+          <div class="div-product-details">
+            <div class="blue-text">Heater</div>
+            <div><strong><%= unit['Heater Model'] %></strong></div>
+          </div>
+        <% end %>
+        <a data-item-id="1" data-item-name="<%= unit['CU Model'] %>" data-item-price="<%= unit['Shop Online Price'] %>" data-item-weight="10" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
+          now</a>
+        <a href="<%= unit["Product Brochure url"] %>" target="_blank" class="button-underline left-margin w-button">View
+          brochure</a></div>
+    </div>
+  </div>
+</div>
+<div class="section-related-ac">
+  <h3 class="centered-heading">
+    <strong>
+      Other <%= system_type_key_to_name(unit['System Type']) %> Units
+    </strong>
+  </h3>
+  <div class="div-flex-h justify-start">
+    <% related_units(unit).each do |unit| %>
+      <%= partial "/partials/related_unit", locals: {unit: unit} %>
+    <% end %>
+  </div>
+</div>
+
+<%= partial "/partials/section-cta" %>

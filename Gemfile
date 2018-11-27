@@ -21,3 +21,5 @@ gem 'activesupport'
 gem "middleman-blog", "~> 4.0"
 gem 'middleman-paginate'
 gem 'airtable'
+gem 'middleman-sitemap-ping'
+gem 'money'

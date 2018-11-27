@@ -13,7 +13,7 @@ activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
-set :url_root, 'https://www..com'
+set :url_root, 'https://www.nationwide-hvac.com'
 set :js_dir, 'javascripts'
 set :index_file, "index.html"
 
@@ -23,19 +23,26 @@ activate :inliner
 activate :sprockets
 activate :i18n, langs: [:en], :mount_at_root => 'en'
 
-
 set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
 
+activate :sitemap_ping do |config|
+  config.host         = 'https://www.nationwide-hvac.com' # (required)                       Host of your website
+  config.sitemap_file = 'sitemap.xml'  # (optional, default: sitemap.xml) Name of your sitemap file
+  config.ping_google  = true                      # (optional, default: true)        Ping Google?
+  config.ping_bing    = true                      # (optional, default: true)        Ping Bing?
+  config.after_build  = true                      # (optional, default: true)        Run automatically after build?
+end
+
 activate :robots,
-  :rules => [
-    {:user_agent => '*', :allow => %w(/)}
-  ],
-  :sitemap => "#{config.url_root}/sitemap.xml"
+         :rules   => [
+           { :user_agent => '*', :allow => %w(/) }
+         ],
+         :sitemap => "#{config.url_root}/sitemap.xml"
 
 activate :google_analytics do |ga|
-    ga.tracking_id = '' # Replace with your property ID.
+  ga.tracking_id = '' # Replace with your property ID.
 end
 
 # port
@@ -78,8 +85,8 @@ proxy "_headers", "netlify-headers", ignore: true
 
 proxy "/ac-units", "/templates/listing.html"
 
-data.units.each do |unit|
-  proxy "/ac-units/#{unit[:AHRI]}", "/templates/detail.html"
+data.products.each do |prod|
+  proxy "/ac-units/#{prod['AHRI']}.html", "/templates/detail.html", locals: { unit: prod}
 end
 
 helpers do
