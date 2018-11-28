@@ -4,6 +4,8 @@ module ProductHelpers
   end
 
   def brand_logo(unit)
+    brand_val = brand(unit)
+    return config.no_image if brand_val.blank?
     "#{brand(unit).try(:downcase)}-logo.png"
   end
 
@@ -45,10 +47,12 @@ module ProductHelpers
 
   def product_image(unit)
     attachments = unit['Attachments']
-    return '' if attachments.nil? || attachments.empty?
+    return config.no_image if attachments.nil? || attachments.empty?
 
     # TODO - Optimize images
-    attachments[0]['url']
+    url = attachments[0]['url']
+    url = config.no_image if url.blank?
+    url
   end
 
   def cart_description(unit)

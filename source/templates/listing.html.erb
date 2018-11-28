@@ -1,5 +1,9 @@
-<% # TODO - Select product based on system type if present %>
-<% products = data.products.reject {|p| p['System Categorization'] == 'Accessories'}.sample(20)  %>
+<% products = data.products.reject {|p| p['System Categorization'] == 'Accessories'}  %>
+<%
+  if system_type_query.present?
+    products.select! {|p| p['System Type'] == system_type_query }
+  end
+%>
 <div class="section-hero-interior">
   <h1 class="cta-heading" data-ix="hero-appear-1">Air <strong>Conditioners</strong>
   </h1>
@@ -79,12 +83,6 @@
                 </div>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
         <!-- Tonnage -->
@@ -107,7 +105,6 @@
 
       <!-- Search Results View -->
       <div class="div-flex-h justify-start _75-with">
-        <!-- TODO - Filte by system type if present -->
         <% products.each do |unit| %>
           <%= partial "/partials/unit_thumbnail", locals: {unit: unit, mixit: true} %>
         <% end %>
