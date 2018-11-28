@@ -7,6 +7,22 @@ module ProductHelpers
     unit['Brand Series']
   end
 
+  def tons(unit)
+    unit["Tons"]
+  end
+
+  def seer(unit)
+    unit['SEER']
+  end
+
+  def price(unit)
+    unit['Shop Online Price']
+  end
+
+  def brochure_url(unit)
+    unit["Product Brochure url"]
+  end
+
   def system_type_bc(unit)
     url = "/ac-units/#{system_type_to_slug(unit['System Type'])}"
 
@@ -65,13 +81,29 @@ module ProductHelpers
   end
 
   def display_price(unit)
+    Money.locale_backend = :i18n
     Money.from_amount(unit['Shop Online Price'].to_f).format
   end
 
   def related_units(unit)
-    data.products
-      .select { |p| p['System Type'] == unit['System Type'] }
-      .delete_if {|p| p['AHRI'] == unit['AHRI']}
-      .sample(4)
+    seer_min, seer_max = seer_range(seer(unit).to_f)
+    related_units = data.products.select do |p|
+      p['AHRI'] != unit['AHRI'] &&
+      p['System Type'] == unit['System Type'] &&
+      p['Tons'] == unit['Tons'] &&
+      p['SEER'] >= seer_min &&
+      p['SEER'] < seer_max 
+    end
+
+    related_units.sample(4)
+  end
+
+  def seer_range(unit_seer)
+    return [14, 16] if 14 <= unit_seer && unit_seer < 16
+    return [16, 18] if 16 <= unit_seer && unit_seer < 18
+    return [18, 20] if 18 <= unit_seer && unit_seer < 20
+    return [20, 999999] if 20 <= unit_seer
+
+    [-1, 999999]
   end
 end

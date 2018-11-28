@@ -8,7 +8,7 @@
   <span class="breadcrumb-link arrow">></span>
   <%= system_type_bc(unit) %>
   <span class="breadcrumb-link arrow">></span>
-  <a href="#" class="breadcrumb-link active"><%= unit['CU Model'] %></a>
+  <a href="#" class="breadcrumb-link active"><%= model(unit) %></a>
 </div>
 <div class="section-product-details">
   <div class="container">
@@ -24,12 +24,12 @@
         <div>
           <div class="div-product-details">
             <div class="blue-text">Tons</div>
-            <div><strong><%= unit['Tons'] %></strong></div>
+            <div><strong><%= tons(unit) %></strong></div>
           </div>
         </div>
         <div class="div-product-details">
           <div class="blue-text">SEER</div>
-          <div><strong><%= unit['SEER'] %></strong></div>
+          <div><strong><%= seer(unit) %></strong></div>
         </div>
         <% if unit['CU Model'] %>
           <div class="div-product-details">
@@ -46,12 +46,12 @@
         <% if unit['Heater model'] %>
           <div class="div-product-details">
             <div class="blue-text">Heater</div>
-            <div><strong><%= unit['Heater Model'] %></strong></div>
+            <div><strong><%= unit['Heater model'] %></strong></div>
           </div>
         <% end %>
-        <a data-item-id="1" data-item-name="<%= unit['CU Model'] %>" data-item-price="<%= unit['Shop Online Price'] %>" data-item-weight="10" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
+        <a data-item-id="1" data-item-name="<%= model(unit) %>" data-item-price="<%= price(unit) %>" data-item-weight="10" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
           now</a>
-        <a href="<%= unit["Product Brochure url"] %>" target="_blank" class="button-underline left-margin w-button">View
+        <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">View
           brochure</a></div>
     </div>
   </div>
@@ -64,7 +64,7 @@
   </h3>
   <div class="div-flex-h justify-start">
     <% related_units(unit).each do |unit| %>
-      <%= partial "/partials/related_unit", locals: {unit: unit} %>
+      <%= partial "/partials/unit_thumbnail", locals: {unit: unit} %>
     <% end %>
   </div>
 </div>
