@@ -51,6 +51,7 @@ set(:port, 4444)
 # enable livereload on development
 configure :development do
   activate :livereload
+  activate :pry
 end
 
 # Layouts
@@ -88,6 +89,7 @@ proxy "/ac-units/index.html", "/templates/listing.html"
 data.products.each do |prod|
   proxy "/ac-units/#{prod['AHRI']}.html", "/templates/detail.html", locals: { unit: prod}
 end
+
 
 helpers do
 
