@@ -1,1 +1,7 @@
-  <div class="breadcrumbs"><a href="#" class="breadcrumb-link">A/C Units</a><a href="#" class="breadcrumb-link arrow">&gt;</a></div>
+<div class="breadcrumbs">
+  <a href="/ac-units" class="breadcrumb-link">A/C Units</a>
+  <% if system_type_query.present? %>
+    <span class="breadcrumb-link arrow">&gt;</span>
+    <a href="#" class="breadcrumb-link"><%= system_type_key_to_name(system_type_query) %></a>
+  <% end %>
+</div>

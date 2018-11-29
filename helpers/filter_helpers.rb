@@ -2,7 +2,7 @@ module FilterHelpers
   def system_types_filter
     filter_links = []
     system_types.each do |st|
-      filter_links << link_to(system_type_key_to_name(st), system_type_key_to_slug(st), class: "type-link")
+      filter_links << link_to(system_type_key_to_name(st), "/ac-units/#{system_type_key_to_slug(st)}", class: "type-link")
     end
 
     filter_links.join

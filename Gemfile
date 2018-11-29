@@ -18,7 +18,6 @@ gem 'middleman-inliner',  :git => 'https://github.com/aidalgol/middleman-inliner
 gem "middleman-sprockets", "~> 4.0.0.rc"
 gem 'middleman-imageoptim', git: 'https://github.com/plasticine/middleman-imageoptim', branch: 'master'
 gem 'activesupport'
-gem "middleman-blog", "~> 4.0"
 gem 'middleman-paginate'
 gem 'airtable'
 gem 'middleman-sitemap-ping'
