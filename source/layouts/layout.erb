@@ -38,11 +38,32 @@
   <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="OTY3ZGU4OGUtYzk5OS00Nzc5LTg4NWItNDg0OGY0YjQ3YzQ4NjM2Nzc3MTc1MzA2NDU5NjQ3"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js"></script>
+  <%= javascript_include_tag "mixitup-multifilter" %>
+  <%= javascript_include_tag "mixitup-pagination" %>
+
 
   <script>
-     // Call the MixitUp plugin:
-     mixitup('.container');
-  </script>
+		var containerEl = document.querySelector('.container');
+		function scrollToContainer() {
+    $('html, body').animate({
+        scrollTop: $('.section-hero-interior').offset().top
+			}, 150);
+		}
+		var mixer = mixitup(containerEl, {
+			pagination: {
+				limit: 75
+			},
+			multifilter: {
+				enable: true
+			},
+			animation: {
+        enable: false
+			},
+			callbacks: {
+        onMixEnd: scrollToContainer
+    },
+		});
+	</script>
 
   </body>
 </html>

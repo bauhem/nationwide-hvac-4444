@@ -15,7 +15,7 @@ module FilterHelpers
     brands_list.each do |brand|
       brand_filters << filter_with_checkbox_link(".#{brand_data_filter(brand)}", brand)
     end
-    
+
     brand_filters.join
   end
 
@@ -26,8 +26,9 @@ module FilterHelpers
 
   def filter_with_checkbox_link(filter, label)
     div_content = []
-    div_content << tag(:img, src: 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg', alt: "", class: "checkbox-button")
-    div_content << content_tag(:div, class: "checkbox-label") do
+    div_content << tag(:img, src: '/images/checkbox-grey.png', alt: "", class: "checkbox-button-grey")
+    div_content << tag(:img, src: '/images/checkbox.png', alt: "", class: "checkbox-button")
+    div_content << content_tag(:div, class: "checkbox-label", "data-ix" => "check-box") do
       label
     end
 
@@ -41,7 +42,7 @@ module FilterHelpers
       link_content.join
     end
   end
-  
+
   def tonnages_filter
     tonnage_filters = []
 
@@ -62,7 +63,7 @@ module FilterHelpers
     seer_ranges.each do |min, max|
       seer_filters << filter_with_checkbox_link(".#{seer_filter_data(min)}", "#{min}-#{max}")
     end
-    
+
     seer_filters.join
   end
 
