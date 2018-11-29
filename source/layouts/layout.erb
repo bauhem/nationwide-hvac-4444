@@ -39,23 +39,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js"></script>
   <%= javascript_include_tag "mixitup-multifilter" %>
+  <%= javascript_include_tag "mixitup-pagination" %>
+
 
   <script>
-     // Call the MixitUp plugin:
-     mixitup('.container');
-  </script>
-
-  <script>
-            var containerEl = document.querySelector('.container');
-            var mixer = mixitup(containerEl, {
-                controls: {
-                    toggleLogic: 'and'
-                }
-                multifilter: {
-                    enable: true // enable the multifilter extension for the mixer
-                }
-            });
-        </script>
+		var containerEl = document.querySelector('.container');
+		function scrollToContainer() {
+    $('html, body').animate({
+        scrollTop: $('.section-hero-interior').offset().top
+			}, 150);
+		}
+		var mixer = mixitup(containerEl, {
+			pagination: {
+				limit: 75
+			},
+			multifilter: {
+				enable: true
+			},
+			animation: {
+        enable: false
+			},
+			callbacks: {
+        onMixEnd: scrollToContainer
+    },
+		});
+	</script>
 
   </body>
 </html>
