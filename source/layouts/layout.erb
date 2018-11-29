@@ -65,20 +65,22 @@
     var img = $('.checkbox-button');
   }
 
-  var mixer = mixitup(containerEl, {
-    pagination: {
-      limit: 12
-    },
-    multifilter: {
-      enable: true
-    },
-    animation: {
-      enable: false
-    },
-    callbacks: {
-      onMixEnd: scrollToContainer,
-      onMixClick: onMixClick
-    }
-  });
+  if (containerEl) {
+    var mixer = mixitup(containerEl, {
+      pagination: {
+        limit: 12
+      },
+      multifilter: {
+        enable: true
+      },
+      animation: {
+        enable: false
+      },
+      callbacks: {
+        onMixEnd: scrollToContainer,
+        onMixClick: onMixClick
+      }
+    });
+  }
 </script>
 </html>

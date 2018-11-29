@@ -3,6 +3,9 @@
 </div>
 <div class="section-about">
   <div class="msp-holder">
+    <div id="quote_builder">
+      <!-- REACT COMPONENT LOADED HERE-->
+    </div>
     <div data-animation="slide" data-easing="ease-out-quart" data-hide-arrows="1" data-disable-swipe="1" data-duration="750" data-infinite="1" class="multi-step-form w-clearfix w-slider">
       <div class="mask-form w-slider-mask">
         <div class="step w-slide">
@@ -136,3 +139,5 @@
 </div>
 
 <%= partial "/partials/section-cta" %>
+
+<%= javascript_include_tag 'instant_quote' %>

@@ -3,15 +3,16 @@ var browserify = require('browserify');
 var babelify = require("babelify");
 var sourcemaps = require("gulp-sourcemaps");
 var tap = require('gulp-tap');
-var buffer = require('gulp-buffer');
+var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
+var log = require('gulplog');
 
 var debug = (process.env.NODE_ENV !== 'production');
 
 var jsFiles = {
   source: [
     "./source/javascripts/**/*.js",
-    "!./source/javascripts/lib/*"
+    "!./source/javascripts/lib/webflow.js"
   ]
 };
 
@@ -35,9 +36,8 @@ gulp.task("concat", function () {
 
       // replace file contents with browserify's bundle stream
       file.contents = browserify(file.path, {debug: debug})
-        .transform(babelify, {presets: ["@babel/env", "@babel/react"]})
+        .transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]})
         .bundle();
-
     }))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))

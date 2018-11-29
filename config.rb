@@ -21,7 +21,7 @@ set :no_image, "product-photo-unavailable.png"
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
-activate :sprockets
+#activate :sprockets # NOTE: DO NOT ACTIVATE WHEN USING GULP
 activate :i18n, langs: [:en], :mount_at_root => 'en'
 activate :meta_tags
 
@@ -58,7 +58,7 @@ set(:port, 4444)
 
 # enable livereload on development
 configure :development do
-  activate :livereload
+  # activate :livereload
   activate :pry
 end
 
@@ -104,8 +104,6 @@ system_types.each do |st|
 end
 
 helpers do
-
-
   # def strip_tags(html)
   #   Sanitize.clean(html.strip).strip
   # end
@@ -114,7 +112,6 @@ helpers do
     renderer = Redcarpet::Render::HTML.new
     Redcarpet::Markdown.new(renderer).render(text)
   end
-
 end
 
 # Build-specific configuration
