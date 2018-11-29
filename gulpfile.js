@@ -22,6 +22,16 @@ var dataFiles = {
   ]
 };
 
+function swallowError(error) {
+
+  if (debug) {
+    // If you want details of the error in the console
+    console.log(error.toString())
+
+    this.emit('end')
+  }
+}
+
 gulp.task('data_files', function () {
   return gulp.src(dataFiles.source)
     .pipe(gulp.dest("./dist/javascripts/data/"));
@@ -39,9 +49,10 @@ gulp.task("concat", function () {
         .transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]})
         .bundle();
     }))
+    .on('error', swallowError)
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(tap(function(file) {
+    .pipe(tap(function (file) {
       if (debug == false) {
         uglify(file);
       }
