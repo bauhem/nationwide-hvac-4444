@@ -9,6 +9,10 @@ module ProductHelpers
     "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
   end
 
+  def item_id(unit)
+    unit['AHRI'].downcase
+  end
+  
   def model(unit)
     unit['Brand Series']
   end

@@ -49,7 +49,7 @@
             <div><strong><%= unit['Heater model'] %></strong></div>
           </div>
         <% end %>
-        <a data-item-id="1" data-item-name="<%= model(unit) %>" data-item-price="<%= price(unit) %>" data-item-weight="10" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
+        <a data-item-id="<%= item_id(unit) %>" data-item-name="<%= model(unit) %>" data-item-price="<%= price(unit) %>" data-item-weight="10" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
           now</a>
         <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">View
           brochure</a></div>

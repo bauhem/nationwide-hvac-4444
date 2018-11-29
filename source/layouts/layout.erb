@@ -58,6 +58,12 @@
     }, 300);
   }
 
+  function onMixClick(state, originalEvent) {
+    originalEvent.preventDefault();
+    var grey_img = $('.checkbox-button-grey');
+    var img = $('.checkbox-button');
+  }
+
   var mixer = mixitup(containerEl, {
     pagination: {
       limit: 12
@@ -69,7 +75,8 @@
       enable: false
     },
     callbacks: {
-      onMixEnd: scrollToContainer
+      onMixEnd: scrollToContainer,
+      onMixClick: onMixClick
     }
   });
 </script>

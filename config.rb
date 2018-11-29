@@ -83,7 +83,7 @@ page "/index.html", :layout => "layout"
 proxy "_redirects", "netlify-redirects", ignore: true
 proxy "_headers", "netlify-headers", ignore: true
 
-proxy "/ac-units/index.html", "/templates/listing.html"
+proxy "/ac-units/index.html", "/templates/listing.html", locals: {system_type_query: ''}
 
 data.products.each do |prod|
   proxy "/ac-units/#{prod['AHRI']}.html", "/templates/detail.html", locals: { unit: prod}

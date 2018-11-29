@@ -62,7 +62,9 @@ module FilterHelpers
     seer_filters = []
 
     seer_ranges.each do |min, max|
-      seer_filters << filter_with_checkbox_link(".#{seer_filter_data(min)}", "#{min}-#{max}")
+      label = "#{min}-#{max}"
+      label = "#{min}+" if min == 20
+      seer_filters << filter_with_checkbox_link(".#{seer_filter_data(min)}", label)
     end
 
     seer_filters.join
