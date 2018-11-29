@@ -1,4 +1,13 @@
-<a href="<%= product_uri(unit) %>" class="related-units w-inline-block">
+<%
+  mixit ||= false
+  
+  css_class = "related-units"
+
+  if mixit
+    css_class = "mix #{mixit_class(unit)}"
+  end
+%>
+<a href="<%= product_uri(unit) %>" class="<%= css_class %> w-inline-block">
   <%= image_tag product_image(unit), width: 200, class: "max-width-image" %>
   <div class="div-full-width">
     <div class="div-flex-h align-center">

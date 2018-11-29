@@ -1,3 +1,9 @@
+<% products = data.products.reject {|p| p['System Categorization'] == 'Accessories'}  %>
+<%
+  if system_type_query.present?
+    products.select! {|p| p['System Type'] == system_type_query }
+  end
+%>
 <div class="section-hero-interior">
   <h1 class="cta-heading" data-ix="hero-appear-1">Air <strong>Conditioners</strong>
   </h1>
@@ -19,11 +25,7 @@
           <div class="div-search-form w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
               <div class="div-search-dropdown bot-top-padding">
-                <a href="../ac-units/split-system-ac" class="type-link">Split System A/C</a>
-                <a href="#" class="type-link">Split System Heat Pump</a>
-                <a href="#" class="type-link">Packaged System A/C</a>
-                <a href="#" class="type-link">Packaged System Heat Pump</a>
-                <a href="#" class="type-link">Over-Under Packaged System</a>
+                <%= system_types_filter %>
               </div>
             </form>
             <div class="w-form-done">
@@ -40,73 +42,13 @@
             <div>Brands</div>
           </div>
           <div class="div-search-form w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
+            <form id="brand-form" name="brand-form" data-name="Brand Form">
               <div class="div-search-dropdown">
                 <div class="dropdown">
-                  <a href="#" data-filter="all" class="filter_button w-inline-block">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">All brands</div>
-                    </div>
-                  </a>
-                  <a href="#" data-filter=".goodman" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field" data-ix="check-box"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Goodman</div>
-                    </div>
-                  </a>
-                  <a href="#" data-filter=".ruud" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">RUUD</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">American Standard</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Ameristar</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Carrier</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Lennox</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Payne</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Rheem</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">Trane</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">York</div>
-                    </div>
-                  </a>
+                  <%= brands_filter %>
                 </div>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
         <!-- Seer -->
@@ -115,25 +57,25 @@
             <div>SEER</div>
           </div>
           <div class="div-search-form w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
+            <form id="seer-form" name="seer-form" data-name="Seer Form">
               <div class="div-search-dropdown">
                 <div class="dropdown">
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
+                  <a href="#" data-filter='.seer-14' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
                       <div class="checkbox-label">14-16</div>
                     </div>
                   </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
+                  <a href="#" data-filter='.seer-16' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
                       <div class="checkbox-label">16-18</div>
                     </div>
                   </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
+                  <a href="#" data-filter='.seer-18' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
                       <div class="checkbox-label">18-20</div>
                     </div>
                   </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
+                  <a href="#" data-filter='.seer-20' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
                       <div class="checkbox-label">20+</div>
                     </div>
@@ -141,12 +83,6 @@
                 </div>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
         <!-- Tonnage -->
@@ -158,129 +94,21 @@
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
               <div class="div-search-dropdown">
                 <div class="dropdown">
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">1.5</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">2.0</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">2.5</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">3.0</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">3.5</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">4.0</div>
-                    </div>
-                  </a>
-                  <a href="#" class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
-                    <div class="checkbox-field"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="" class="checkbox-button">
-                      <div class="checkbox-label">5.0</div>
-                    </div>
-                  </a>
+                  <%= tonnages_filter %>
                 </div>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
             </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
-          </div>
         </div>
       </div>
       <!-- End of Search Filter View -->
 
       <!-- Search Results View -->
       <div class="div-flex-h justify-start _75-with">
-        <a href="../ac-units/details" data-number="01" class="mix goodman split-system-ac ton-1-5 seer-14 w-inline-block"><img src="../images/gsx14.jpg" alt="">
-          <div class="div-flex-h align-center">
-            <div class="product-name">GSX14</div><img src="../images/goodman-logo.png" width="100" alt="" class="image-brand"></div>
-          <div>
-            <div class="div-product-details">
-              <div class="blue-text">Tons</div>
-              <div>
-                <strong>1.5</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">SEER</div>
-              <div>
-                <strong>14</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">Price</div>
-              <div>
-                <strong>$3 700</strong>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="../ac-units/details" data-number="02" class="mix ruud split-system-heat-pump ton-2 seer-15 w-inline-block"><img src="../images/gsx14.jpg" alt="">
-          <div class="div-flex-h align-center">
-            <div class="product-name">GSX15</div><img src="../images/ruud-logo.png" width="80" alt="" class="image-brand"></div>
-          <div>
-            <div class="div-product-details">
-              <div class="blue-text">Tons</div>
-              <div>
-                <strong>2.0</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">SEER</div>
-              <div>
-                <strong>15</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">Price</div>
-              <div>
-                <strong>$3 700</strong>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="../ac-units/details" class="mix york packaged-system-heat-pump ton-2-5 seer-16 w-inline-block"><img src="../images/gsx14.jpg" alt="">
-          <div class="div-flex-h align-center">
-            <div class="product-name">GSX16</div><img src="../images/york-logo.png" width="100" alt="" class="image-brand"></div>
-          <div>
-            <div class="div-product-details">
-              <div class="blue-text">Tons</div>
-              <div>
-                <strong>2.5</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">SEER</div>
-              <div>
-                <strong>16</strong>
-              </div>
-            </div>
-            <div class="div-product-details">
-              <div class="blue-text">Price</div>
-              <div>
-                <strong>$3 700</strong>
-              </div>
-            </div>
-          </div>
-        </a>
+        <% products.each do |unit| %>
+          <%= partial "/partials/unit_thumbnail", locals: {unit: unit, mixit: true} %>
+        <% end %>
+
       </div>
       <!-- End of Search Results View -->
 

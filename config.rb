@@ -16,6 +16,7 @@ end
 set :url_root, 'https://www.nationwide-hvac.com'
 set :js_dir, 'javascripts'
 set :index_file, "index.html"
+set :no_image, "product-photo-unavailable.png"
 
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
@@ -51,6 +52,7 @@ set(:port, 4444)
 # enable livereload on development
 configure :development do
   activate :livereload
+  activate :pry
 end
 
 # Layouts
@@ -87,6 +89,13 @@ proxy "/ac-units/index.html", "/templates/listing.html"
 
 data.products.each do |prod|
   proxy "/ac-units/#{prod['AHRI']}.html", "/templates/detail.html", locals: { unit: prod}
+end
+
+require 'helpers/product_helpers'
+include ProductHelpers
+
+system_types.each do |st|
+  proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", locals: { system_type_query: st}
 end
 
 helpers do
