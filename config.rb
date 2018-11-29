@@ -47,6 +47,12 @@ activate :google_analytics do |ga|
   ga.tracking_id = '' # Replace with your property ID.
 end
 
+# Activate React using gulp
+activate :external_pipeline,
+         name:    :gulp,
+         command: build? ? "NODE_ENV=production ./node_modules/gulp/bin/gulp.js production" : "NODE_ENV=development ./node_modules/gulp/bin/gulp.js default",
+         source:  'dist'
+
 # port
 set(:port, 4444)
 
@@ -100,9 +106,9 @@ end
 helpers do
 
 
-  def strip_tags(html)
-    Sanitize.clean(html.strip).strip
-  end
+  # def strip_tags(html)
+  #   Sanitize.clean(html.strip).strip
+  # end
 
   def markdown(text)
     renderer = Redcarpet::Render::HTML.new
@@ -110,6 +116,7 @@ helpers do
   end
 
 end
+
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 

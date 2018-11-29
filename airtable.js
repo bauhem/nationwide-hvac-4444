@@ -1,5 +1,6 @@
 var Airtable = require('airtable');
 var jsonfile = require('jsonfile');
+
 var productsFile = 'data/products.json';
 var vendorsFile = 'data/vendors.json';
 var accessoriesFile = 'data/accessories.json';

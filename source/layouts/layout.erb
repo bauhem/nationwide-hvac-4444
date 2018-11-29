@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <%= display_meta_tags %>
+  <%= auto_display_meta_tags %>
 
   <%= stylesheet_link_tag "webflow.css", "normalize.css" %>
   <%= stylesheet_link_tag "nationwide-hvac.webflow.css" %>
@@ -35,20 +35,20 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<%= javascript_include_tag "webflow.js", async: true %>
+<%= javascript_include_tag "lib/webflow.js", async: true %>
 
 <script src="https://cdn.jsdelivr.net/combine/npm/mobile-detect@1.4.1,npm/libphonenumber-js@1.0.24/bundle/libphonenumber-js.min.js,npm/clientjs@0.1.11,npm/jquery@3.3.1"></script>
-<%= javascript_include_tag "validate", async: true %>
-<%= javascript_include_tag "jquery.inputmask.bundle", async: true %>
-<%= javascript_include_tag "lazysizes.min", async: true %>
+<%= javascript_include_tag "lib/validate", async: true %>
+<%= javascript_include_tag "lib/jquery.inputmask.bundle", async: true %>
+<%= javascript_include_tag "lib/lazysizes.min", async: true %>
 <!-- [if lte IE 9]>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="OTY3ZGU4OGUtYzk5OS00Nzc5LTg4NWItNDg0OGY0YjQ3YzQ4NjM2Nzc3MTc1MzA2NDU5NjQ3"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js"></script>
-<%= javascript_include_tag "mixitup-multifilter" %>
-<%= javascript_include_tag "mixitup-pagination" %>
+<%= javascript_include_tag "lib/mixitup-multifilter" %>
+<%= javascript_include_tag "lib/mixitup-pagination" %>
 
 <script>
   var containerEl = document.querySelector('.container');
