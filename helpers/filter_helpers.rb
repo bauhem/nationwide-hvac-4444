@@ -21,14 +21,15 @@ module FilterHelpers
 
   def brand_data_filter(brand)
     return '' if brand.nil? || brand == ''
-    brand.downcase.gsub!(/ /, '-')
+    brand.downcase.gsub(/ /, '-')
   end
 
   def filter_with_checkbox_link(filter, label)
+    # TODO - We can force a specific order using data-order
     div_content = []
     div_content << tag(:img, src: '/images/checkbox-grey.png', alt: "", class: "checkbox-button-grey")
     div_content << tag(:img, src: '/images/checkbox.png', alt: "", class: "checkbox-button")
-    div_content << content_tag(:div, class: "checkbox-label", "data-ix" => "check-box") do
+    div_content << content_tag(:div, class: "checkbox-label", "data-ix": "check-box") do
       label
     end
 

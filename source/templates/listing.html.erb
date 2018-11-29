@@ -1,11 +1,15 @@
-<% products = data.products.reject {|p| p['System Categorization'] == 'Accessories'}  %>
 <%
-  if system_type_query.present?
-    products.select! {|p| p['System Type'] == system_type_query }
+  system_query_type ||= ''
+
+  if system_query_type.present?
+    products = data.products.select { |p| p['System Type'] == st }
+  else
+    products = data.products
   end
 %>
 <div class="section-hero-interior">
-  <h1 class="cta-heading" data-ix="hero-appear-1">Air <strong>Conditioners</strong>
+  <h1 class="cta-heading" data-ix="hero-appear-1">Air
+    <strong>Conditioners</strong>
   </h1>
 </div>
 
@@ -28,12 +32,6 @@
                 <%= system_types_filter %>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
         <!-- Brands -->
@@ -44,7 +42,7 @@
           <div class="div-search-form w-form">
             <form id="brand-form" name="brand-form" data-name="Brand Form">
               <div class="div-search-dropdown">
-                <div class="dropdown">
+                <div class="dropdown" data-filter-group>
                   <%= brands_filter %>
                 </div>
               </div>
@@ -59,32 +57,32 @@
           <div class="div-search-form w-form">
             <form id="seer-form" name="seer-form" data-name="Seer Form">
               <div class="div-search-dropdown">
-                <div class="dropdown">
+                <div class="dropdown" data-filter-group>
                   <a href="#" data-filter='.seer-14' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field">
                       <img src="/images/checkbox-grey.png" alt="" class="checkbox-button-grey">
-                        <img src="/images/checkbox.png" alt="" class="checkbox-button">
+                      <img src="/images/checkbox.png" alt="" class="checkbox-button">
                       <div class="checkbox-label" data-ix="check-box">14-16</div>
                     </div>
                   </a>
                   <a href="#" data-filter='.seer-16' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field">
                       <img src="/images/checkbox-grey.png" alt="" class="checkbox-button-grey">
-                        <img src="/images/checkbox.png" alt="" class="checkbox-button">
+                      <img src="/images/checkbox.png" alt="" class="checkbox-button">
                       <div class="checkbox-label" data-ix="check-box">16-18</div>
                     </div>
                   </a>
                   <a href="#" data-filter='.seer-18' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field">
                       <img src="/images/checkbox-grey.png" alt="" class="checkbox-button-grey">
-                        <img src="/images/checkbox.png" alt="" class="checkbox-button">
+                      <img src="/images/checkbox.png" alt="" class="checkbox-button">
                       <div class="checkbox-label" data-ix="check-box">18-20</div>
                     </div>
                   </a>
                   <a href="#" data-filter='.seer-20' class="filter_button w-inline-block"><img src="../images/5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg" alt="" class="image-check-inactive">
                     <div class="checkbox-field">
                       <img src="/images/checkbox-grey.png" alt="" class="checkbox-button-grey">
-                        <img src="/images/checkbox.png" alt="" class="checkbox-button">
+                      <img src="/images/checkbox.png" alt="" class="checkbox-button">
                       <div class="checkbox-label" data-ix="check-box">20+</div>
                     </div>
                   </a>
@@ -106,7 +104,7 @@
                 </div>
               </div>
             </form>
-            </div>
+          </div>
         </div>
       </div>
       <!-- End of Search Filter View -->
@@ -115,7 +113,7 @@
       <div class="div-flex-h justify-start _75-with">
 
         <% products.each do |unit| %>
-          <%= partial "/partials/unit_thumbnail", locals: {unit: unit, mixit: true} %>
+          <%= partial "/partials/unit_thumbnail", locals: { unit: unit, mixit: true } %>
         <% end %>
 
         <%= partial "/partials/paginations" %>

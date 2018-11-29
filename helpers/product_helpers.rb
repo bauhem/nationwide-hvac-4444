@@ -6,7 +6,7 @@ module ProductHelpers
   def brand_logo(unit)
     brand_val = brand(unit)
     return config.no_image if brand_val.blank?
-    "#{brand(unit).try(:downcase)}-logo.png"
+    "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
   end
 
   def model(unit)

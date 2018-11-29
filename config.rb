@@ -73,8 +73,6 @@ page "/thank-you.html", :layout => "no-contact-layout"
 # https://middlemanapp.com/advanced/dynamic-pages/
 ignore '/templates/*'
 
-activate :pagination
-
 page "/index.html", :layout => "layout"
 
 
@@ -95,7 +93,7 @@ require 'helpers/product_helpers'
 include ProductHelpers
 
 system_types.each do |st|
-  proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", locals: { system_type_query: st}
+  proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", locals: {system_type_query: st}
 end
 
 helpers do
