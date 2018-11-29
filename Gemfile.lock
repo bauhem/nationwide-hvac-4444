@@ -165,6 +165,8 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
+    middleman-meta-tags (0.4.0)
+      middleman-core (>= 3.0.0)
     middleman-minify-html (3.4.1)
       htmlcompressor (~> 0.2.0)
       middleman-core (>= 3.2)
@@ -261,6 +263,7 @@ DEPENDENCIES
   middleman-imageoptim!
   middleman-inliner!
   middleman-livereload (~> 3.4)
+  middleman-meta-tags
   middleman-minify-html
   middleman-protect-emails
   middleman-pry

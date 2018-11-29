@@ -23,6 +23,7 @@ activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
 activate :sprockets
 activate :i18n, langs: [:en], :mount_at_root => 'en'
+activate :meta_tags
 
 set :markdown_engine, :redcarpet
 set :relative_links, true
