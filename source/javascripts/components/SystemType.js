@@ -1,33 +1,23 @@
 import React from "react";
 
-
 class SystemType extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // Load proper system type based on this.props.fieldValues.system_type_structure
-    this.state = {
-      system_types: this.loadSystemTypes(this.props.fieldValues.system_type_structure)
-    }
-  }
-
-  loadSystemTypes(structure) {
-
-  }
-
-  saveAndContinue(val) {
-    // Get values via this.refs
-
-    var data = {
-      system_type: val
-    }
-
-    this.props.saveValues(data);
-  }
-
   render() {
-    // Generate list of options from system types
-    return <div>{this.props.fieldValues.system_type_structure}</div>
+    return (
+      <div data-ix="appear-next"
+           className="options different-color-font pale-border">
+        <div className="radio-button-field grey-border w-radio"
+             onClick={() => this.props.saveValues({system_type: this.props.type})}>
+          <div data-ix="appear-next" className="div-hover"></div>
+          <input type="radio" name="system"
+                 value={this.props.type} data-name="system"
+                 className="radio-button w-radio-input"/>
+          <label htmlFor={this.props.type} className="w-form-label">
+            <strong>{this.props.name}</strong>
+          </label>
+          <p className="smaller-explanation">{this.props.description}</p>
+        </div>
+      </div>
+    )
   }
 }
 

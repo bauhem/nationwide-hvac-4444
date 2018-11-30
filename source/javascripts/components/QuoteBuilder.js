@@ -1,8 +1,16 @@
 import React from 'react';
+import config from 'react-global-configuration';
+
 import SystemTypeStructure from "./SystemTypeStructure";
-import SystemType from "./SystemType";
+import SystemTypes from "./SystemTypes";
 import Tonnage from "./Tonnage";
 import Quote from "./Quote";
+import ModelNumber from "./ModelNumber";
+import AirHandlerLocation from "./AirHandlerLocation";
+import AirHandlerType from "./AirHandlerType";
+import RoofAccess from "./RoofAccess";
+import CondenserUnitLocation from "./CondenserUnitLocation";
+import Brands from "./Brands";
 
 const MAX_STEPS = 10;
 
@@ -25,38 +33,53 @@ class QuoteBuilder extends React.Component {
   constructor(props) {
     super(props);
 
+    let savedStep = parseInt(localStorage.getItem('instantQuoteCurrentStep'));
+    let saved_values = JSON.parse(localStorage.getItem('instantQuoteValues'));
+    this.saveValues(saved_values);
+
     this.state = {
-      step: 1,
+      step: savedStep || 1,
 
     }
   }
 
   saveValues(fields) {
     fieldValues = Object.assign({}, fieldValues, fields)
+    localStorage.setItem('instantQuoteValues', JSON.stringify(fieldValues));
   }
 
   renderNextStep() {
     switch (this.state.step) {
       case 1:
-        return <SystemTypeStructure fieldValues={fieldValues} saveValues={this.saveValues}/>;
+        return <SystemTypeStructure fieldValues={fieldValues}
+                                    saveValues={this.saveValues}/>;
       case 2:
-        return <SystemType fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <SystemTypes fieldValues={fieldValues}
+                           saveValues={this.saveValues}/>;
       case 3:
-        return <Tonnage fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <Tonnage fieldValues={fieldValues}
+                        saveValues={this.saveValues}/>;
       case 4:
-        return <ModelNumber fieldValues={fieldValues} saveValues={this.saveValues} />;
+        if (fieldValues.tons === null) {
+          return <ModelNumber fieldValues={fieldValues}
+                              saveValues={this.saveValues}/>;
+        }
       case 5:
-        return <AirHandlerLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <AirHandlerLocation fieldValues={fieldValues}
+                                   saveValues={this.saveValues}/>;
       case 6:
-        return <AirHandlerType fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <AirHandlerType fieldValues={fieldValues}
+                               saveValues={this.saveValues}/>;
       case 7:
-        return <RoofAccess fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <RoofAccess fieldValues={fieldValues}
+                           saveValues={this.saveValues}/>;
       case 8:
-        return <CondenserUnitLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <CondenserUnitLocation fieldValues={fieldValues}
+                                      saveValues={this.saveValues}/>;
       case 9:
-        return <Brands fieldValues={fieldValues} saveValues={this.saveValues} />;
+        return <Brands fieldValues={fieldValues} saveValues={this.saveValues}/>;
       case 10:
-        return <Quote fieldValues={fieldValues} />;
+        return <Quote fieldValues={fieldValues}/>;
     }
   }
 
@@ -75,7 +98,7 @@ class QuoteBuilder extends React.Component {
     if (this.state.step === 1) {
       return;
     }
-    this.setState({step: this.state.step - 1});
+    this.changeStep(this.state.step - 1);
   }
 
   nextBtn() {
@@ -91,7 +114,12 @@ class QuoteBuilder extends React.Component {
     if (this.state.step === MAX_STEPS) {
       return;
     }
-    this.setState({step: this.state.step + 1});
+    this.changeStep(this.state.step + 1);
+  }
+
+  changeStep(newStep) {
+    localStorage.setItem('instantQuoteCurrentStep', newStep);
+    this.setState({step: newStep});
   }
 
   render() {
@@ -112,7 +140,14 @@ class QuoteBuilder extends React.Component {
              data-hide-arrows="1" data-disable-swipe="1" data-duration="750"
              data-infinite="1" className="multi-step-form w-clearfix w-slider">
           <div className="mask-form w-slider-mask">
-            {slide}
+            <div className="w-slide">
+              <div className="form-wrapper w-form">
+                <form id="wf-form-Instant-Quote" name="wf-form-Instant-Quote"
+                      data-name="Instant Quote">
+                  {slide}
+                </form>
+              </div>
+            </div>
           </div>
         </div>
         {buttons}

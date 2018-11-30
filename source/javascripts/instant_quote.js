@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import config from 'react-global-configuration';
+import configuration from './config';
+
 import QuoteBuilder from "./components/QuoteBuilder.js";
 
 function onReady(completed) {
@@ -11,6 +14,8 @@ function onReady(completed) {
 }
 
 onReady(function () {
+  config.set(configuration);
+
   let quote_builder = document.getElementById("quote_builder");
   if (quote_builder) {
     ReactDOM.render(

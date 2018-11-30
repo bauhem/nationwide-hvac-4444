@@ -133,10 +133,6 @@ module ProductHelpers
         "Packaged System Heat Pump"
       when "WSHP"
         "Water Sourced Heat Pump"
-      when "Furnace"
-        "Furnace"
-      when "Case Coil"
-        "Case Coil"
       when "P HP OU"
         "Over-Under Packaged System"
     end
