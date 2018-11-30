@@ -6,3 +6,4 @@ dist/javascripts/data/
 tmp/**
 
 .DS_Store
+build/**
