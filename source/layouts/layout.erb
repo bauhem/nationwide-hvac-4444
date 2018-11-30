@@ -27,11 +27,11 @@
 </head>
 
 <body data-ix="body-load">
-  <%= partial "/partials/header" %>
+<%= partial "/partials/header" %>
 
-  <%= yield %>
+<%= yield %>
 
-  <%= partial "/partials/footer" %>
+<%= partial "/partials/footer" %>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -46,42 +46,44 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="OTY3ZGU4OGUtYzk5OS00Nzc5LTg4NWItNDg0OGY0YjQ3YzQ4NjM2Nzc3MTc1MzA2NDU5NjQ3"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>
 <%= javascript_include_tag "lib/mixitup-multifilter" %>
 <%= javascript_include_tag "lib/mixitup-pagination" %>
 
 <script>
-  var containerEl = document.querySelector('.container');
+  $(document).ready(function ($) {
+    var containerEl = document.querySelector('.container');
 
-  function scrollToContainer() {
-    $('html, body').animate({
-      scrollTop: $('.section-hero-interior').offset().top
-    }, 300);
-  }
+    function scrollToContainer() {
+      $('html, body').animate({
+        scrollTop: $('.section-hero-interior').offset().top
+      }, 300);
+    }
 
-  function onMixClick(state, originalEvent) {
-    originalEvent.preventDefault();
-    var grey_img = $('.checkbox-button-grey');
-    var img = $('.checkbox-button');
-  }
+    function onMixClick(state, originalEvent) {
+      originalEvent.preventDefault();
+      var grey_img = $('.checkbox-button-grey');
+      var img = $('.checkbox-button');
+    }
 
-  if (containerEl) {
-    var mixer = mixitup(containerEl, {
-      pagination: {
-        limit: 12
-      },
-      multifilter: {
-        enable: true
-      },
-      animation: {
-        enable: false
-      },
-      callbacks: {
-        onMixEnd: scrollToContainer,
-        onMixClick: onMixClick
-      }
-    });
-  }
+    if (containerEl) {
+      var mixer = mixitup(containerEl, {
+        pagination: {
+          limit: 12
+        },
+        multifilter: {
+          enable: true
+        },
+        animation: {
+          enable: false
+        },
+        callbacks: {
+          onMixEnd: scrollToContainer,
+          onMixClick: onMixClick
+        }
+      });
+    }
+  });
 </script>
 </html>

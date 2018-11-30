@@ -12,7 +12,10 @@ var debug = (process.env.NODE_ENV !== 'production');
 var jsFiles = {
   source: [
     "./source/javascripts/**/*.js",
-    "!./source/javascripts/lib/webflow.js"
+    "!./source/javascripts/lib/**"
+  ],
+  no_browserify: [
+    "./source/javascripts/lib/**"
   ]
 };
 
@@ -37,7 +40,7 @@ gulp.task('data_files', function () {
     .pipe(gulp.dest("./dist/javascripts/data/"));
 });
 
-gulp.task("concat", function () {
+gulp.task("browserify", function () {
   return gulp.src(jsFiles.source, {read: false})
     .pipe(tap(function (file) {
       if (debug) {
@@ -60,11 +63,15 @@ gulp.task("concat", function () {
     .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest("./dist/javascripts/"));
 });
+gulp.task("concat", function () {
+  return gulp.src(jsFiles.no_browserify)
+    .pipe(gulp.dest("./dist/javascripts/lib/"));
+});
 
 gulp.task("watch", function () {
-  gulp.watch("./source/javascripts/**/*", gulp.series("concat"));
+  gulp.watch("./source/javascripts/**/*", gulp.parallel("concat", "browserify"));
   gulp.watch("./data/*.json", gulp.series("data_files"));
 });
 
-gulp.task("default", gulp.parallel("concat", "data_files", "watch"));
-gulp.task("production", gulp.parallel("concat", "data_files"));
+gulp.task("default", gulp.parallel("concat", "browserify", "data_files", "watch"));
+gulp.task("production", gulp.parallel("concat", "browserify", "data_files"));
