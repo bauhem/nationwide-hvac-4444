@@ -45,8 +45,8 @@ class QuoteBuilder extends React.Component {
         return <Tonnage fieldValues={fieldValues} saveValues={this.saveValues} />;
       case 4:
         return <ModelNumber fieldValues={fieldValues} saveValues={this.saveValues} />;
-      case 5:
-        return <UnitLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 6:
+        return <AirHandlerLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
       case 6:
         return <AirHandlerType fieldValues={fieldValues} saveValues={this.saveValues} />;
       case 7:
