@@ -4,12 +4,18 @@ import SystemType from "./SystemType";
 import Tonnage from "./Tonnage";
 import Quote from "./Quote";
 
-const MAX_STEPS = 4;
+const MAX_STEPS = 10;
 
 var fieldValues = {
   system_type_structure: null,
   system_type: null,
   tonnage: null,
+  model_number: null,
+  location: null,
+  air_handler_type: null,
+  roof_access: null,
+  condenser_unit_location: null,
+  brands: [],
   zipcode: null
 };
 
@@ -38,6 +44,18 @@ class QuoteBuilder extends React.Component {
       case 3:
         return <Tonnage fieldValues={fieldValues} saveValues={this.saveValues} />;
       case 4:
+        return <ModelNumber fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 6:
+        return <AirHandlerLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 6:
+        return <AirHandlerType fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 7:
+        return <RoofAccess fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 8:
+        return <CondenserUnitLocation fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 9:
+        return <Brands fieldValues={fieldValues} saveValues={this.saveValues} />;
+      case 10:
         return <Quote fieldValues={fieldValues} />;
     }
   }
