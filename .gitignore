@@ -4,3 +4,5 @@ node_modules/@*
 dist/javascripts/**
 dist/javascripts/data/
 tmp/**
+
+.DS_Store
