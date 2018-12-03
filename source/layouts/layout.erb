@@ -41,10 +41,15 @@
 <%= javascript_include_tag "lib/validate", async: true %>
 <%= javascript_include_tag "lib/jquery.inputmask.bundle", async: true %>
 <%= javascript_include_tag "lib/lazysizes.min", async: true %>
-<!-- [if lte IE 9]>
+<!-- [if lte IE 9]>0
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-<script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="OTY3ZGU4OGUtYzk5OS00Nzc5LTg4NWItNDg0OGY0YjQ3YzQ4NjM2Nzc3MTc1MzA2NDU5NjQ3"></script>
+  <% if development? %>
+  <%= partial "/partials/snipcart.development" %>
+  <% else %>
+  <%= partial "/partials/snipcart.production" %>
+  <% end %>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>

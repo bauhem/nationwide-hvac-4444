@@ -13,7 +13,7 @@ activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
-set :url_root, 'https://www.nationwide-hvac.com'
+set :url_root, 'https://egidius.serveo.net'
 set :js_dir, 'javascripts'
 set :index_file, "index.html"
 set :no_image, "product-photo-unavailable.png"

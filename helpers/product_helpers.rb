@@ -12,7 +12,7 @@ module ProductHelpers
   def item_id(unit)
     unit['AHRI'].downcase
   end
-  
+
   def model(unit)
     unit['Brand Series']
   end
@@ -42,7 +42,7 @@ module ProductHelpers
   end
 
   def product_url(unit)
-    "#{config.url_root}/#{product_uri(unit)}"
+    "#{config.url_root}#{product_uri(unit)}"
   end
 
   def product_uri(unit)
