@@ -1,6 +1,6 @@
 <%
   mixit ||= false
-  
+
   css_class = "related-units"
 
   if mixit
@@ -8,23 +8,21 @@
   end
 %>
 <a href="<%= product_uri(unit) %>" class="<%= css_class %> w-inline-block">
-  <%= image_tag product_image(unit), width: 200, class: "max-width-image" %>
-  <div class="div-full-width">
+  <%= image_tag product_image(unit), width: 300 %>
     <div class="div-flex-h align-center">
       <div class="product-name smaller"><%= model(unit) %></div>
       <%= image_tag brand_logo(unit), width: 80, class: "image-brand" %>
     </div>
-    <div class="div-product-details smaller">
+    <div class="div-product-details">
       <div class="blue-text">Tons</div>
       <div><strong><%= tons(unit) %></strong></div>
     </div>
-    <div class="div-product-details smaller">
+    <div class="div-product-details">
       <div class="blue-text">SEER</div>
       <div><strong><%= seer(unit) %></strong></div>
     </div>
-    <div class="div-product-details smaller">
+    <div class="div-product-details">
       <div class="blue-text">Price</div>
       <div><strong><%= display_price(unit) %></strong></div>
     </div>
-  </div>
 </a>
