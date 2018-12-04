@@ -14,6 +14,8 @@ import RoofAccess from "./RoofAccess";
 import CondenserUnitLocation from "./CondenserUnitLocation";
 import Brands from "./Brands";
 import SquareFootage from "./SquareFootage";
+import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
+import CallUs from "./CallUs";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -22,13 +24,13 @@ const StatesComponents = {
   ModelNumber: ModelNumber,
   SquareFootage: SquareFootage,
   AirHandlerLocation: AirHandlerLocation,
-  // WaterHeaterUnderAirHandler: WaterHeaterUnderAirHandler,
+  WaterHeaterUnderAirHandler: WaterHeaterUnderAirHandler,
   AirHandlerType: AirHandlerType,
   CondenserUnitLocation: CondenserUnitLocation,
   RoofAccess: RoofAccess,
   // PackagedSystemLocation: PackagedSystemLocation,
   // AirSystemFilterLocation: AirSystemFilterLocation,
-  // CallUs: CallUs,
+  CallUs: CallUs,
   Brands: Brands,
   // ZipCode: ZipCode,
   Quote: Quote,
@@ -77,7 +79,7 @@ class QuoteBuilder extends React.Component {
       (state, action) => this.command(action, event) || state,
       undefined,
     );
-    
+
     this.setState({
       currentState: nextQuoteState.value,
       ...nextState,
@@ -99,7 +101,7 @@ class QuoteBuilder extends React.Component {
     this.setState(fields);
   }
 
-  saveAndContinue(fields, event={type: "SUBMIT"}) {
+  saveAndContinue(fields, event = {type: "SUBMIT"}) {
     this.saveValues(fields);
     this.transition(event);
   }
@@ -107,9 +109,10 @@ class QuoteBuilder extends React.Component {
   backBtn() {
     return (
       <div className="previous w-slider-arrow-left"
-           onClick={() => this.prevStep()}><img
-        src="https://daks2k3a4ib2z.cloudfront.net/585d5e2a7b64077507abdf08/58ab945ae3eb210a7dbbd7cc_arrow-left.gif"
-        alt=""/>
+           onClick={() => this.transition({type: 'BACK'})}>
+        <img
+          src="https://daks2k3a4ib2z.cloudfront.net/585d5e2a7b64077507abdf08/58ab945ae3eb210a7dbbd7cc_arrow-left.gif"
+          alt=""/>
         <div className="previous-button">Back</div>
       </div>
     )
@@ -151,7 +154,7 @@ class QuoteBuilder extends React.Component {
               <div className="w-slide">
                 <div className="form-wrapper w-form">
                   <form id="wf-form-Instant-Quote" name="wf-form-Instant-Quote"
-                        data-name="Instant Quote">
+                        data-name="Instant Quote" className="form-full-width">
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}/>

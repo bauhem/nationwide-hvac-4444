@@ -73,7 +73,8 @@ const QuoteSM = Machine({
     AirHandlerLocation: {
       on: {
         LOAD_WATER_HEATER: 'WaterHeaterUnderAirHandler',
-        SUBMIT: 'AirHandlerType'
+        LOAD_AIR_HANDLER_TYPE: 'AirHandlerType',
+        SUBMIT: 'CondenserUnitLocation'
       }
     },
     WaterHeaterUnderAirHandler: {
@@ -93,6 +94,7 @@ const QuoteSM = Machine({
       }
     },
     RoofAccess: {
+      onEntry: 'filterBrands',
       on: {
         SUBMIT: 'Brands'
       }
@@ -126,8 +128,12 @@ const QuoteSM = Machine({
     },
     Accessories: {
       type: 'final'
-    }
+    },
+    hist: {type: 'history'},
   },
+  on: {
+    BACK: 'hist'
+  }
 }, {
   guards: {
     isSplitSystem,

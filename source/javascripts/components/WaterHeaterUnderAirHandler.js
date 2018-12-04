@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class AirHandlerType extends React.Component {
+class WaterHeaterUnderAirHandler extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,31 +10,31 @@ class AirHandlerType extends React.Component {
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Please select the air handler type</h3>
+          <h3 className="titre-big">Is the water heater under the air handler?</h3>
         </div>
         <div className="div-flex-h">
           <div data-ix="appear-next"
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_type: 'horizontal'})}>
+                 onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: false})}>
               <div data-ix="appear-next" className="div-hover"></div>
-              <input type="radio" id="horizontal" name="handler-type"
-                     value="horizontal" data-name="handler-type"
+              <input type="radio" id="no" name="water-heater-under-air-handler"
+                     value="no" data-name="water-heater-under-air-handler"
                      className="radio-button w-radio-input"/>
-              <label htmlFor="horizontal"
-                     className="w-form-label"><strong>Horizontal</strong></label>
+              <label htmlFor="no"
+                     className="w-form-label"><strong>No</strong></label>
             </div>
           </div>
           <div data-ix="appear-next"
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_type: 'vertical'})}>
+                 onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: true})}>
               <div data-ix="appear-next" className="div-hover"></div>
-              <input type="radio" id="vertical" name="handler-type"
-                     value="vertical" data-name="handler-type"
+              <input type="radio" id="yes" name="handler-type"
+                     value="yes" data-name="handler-type"
                      className="radio-button w-radio-input"/>
-              <label htmlFor="vertical"
-                     className="w-form-label"><strong>Vertical</strong></label>
+              <label htmlFor="yes"
+                     className="w-form-label"><strong>Yes</strong></label>
             </div>
           </div>
         </div>
@@ -43,4 +43,4 @@ class AirHandlerType extends React.Component {
   }
 }
 
-export default AirHandlerType;
+export default WaterHeaterUnderAirHandler;
