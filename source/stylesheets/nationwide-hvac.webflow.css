@@ -2675,6 +2675,9 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
   }
+  .div-40.form {
+    margin-top: 0px;
+  }
   .msp-holder {
     padding-right: 0%;
     padding-left: 0%;
@@ -2686,6 +2689,12 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
+  }
+  .div-tow-collumn {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
   }
   .options.different-color-font.pale-border {
     width: 100%;
@@ -2810,6 +2819,7 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
     align-self: stretch;
   }
   .form-beat-quote.second {
+    padding-top: 20px;
     padding-right: 30px;
     padding-left: 30px;
   }
@@ -2844,6 +2854,10 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
     width: 100%;
     margin-bottom: 6%;
   }
+  .section-about {
+    padding-right: 0%;
+    padding-left: 0%;
+  }
   .div-product-details.smaller {
     font-size: 15px;
   }
@@ -2877,6 +2891,9 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
   .next.final {
     bottom: 5px;
     margin-top: 30px;
+  }
+  .div-40.form {
+    padding-right: 0px;
   }
   .mask-form {
     display: inline-block;
@@ -2942,6 +2959,9 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
     -ms-flex-item-align: stretch;
     -ms-grid-row-align: stretch;
     align-self: stretch;
+  }
+  .div-50-2.form {
+    margin-top: 20px;
   }
   .div-full-width.added-top-margin {
     margin-top: 60px;
