@@ -1,7 +1,5 @@
 import React from "react";
 
-var units = require('../../../data/products.json');
-
 class Quote extends React.Component {
   constructor(props) {
     super(props);

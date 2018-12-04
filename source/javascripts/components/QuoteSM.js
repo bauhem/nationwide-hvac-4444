@@ -94,7 +94,6 @@ const QuoteSM = Machine({
       }
     },
     RoofAccess: {
-      onEntry: 'filterBrands',
       on: {
         SUBMIT: 'Brands'
       }
@@ -110,6 +109,7 @@ const QuoteSM = Machine({
       }
     },
     Brands: {
+      onEntry: 'filterBrands',
       on: {
         SUBMIT: 'ZipCode'
       }
@@ -120,7 +120,7 @@ const QuoteSM = Machine({
       }
     },
     Quote: {
-      onEntry: ['filterResults'],
+      onEntry: 'filterResults',
       on: {
         SUBMIT: 'Accessories'
       }

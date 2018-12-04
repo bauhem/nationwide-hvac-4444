@@ -16,6 +16,7 @@ import Brands from "./Brands";
 import SquareFootage from "./SquareFootage";
 import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import CallUs from "./CallUs";
+import {unitsFilter} from "./UnitsFilter";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -88,6 +89,9 @@ class QuoteBuilder extends React.Component {
 
   command(action, event) {
     switch (action.type) {
+      case 'filterBrands':
+        let [units, brands] = unitsFilter(this.state);
+        break;
       case 'filterResults':
         // TODO - implement this
         break;
@@ -120,8 +124,8 @@ class QuoteBuilder extends React.Component {
 
   nextBtn() {
     return (
-      <div className="next w-hidden-tiny w-slider-arrow-right"
-           onClick={() => this.nextStep()}>
+      <div className="next w-slider-arrow-right"
+           onClick={() => this.transition({type: 'SUBMIT'})}>
         <div className="next-button">Next step</div>
       </div>
     );
@@ -140,7 +144,8 @@ class QuoteBuilder extends React.Component {
     }
 
     if (this.state.currentState.type !== 'final') {
-      // buttons.push(this.nextBtn());
+      // TODO - Show button only in specific states
+      buttons.push(this.nextBtn());
     }
 
     return (
