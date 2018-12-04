@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class WaterHeaterUnderAirHandler extends React.Component {
+class AirSystemFilterLocation extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,31 +10,31 @@ class WaterHeaterUnderAirHandler extends React.Component {
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Is the water heater under the air handler?</h3>
+          <h3 className="titre-big">Which side of the system is the air filter located?</h3>
         </div>
         <div className="div-flex-h">
           <div data-ix="appear-next"
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: false})}>
+                 onClick={() => this.props.saveAndContinue({air_filter_side: 'left'})}>
               <div data-ix="appear-next" className="div-hover"></div>
-              <input type="radio" id="no" name="water-heater-under-air-handler"
-                     value="no" data-name="water-heater-under-air-handler"
+              <input type="radio" id="left" name="air-filter-side"
+                     value="left" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>
-              <label htmlFor="no"
-                     className="w-form-label"><strong>No</strong></label>
+              <label htmlFor="left"
+                     className="w-form-label"><strong>Left</strong></label>
             </div>
           </div>
           <div data-ix="appear-next"
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: true})}>
+                 onClick={() => this.props.saveAndContinue({air_filter_side: 'right'})}>
               <div data-ix="appear-next" className="div-hover"></div>
-              <input type="radio" id="yes" name="water-heater-under-air-handler"
-                     value="yes" data-name="water-heater-under-air-handler"
+              <input type="radio" id="right" name="air-filter-side"
+                     value="right" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>
-              <label htmlFor="yes"
-                     className="w-form-label"><strong>Yes</strong></label>
+              <label htmlFor="right"
+                     className="w-form-label"><strong>Right</strong></label>
             </div>
           </div>
         </div>
@@ -43,4 +43,4 @@ class WaterHeaterUnderAirHandler extends React.Component {
   }
 }
 
-export default WaterHeaterUnderAirHandler;
+export default AirSystemFilterLocation;

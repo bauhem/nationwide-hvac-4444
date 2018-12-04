@@ -17,6 +17,8 @@ import SquareFootage from "./SquareFootage";
 import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import CallUs from "./CallUs";
 import {unitsFilter} from "./UnitsFilter";
+import PackagedSystemLocation from "./PackagedSystemLocation";
+import AirSystemFilterLocation from "./AirSystemFilterLocation";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -29,8 +31,8 @@ const StatesComponents = {
   AirHandlerType: AirHandlerType,
   CondenserUnitLocation: CondenserUnitLocation,
   RoofAccess: RoofAccess,
-  // PackagedSystemLocation: PackagedSystemLocation,
-  // AirSystemFilterLocation: AirSystemFilterLocation,
+  PackagedSystemLocation: PackagedSystemLocation,
+  AirSystemFilterLocation: AirSystemFilterLocation,
   CallUs: CallUs,
   Brands: Brands,
   // ZipCode: ZipCode,
@@ -91,6 +93,7 @@ class QuoteBuilder extends React.Component {
     switch (action.type) {
       case 'filterBrands':
         let [units, brands] = unitsFilter(this.state);
+        this.saveValues({units: units, brands: brands});
         break;
       case 'filterResults':
         // TODO - implement this
@@ -101,7 +104,6 @@ class QuoteBuilder extends React.Component {
   }
 
   saveValues(fields) {
-    let fieldValues = Object.assign({}, this.state, fields)
     this.setState(fields);
   }
 

@@ -2,11 +2,11 @@ const units = require('../../../data/products.json');
 
 export function unitsFilter(ctx) {
   const state = ctx; // DO NOT MODIFY ctx DIRECTLY
-  let filtered_units = units
-    .filter(filterOutBySystemType.bind(this, ctx.system_type))
-    .filter(filterOutByTons.bind(this, ctx.tonnage))
-    .filter(filterOut39InchesOrHigher.bind(this))
-    .filter(filterOutSingleStageFrontReturn.bind(this));
+  let filtered_units = [] ;
+  filtered_units = units.filter(filterOutBySystemType.bind(this, state.system_type))
+    .filter(filterOutByTons.bind(this, state.tonnage))
+    .filter(filterOut39InchesOrHigher.bind(this, state.air_handler_location))
+    .filter(filterOutSingleStageFrontReturn.bind(this, state.air_handler_location));
   let brands = [...new Set(filtered_units.map(unit => unit['Brand']))];
 
   return [filtered_units, brands];
@@ -20,10 +20,18 @@ function filterOutByTons(tons, unit) {
   return tons === unit['Tons'];
 }
 
-function filterOut39InchesOrHigher(unit) {
-  return unit['AHU H'] <= '39';
+function filterOut39InchesOrHigher(ah_loc, unit) {
+  if (ah_loc !== 'closet') {
+    return true;
+  }
+  
+  return unit['AHU H'] <= 39;
 }
 
-function filterOutSingleStageFrontReturn(unit) {
+function filterOutSingleStageFrontReturn(ah_loc, unit) {
+  if (ah_loc == 'closet') {
+    return true;
+  }
+
   return unit['System Categorization'] !== 'Single Stage/Front Return';
 }
