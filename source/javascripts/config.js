@@ -11,7 +11,25 @@ const configuration = {
   water_system: [
     {type: "WSHP", name: "Water Sourced", description: ""}
   ],
-  tonnage: [1.5,2,2.5,3,3.5,4,5]
+  tonnage: [1.5,2,2.5,3,3.5,4,5],
+  model_to_tons: [
+    {model: "18", tons: 1.5},
+    {model: "24", tons: 2},
+    {model: "30", tons: 2.5},
+    {model: "36", tons: 3},
+    {model: "42", tons: 3.5},
+    {model: "48", tons: 4},
+    {model: "60", tons: 5},
+  ],
+  square_footage_to_tons: [
+    {footage: '600-900', tons: 1.5},
+    {footage: '901-1200', tons: 2},
+    {footage: '1201-1500', tons: 2.5},
+    {footage: '1501-1800', tons: 3},
+    {footage: '1801-2100', tons: 3.5},
+    {footage: '2101-2400', tons: 4},
+    {footage: '2401-3000', tons: 5}
+  ]
 };
  
 export default configuration;

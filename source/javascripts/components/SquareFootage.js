@@ -2,34 +2,21 @@ import React from "react";
 import config from "react-global-configuration";
 import QuoteCtx from "./QuoteCtx";
 
-
-class ModelNumber extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class SquareFootage extends React.Component {
   render() {
     return (
       <QuoteCtx.Consumer>
         {context => (
+
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">See the diagram</h3>
+              <h3 className="titre-big">What's your building square
+                footage?</h3>
             </div>
-            <p className="smaller-explanation">Please see the diagram to locate
-              the
-              model number. If one of the following series of numbers appears in
-              the
-              model number please input those numbers.</p>
             <div className="div-flex-h justify-start added-top-margin">
-              <div className="div-diagram">
-                <img src="/images/number-locate.png"
-                     id="w-node-ec8688239c87-33000f20"
-                     alt=""/>
-              </div>
               <div className="div-flex-h tonnage-form">
                 {
-                  config.get('model_to_tons').map((data) => {
+                  config.get('square_footage_to_tons').map((data) => {
                     return (
                       <div data-ix="appear-next"
                            className="options different-color-font pale-border smallest">
@@ -40,12 +27,12 @@ class ModelNumber extends React.Component {
                              })}>
                           <div data-ix="appear-next"
                                className="div-hover"></div>
-                          <input type="radio" name="model-number"
-                                 value={data.model}
-                                 data-name="model-number"
+                          <input type="radio" name="square-footage"
+                                 value={data.footage}
+                                 data-name="square-footage"
                                  className="radio-button w-radio-input"/>
                           <label className="w-form-label">
-                            <strong>{data.model}</strong>
+                            <strong>{data.footage}</strong>
                           </label>
                         </div>
                       </div>
@@ -56,10 +43,10 @@ class ModelNumber extends React.Component {
                      className="options different-color-font pale-border smallest">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
-                    onClick={() => this.props.transition({type: "LOAD_SQUARE_FOOTAGE"})}>
+                    onClick={() => this.props.transition({type: "CALL_US"})}>
                     <div data-ix="appear-next" className="div-hover"></div>
-                    <input type="radio" id="not-sure-2" name="model-number"
-                           value="not-sure" data-name="model-number"
+                    <input type="radio" id="not-sure-2" name="square-footage"
+                           value="not-sure" data-name="square-footage"
                            className="radio-button w-radio-input"/>
                     <label htmlFor="not-sure-2" className="w-form-label">
                       <strong>Not sure</strong>
@@ -76,4 +63,4 @@ class ModelNumber extends React.Component {
   }
 }
 
-export default ModelNumber;
+export default SquareFootage;

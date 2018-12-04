@@ -4,6 +4,7 @@ import config from "react-global-configuration";
 class SystemTypeStructure extends React.Component {
   constructor(props) {
     super(props);
+
   }
 
   render() {
@@ -19,10 +20,13 @@ class SystemTypeStructure extends React.Component {
               <div className="div-heading-slide">
                 <h3 className="titre-big">Split System</h3>
               </div>
-              <p>A split system air conditioner consists of two main parts: the
-                outdoor unit (Condenser) and the indoor unit (Air Handler)</p>
+              <p>A split system air conditioner consists of two main parts:
+                the
+                outdoor unit (Condenser) and the indoor unit (Air
+                Handler)</p>
             </div>
-            <div className="radio-button-field w-radio" onClick={() => this.props.saveValues({system_type_structure: config.get('split_system')})}>
+            <div className="radio-button-field w-radio"
+                 onClick={() => this.props.saveAndContinue({system_type_structure: 'split_system', system_types: config.get('split_system')})}>
               <div data-ix="appear-next" className="div-hover"></div>
               <input type="radio" id="split-system" name="type"
                      value="split-system" data-name="type"
@@ -41,7 +45,8 @@ class SystemTypeStructure extends React.Component {
                 conditioning system with just one unit outside and no air
                 handler inside</p>
             </div>
-            <div className="radio-button-field w-radio" onClick={() => this.props.saveValues({system_type_structure: config.get('packaged_system')})}>
+            <div className="radio-button-field w-radio"
+                 onClick={() => this.props.saveAndContinue({system_type_structure: 'packaged_system', system_types: config.get('packaged_system')})}>
               <div data-ix="appear-next" className="div-hover"></div>
               <input type="radio" id="packaged-system" name="type"
                      value="packaged-system" data-name="type"
@@ -58,12 +63,14 @@ class SystemTypeStructure extends React.Component {
               </div>
               <p>A water sourced system is a </p>
             </div>
-            <div className="radio-button-field w-radio" onClick={() => this.props.saveValues({system_type_structure: config.get('water_system')})}>
+            <div className="radio-button-field w-radio"
+                 onClick={() => this.props.saveAndContinue({system_type_structure: 'water_system', system_types: config.get('water_system')})}>
               <div data-ix="appear-next" className="div-hover"></div>
               <input type="radio" id="water-sourced-system" name="type"
                      value="water-sourced-system" data-name="type"
                      className="radio-button w-radio-input"/>
-              <label htmlFor="water-sourced-system" className="w-form-label">
+              <label htmlFor="water-sourced-system"
+                     className="w-form-label">
                 <strong>I currently have a Water Sourced System</strong>
               </label>
             </div>
