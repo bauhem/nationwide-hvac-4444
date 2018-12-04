@@ -6,19 +6,21 @@ import QuoteCtx from "./QuoteCtx";
 import SystemTypeStructure from "./SystemTypeStructure";
 import SystemTypes from "./SystemTypes";
 import Tonnage from "./Tonnage";
-import Quote from "./Quote";
 import ModelNumber from "./ModelNumber";
 import AirHandlerLocation from "./AirHandlerLocation";
 import AirHandlerType from "./AirHandlerType";
 import RoofAccess from "./RoofAccess";
 import CondenserUnitLocation from "./CondenserUnitLocation";
-import Brands from "./Brands";
 import SquareFootage from "./SquareFootage";
-import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import CallUs from "./CallUs";
-import {unitsFilter} from "./UnitsFilter";
+import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import PackagedSystemLocation from "./PackagedSystemLocation";
 import AirSystemFilterLocation from "./AirSystemFilterLocation";
+import Brands from "./Brands";
+import Quote from "./Quote";
+
+import {unitsFilter, brandsFilter} from "./UnitsFilter";
+import ZipCode from "./ZipCode";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -35,7 +37,7 @@ const StatesComponents = {
   AirSystemFilterLocation: AirSystemFilterLocation,
   CallUs: CallUs,
   Brands: Brands,
-  // ZipCode: ZipCode,
+  ZipCode: ZipCode,
   Quote: Quote,
   // Accessories: Accessories
 };
@@ -47,28 +49,27 @@ class QuoteBuilder extends React.Component {
   constructor(props) {
     super(props);
 
-    // TODO - Use saved system_type_structure in default SM ctx value
-    if (saved_values === null) {
-      this.state = {
-        currentState: stateMachine.initialState.value,
-        system_type_structure: null,
-        system_types: null,
-        system_type: null,
-        tonnage: null,
-        model_number: null,
-        square_footage: null,
-        air_handler_location: null,
-        water_heater_under_air_handler: null,
-        air_handler_type: null,
-        condenser_unit_location: null,
-        roof_access: null,
-        packaged_system_location: null,
-        air_filter_side: null,
-        brands: [],
-        zip_code: null
-      }
-    } else {
-      this.state = saved_values;
+    this.state = {
+      currentState: stateMachine.initialState.value,
+      system_type_structure: null,
+      system_types: null,
+      system_type: null,
+      tonnage: null,
+      air_handler_location: null,
+      water_heater_under_air_handler: null,
+      air_handler_type: null,
+      condenser_unit_location: null,
+      roof_access: null,
+      packaged_system_location: null,
+      air_filter_side: null,
+      brands: [],
+      selected_brands: [],
+      units: null,
+      zip_code: null
+    };
+
+    if (saved_values !== null) {
+      this.state = Object.assign(this.state, saved_values);
     }
 
     this.saveValues = this.saveValues.bind(this);
@@ -90,13 +91,16 @@ class QuoteBuilder extends React.Component {
   }
 
   command(action, event) {
+    let units = [];
     switch (action.type) {
       case 'filterBrands':
-        let [units, brands] = unitsFilter(this.state);
+        units = unitsFilter(this.state);
+        let brands = brandsFilter(units, this.state);
         this.saveValues({units: units, brands: brands});
         break;
       case 'filterResults':
-        // TODO - implement this
+        units = unitsFilter(this.state);
+        this.saveValues({units: units});
         break;
       default:
         break;
@@ -124,15 +128,6 @@ class QuoteBuilder extends React.Component {
     )
   }
 
-  nextBtn() {
-    return (
-      <div className="next w-slider-arrow-right"
-           onClick={() => this.transition({type: 'SUBMIT'})}>
-        <div className="next-button">Next step</div>
-      </div>
-    );
-  }
-
   componentDidUpdate() {
     localStorage.setItem('instantQuoteValues', JSON.stringify(this.state));
   }
@@ -143,11 +138,6 @@ class QuoteBuilder extends React.Component {
 
     if (this.state.currentState !== QuoteSM.initialState.value) {
       buttons.push(this.backBtn());
-    }
-
-    if (this.state.currentState.type !== 'final') {
-      // TODO - Show button only in specific states
-      buttons.push(this.nextBtn());
     }
 
     return (
