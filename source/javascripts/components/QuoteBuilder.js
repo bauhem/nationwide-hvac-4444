@@ -96,7 +96,7 @@ class QuoteBuilder extends React.Component {
       case 'filterBrands':
         units = unitsFilter(this.state);
         let brands = brandsFilter(units, this.state);
-        this.saveValues({units: units, brands: brands});
+        this.saveValues({units: units, brands: brands, selected_brands: []});
         break;
       case 'filterResults':
         units = unitsFilter(this.state);

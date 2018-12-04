@@ -6,6 +6,12 @@ class Unit extends React.Component {
     let unit = this.props.unit;
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';
     let zone = 'Installed Price Zone 1';
+    let item_id = unit['AHRI'].toLowerCase();
+    let model_name = unit['Brand Series'];
+    let price = unit[zone];
+    let url = '/ac-units/'+ item_id + '.html';
+    let description = '';    //    "#{system_type_key_to_name(unit['System Type'])} by #{unit['Brand']}"
+
 
     return (
       <div className="units-quote">
@@ -13,12 +19,12 @@ class Unit extends React.Component {
           <div className="unit-overlay">
             <h3 className="heading-no-top-margin">I want this unit
               installed</h3>
-            {/* TODO - Add snip cart elements here */}
-            <a href="#" className="button w-button">Add
-              to cart</a>
+            <a href="#" data-item-id={item_id} data-item-name={model_name} data-item-price={price} data-item-url={url} data-item-description={description} className="button w-button snipcart-add-item">
+              Add to cart
+            </a>
           </div>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller">{unit['Brand Series']}</div>
+            <div className="product-name smaller">{model_name}</div>
             <img src={brand_img} width="80"
                  alt={unit['Brand']}
                  className="image-brand"/></div>
@@ -42,7 +48,7 @@ class Unit extends React.Component {
             <div className="blue-text">Price including
               installation
             </div>
-            <div><strong>{unit[zone]}</strong></div>
+            <div><strong>{price}</strong></div>
           </div>
         </div>
       </div>

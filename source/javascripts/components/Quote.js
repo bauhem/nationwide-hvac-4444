@@ -5,7 +5,6 @@ import Unit from "./Unit";
 class Quote extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -33,7 +32,7 @@ class Quote extends React.Component {
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Here&#x27;s the Good results for you</h3>
+          <h3 className="titre-big">Here are the Good/Better/Best results for you</h3>
         </div>
         <div className="flex-third">
           <div className="good-div">
