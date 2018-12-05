@@ -77,21 +77,27 @@ class QuoteBuilder extends React.Component {
       brands: [],
       selected_brands: [],
       units: null,
-      zip_code: null
+      zip_code: null,
+      history: []
     }
   }
 
   transition(event) {
-    const nextQuoteState = stateMachine.transition(this.state.currentState, event);
-    const nextState = nextQuoteState.actions.reduce(
-      (state, action) => this.command(action, event) || state,
-      undefined,
-    );
+    if (event.type === "BACK") {
+      this.prevState();
+    } else {
+      const nextQuoteState = stateMachine.transition(this.state.currentState, event);
+      const nextState = nextQuoteState.actions.reduce(
+        (state, action) => this.command(action, event) || state,
+        undefined,
+      );
 
-    this.setState({
-      currentState: nextQuoteState.value,
-      ...nextState,
-    });
+      this.setState({
+        currentState: nextQuoteState.value,
+        history: this.pushStateToHistory(nextQuoteState.value),
+        ...nextState,
+      });
+    }
   }
 
   command(action, event) {
@@ -113,6 +119,32 @@ class QuoteBuilder extends React.Component {
     }
   }
 
+  pushStateToHistory(nextState) {
+    let history = this.state.history;
+
+    if (history[history.length-1] !== nextState) {
+      history.push(nextState);
+    }
+
+    return history;
+  }
+
+  prevState() {
+    let history = this.state.history;
+    history.pop();
+
+    let prevState = history[history.length-1];
+
+    if (history.length === 0) {
+      prevState = stateMachine.initialState.value;
+    }
+
+    this.setState({
+      currentState: prevState,
+      history: history
+    });
+  }
+
   saveValues(fields) {
     this.setState(fields);
   }
@@ -124,7 +156,7 @@ class QuoteBuilder extends React.Component {
 
   backBtn() {
     return (
-      <div className="previous w-slider-arrow-left"
+      <div key="back-btn" className="previous w-slider-arrow-left"
            onClick={() => this.transition({type: 'BACK'})}>
         <img
           src="https://daks2k3a4ib2z.cloudfront.net/585d5e2a7b64077507abdf08/58ab945ae3eb210a7dbbd7cc_arrow-left.gif"

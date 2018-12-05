@@ -29,7 +29,8 @@ const configuration = {
     {footage: '1801-2100', tons: 3.5},
     {footage: '2101-2400', tons: 4},
     {footage: '2401-3000', tons: 5}
-  ]
+  ],
+  root_url: 'https://www.nationwide-hvac.com'
 };
  
 export default configuration;

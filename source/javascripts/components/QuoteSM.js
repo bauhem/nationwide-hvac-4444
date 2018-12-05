@@ -131,10 +131,9 @@ const QuoteSM = Machine({
     Accessories: {
       type: 'final'
     },
-    hist: {type: 'history', history: true},
   },
   on: {
-    BACK: 'hist'
+    BACK: {actions: "back"}
   }
 }, {
   guards: {
@@ -143,5 +142,6 @@ const QuoteSM = Machine({
     isWaterSystem
   }
 });
+
 
 export default QuoteSM;

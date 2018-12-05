@@ -17,7 +17,8 @@ const QuoteCtx = React.createContext({
   brands: [],
   selected_brands: [],
   units: null ,
-  zip_code: null
+  zip_code: null,
+  history: []
 });
 
 export default QuoteCtx;
