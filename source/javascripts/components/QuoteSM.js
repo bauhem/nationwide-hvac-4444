@@ -19,6 +19,7 @@ const QuoteSM = Machine({
   initial: 'SystemTypeStructure',
   states: {
     SystemTypeStructure: {
+      onEntry: 'clearPersistedData',
       on: {
         SUBMIT: 'SystemTypes',
       },
@@ -111,7 +112,8 @@ const QuoteSM = Machine({
     Brands: {
       onEntry: 'filterBrands',
       on: {
-        SUBMIT: 'ZipCode'
+        SUBMIT: 'ZipCode',
+        CALL_US_ON_NO_BRANDS: 'CallUs'
       }
     },
     ZipCode: {
@@ -129,7 +131,7 @@ const QuoteSM = Machine({
     Accessories: {
       type: 'final'
     },
-    hist: {type: 'history'},
+    hist: {type: 'history', history: true},
   },
   on: {
     BACK: 'hist'

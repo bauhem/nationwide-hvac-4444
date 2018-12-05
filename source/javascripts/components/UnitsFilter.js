@@ -10,7 +10,7 @@ export function unitsFilter(ctx) {
   let filtered_units = [] ;
   filtered_units = units.filter(filterOutBySystemType.bind(this, state.system_type))
     .filter(filterOutByTons.bind(this, state.tonnage))
-    .filter(filterOut39InchesOrHigher.bind(this, state.air_handler_location))
+    .filter(filterOut39InchesOrHigher.bind(this, state.air_handler_location, state.water_heater_under_air_handler))
     .filter(filterOutSingleStageFrontReturn.bind(this, state.air_handler_location))
     .filter(filterOutByBrand.bind(this, state.selected_brands));
   return filtered_units;
@@ -28,12 +28,13 @@ function filterOutByTons(tons, unit) {
   return tons === unit['Tons'];
 }
 
-function filterOut39InchesOrHigher(ah_loc, unit) {
-  if (ah_loc !== 'closet') {
+function filterOut39InchesOrHigher(ah_loc, wh_under_ah, unit) {
+  if (ah_loc !== 'closet' || wh_under_ah === false) {
     return true;
   }
-  
-  return unit['AHU H'] <= 39;
+
+  // TODO - This is a hack for now until we find out if the " is desired or not
+  return unit['AHU H'] <= 39 || unit['AHU H"'] <= 39;
 }
 
 function filterOutSingleStageFrontReturn(ah_loc, unit) {

@@ -49,7 +49,19 @@ class QuoteBuilder extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = QuoteBuilder.defaultState();
+
+    if (saved_values !== null) {
+      this.state = Object.assign(this.state, saved_values);
+    }
+
+    this.saveValues = this.saveValues.bind(this);
+    this.saveAndContinue = this.saveAndContinue.bind(this);
+    this.transition = this.transition.bind(this);
+  }
+
+  static defaultState() {
+    return {
       currentState: stateMachine.initialState.value,
       system_type_structure: null,
       system_types: null,
@@ -66,15 +78,7 @@ class QuoteBuilder extends React.Component {
       selected_brands: [],
       units: null,
       zip_code: null
-    };
-
-    if (saved_values !== null) {
-      this.state = Object.assign(this.state, saved_values);
     }
-
-    this.saveValues = this.saveValues.bind(this);
-    this.saveAndContinue = this.saveAndContinue.bind(this);
-    this.transition = this.transition.bind(this);
   }
 
   transition(event) {
@@ -102,6 +106,8 @@ class QuoteBuilder extends React.Component {
         units = unitsFilter(this.state);
         this.saveValues({units: units});
         break;
+      case 'clearPersistedData':
+        this.setState(QuoteBuilder.defaultState());
       default:
         break;
     }

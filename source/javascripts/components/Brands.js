@@ -1,5 +1,6 @@
 import React from "react";
 import QuoteCtx from "./QuoteCtx";
+import Quote from "./Quote";
 
 var selected_brands = [];
 
@@ -34,6 +35,10 @@ class Brands extends React.Component {
   }
 
   render() {
+    if (this.context.brands.length == 0) {
+      this.props.transition({type: 'CALL_US_ON_NO_BRANDS'});
+    }
+
     return (
       <QuoteCtx.Consumer>
         {context =>
@@ -68,5 +73,7 @@ class Brands extends React.Component {
     )
   }
 }
+
+Brands.contextType = QuoteCtx;
 
 export default Brands;
