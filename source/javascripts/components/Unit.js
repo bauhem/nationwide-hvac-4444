@@ -1,15 +1,18 @@
 import React from "react";
+import config from 'react-global-configuration';
 
+import QuoteCtx from "./QuoteCtx";
 
 class Unit extends React.Component {
   render() {
+    let system_types = this.context.system_types;
     let unit = this.props.unit;
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';
     let zone = 'Installed Price Zone 1';
     let item_id = unit['AHRI'].toLowerCase();
     let model_name = unit['Brand Series'];
     let price = unit[zone];
-    let url = '/ac-units/'+ item_id + '.html';
+    let url = config.get('root_url') + '/ac-units/'+ item_id + '.html';
     let description = '';    //    "#{system_type_key_to_name(unit['System Type'])} by #{unit['Brand']}"
 
 
@@ -55,5 +58,6 @@ class Unit extends React.Component {
     );
   }
 }
+Unit.contextTypes = QuoteCtx;
 
 export default Unit;

@@ -187,13 +187,10 @@ class QuoteBuilder extends React.Component {
                className="multi-step-form w-clearfix w-slider">
             <div className="mask-form w-slider-mask">
               <div className="w-slide">
-                <div className="form-wrapper w-form">
-                  <form id="wf-form-Instant-Quote" name="wf-form-Instant-Quote"
-                        data-name="Instant Quote" className="form-full-width">
+                <div className="form-wrapper w-form form-full-width">
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}/>
-                  </form>
                 </div>
               </div>
             </div>
