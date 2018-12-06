@@ -319,7 +319,10 @@ ul {
 }
 
 .textarea {
+  max-height: 250px;
+  max-width: 100%;
   min-height: 100px;
+  min-width: 100%;
   border-style: none none solid;
   border-width: 1px 1px 2px;
   border-color: #000 #000 #fff;
@@ -1202,6 +1205,10 @@ ul {
   margin-right: 20px;
 }
 
+.text-field-2.bigger-field.added-right-margin.bot-field {
+  display: none;
+}
+
 .text-field-2.bigger-field.bot-field {
   display: none;
 }
@@ -1214,6 +1221,14 @@ ul {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.div-tow-collumn.vertical {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .options {
@@ -1357,7 +1372,7 @@ ul {
 }
 
 .form-wrapper.second {
-  padding: 30px 8% 60px;
+  padding: 60px 8%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -1706,6 +1721,15 @@ ul {
   border-bottom: 1px solid #f6c9ca;
 }
 
+.div-full-width.flex-margin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .shopping-cart {
   position: relative;
   display: -webkit-box;
@@ -1763,6 +1787,7 @@ ul {
 .select-field {
   height: 50px;
   margin-bottom: 20px;
+  font-size: 16px;
 }
 
 .radio-button {
@@ -2185,6 +2210,10 @@ ul {
   background-color: #000;
 }
 
+.submit.final.no-margin-right {
+  margin-right: 0px;
+}
+
 .html-left {
   width: 100%;
   padding-top: 10px;
@@ -2204,6 +2233,10 @@ ul {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.checkbox-form {
+  margin-top: 30px;
 }
 
 html.w-mod-js *[data-ix="hero-appear-1"] {
@@ -2853,6 +2886,9 @@ html.w-mod-js *[data-ix="appear-from-bottom"] {
   .div-logo {
     width: 100%;
     margin-bottom: 6%;
+  }
+  .brand {
+    width: 180px;
   }
   .section-about {
     padding-right: 0%;

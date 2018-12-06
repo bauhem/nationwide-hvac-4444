@@ -32,5 +32,5 @@ const configuration = {
   ],
   root_url: 'https://www.nationwide-hvac.com'
 };
- 
+
 export default configuration;
