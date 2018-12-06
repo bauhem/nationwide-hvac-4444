@@ -32,5 +32,5 @@ const configuration = {
   ],
   root_url: 'https://egidius.serveo.net'
 };
- 
+
 export default configuration;
