@@ -12,7 +12,7 @@ var base = new Airtable({
   apiKey: 'keyHpcZOz0geS06xM' // TODO - CHANGE THIS
 }).base('apppfZRVZdFKMDYpt');
 
-base('Products').select({
+base('Match-Ups').select({
   //sort
   sort: [{
     field: "AHRI",
