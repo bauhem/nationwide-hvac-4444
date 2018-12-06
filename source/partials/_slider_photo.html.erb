@@ -1,0 +1,20 @@
+<a href="#" class="w-inline-block w-lightbox">
+  <%= image_tag product_image(unit) %>
+  <% if product_has_image?(unit) %>
+    <% photo = unit['Attachments'][0] %>
+    <script type="application/json" class="w-json">{
+              "items": [
+                {
+                  "type": "image",
+                  "_id": "<%= photo['filename'] %>",
+                  "fileName": "<%= photo['filename'] %>",
+                  "width": 400,
+                  "height": 400,
+                  "url": "<%= photo.url.html_safe %>"
+                }
+              ]
+            }
+
+    </script>
+  <% end %>
+</a>

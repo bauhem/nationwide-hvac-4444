@@ -59,6 +59,10 @@ module ProductHelpers
     url
   end
 
+  def product_has_image?(unit)
+    unit['Attachments'].present?
+  end
+
   def cart_description(unit)
     "#{system_type_key_to_name(unit['System Type'])} #{model(unit)} by #{unit['Brand']}"
   end
