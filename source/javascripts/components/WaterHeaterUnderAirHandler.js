@@ -13,11 +13,11 @@ class WaterHeaterUnderAirHandler extends React.Component {
           <h3 className="titre-big">Is the water heater under the air handler?</h3>
         </div>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: false})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="no" name="water-heater-under-air-handler"
                      value="no" data-name="water-heater-under-air-handler"
                      className="radio-button w-radio-input"/>
@@ -25,11 +25,11 @@ class WaterHeaterUnderAirHandler extends React.Component {
                      className="w-form-label"><strong>No</strong></label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({water_heater_under_air_handler: true})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="yes" name="water-heater-under-air-handler"
                      value="yes" data-name="water-heater-under-air-handler"
                      className="radio-button w-radio-input"/>

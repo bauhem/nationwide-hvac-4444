@@ -3,11 +3,11 @@ import React from "react";
 class SystemType extends React.Component {
   render() {
     return (
-      <div data-ix="appear-next"
+      <div
            className="options different-color-font pale-border">
         <div className="radio-button-field grey-border w-radio"
              onClick={() => this.props.saveAndContinue({system_type: this.props.type})}>
-          <div data-ix="appear-next" className="div-hover"></div>
+          <div className="div-hover"></div>
           <input type="radio" name="system"
                  value={this.props.type} data-name="system"
                  className="radio-button w-radio-input"/>

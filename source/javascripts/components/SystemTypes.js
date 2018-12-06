@@ -21,7 +21,7 @@ class SystemTypes extends React.Component {
             <div className="div-flex-h">
               {
                 context.system_types.map((type) => {
-                  return <SystemType {...type}
+                  return <SystemType key={type.type} {...type}
                                      saveAndContinue={this.props.saveAndContinue}/>
                 })
               }

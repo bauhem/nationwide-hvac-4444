@@ -15,11 +15,11 @@ class CondenserUnitLocation extends React.Component {
         <p className="smaller-explanation">Is the Condenser Unit Located on the
           ground or on the roof of the building?</p>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({condenser_unit_location: 'roof'}, {type: 'LOAD_ROOF_ACCESS'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <img src="/images/roof.png" alt=""/>
               <input type="radio"
                      id="roof"
@@ -33,11 +33,11 @@ class CondenserUnitLocation extends React.Component {
               </label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({condenser_unit_location: 'ground'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <img src="/images/ground.png" alt=""/>
               <input type="radio"
                      id="ground"

@@ -13,11 +13,11 @@ class RoofAccess extends React.Component {
           <h3 className="titre-big">How do you access the roof?</h3>
         </div>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({roof_access: 'stair'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="stair" name="roof-access" value="stair"
                      data-name="roof-access"
                      className="radio-button w-radio-input"/>
@@ -28,11 +28,11 @@ class RoofAccess extends React.Component {
               </label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({roof_access: 'crane'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="crane" name="roof-access" value="crane"
                      data-name="roof-access"
                      className="radio-button w-radio-input"/>

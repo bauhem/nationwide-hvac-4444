@@ -31,14 +31,14 @@ class ModelNumber extends React.Component {
                 {
                   config.get('model_to_tons').map((data) => {
                     return (
-                      <div data-ix="appear-next"
+                      <div
                            className="options different-color-font pale-border smallest">
                         <div className="radio-button-field grey-border w-radio"
                              onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
                                type: 'SUBMIT',
                                value: context.system_type_structure
                              })}>
-                          <div data-ix="appear-next"
+                          <div
                                className="div-hover"></div>
                           <input type="radio" name="model-number"
                                  value={data.model}
@@ -52,12 +52,12 @@ class ModelNumber extends React.Component {
                     );
                   })
                 }
-                <div data-ix="appear-next"
+                <div
                      className="options different-color-font pale-border smallest">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
                     onClick={() => this.props.transition({type: "LOAD_SQUARE_FOOTAGE"})}>
-                    <div data-ix="appear-next" className="div-hover"></div>
+                    <div className="div-hover"></div>
                     <input type="radio" id="not-sure-2" name="model-number"
                            value="not-sure" data-name="model-number"
                            className="radio-button w-radio-input"/>

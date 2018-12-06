@@ -122,7 +122,7 @@ class QuoteBuilder extends React.Component {
   pushStateToHistory(nextState) {
     let history = this.state.history;
 
-    if (history[history.length-1] !== nextState) {
+    if (history[history.length - 1] !== nextState) {
       history.push(nextState);
     }
 
@@ -133,7 +133,7 @@ class QuoteBuilder extends React.Component {
     let history = this.state.history;
     history.pop();
 
-    let prevState = history[history.length-1];
+    let prevState = history[history.length - 1];
 
     if (history.length === 0) {
       prevState = stateMachine.initialState.value;
@@ -173,29 +173,30 @@ class QuoteBuilder extends React.Component {
   render() {
     const SlideComponent = StatesComponents[this.state.currentState];
     let buttons = [];
+    let second_slide = '';
 
     if (this.state.currentState !== QuoteSM.initialState.value) {
       buttons.push(this.backBtn());
+      second_slide = 'second'
     }
 
     return (
       <QuoteCtx.Provider value={this.state}>
         <div className="msp-holder">
-          <div data-animation="slide" data-easing="ease-out-quart"
-               data-hide-arrows="1" data-disable-swipe="1" data-duration="750"
-               data-infinite="1"
-               className="multi-step-form w-clearfix w-slider">
-            <div className="mask-form w-slider-mask">
+          <div className="multi-step-form w-slider">
+            <div className="w-slider-mask">
               <div className="w-slide">
-                <div className="form-wrapper w-form form-full-width">
+                <div className={"form-wrapper w-form " + second_slide}>
+                  <div className="form-full-width">
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}/>
+                  </div>
                 </div>
               </div>
             </div>
+            {buttons}
           </div>
-          {buttons}
         </div>
       </QuoteCtx.Provider>
     );

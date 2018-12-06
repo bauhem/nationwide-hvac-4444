@@ -9,11 +9,11 @@ class PackagedSystemLocation extends React.Component {
         </div>
         <p className="smaller-explanation">Where is the Packaged System located?</p>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({packaged_system_location: 'side_of_home'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <img src="/images/side-of-home.png" alt=""/>
               <input type="radio"
                      id="side-of-home"
@@ -27,11 +27,11 @@ class PackagedSystemLocation extends React.Component {
               </label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({packaged_system_location: 'roof'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <img src="/images/roof.png" alt=""/>
               <input type="radio"
                      id="roof"
@@ -45,11 +45,11 @@ class PackagedSystemLocation extends React.Component {
               </label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({packaged_system_location: 'ground'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <img src="/images/ground.png" alt=""/>
               <input type="radio"
                      id="ground"

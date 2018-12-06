@@ -13,11 +13,11 @@ class AirHandlerType extends React.Component {
           <h3 className="titre-big">Please select the air handler type</h3>
         </div>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({air_handler_type: 'horizontal'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="horizontal" name="handler-type"
                      value="horizontal" data-name="handler-type"
                      className="radio-button w-radio-input"/>
@@ -25,11 +25,11 @@ class AirHandlerType extends React.Component {
                      className="w-form-label"><strong>Horizontal</strong></label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({air_handler_type: 'vertical'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="vertical" name="handler-type"
                      value="vertical" data-name="handler-type"
                      className="radio-button w-radio-input"/>

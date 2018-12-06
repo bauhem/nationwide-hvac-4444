@@ -13,11 +13,11 @@ class AirSystemFilterLocation extends React.Component {
           <h3 className="titre-big">Which side of the system is the air filter located?</h3>
         </div>
         <div className="div-flex-h">
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({air_filter_side: 'left'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="left" name="air-filter-side"
                      value="left" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>
@@ -25,11 +25,11 @@ class AirSystemFilterLocation extends React.Component {
                      className="w-form-label"><strong>Left</strong></label>
             </div>
           </div>
-          <div data-ix="appear-next"
+          <div
                className="options different-color-font pale-border">
             <div className="radio-button-field grey-border w-radio"
                  onClick={() => this.props.saveAndContinue({air_filter_side: 'right'})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="right" name="air-filter-side"
                      value="right" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>

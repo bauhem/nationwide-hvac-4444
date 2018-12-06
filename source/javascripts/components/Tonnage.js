@@ -21,15 +21,14 @@ class Tonnage extends React.Component {
               {
                 config.get('tonnage').map((tons) => {
                   return (
-                    <div data-ix="appear-next"
-                         className="options different-color-font pale-border smaller"
+                    <div key={tons} className="options different-color-font pale-border smaller"
                          style={style}>
                       <div className="radio-button-field grey-border w-radio"
                            onClick={() => this.props.saveAndContinue({tonnage: tons}, {
                              type: 'SUBMIT',
                              value: context.system_type_structure
                            })}>
-                        <div data-ix="appear-next" className="div-hover"></div>
+                        <div className="div-hover"></div>
                         <input type="radio" id={tons} name="tonnage"
                                value={tons}
                                data-name="tonnage"
@@ -42,12 +41,11 @@ class Tonnage extends React.Component {
                   )
                 })
               }
-              <div data-ix="appear-next"
-                   className="options different-color-font pale-border smaller"
+              <div key={"not-sure"} className="options different-color-font pale-border smaller"
                    style={style}>
                 <div className="radio-button-field grey-border w-radio"
                      onClick={() => this.props.transition({type: "LOAD_MODEL"})}>
-                  <div data-ix="appear-next" className="div-hover"></div>
+                  <div className="div-hover"></div>
                   <input type="radio" id="not-sure" name="tonnage"
                          value=""
                          className="radio-button w-radio-input"/>

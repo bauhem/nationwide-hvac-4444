@@ -27,7 +27,7 @@ class SystemTypeStructure extends React.Component {
             </div>
             <div className="radio-button-field w-radio"
                  onClick={() => this.props.saveAndContinue({system_type_structure: 'split_system', system_types: config.get('split_system')})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="split-system" name="type"
                      value="split-system" data-name="type"
                      className="radio-button w-radio-input"/>
@@ -47,7 +47,7 @@ class SystemTypeStructure extends React.Component {
             </div>
             <div className="radio-button-field w-radio"
                  onClick={() => this.props.saveAndContinue({system_type_structure: 'packaged_system', system_types: config.get('packaged_system')})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="packaged-system" name="type"
                      value="packaged-system" data-name="type"
                      className="radio-button w-radio-input"/>
@@ -65,7 +65,7 @@ class SystemTypeStructure extends React.Component {
             </div>
             <div className="radio-button-field w-radio"
                  onClick={() => this.props.saveAndContinue({system_type_structure: 'water_system', system_types: config.get('water_system')})}>
-              <div data-ix="appear-next" className="div-hover"></div>
+              <div className="div-hover"></div>
               <input type="radio" id="water-sourced-system" name="type"
                      value="water-sourced-system" data-name="type"
                      className="radio-button w-radio-input"/>

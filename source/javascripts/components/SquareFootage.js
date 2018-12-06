@@ -18,14 +18,14 @@ class SquareFootage extends React.Component {
                 {
                   config.get('square_footage_to_tons').map((data) => {
                     return (
-                      <div data-ix="appear-next"
+                      <div
                            className="options different-color-font pale-border smallest">
                         <div className="radio-button-field grey-border w-radio"
                              onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
                                type: 'SUBMIT',
                                value: context.system_type_structure
                              })}>
-                          <div data-ix="appear-next"
+                          <div
                                className="div-hover"></div>
                           <input type="radio" name="square-footage"
                                  value={data.footage}
@@ -39,12 +39,12 @@ class SquareFootage extends React.Component {
                     );
                   })
                 }
-                <div data-ix="appear-next"
+                <div
                      className="options different-color-font pale-border smallest">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
                     onClick={() => this.props.transition({type: "CALL_US"})}>
-                    <div data-ix="appear-next" className="div-hover"></div>
+                    <div className="div-hover"></div>
                     <input type="radio" id="not-sure-2" name="square-footage"
                            value="not-sure" data-name="square-footage"
                            className="radio-button w-radio-input"/>
