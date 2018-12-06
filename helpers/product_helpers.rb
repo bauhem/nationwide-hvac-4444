@@ -60,7 +60,7 @@ module ProductHelpers
   end
 
   def cart_description(unit)
-    "#{system_type_key_to_name(unit['System Type'])} by #{unit['Brand']}"
+    "#{system_type_key_to_name(unit['System Type'])} #{model(unit)} by #{unit['Brand']}"
   end
 
   def display_price(unit)

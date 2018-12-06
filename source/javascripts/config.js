@@ -9,7 +9,7 @@ const configuration = {
     {type: "SS HP", name: "Heat Pump", description: "Technically, a heat pump is a mechanical-compression cycle refrigeration system that can be reversed to either heat or cool a controlled space."},
   ],
   water_system: [
-    {type: "WSHP", name: "Water Sourced", description: ""}
+    {type: "WSHP", name: "Water Sourced", description: "Mostly used in high rise buildings, a water source heat pump operates much like a traditional air source heat pump except that it extracts and dissipates heat by way of water instead of air."}
   ],
   tonnage: [1.5,2,2.5,3,3.5,4,5],
   model_to_tons: [
@@ -30,7 +30,7 @@ const configuration = {
     {footage: '2101-2400', tons: 4},
     {footage: '2401-3000', tons: 5}
   ],
-  root_url: 'https://www.nationwide-hvac.com'
+  root_url: 'https://egidius.serveo.net'
 };
  
 export default configuration;

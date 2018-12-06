@@ -1,0 +1,47 @@
+<div class="section-hero-interior">
+  <h1 class="cta-heading" data-ix="hero-appear-1"><strong>Accessory</strong>
+  </h1>
+</div>
+
+<div class="breadcrumbs">
+  <a href="/ac-units" class="breadcrumb-link">
+    A/C Units
+  </a>
+  <span class="breadcrumb-link arrow">></span>
+  <a href="/ac-units/accessories" class="breadcrumb-link">Accessories</a>
+  <span class="breadcrumb-link arrow">></span>
+  <a href="#" class="breadcrumb-link active"><%= accessory['Item'] %></a>
+</div>
+<div class="section-product-details">
+  <div class="container">
+    <div class="div-flex-h justify-start added-bot-margin">
+      <% if acc_has_image?(accessory) %>
+        <%# TODO - Create slider if more than one image %>
+        <div class="div-40">
+          <a href="#" class="w-inline-block w-lightbox">
+            <img src="<%= accessory['Image'][0]['thumbnails']['large']['url'] %>" alt="<%= accessory['Item'] %>">
+          </a>
+        </div>
+      <% end %>
+      <div class="div-full-width added-top-margin">
+        <div class="div-flex-h align-center">
+          <div class="product-name smaller"><%= accessory['Item'] %></div>
+        </div>
+        <div class="div-product-details smaller">
+          <div class="blue-text">Details</div>
+          <div>
+            <strong><%= accessory['Description'] %></strong>
+          </div>
+        </div>
+        <div class="div-product-details smaller">
+          <div class="blue-text">Price</div>
+          <div>
+            <strong><%= acc_display_price(accessory) %></strong>
+          </div>
+        </div>
+        <a data-item-id="<%= accessory['id'] %>" data-item-name="<%= accessory['Item'] %>" data-item-price="<%= accessory['Price $'] %>" data-item-url="<%= "#{config.url_root}/ac-units/accessories/#{accessory['id']}.html" %>" data-item-description="<%= accessory['Description'] || '' %>" href="#" class="button added-top-margin snipcart-add-item w-button">Add
+          to cart</a>
+      </div>
+    </div>
+  </div>
+</div>

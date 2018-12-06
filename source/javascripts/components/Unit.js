@@ -1,20 +1,27 @@
 import React from "react";
 import config from 'react-global-configuration';
 
-import QuoteCtx from "./QuoteCtx";
-
 class Unit extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.transition({type: 'SUBMIT'});
+  }
+
   render() {
-    let system_types = this.context.system_types;
     let unit = this.props.unit;
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';
     let zone = 'Installed Price Zone 1';
     let item_id = unit['AHRI'].toLowerCase();
     let model_name = unit['Brand Series'];
-    let price = unit[zone];
-    let url = config.get('root_url') + '/ac-units/'+ item_id + '.html';
-    let description = '';    //    "#{system_type_key_to_name(unit['System Type'])} by #{unit['Brand']}"
-
+    let price = unit['Shop Online Price'];
+    let url = config.get('root_url') + '/ac-units/' + item_id + '.html';
+    let description = `${this.props.systemTypeName} ${model_name} by ${unit['Brand']}`;
+    let installation_price = unit[zone] - price;
 
     return (
       <div className="units-quote">
@@ -22,8 +29,16 @@ class Unit extends React.Component {
           <div className="unit-overlay">
             <h3 className="heading-no-top-margin">I want this unit
               installed</h3>
-            <a href="#" data-item-id={item_id} data-item-name={model_name} data-item-price={price} data-item-url={url} data-item-description={description} className="button w-button snipcart-add-item">
-              Add to cart
+            <a href="#" data-item-id={item_id}
+               data-item-name={model_name + " " + item_id}
+               data-item-price={price} data-item-url={url}
+               data-item-description={description}
+               data-item-custom1-name={zone}
+               data-item-custom1-options={`Incuding installation[+${installation_price}]`}
+               data-item-metadata={this.props.orderMetaData}
+               className="button w-button snipcart-add-item"
+               onClick={this.handleClick}>
+              Select
             </a>
           </div>
           <div className="div-flex-h align-center">
@@ -58,6 +73,5 @@ class Unit extends React.Component {
     );
   }
 }
-Unit.contextTypes = QuoteCtx;
 
 export default Unit;

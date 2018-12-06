@@ -16,7 +16,7 @@ base('Match-Ups').select({
   //sort
   sort: [{
     field: "AHRI",
-    direction: "desc"
+    direction: "asc"
   }]
 }).eachPage(function page(records, fetchNextPage) {
   // This function (`page`) will get called for each page of records.
@@ -34,7 +34,12 @@ base('Match-Ups').select({
   console.log('Match-ups loaded!');
 });
 
-base('Vendors').select()
+base('Vendors').select({
+  sort: [{
+    field: "Name",
+    direction: "asc"
+  }]
+})
   .eachPage(function page(records, fetchNextPage) {
     // This function (`page`) will get called for each page of records.
     records.forEach(function (record) {
@@ -49,4 +54,28 @@ base('Vendors').select()
       console.error(err)
     });
     console.log('Vendors loaded!');
+  });
+
+base('Accessories').select({
+  sort: [{
+      field: "Model",
+      direction: "asc"
+    }]
+})
+  .eachPage(function page(records, fetchNextPage) {
+    // This function (`page`) will get called for each page of records.
+    records.forEach(function (record) {
+      let data = record._rawJson.fields;
+      data['id'] = record.getId();
+      accessoryJson.push(data);
+    });
+    fetchNextPage();
+  }, function done(error) {
+    if (error) {
+      console.log(error);
+    }
+    jsonfile.writeFile(accessoriesFile, accessoryJson, 'utf8', function (err) {
+      console.error(err)
+    });
+    console.log('Accessories loaded!');
   });

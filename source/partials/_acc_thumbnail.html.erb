@@ -1,0 +1,18 @@
+<a href="<%= acc_uri(acc) %>" class="mix w-inline-block">
+  <%= image_tag acc_image(acc), alt: acc['Item'] %>
+  <div class="div-flex-h align-center">
+    <div class="product-name smaller"><%= acc['Item'] %></div>
+  </div>
+  <div class="div-product-details smaller">
+    <div class="blue-text">Details</div>
+    <div>
+      <strong><%= acc['Description'] %></strong>
+    </div>
+  </div>
+  <div class="div-product-details smaller">
+    <div class="blue-text">Price</div>
+    <div>
+      <strong><%= acc_display_price(acc) %></strong>
+    </div>
+  </div>
+</a>

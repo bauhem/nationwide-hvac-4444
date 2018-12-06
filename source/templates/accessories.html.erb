@@ -1,0 +1,32 @@
+<div class="section-hero-interior">
+  <h1 class="cta-heading" data-ix="hero-appear-1">
+    <strong>Accessories</strong>
+  </h1>
+</div>
+
+<div class="breadcrumbs">
+  <a href="/ac-units" class="breadcrumb-link">A/C Units</a>
+  <span class="breadcrumb-link arrow">&gt;</span>
+  <a href="#" class="breadcrumb-link">Accessories</a>
+</div>
+
+<div class="section-product-listing">
+  <div class="container">
+    <div class="div-flex-h align-start">
+    </div>
+  </div>
+</div>
+
+<div class="div-20">
+</div>
+<div class="div-flex-h justify-start _75-with">
+
+  <% data.accessories.each do |acc| %>
+    <%= partial "/partials/acc_thumbnail", locals: { acc: acc } %>
+  <% end %>
+
+  <%= partial "/partials/paginations" %>
+
+</div>
+
+<%= partial "/partials/section-cta" %>

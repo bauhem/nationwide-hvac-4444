@@ -21,6 +21,7 @@ import Quote from "./Quote";
 
 import {unitsFilter, brandsFilter} from "./UnitsFilter";
 import ZipCode from "./ZipCode";
+import Accessories from "./Accessories";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -39,7 +40,7 @@ const StatesComponents = {
   Brands: Brands,
   ZipCode: ZipCode,
   Quote: Quote,
-  // Accessories: Accessories
+  Accessories: Accessories
 };
 
 const saved_values = JSON.parse(localStorage.getItem('instantQuoteValues'));

@@ -26,7 +26,10 @@ class SystemTypeStructure extends React.Component {
                 Handler)</p>
             </div>
             <div className="radio-button-field w-radio"
-                 onClick={() => this.props.saveAndContinue({system_type_structure: 'split_system', system_types: config.get('split_system')})}>
+                 onClick={() => this.props.saveAndContinue({
+                   system_type_structure: 'split_system',
+                   system_types: config.get('split_system')
+                 })}>
               <div className="div-hover"></div>
               <input type="radio" id="split-system" name="type"
                      value="split-system" data-name="type"
@@ -46,7 +49,10 @@ class SystemTypeStructure extends React.Component {
                 handler inside</p>
             </div>
             <div className="radio-button-field w-radio"
-                 onClick={() => this.props.saveAndContinue({system_type_structure: 'packaged_system', system_types: config.get('packaged_system')})}>
+                 onClick={() => this.props.saveAndContinue({
+                   system_type_structure: 'packaged_system',
+                   system_types: config.get('packaged_system')
+                 })}>
               <div className="div-hover"></div>
               <input type="radio" id="packaged-system" name="type"
                      value="packaged-system" data-name="type"
@@ -61,10 +67,16 @@ class SystemTypeStructure extends React.Component {
               <div className="div-heading-slide">
                 <h3 className="titre-big">Water Sourced System</h3>
               </div>
-              <p>A water sourced system is a </p>
+              <p>Mostly used in high rise buildings, a water source heat pump
+                operates much like a traditional air source heat pump except
+                that it extracts and dissipates heat by way of water instead of
+                air. </p>
             </div>
             <div className="radio-button-field w-radio"
-                 onClick={() => this.props.saveAndContinue({system_type_structure: 'water_system', system_types: config.get('water_system')})}>
+                 onClick={() => this.props.saveAndContinue({
+                   system_type_structure: 'water_system',
+                   system_types: config.get('water_system')
+                 })}>
               <div className="div-hover"></div>
               <input type="radio" id="water-sourced-system" name="type"
                      value="water-sourced-system" data-name="type"

@@ -96,6 +96,12 @@ data.products.each do |prod|
   proxy "/ac-units/#{prod['AHRI']}.html", "/templates/detail.html", locals: { unit: prod}
 end
 
+data.accessories.each do |acc|
+  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", locals: { accessory: acc}
+end
+
+proxy "/ac-units/accessories/index.html", "/templates/accessories.html"
+
 require 'helpers/product_helpers'
 include ProductHelpers
 
