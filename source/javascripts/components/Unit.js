@@ -15,7 +15,8 @@ class Unit extends React.Component {
   render() {
     let unit = this.props.unit;
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';
-    let zone = 'Installed Price Zone 1';
+    let zone_id = this.props.zone_num;
+    let zone = `Installed Price Zone ${zone_id}`;
     let item_id = unit['AHRI'].toLowerCase();
     let model_name = unit['Brand Series'];
     let price = unit['Shop Online Price'];
@@ -33,8 +34,8 @@ class Unit extends React.Component {
                data-item-name={model_name + " " + item_id}
                data-item-price={price} data-item-url={url}
                data-item-description={description}
-               data-item-custom1-name={zone}
-               data-item-custom1-options={`Incuding installation[+${installation_price}]`}
+               data-item-custom1-name={`Zone ${zone_id}`}
+               data-item-custom1-options={`Including installation[+${installation_price}]`}
                data-item-metadata={this.props.orderMetaData}
                className="button w-button snipcart-add-item"
                onClick={this.handleClick}>
@@ -66,7 +67,7 @@ class Unit extends React.Component {
             <div className="blue-text">Price including
               installation
             </div>
-            <div><strong>{price}</strong></div>
+            <div><strong>{price + installation_price}</strong></div>
           </div>
         </div>
       </div>

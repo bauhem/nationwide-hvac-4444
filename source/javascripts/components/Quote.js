@@ -25,10 +25,14 @@ class Quote extends React.Component {
       roof_access: ctx.roof_access,
       water_heater_under_air_handler: ctx.water_heater_under_air_handler
     };
-    
+
     Object.keys(metaData).forEach((key) => (metaData[key] == null) && delete metaData[key]);
 
     return metaData;
+  }
+
+  renderUnit(unit, props) {
+    return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
 
   render() {
@@ -37,7 +41,7 @@ class Quote extends React.Component {
     let best = [];
     let systemTypeName = this.systemTypeName(this.context.system_types, this.context.system_type);
     let orderMetaData = this.orderMetaData(this.context);
-     
+
     if (this.context.units.length > 0) {
       this.context.units.forEach(unit => {
         let rating = unit['Good/Better/Best Rating'];
@@ -55,10 +59,18 @@ class Quote extends React.Component {
       });
     }
 
+    let props = {
+      transition: this.props.transition,
+      systemTypeName: systemTypeName,
+      orderMetaData: JSON.stringify(orderMetaData),
+      zone_num: this.context.zone_num
+    };
+
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Here are the Good/Better/Best results for you</h3>
+          <h3 className="titre-big">Here are the Good/Better/Best results for
+            you</h3>
         </div>
         <div className="flex-third">
           <div className="good-div">
@@ -67,9 +79,7 @@ class Quote extends React.Component {
             </div>
             {
               good.map(unit => {
-                return (
-                  <Unit key={unit['AHRI']} transition={this.props.transition} unit={unit} systemTypeName={systemTypeName} orderMetaData={JSON.stringify(orderMetaData)}/>
-                )
+                return this.renderUnit(unit, props);
               })
             }
           </div>
@@ -79,9 +89,7 @@ class Quote extends React.Component {
             </div>
             {
               better.map(unit => {
-                return (
-                  <Unit key={unit['AHRI']} transition={this.props.transition} unit={unit} systemTypeName={systemTypeName} orderMetaData={JSON.stringify(orderMetaData)}/>
-                )
+                return this.renderUnit(unit, props);
               })
             }
           </div>
@@ -91,9 +99,7 @@ class Quote extends React.Component {
             </div>
             {
               best.map(unit => {
-                return (
-                  <Unit key={unit['AHRI']} transition={this.props.transition} unit={unit} systemTypeName={systemTypeName} orderMetaData={JSON.stringify(orderMetaData)}/>
-                )
+                return this.renderUnit(unit, props);
               })
             }
           </div>

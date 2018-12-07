@@ -118,7 +118,8 @@ const QuoteSM = Machine({
     },
     ZipCode: {
       on: {
-        SUBMIT: 'Quote'
+        SUBMIT: 'Quote',
+        INVALID_ZIP: 'CallUs'
       }
     },
     Quote: {

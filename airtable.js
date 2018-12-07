@@ -4,9 +4,11 @@ var jsonfile = require('jsonfile');
 var productsFile = 'data/products.json';
 var vendorsFile = 'data/vendors.json';
 var accessoriesFile = 'data/accessories.json';
+var zonesFile = 'data/zip_codes.json';
 var productJson = [];
 var vendorJson = [];
 var accessoryJson = [];
+var zoneJson = [];
 
 var base = new Airtable({
   apiKey: 'keyHpcZOz0geS06xM' // TODO - CHANGE THIS
@@ -78,4 +80,21 @@ base('Accessories').select({
       console.error(err)
     });
     console.log('Accessories loaded!');
+  });
+
+base('Zones').select()
+  .eachPage(function page(records, fetchNextPage) {
+    // This function (`page`) will get called for each page of records.
+    records.forEach(function (record) {
+      zoneJson.push(record._rawJson.fields);
+    });
+    fetchNextPage();
+  }, function done(error) {
+    if (error) {
+      console.log(error);
+    }
+    jsonfile.writeFile(zonesFile, zoneJson, 'utf8', function (err) {
+      console.error(err)
+    });
+    console.log('Zones loaded!');
   });

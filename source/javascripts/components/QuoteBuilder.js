@@ -79,6 +79,7 @@ class QuoteBuilder extends React.Component {
       selected_brands: [],
       units: null,
       zip_code: null,
+      zone_num: null,
       history: []
     }
   }
