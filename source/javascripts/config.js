@@ -30,7 +30,7 @@ const configuration = {
     {footage: '2101-2400', tons: 4},
     {footage: '2401-3000', tons: 5}
   ],
-  root_url: 'https://egidius.serveo.net'
+  root_url: 'https://nationwide-hvac.netlify.com'
 };
 
 export default configuration;
