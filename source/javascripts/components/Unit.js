@@ -12,6 +12,7 @@ class Unit extends React.Component {
     this.props.transition({type: 'SUBMIT'});
   }
 
+
   render() {
     let unit = this.props.unit;
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';

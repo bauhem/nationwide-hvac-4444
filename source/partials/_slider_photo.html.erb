@@ -1,5 +1,6 @@
 <a href="#" class="w-inline-block w-lightbox">
-  <%= image_tag product_image(unit) %>
+  <% photo_url =  cloudinary_resize(product_image(unit), 500, 400, 'fit') %>
+  <%= image_tag photo_url %>
   <% if product_has_image?(unit) %>
     <% photo = unit['Attachments'][0] %>
     <script type="application/json" class="w-json">{
@@ -10,11 +11,10 @@
                   "fileName": "<%= photo['filename'] %>",
                   "width": 400,
                   "height": 400,
-                  "url": "<%= photo.url.html_safe %>"
+                  "url": "<%= photo_url %>"
                 }
               ]
             }
-
     </script>
   <% end %>
 </a>

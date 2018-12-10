@@ -28,7 +28,7 @@ activate :meta_tags
 set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
-set :cloudinary_name, ENV['CLOUDINARY_NAME']
+set :cloudinary_name, 'nationwide-hvac'
 
 activate :sitemap_ping do |config|
   config.host         = 'https://www.nationwide-hvac.com' # (required)                       Host of your website
@@ -121,7 +121,7 @@ helpers do
     Redcarpet::Markdown.new(renderer).render(text)
   end
 
-  def cloudinary_resize(url, width, height, crop = 'fill', fetch_format = 'auto')
+  def cloudinary_resize(url, width, height, crop = 'fit', fetch_format = 'auto')
     "https://res.cloudinary.com/#{config.cloudinary_name}/image/fetch/w_#{width},h_#{height},c_#{crop},f_#{fetch_format}/#{url}"
   end
 end
