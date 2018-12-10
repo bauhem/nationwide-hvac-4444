@@ -1,6 +1,6 @@
 import React from "react";
 
-const zip_data = require('../../../data/zip_codes.json');
+//const zip_data = require('../../../data/zip_codes.json');
 
 class ZipCode extends React.Component {
   constructor(props) {
