@@ -1,5 +1,5 @@
 <% content_for(:meta) do %>
-  <%= title  "#{model(unit)}" %>
+  <%= title "#{model(unit)}" %>
 <% end %>
 
 <div class="section-hero-interior">
@@ -18,7 +18,7 @@
   <div class="container">
     <div class="div-flex-h justify-start added-bot-margin">
       <div class="div-40">
-          <%= partial '/partials/slider_photo', locals: {unit: unit} %>
+        <%= partial '/partials/slider_photo', locals: { unit: unit } %>
       </div>
       <div class="div-60">
         <h3 class="cta-heading no-bot-margin">
@@ -52,7 +52,16 @@
             <div><strong><%= unit['Heater model'] %></strong></div>
           </div>
         <% end %>
-        <a data-item-id="<%= item_id(unit) %>" data-item-name="<%= model(unit) %>" data-item-price="<%= price(unit) %>" data-item-url="<%= product_url(unit) %>" data-item-description="<%= cart_description(unit) %>" href="#" class="button added-top-margin snipcart-add-item w-button">Buy
+        <a data-item-id="<%= item_id(unit) %>"
+           data-item-name="<%= model(unit) %>"
+           data-item-price="<%= price(unit) %>"
+           data-item-url="<%= product_url(unit) %>"
+           data-item-description="<%= cart_description(unit) %>"
+           data-item-custom1-name="Zone 1"
+           data-item-custom1-options="Including installation[+<%= installation_price(unit, 1)%>]"
+           data-item-custom2-name="Zone 2"
+           data-item-custom2-options="Including installation[+<%= installation_price(unit, 2)%>]"
+           href="#" class="button added-top-margin snipcart-add-item w-button">Buy
           now</a>
         <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">View
           brochure</a></div>
@@ -67,7 +76,7 @@
   </h3>
   <div class="div-flex-h justify-start">
     <% related_units(unit).each do |unit| %>
-      <%= partial "/partials/unit_thumbnail", locals: {unit: unit} %>
+      <%= partial "/partials/unit_thumbnail", locals: { unit: unit } %>
     <% end %>
   </div>
 </div>

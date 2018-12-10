@@ -32,10 +32,10 @@ set :cloudinary_name, ENV['CLOUDINARY_NAME']
 
 activate :sitemap_ping do |config|
   config.host         = 'https://www.nationwide-hvac.com' # (required)                       Host of your website
-  config.sitemap_file = 'sitemap.xml'  # (optional, default: sitemap.xml) Name of your sitemap file
-  config.ping_google  = true                      # (optional, default: true)        Ping Google?
-  config.ping_bing    = true                      # (optional, default: true)        Ping Bing?
-  config.after_build  = true                      # (optional, default: true)        Run automatically after build?
+  config.sitemap_file = 'sitemap.xml' # (optional, default: sitemap.xml) Name of your sitemap file
+  config.ping_google  = true # (optional, default: true)        Ping Google?
+  config.ping_bing    = true # (optional, default: true)        Ping Bing?
+  config.after_build  = true # (optional, default: true)        Run automatically after build?
 end
 
 activate :robots,
@@ -91,15 +91,15 @@ page "/index.html", :layout => "layout"
 proxy "_redirects", "netlify-redirects", ignore: true
 proxy "_headers", "netlify-headers", ignore: true
 
-proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", locals: {system_type_query: ''}
+proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", locals: { system_type_query: '' }
 
 data.products.each do |prod|
   ahri = prod['AHRI'].lstrip.rstrip
-  proxy "/ac-units/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod}
+  proxy "/ac-units/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
 
 data.accessories.each do |acc|
-  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc}
+  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
 end
 
 proxy "/ac-units/accessories/index.html", "/templates/accessories.html", layout: "layout"
@@ -108,7 +108,7 @@ require 'helpers/product_helpers'
 include ProductHelpers
 
 system_types.each do |st|
-  proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", layout: "layout", locals: {system_type_query: st}
+  proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", layout: "layout", locals: { system_type_query: st }
 end
 
 helpers do
@@ -119,6 +119,10 @@ helpers do
   def markdown(text)
     renderer = Redcarpet::Render::HTML.new
     Redcarpet::Markdown.new(renderer).render(text)
+  end
+
+  def cloudinary_resize(url, width, height, crop = 'fill', fetch_format = 'auto')
+    "https://res.cloudinary.com/#{config.cloudinary_name}/image/fetch/w_#{width},h_#{height},c_#{crop},f_#{fetch_format}/#{url}"
   end
 end
 

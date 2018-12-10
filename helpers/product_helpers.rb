@@ -29,6 +29,10 @@ module ProductHelpers
     unit['Shop Online Price']
   end
 
+  def installation_price(unit, zone)
+    unit["Installed Price Zone #{zone}"] - price(unit)
+  end
+
   def brochure_url(unit)
     unit["Product Brochure url"]
   end
@@ -53,7 +57,6 @@ module ProductHelpers
     attachments = unit['Attachments']
     return config.no_image if attachments.nil? || attachments.empty?
 
-    # TODO - Optimize images
     url = attachments[0]['url']
     url = config.no_image if url.blank?
     url
