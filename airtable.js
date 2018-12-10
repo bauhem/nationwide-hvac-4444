@@ -93,6 +93,7 @@ base('Zones').select()
     if (error) {
       console.log(error);
     }
+    
     jsonfile.writeFile(zonesFile, zoneJson, 'utf8', function (err) {
       console.error(err)
     });
