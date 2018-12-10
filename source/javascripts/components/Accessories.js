@@ -7,10 +7,13 @@ class Accessories extends React.Component {
   render() {
     const accComponents = accessories.map((acc) => {
       let img = '';
+      let img_url = '/images/product-photo-unavailable.png';
 
       if (acc['Image'] !== undefined) {
-        img = <img src={acc['Image'][0]['thumbnails']['large']['url']} alt={acc['Item']} />
+        img_url = acc['Image'][0]['thumbnails']['large']['url'];
       }
+      img = <img src={img_url} alt={acc['Item']} />;
+
       return (
         <div key={acc['id']} className="div-full-width added-top-margin">
           <div className="unit-overlay">

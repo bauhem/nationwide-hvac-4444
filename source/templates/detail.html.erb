@@ -58,7 +58,7 @@
            data-item-url="<%= product_url(unit) %>"
            data-item-description="<%= cart_description(unit) %>"
            data-item-custom1-name="Installation Fees (based on zip code)"
-           data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1)%>]|Zone 2[+<%= installation_price(unit, 2)%>]"
+           data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
            href="#" class="button added-top-margin snipcart-add-item w-button">Buy
           now</a>
         <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">View
@@ -80,3 +80,42 @@
 </div>
 
 <%= partial "/partials/section-cta" %>
+
+<% content_for(:footer_scripts) do %>
+  <script>
+    $(document).ready(function ($) {
+      var zipData = [];
+
+      $.get({
+        url: '/javascripts/data/zip_codes.json'
+      })
+        .done(function (data) {
+          zipData = data
+        });
+
+      function installZoneFromZip(zip_code) {
+        let idx = zipData.findIndex(obj => obj['Zip'] === parseInt(zip_code));
+
+        if (idx === -1) return null;
+
+        return zipData[idx]['Zone'];
+      }
+
+      $('a.snipcart-add-item').click(function (e) {
+        let install_options = $(this).data('item-custom1-options').split('|');
+        let zip = prompt("Please enter your zip code", "");
+        if (zip != null) {
+          let zone = installZoneFromZip(parseInt(zip));
+
+          if (zone === null) {
+            window.alert('Your zip code is not on our usual territory. Give us a call at 877-910-HVAC to chat with our live agents');
+            e.preventDefault();
+            return false;
+          } else {
+            $(this).data('item-custom1-options', install_options[zone - 1]);
+          }
+        }
+      });
+    });
+  </script>
+<% end %>
