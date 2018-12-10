@@ -28,6 +28,7 @@ activate :meta_tags
 set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
+set :cloudinary_name, ENV['CLOUDINARY_NAME']
 
 activate :sitemap_ping do |config|
   config.host         = 'https://www.nationwide-hvac.com' # (required)                       Host of your website
