@@ -23,6 +23,7 @@ class Unit extends React.Component {
     let url = config.get('root_url') + '/ac-units/' + item_id + '.html';
     let description = `${this.props.systemTypeName} ${model_name} by ${unit['Brand']}`;
     let installation_price = unit[zone] - price;
+    let installation_options = `Zone ${zone_id}[+${installation_price}]`
 
     return (
       <div className="units-quote">
@@ -35,10 +36,8 @@ class Unit extends React.Component {
                data-item-name={model_name + " " + item_id}
                data-item-price={price}
                data-item-description={description}
-               data-item-custom1-name={(zone_id == 1) ? `Zone ${zone_id}` : null}
-               data-item-custom1-options={(zone_id == 1) ? `Including installation[+${installation_price}]` : null}
-               data-item-custom2-name={(zone_id == 2) ? `Zone ${zone_id}` : null}
-               data-item-custom2-options={(zone_id == 2) ? `Including installation[+${installation_price}]` : null}
+               data-item-custom1-name="Installation Fees (based on zip code)"
+               data-item-custom1-options={installation_options}
                data-item-metadata={this.props.orderMetaData}
                className="button w-button snipcart-add-item"
                onClick={this.handleClick}>
