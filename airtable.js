@@ -93,7 +93,7 @@ base('Zones').select()
     if (error) {
       console.log(error);
     }
-    
+    zoneJson.sort((a, b) => a['Zip'] - b['Zip']);
     jsonfile.writeFile(zonesFile, zoneJson, 'utf8', function (err) {
       console.error(err)
     });

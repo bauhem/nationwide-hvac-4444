@@ -1,6 +1,6 @@
 import React from "react";
 
-const zip_data = require('../../../data/zip_codes.json');
+const zipData = require('../../../data/zip_codes.json');
 
 class ZipCode extends React.Component {
   constructor(props) {
@@ -12,8 +12,13 @@ class ZipCode extends React.Component {
   }
 
   getZone(zip_code) {
+    // We take for granted that the zips will be sorted already
     if (/^\d+$/.test(zip_code)) {
-      return 2;
+      let idx = zipData.findIndex(obj => obj['Zip'] === parseInt(zip_code));
+
+      if (idx === -1) return null;
+
+      return zipData[idx]['Zone'];
     }
 
     return null;
@@ -30,7 +35,7 @@ class ZipCode extends React.Component {
         return this.props.transition({type: 'INVALID_ZIP'});
       }
 
-      return this.props.saveAndContinue({zip_code: this.zip.value, zone_num: zone});
+      return this.props.saveAndContinue({zip_code: zip_code, zone_num: zone});
     }
 
     this.zip.current.reportValidity();

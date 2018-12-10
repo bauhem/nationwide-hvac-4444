@@ -23,7 +23,8 @@ class Quote extends React.Component {
       condenser_unit_location: ctx.condenser_unit_location,
       packaged_system_location: ctx.packaged_system_location,
       roof_access: ctx.roof_access,
-      water_heater_under_air_handler: ctx.water_heater_under_air_handler
+      water_heater_under_air_handler: ctx.water_heater_under_air_handler,
+      zip_code: ctx.zip_code
     };
 
     Object.keys(metaData).forEach((key) => (metaData[key] == null) && delete metaData[key]);
