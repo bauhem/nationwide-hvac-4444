@@ -1,3 +1,7 @@
+<% content_for(:meta) do %>
+  <%= title   "Shop AC Units" %>
+<% end %>
+
 <%
   if system_type_query.present?
     products = data.products.select { |p| p['System Type'] == system_type_query }

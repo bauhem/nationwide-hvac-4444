@@ -17,7 +17,7 @@ class Unit extends React.Component {
     let brand_img = '/images/' + unit['Brand'].toLowerCase().replace(/ /g, "-") + '-logo.png';
     let zone_id = this.props.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
-    let item_id = unit['AHRI'].toLowerCase();
+    let item_id = unit['AHRI'].toLowerCase().trim();
     let model_name = unit['Brand Series'];
     let price = unit['Shop Online Price'];
     let url = config.get('root_url') + '/ac-units/' + item_id + '.html';
@@ -31,8 +31,9 @@ class Unit extends React.Component {
             <h3 className="heading-no-top-margin">I want this unit
               installed</h3>
             <a href="#" data-item-id={item_id}
+               data-item-url={url}
                data-item-name={model_name + " " + item_id}
-               data-item-price={price} data-item-url={url}
+               data-item-price={price}
                data-item-description={description}
                data-item-custom1-name={`Zone ${zone_id}`}
                data-item-custom1-options={`Including installation[+${installation_price}]`}

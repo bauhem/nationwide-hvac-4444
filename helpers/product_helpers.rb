@@ -46,7 +46,7 @@ module ProductHelpers
   end
 
   def product_uri(unit)
-    "/ac-units/#{unit['AHRI']}.html"
+    "/ac-units/#{unit['AHRI'].lstrip.rstrip}.html"
   end
 
   def product_image(unit)
