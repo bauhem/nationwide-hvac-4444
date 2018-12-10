@@ -35,8 +35,10 @@ class Unit extends React.Component {
                data-item-name={model_name + " " + item_id}
                data-item-price={price}
                data-item-description={description}
-               data-item-custom1-name={`Zone ${zone_id}`}
-               data-item-custom1-options={`Including installation[+${installation_price}]`}
+               data-item-custom1-name={(zone_id == 1) ? `Zone ${zone_id}` : null}
+               data-item-custom1-options={(zone_id == 1) ? `Including installation[+${installation_price}]` : null}
+               data-item-custom2-name={(zone_id == 2) ? `Zone ${zone_id}` : null}
+               data-item-custom2-options={(zone_id == 2) ? `Including installation[+${installation_price}]` : null}
                data-item-metadata={this.props.orderMetaData}
                className="button w-button snipcart-add-item"
                onClick={this.handleClick}>

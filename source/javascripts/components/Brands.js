@@ -36,7 +36,15 @@ class Brands extends React.Component {
 
   render() {
     if (this.context.brands.length == 0) {
-      this.props.transition({type: 'CALL_US_ON_NO_BRANDS'});
+      return (
+        <div>
+          <span>No Brands matches your query. Please start again by</span>
+          <button className="next-button"
+                  onClick={() => this.props.transition({type: 'RESET'})}>
+            Clicking here
+          </button>
+        </div>
+      )
     }
 
     return (

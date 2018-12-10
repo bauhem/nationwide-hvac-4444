@@ -134,7 +134,8 @@ const QuoteSM = Machine({
     },
   },
   on: {
-    BACK: {actions: "back"}
+    BACK: {actions: "back"},
+    RESET: 'SystemTypeStructure'
   }
 }, {
   guards: {
