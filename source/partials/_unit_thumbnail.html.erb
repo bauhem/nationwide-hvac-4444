@@ -8,7 +8,9 @@
   end
 %>
 <a href="<%= product_uri(unit) %>" class="<%= css_class %> w-inline-block">
+  <div class="div-image">
   <%= image_tag cloudinary_resize(product_image(unit), 300, 200, 'fit') %>
+  </div>
   <div class="div-flex-h align-center">
     <div class="product-name smaller"><%= model(unit) %></div>
     <%= image_tag brand_logo(unit), width: 80, class: "image-brand" %>
