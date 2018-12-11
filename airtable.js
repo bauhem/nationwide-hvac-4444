@@ -1,101 +1,43 @@
-var Airtable = require('airtable');
-var jsonfile = require('jsonfile');
+const Airtable = require('airtable');
+const jsonfile = require('jsonfile');
 
-var productsFile = 'data/products.json';
-var vendorsFile = 'data/vendors.json';
-var accessoriesFile = 'data/accessories.json';
-var zonesFile = 'data/zip_codes.json';
-var productJson = [];
-var vendorJson = [];
-var accessoryJson = [];
-var zoneJson = [];
+const productsFile = 'data/products.json';
+const vendorsFile = 'data/vendors.json';
+const accessoriesFile = 'data/accessories.json';
+const zonesFile = 'data/zip_codes.json';
 
-var base = new Airtable({
-  apiKey: 'keyHpcZOz0geS06xM' // TODO - CHANGE THIS
-}).base('apppfZRVZdFKMDYpt');
+const base = new Airtable({
+  apiKey: process.env.AIRTABLE_API_KEY //'keyHpcZOz0geS06xM' // TODO - CHANGE THIS
+}).base(process.env.AIRTABLE_API_BASE); //'apppfZRVZdFKMDYpt'
 
-base('Match-Ups').select({
-  //sort
-  sort: [{
-    field: "AHRI",
-    direction: "asc"
-  }]
-}).eachPage(function page(records, fetchNextPage) {
-  // This function (`page`) will get called for each page of records.
-  records.forEach(function (record) {
-    productJson.push(record._rawJson.fields);
-  });
-  fetchNextPage();
-}, function done(error) {
-  if (error) {
-    console.log(error);
-  }
-  jsonfile.writeFile(productsFile, productJson, 'utf8', function (err) {
-    console.error(err)
-  });
-  console.log('Match-ups loaded!');
-});
-
-base('Vendors').select({
-  sort: [{
-    field: "Name",
-    direction: "asc"
-  }]
-})
-  .eachPage(function page(records, fetchNextPage) {
-    // This function (`page`) will get called for each page of records.
-    records.forEach(function (record) {
-      vendorJson.push(record._rawJson.fields);
-    });
-    fetchNextPage();
-  }, function done(error) {
-    if (error) {
-      console.log(error);
-    }
-    jsonfile.writeFile(vendorsFile, vendorJson, 'utf8', function (err) {
-      console.error(err)
-    });
-    console.log('Vendors loaded!');
-  });
-
-base('Accessories').select({
-  sort: [{
-      field: "Model",
-      direction: "asc"
-    }]
-})
-  .eachPage(function page(records, fetchNextPage) {
+function sync(column_name, output_file, sort_fields = []) {
+  let dataJson = [];
+  base(column_name).select({
+    //sort
+    sort: sort_fields
+  }).eachPage(function page(records, fetchNextPage) {
     // This function (`page`) will get called for each page of records.
     records.forEach(function (record) {
       let data = record._rawJson.fields;
       data['id'] = record.getId();
-      accessoryJson.push(data);
+      dataJson.push(data);
     });
     fetchNextPage();
   }, function done(error) {
     if (error) {
       console.log(error);
     }
-    jsonfile.writeFile(accessoriesFile, accessoryJson, 'utf8', function (err) {
+    jsonfile.writeFile(output_file, dataJson, 'utf8', function (err) {
       console.error(err)
     });
-    console.log('Accessories loaded!');
+    console.log(column_name + ' completed!');
   });
+}
 
-base('Zones').select()
-  .eachPage(function page(records, fetchNextPage) {
-    // This function (`page`) will get called for each page of records.
-    records.forEach(function (record) {
-      zoneJson.push(record._rawJson.fields);
-    });
-    fetchNextPage();
-  }, function done(error) {
-    if (error) {
-      console.log(error);
-    }
-    zoneJson.sort((a, b) => a['Zip'] - b['Zip']);
-    jsonfile.writeFile(zonesFile, zoneJson, 'utf8', function (err) {
-      console.error(err)
-    });
-    console.log('Zones loaded!');
-  });
+sync('Match-Ups', productsFile, [{field: "AHRI", direction: "asc"}]);
+
+sync('Vendors', vendorsFile, [{field: "Name", direction: "asc"}]);
+
+sync('Accessories', accessoriesFile, [{field: "Model", direction: "asc"}]);
+
+sync('Zones', zonesFile, [{field: "Zip", direction: "asc"}]);
