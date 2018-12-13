@@ -1,7 +1,7 @@
 import React from "react";
 import config from "react-global-configuration";
 
-const accessories = require('../../../accessories.json');
+const accessories = require('../../../data/accessories.json');
 
 class Accessories extends React.Component {
   render() {

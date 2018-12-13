@@ -8,6 +8,8 @@
   else
     products = data.products
   end
+
+  products.reject! {|p| p['AHRI'].nil?}
 %>
 
 <div class="section-hero-interior">

@@ -94,6 +94,7 @@ proxy "_headers", "netlify-headers", ignore: true
 proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", locals: { system_type_query: '' }
 
 data.products.each do |prod|
+  next if prod['AHRI'].nil?
   ahri = prod['AHRI'].lstrip.rstrip
   proxy "/ac-units/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
