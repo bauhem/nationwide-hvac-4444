@@ -1,4 +1,6 @@
-const api = require("./airtable-api");
+require("@babel/polyfill");
+
+const api = require("../airtable-api");
 
 const Airtable = require('airtable');
 
