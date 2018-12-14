@@ -1,4 +1,5 @@
 const jsonFile = require('jsonfile');
+const path = require('path')
 
 var sync = function (base, column_name, output_file, sort_fields = []) {
   let dataJson = [];
@@ -22,32 +23,32 @@ var saveRecords = function (records, output_file) {
   console.log('Saving records completed!')
 }
 
-exports.syncAll = function (base) {
-  const productsFile = 'data/products.json';
-  const vendorsFile = 'data/vendors.json';
-  const accessoriesFile = 'data/accessories.json';
-  const zonesFile = 'data/zip_codes.json';
+exports.syncAll = async function (base, output_dir='.') {
+  const productsFile = path.join(output_dir, 'data/products.json');
+  const vendorsFile = path.join(output_dir, 'data/vendors.json');
+  const accessoriesFile = path.join(output_dir, 'data/accessories.json');
+  const zonesFile = path.join(output_dir, 'data/zip_codes.json');
 
   console.log('Syncing Match-Ups');
-  sync(base, 'Match-Ups', productsFile, [{field: "AHRI", direction: "asc"}])
+  await sync(base, 'Match-Ups', productsFile, [{field: "AHRI", direction: "asc"}])
     .then((records) => {
       saveRecords(records, productsFile)
     });
 
   console.log('Syncing Vendors');
-  sync(base, 'Vendors', vendorsFile, [{field: "Name", direction: "asc"}])
+  await sync(base, 'Vendors', vendorsFile, [{field: "Name", direction: "asc"}])
     .then((records) => {
       saveRecords(records, vendorsFile)
     });
 
   console.log('Syncing Accessories');
-  sync(base, 'Accessories', accessoriesFile, [{field: "Model", direction: "asc"}])
+  await sync(base, 'Accessories', accessoriesFile, [{field: "Model", direction: "asc"}])
     .then((records) => {
       saveRecords(records, accessoriesFile)
     });
 
   console.log('Syncing Zones');
-  sync(base, 'Zones', zonesFile, [{field: "Zip", direction: "asc"}])
+  await sync(base, 'Zones', zonesFile, [{field: "Zip", direction: "asc"}])
     .then((records) => {
       saveRecords(records, zonesFile)
     });
