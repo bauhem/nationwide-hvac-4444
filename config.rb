@@ -109,6 +109,7 @@ require 'helpers/product_helpers'
 include ProductHelpers
 
 system_types.each do |st|
+  st = st.lstrip.rstrip
   proxy "/ac-units/#{system_type_key_to_slug(st)}/index.html", "/templates/listing.html", layout: "layout", locals: { system_type_query: st }
 end
 

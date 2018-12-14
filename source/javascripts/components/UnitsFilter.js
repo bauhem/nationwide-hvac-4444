@@ -21,7 +21,7 @@ export function brandsFilter(units, ctx) {
 }
 
 function filterOutBySystemType(type, unit) {
-  return type === unit['System Type'];
+  return type.trim() === unit['System Type'].trim();
 }
 
 function filterOutByTons(tons, unit) {
