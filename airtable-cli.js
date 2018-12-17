@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const api = require("./airtable-api");
 const Airtable = require('airtable');
 

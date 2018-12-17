@@ -18,6 +18,7 @@
   "homepage": "https://github.com/bauhem/nationwide-hvac-4444#readme",
   "dependencies": {
     "airtable": "^0.5.7",
+    "dotenv": "^6.2.0",
     "jsonfile": "^5.0.0",
     "lambda-git": "^0.1.2",
     "netlify-lambda": "^1.1.0",
