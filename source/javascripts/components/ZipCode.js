@@ -55,7 +55,7 @@ class ZipCode extends React.Component {
                  id="Zipcode" required={true}
                  ref={this.zip}/>
         </div>
-        <div className="next w-slider-arrow-right"
+        <div className="next button w-slider-arrow-right"
              onClick={this.handleClick}>
           <div className="next-button">Next step</div>
         </div>

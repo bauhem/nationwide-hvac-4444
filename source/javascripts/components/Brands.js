@@ -71,7 +71,7 @@ class Brands extends React.Component {
                 })
               }
             </div>
-            <div className="next w-slider-arrow-right"
+            <div className="next button w-slider-arrow-right"
                  onClick={() => this.props.transition({type: "SUBMIT"})}>
               <div className="next-button">Next step</div>
             </div>
