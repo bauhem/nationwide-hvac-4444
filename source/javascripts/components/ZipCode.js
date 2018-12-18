@@ -1,4 +1,5 @@
 import React from "react";
+import QuoteCtx from './QuoteCtx';
 
 const zipData = require('../../../data/zip_codes.json');
 
@@ -53,7 +54,7 @@ class ZipCode extends React.Component {
           <input type="text" pattern="[0-9]{5}" className="zipcode w-input" maxLength="5"
                  name="Zipcode" placeholder="You zip code"
                  id="Zipcode" required={true}
-                 ref={this.zip}/>
+                 ref={this.zip} value={this.context.zip_code}/>
         </div>
         <div className="next button w-slider-arrow-right"
              onClick={this.handleClick}>
@@ -63,5 +64,7 @@ class ZipCode extends React.Component {
     );
   }
 }
+
+ZipCode.contextType = QuoteCtx;
 
 export default ZipCode;

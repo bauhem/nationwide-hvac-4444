@@ -8,7 +8,6 @@ class Brands extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.checkAndAssignSelectedBrand = this.checkAndAssignSelectedBrand.bind(this);
   }
 
   handleChange(e) {
@@ -24,7 +23,7 @@ class Brands extends React.Component {
     this.props.saveValues({selected_brands: selected_brands});
   }
 
-  checkAndAssignSelectedBrand(ctx, brand) {
+  static checkAndAssignSelectedBrand(ctx, brand) {
     let selected = ctx.selected_brands.includes(brand);
 
     if (selected && selected_brands.indexOf(brand) === -1) {
@@ -52,17 +51,17 @@ class Brands extends React.Component {
         {context =>
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">Select brand(s)</h3>
+              <h3 className="titre-big">Select brand(s) (optional)</h3>
             </div>
-            <div className="div-flex-h justify-start">
+            <div className="flex-third div-flex-h justify-start">
               {
                 context.brands.map(brand => {
                   return (
-                    <div className="options brand w-checkbox">
+                    <div key={brand} className="options brand w-checkbox">
                       <input type="checkbox" id={brand} name="brand"
                              className="checkbox w-checkbox-input" value={brand}
                              onChange={this.handleChange}
-                             checked={this.checkAndAssignSelectedBrand(context, brand)}/>
+                             checked={Brands.checkAndAssignSelectedBrand(context, brand)}/>
                       <label
                         htmlFor={brand}
                         className="checkbox-label-form w-form-label">{brand}</label>

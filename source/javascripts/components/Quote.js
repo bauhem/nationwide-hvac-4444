@@ -66,6 +66,12 @@ class Quote extends React.Component {
       zone_num: this.context.zone_num
     };
 
+    let brands = this.context.brands;
+
+    if (this.context.selected_brands.length > 0) {
+      brands = this.context.selected_brands;
+    }
+
     return (
       <>
         <div className="div-heading-slide">
@@ -76,7 +82,7 @@ class Quote extends React.Component {
             <select className={"select-field"} multiple={true}>
               <option>Select Brand(s)</option>
               {
-                this.context.brands.map(brand => {
+                brands.map(brand => {
                   return <Filter
                     key={brand}
                     dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
