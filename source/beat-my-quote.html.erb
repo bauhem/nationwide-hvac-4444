@@ -1,6 +1,8 @@
-<% content_for(:meta) do %>
-  <%= title "Beat my Quote" %>
-<% end %>
+<%=
+  content_for(:head) do
+    display_meta_tags title: "Beat my Quote", description: "Received a cheap estimate from a competitor? Send it to us and we will reach out to you"
+  end
+%>
 
 <div class="section-hero-interior">
   <h1 class="cta-heading" data-ix="hero-appear-1">Beat <strong>My Quote</strong></h1>

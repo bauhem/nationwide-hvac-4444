@@ -1,7 +1,9 @@
-<% content_for(:meta) do %>
-  <%= title "AC Repairs" %>
-  <%= description "Professional AC Repair Services throughout the South Florida areas" %>
-<% end %>
+<%=
+  content_for(:head) do
+    display_meta_tags title: "AC Repairs", description: "Professional AC Repair Services throughout the South Forida areas"
+  end
+%>
+
 <div class="section-hero-interior">
     <h1 class="cta-heading" data-ix="hero-appear-1">A/C <strong>Repairs</strong> &amp; <strong>Maintenance</strong></h1>
   </div>

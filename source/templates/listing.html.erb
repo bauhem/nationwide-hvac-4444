@@ -1,6 +1,8 @@
-<% content_for(:meta) do %>
-  <%= title "Shop AC Units" %>
-<% end %>
+<%=
+  content_for(:head) do
+    display_meta_tags title: "Shop AC Units", description: "Find the best AC Units for you"
+  end
+%>
 
 <%
   if system_type_query.present?

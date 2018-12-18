@@ -1,17 +1,17 @@
 <!doctype html>
 <html data-wf-page="5bc893d71699bea994b18c33" data-wf-site="5bc893d71699bef018b18c32" lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
   <%= stylesheet_link_tag "webflow.css", "normalize.css" %>
   <%= stylesheet_link_tag "nationwide-hvac.webflow.css" %>
   <%= yield_content :head %>
-  <%= yield_content :meta %>
+  <%#= yield_content :meta %>
   <%= auto_display_meta_tags %>
   <%= google_analytics_tag %>
 
-  <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="prefetch">
+  <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="prefetch"/>
 
   <!-- [if lt IE 9]>
   <script
@@ -23,8 +23,8 @@
   }(window, document);</script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({google: {families: ["Varela Round:400", "Droid Serif:400,400italic,700,700italic", "Nunito Sans:200,300,regular,600,700,800,900"]}});</script>
-  <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon">
-  <link href="/images/webclip.png" rel="apple-touch-icon">
+  <link href="<%= image_path('favicon.png') %>" rel="shortcut icon" type="image/x-icon"/>
+  <link href="<%= image_path('webclip.png') %>" rel="apple-touch-icon"/>
 </head>
 
 <body data-ix="body-load">
