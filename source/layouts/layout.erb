@@ -11,7 +11,7 @@
   <%= auto_display_meta_tags %>
   <%= google_analytics_tag %>
 
-  <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="prefetch"/>
+  <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet"/>
 
   <!-- [if lt IE 9]>
   <script
@@ -43,12 +43,12 @@
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"
   async></script><![endif] -->
+
 <% if development? %>
   <%= partial "/partials/snipcart.development" %>
 <% else %>
   <%= partial "/partials/snipcart.production" %>
 <% end %>
-
 
 <%= javascript_include_tag "lib/jquery.inputmask.bundle"%>
 <%= javascript_include_tag "lib/validate", async: true %>
