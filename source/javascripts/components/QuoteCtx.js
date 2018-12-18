@@ -19,7 +19,9 @@ const QuoteCtx = React.createContext({
   units: null ,
   zip_code: null,
   zone_num: null,
-  history: []
+  history: [],
+  selected_seers: [],
+  selected_unit: null
 });
 
 export default QuoteCtx;

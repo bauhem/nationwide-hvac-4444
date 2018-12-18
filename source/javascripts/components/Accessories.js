@@ -26,7 +26,6 @@ class Accessories extends React.Component {
                className="button w-button snipcart-add-item">Add to cart</a>
 
           </div>
-          {img}
           <div className="div-flex-h align-center">
             <div className="product-name smaller">{acc['Item']}</div>
           </div>

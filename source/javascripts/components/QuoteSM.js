@@ -125,9 +125,14 @@ const QuoteSM = Machine({
     Quote: {
       onEntry: 'filterResults',
       on: {
-        SUBMIT: 'Accessories'
+        SUBMIT: 'UnitDetails'
       }
 
+    },
+    UnitDetails: {
+      on: {
+        SUBMIT: 'Accessories'
+      }
     },
     Accessories: {
       type: 'final'

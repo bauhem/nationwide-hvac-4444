@@ -1,11 +1,7 @@
 
 export function unitsFilter(ctx) {
   const state = ctx; // DO NOT MODIFY ctx DIRECTLY
-  let units = ctx.units;
-
-  if (units === null) {
-    units = require('../../../data/products.json');
-  }
+  let units = require('../../../data/products.json');
 
   let filtered_units = [] ;
   filtered_units = units.filter(filterOutBySystemType.bind(this, state.system_type))
@@ -16,7 +12,8 @@ export function unitsFilter(ctx) {
   return filtered_units;
 }
 
-export function brandsFilter(units, ctx) {
+export function brandsFilter(ctx) {
+  let units = require('../../../data/products.json');
   return [...new Set(units.map(unit => unit['Brand']))];
 }
 

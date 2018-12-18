@@ -1,18 +1,17 @@
 import React from "react";
+import mixitup from 'mixitup';
+import config from "react-global-configuration";
+import mixitupMultifilter from '../lib/mixitup-multifilter'; // loaded from a directory of your choice within your project
+
 import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
+
+mixitup.use(mixitupMultifilter);
 
 class Quote extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  systemTypeName(systemTypes, type) {
-    let system_type_info = systemTypes.find((type_info) => {
-      return type_info.type === type
-    });
-
-    return system_type_info.name;
+    this.startMixitUp = this.startMixitUp.bind(this);
   }
 
   orderMetaData(ctx) {
@@ -36,33 +35,33 @@ class Quote extends React.Component {
     return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
 
+  startMixitUp() {
+    mixitup('.container', {
+      multifilter: {
+        enable: true
+      },
+      animation: {
+        enable: false
+      },
+      callbacks: {
+        onMixEnd: null
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.startMixitUp();
+  }
+
+  componentDidUpdate() {
+    this.startMixitUp();
+  }
+
   render() {
-    let good = [];
-    let better = [];
-    let best = [];
-    let systemTypeName = this.systemTypeName(this.context.system_types, this.context.system_type);
     let orderMetaData = this.orderMetaData(this.context);
 
-    if (this.context.units.length > 0) {
-      this.context.units.forEach(unit => {
-        let rating = unit['Good/Better/Best Rating'];
-        switch (rating) {
-          case 'Good':
-            good.push(unit);
-            break;
-          case 'Better':
-            better.push(unit);
-            break;
-          case 'Best':
-            best.push(unit);
-            break;
-        }
-      });
-    }
-
     let props = {
-      transition: this.props.transition,
-      systemTypeName: systemTypeName,
+      saveAndContinue: this.props.saveAndContinue,
       orderMetaData: JSON.stringify(orderMetaData),
       zone_num: this.context.zone_num
     };
@@ -70,47 +69,50 @@ class Quote extends React.Component {
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Here are the Good/Better/Best results for
-            you</h3>
+          <h3 className="titre-big">Here are your results</h3>
         </div>
-        <div className="flex-third">
-          <div className="good-div">
-            <div className="heading-result">
-              <div>Good</div>
-            </div>
-            {
-              good.map(unit => {
-                return this.renderUnit(unit, props);
-              })
-            }
+        <div className="div-full-width quote-filters">
+          <div className="w-inline-block" data-filter-group={'brand'}>
+            <select className={"select-field"} multiple={true}>
+              <option>Select Brand(s)</option>
+              {
+                this.context.brands.map(brand => {
+                  return <Filter
+                    key={brand}
+                    dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
+                    value={brand}/>
+                })
+              }
+            </select>
           </div>
-          <div className="good-div">
-            <div className="heading-result best">
-              <div>Better</div>
-            </div>
-            {
-              better.map(unit => {
-                return this.renderUnit(unit, props);
-              })
-            }
+          <div className="w-inline-block" data-filter-group={'seer'}>
+            <select className={"select-field"}>
+              <option>Select SEER</option>
+              {
+                config.get('seer_ranges').map(seer => {
+                  return <Filter key={seer} dataFilter={`.seer-${seer}`} value={seer}/>
+                })
+              }
+            </select>
           </div>
-          <div className="good-div">
-            <div className="heading-result better">
-              <div>Best</div>
-            </div>
-            {
-              best.map(unit => {
-                return this.renderUnit(unit, props);
-              })
-            }
-          </div>
+        </div>
+        <div className="flex-third div-full-height container">
+          {
+            this.context.units.map(unit => {
+              return this.renderUnit(unit, props);
+            })
+          }
         </div>
       </>
     )
   }
 }
 
+const Filter = ({dataFilter, value}) => {
+  return (
+    <option value={dataFilter}>{value}</option>
+  )
+}
 Quote.contextType = QuoteCtx;
-
 
 export default Quote;

@@ -6,10 +6,10 @@
   if system_type_query.present?
     products = data.products.select { |p| p['System Type'].lstrip.rstrip == system_type_query }
   else
-    products = data.products.reject { |p| p['System Type'].nil?}
+    products = data.products.reject { |p| p['System Type'].nil? }
   end
 
-  products.reject! {|p| p['AHRI'].nil?}
+  products.reject! { |p| p['AHRI'].nil? }
 %>
 
 <div class="section-hero-interior">
@@ -18,7 +18,7 @@
   </h1>
 </div>
 
-<%= partial "/partials/breadcrumbs", locals: {system_type_query: system_type_query}%>
+<%= partial "/partials/breadcrumbs", locals: { system_type_query: system_type_query } %>
 
 <div class="section-product-listing">
   <div class="container">
@@ -104,3 +104,41 @@
 </div>
 
 <%= partial "/partials/section-cta" %>
+
+<% content_for(:footer_scripts) do %>
+  <script>
+    $(document).ready(function ($) {
+      var containerEl = document.querySelector('.container');
+
+      function scrollToContainer() {
+        $('html, body').animate({
+          scrollTop: $('.breadcrumbs').offset().top
+        }, 300);
+      }
+
+      function onMixClick(state, originalEvent) {
+        originalEvent.preventDefault();
+        var grey_img = $('.checkbox-button-grey');
+        var img = $('.checkbox-button');
+      }
+
+      if (containerEl) {
+        var mixer = mixitup(containerEl, {
+          pagination: {
+            limit: 12
+          },
+          multifilter: {
+            enable: true
+          },
+          animation: {
+            enable: false
+          },
+          callbacks: {
+            onMixEnd: scrollToContainer,
+            onMixClick: onMixClick
+          }
+        });
+      }
+    });
+  </script>
+<% end %>

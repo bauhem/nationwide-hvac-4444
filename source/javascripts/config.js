@@ -1,17 +1,37 @@
 const configuration = {
   packaged_system: [
-    {type: "P SC", name: "Straight Cool", description: "Straight cool systems are great for homeowners that almost never turn their heat on. It costs less up front and is more efficient on the cooling side, but costs more to use in heat mode than a heat pump system might."},
-    {type: "P HP", name: "Heat Pump", description: "Technically, a heat pump is a mechanical-compression cycle refrigeration system that can be reversed to either heat or cool a controlled space."},
+    {
+      type: "P SC",
+      name: "Straight Cool",
+      description: "Straight cool systems are great for homeowners that almost never turn their heat on. It costs less up front and is more efficient on the cooling side, but costs more to use in heat mode than a heat pump system might."
+    },
+    {
+      type: "P HP",
+      name: "Heat Pump",
+      description: "Technically, a heat pump is a mechanical-compression cycle refrigeration system that can be reversed to either heat or cool a controlled space."
+    },
     {type: "P HP OU", name: "Over-under", description: ""}
   ],
   split_system: [
-    {type: "SS SC", name: "Straight Cool", description: "Straight cool systems are great for homeowners that almost never turn their heat on. It costs less up front and is more efficient on the cooling side, but costs more to use in heat mode than a heat pump system might."},
-    {type: "SS HP", name: "Heat Pump", description: "Technically, a heat pump is a mechanical-compression cycle refrigeration system that can be reversed to either heat or cool a controlled space."},
+    {
+      type: "SS SC",
+      name: "Straight Cool",
+      description: "Straight cool systems are great for homeowners that almost never turn their heat on. It costs less up front and is more efficient on the cooling side, but costs more to use in heat mode than a heat pump system might."
+    },
+    {
+      type: "SS HP",
+      name: "Heat Pump",
+      description: "Technically, a heat pump is a mechanical-compression cycle refrigeration system that can be reversed to either heat or cool a controlled space."
+    },
   ],
   water_system: [
-    {type: "WSHP", name: "Water Sourced", description: "Mostly used in high rise buildings, a water source heat pump operates much like a traditional air source heat pump except that it extracts and dissipates heat by way of water instead of air."}
+    {
+      type: "WSHP",
+      name: "Water Sourced",
+      description: "Mostly used in high rise buildings, a water source heat pump operates much like a traditional air source heat pump except that it extracts and dissipates heat by way of water instead of air."
+    }
   ],
-  tonnage: [1.5,2,2.5,3,3.5,4,5],
+  tonnage: [1.5, 2, 2.5, 3, 3.5, 4, 5],
   model_to_tons: [
     {model: "18", tons: 1.5},
     {model: "24", tons: 2},
@@ -31,7 +51,9 @@ const configuration = {
     {footage: '2401-3000', tons: 5}
   ],
   root_url: 'https://cultum.serveo.net',
-  cloudinary_resize_url: 'https://res.cloudinary.com/nationwide-hvac/image/fetch'
+  cloudinary_resize_url: 'https://res.cloudinary.com/nationwide-hvac/image/fetch',
+  seer_ranges: ['14-16', '16-18', '18-20', '20+'],
+  no_image_path: 'images/product-photo-unavailable.png'
 };
 
 export default configuration;

@@ -58,41 +58,6 @@
 <%= javascript_include_tag "lib/mixitup-multifilter" %>
 <%= javascript_include_tag "lib/mixitup-pagination" %>
 
-<script>
-  $(document).ready(function ($) {
-    var containerEl = document.querySelector('.container');
-
-    function scrollToContainer() {
-      $('html, body').animate({
-        scrollTop: $('.section-hero-interior').offset().top
-      }, 300);
-    }
-
-    function onMixClick(state, originalEvent) {
-      originalEvent.preventDefault();
-      var grey_img = $('.checkbox-button-grey');
-      var img = $('.checkbox-button');
-    }
-
-    if (containerEl) {
-      var mixer = mixitup(containerEl, {
-        pagination: {
-          limit: 12
-        },
-        multifilter: {
-          enable: true
-        },
-        animation: {
-          enable: false
-        },
-        callbacks: {
-          onMixEnd: scrollToContainer,
-          onMixClick: onMixClick
-        }
-      });
-    }
-  });
-</script>
 <%= yield_content :footer_scripts %>
 
 </html>

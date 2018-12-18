@@ -18,10 +18,11 @@ import PackagedSystemLocation from "./PackagedSystemLocation";
 import AirSystemFilterLocation from "./AirSystemFilterLocation";
 import Brands from "./Brands";
 import Quote from "./Quote";
-
-import {unitsFilter, brandsFilter} from "./UnitsFilter";
 import ZipCode from "./ZipCode";
 import Accessories from "./Accessories";
+import UnitDetails from "./UnitDetails";
+
+import {unitsFilter, brandsFilter} from "./UnitsFilter";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -40,6 +41,7 @@ const StatesComponents = {
   Brands: Brands,
   ZipCode: ZipCode,
   Quote: Quote,
+  UnitDetails: UnitDetails,
   Accessories: Accessories
 };
 
@@ -80,7 +82,9 @@ class QuoteBuilder extends React.Component {
       units: null,
       zip_code: null,
       zone_num: null,
-      history: []
+      history: [],
+      selected_seers: [],
+      selected_unit: null
     }
   }
 
@@ -106,8 +110,7 @@ class QuoteBuilder extends React.Component {
     let units = [];
     switch (action.type) {
       case 'filterBrands':
-        units = unitsFilter(this.state);
-        let brands = brandsFilter(units, this.state);
+        let brands = brandsFilter(this.state);
         this.saveValues({units: units, brands: brands, selected_brands: []});
         break;
       case 'filterResults':
@@ -133,18 +136,21 @@ class QuoteBuilder extends React.Component {
 
   prevState() {
     let history = this.state.history;
+    let curr_obj_state = this.state;
     history.pop();
 
     let prevState = history[history.length - 1];
 
+    // TODO - Best thing here would be to revert each field as we go back.
     if (history.length === 0) {
+      curr_obj_state = QuoteBuilder.defaultState();
       prevState = stateMachine.initialState.value;
     }
 
-    this.setState({
-      currentState: prevState,
-      history: history
-    });
+    curr_obj_state.currentState = prevState;
+    curr_obj_state.history = history;
+
+    this.setState(curr_obj_state);
   }
 
   saveValues(fields) {
