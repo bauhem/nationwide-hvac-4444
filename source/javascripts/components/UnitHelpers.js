@@ -24,7 +24,10 @@ export function unitImage(unit, width = 300, height = 200, crop = 'fit') {
 }
 
 export function brandLogoImage(unit) {
-  return `/images/${unit['Brand'].toLowerCase().replace(/ /g, "-")}-logo.png`;
+  let brand = unit['Brand'].toLowerCase().replace(/ /g, "-");
+  return brand_logos.find((logo) => {
+    return logo.indexOf(brand) !== -1;
+  });
 }
 
 export function unitDescription(systemTypes, unit) {

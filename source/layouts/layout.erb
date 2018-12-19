@@ -58,6 +58,13 @@
 <%= javascript_include_tag "lib/mixitup-multifilter" %>
 <%= javascript_include_tag "lib/mixitup-pagination" %>
 
+<script>
+  var brand_logos = [];
+  <% data.products.map {|p| p['Brand']}.uniq.each do |brand| %>
+    brand_logos.push("<%= asset_path :images, brand_name_to_logo(brand) %>");
+  <% end %>
+</script>
+
 <%= yield_content :footer_scripts %>
 
 </html>

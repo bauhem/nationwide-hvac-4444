@@ -3,10 +3,14 @@ module ProductHelpers
     unit['Brand']
   end
 
+  def brand_name_to_logo(brand_val)
+    "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
+  end
+
   def brand_logo(unit)
     brand_val = brand(unit)
     return config.no_image if brand_val.blank?
-    "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
+    brand_name_to_logo(brand_val)
   end
 
   def item_id(unit)
