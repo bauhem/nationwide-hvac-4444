@@ -41,7 +41,7 @@ class ZipCode extends React.Component {
 
     this.zip.current.reportValidity();
   }
-  
+
   render() {
     return (
       <>
@@ -56,9 +56,9 @@ class ZipCode extends React.Component {
                  id="Zipcode" required={true}
                  ref={this.zip} value={this.context.zip_code}/>
         </div>
-        <div className="next button w-slider-arrow-right"
+        <div className="next-button w-slider-arrow-right"
              onClick={this.handleClick}>
-          <div className="next-button">Next step</div>
+          Next step
         </div>
       </>
     );
