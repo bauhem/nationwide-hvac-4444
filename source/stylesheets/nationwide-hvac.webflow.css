@@ -1675,7 +1675,7 @@ ul {
 .div-full-width.added-top-margin {
   position: relative;
   margin: 0px 14px 20px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
   -webkit-box-flex: 22%;
   -webkit-flex: 22%;
   -ms-flex: 22%;
@@ -1946,7 +1946,10 @@ ul {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;

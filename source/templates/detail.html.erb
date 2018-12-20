@@ -54,7 +54,8 @@
             <div><strong><%= unit['Heater model'] %></strong></div>
           </div>
         <% end %>
-        <a data-item-id="<%= item_id(unit) %>"
+        <a data-ix="open-item-added"
+           data-item-id="<%= item_id(unit) %>"
            data-item-name="<%= model(unit) %>"
            data-item-price="<%= price(unit) %>"
            data-item-url="<%= product_url(unit) %>"

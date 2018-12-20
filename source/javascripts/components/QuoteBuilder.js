@@ -190,10 +190,10 @@ class QuoteBuilder extends React.Component {
 
     return (
       <QuoteCtx.Provider value={this.state}>
-        <div className="msp-holder">
-          <div className="multi-step-form w-slider">
+        <div className="msp-holder" id="next">
+          <div className="multi-step-form w-slider" data-animation="slide" data-easing="ease-out-quart" data-disable-swipe="1" data-duration="750" data-infinite="1" >
             <div className="w-slider-mask">
-              <div className="w-slide">
+              <div data-ix="slider-anim" className="slide w-slide">
                 <div className={"form-wrapper w-form " + second_slide}>
                   <div className="form-full-width">
                     <SlideComponent saveValues={this.saveValues}

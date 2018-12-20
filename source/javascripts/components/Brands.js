@@ -70,10 +70,10 @@ class Brands extends React.Component {
                 })
               }
             </div>
-            <div className="next-button w-slider-arrow-right"
+            <a href="#next" className="next-button w-slider-arrow-right"
                  onClick={() => this.props.transition({type: "SUBMIT"})}>
               Next step
-            </div>
+            </a>
           </>
         }
       </QuoteCtx.Consumer>

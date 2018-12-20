@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-wf-page="5bc893d71699bea994b18c33" data-wf-site="5bc893d71699bef018b18c32" lang="fr">
+<html data-wf-page="5bc893d71699bea994b18c33" data-wf-site="5bc893d71699bef018b18c32" lang="<%= locale %>">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -28,6 +28,13 @@
 </head>
 
 <body data-ix="body-load">
+  <div>
+    <div data-ix="close-modal-produits" class="overlay-black"></div>
+    <div class="div-added-to-cart">
+      <h3>This item was added to your cart</h3>
+      <div><a href="#" data-ix="close-item-added" class="button w-button">Continue</a><a href="#" data-ix="close-modal-produits-2" class="button-underline left-margin w-button">See my cart</a></div>
+    </div>
+  </div>
 <%= partial "/partials/header" %>
 
 <%= yield %>

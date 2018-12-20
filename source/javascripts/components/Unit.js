@@ -28,7 +28,9 @@ class Unit extends React.Component {
     return (
       <div
         className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range}`}>
+        <div class="div-image">
         <img src={img_src}/>
+        </div>
         <div className="div-flex-h align-center">
           <div className="product-name smaller">{model_name}</div>
           <img src={brand_img} width="80"
@@ -57,7 +59,7 @@ class Unit extends React.Component {
           <div><strong>{price + installation_price}</strong></div>
         </div>
         <div className="">
-          <a href="#"
+          <a href="#next"
              className="button w-button"
              onClick={this.handleClick}>
             See unit details

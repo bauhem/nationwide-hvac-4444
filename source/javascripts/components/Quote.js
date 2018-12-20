@@ -78,18 +78,18 @@ class Quote extends React.Component {
           <h3 className="titre-big">Here are your results</h3>
         </div>
         <div className="div-full-width quote-filters">
-          <div className="w-inline-block" data-filter-group={'brand'}>
-            <select className={"select-field"} multiple={true}>
-              <option>Select Brand(s)</option>
-              {
-                brands.map(brand => {
-                  return <Filter
-                    key={brand}
-                    dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
-                    value={brand}/>
-                })
-              }
-            </select>
+          <div className="dropdown w-inline-block" data-filter-group={'brand'}>
+          <select className={"select-field"} multiple={true}>
+            <option>Select Brand(s)</option>
+            {
+              brands.map(brand => {
+                return <Filter
+                  key={brand}
+                  dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
+                  value={brand}/>
+              })
+            }
+          </select>
           </div>
           <div className="w-inline-block" data-filter-group={'seer'}>
             <select className={"select-field"}>
