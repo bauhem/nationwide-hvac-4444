@@ -71,20 +71,22 @@
     </div>
   </div>
 </div>
-<% if related_units(unit).any? %>
-  <div class="section-related-ac">
-    <h3 class="centered-heading">
-      <strong>
-        Other <%= system_type_key_to_name(unit['System Type']) %> Units
-      </strong>
-    </h3>
-    <div class="div-flex-h justify-start">
+<div class="section-related-ac">
+  <h3 class="centered-heading">
+    <strong>
+      Other <%= system_type_key_to_name(unit['System Type']) %> Units
+    </strong>
+  </h3>
+  <div class="div-flex-h justify-start">
+    <% if related_units(unit).any? %>
       <% related_units(unit).each do |unit| %>
         <%= partial "/partials/unit_thumbnail", locals: { unit: unit } %>
       <% end %>
-    </div>
+    <% else %>
+      There is currently no other product similar to this unit
+    <% end %>
   </div>
-<% end %>
+</div>
 
 <%= partial "/partials/section-cta" %>
 
