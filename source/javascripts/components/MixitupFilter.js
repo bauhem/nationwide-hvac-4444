@@ -12,9 +12,9 @@ class MixitupFilter extends React.Component {
 
     let filter_inner_content = (
       <div className="checkbox-field">
-        <img src="images/checkbox-grey.png" alt=""
+        <img src={greyCBImgUrl} alt=""
              className="checkbox-button-grey"/>
-        <img src="images/checkbox.png" alt=""
+        <img src={activeCBImgUrl} alt=""
              className="checkbox-button"/>
         <div className="checkbox-label" data-ix="check-box">
           {value}

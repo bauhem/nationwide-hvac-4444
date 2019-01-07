@@ -74,6 +74,8 @@
   <% data.products.map {|p| p['Brand']}.uniq.each do |brand| %>
   brand_logos.push("<%= asset_path :images, brand_name_to_logo(brand) %>");
   <% end %>
+  var greyCBImgUrl = "<%= asset_path :images, 'checkbox-grey.png' %>";
+  var activeCBImgUrl = "<%= asset_path :images, 'checkbox.png' %>";
 
   // This method is used to get the z-index of the filters checkboxes.
   function getStyleProp(el, styleProp) {
