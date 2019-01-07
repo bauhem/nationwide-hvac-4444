@@ -1,6 +1,6 @@
 module.exports = {
+  mode: "development",
   module: {
-    mode: "development",
     rules: [
       {
         test: /\.js?$/,
