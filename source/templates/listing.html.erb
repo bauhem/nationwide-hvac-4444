@@ -124,8 +124,9 @@
             enable: false
           },
           callbacks: {
+            onMixClick: handleMixClick,
             onMixEnd: (state) => {
-              onMixEnd(state, '.breadcrumbs');
+              scrollToContainer('.breadcrumbs');
             }
           }
         });

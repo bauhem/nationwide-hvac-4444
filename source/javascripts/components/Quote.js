@@ -50,8 +50,9 @@ class Quote extends React.Component {
         enable: false
       },
       callbacks: {
+        onMixClick: handleMixClick,
         onMixEnd: (state) => {
-          onMixEnd(state, '.form-full-width');
+          scrollToContainer('.form-full-width');
         },
         onMixFail: (state) => {
           console.log('Mix failed: ');

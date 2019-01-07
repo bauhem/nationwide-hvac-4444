@@ -96,11 +96,10 @@
     }, 300);
   }
 
-  function onMixEnd(state, scrollContainerSelector) {
-    let el = state.triggerElement;
-
-    toggleCB(el);
-    scrollToContainer(scrollContainerSelector);
+  function handleMixClick(state, futureState) {
+    if (this.classList.contains('filter_button')) {
+      toggleCB(this);
+    }
   }
 
   function toggleCB(el) {

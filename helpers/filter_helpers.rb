@@ -27,6 +27,7 @@ module FilterHelpers
   def filter_with_checkbox_link(filter, label)
     # TODO - We can force a specific order using data-order
     div_content = []
+    # NOTE: DO NOT UPDATE THE IMAGES ORDER WITHOUT MODIFYING handleMixClick in layout.erb
     div_content << tag(:img, src: '/images/checkbox-grey.png', alt: "", class: "checkbox-button-grey")
     div_content << tag(:img, src: '/images/checkbox.png', alt: "", class: "checkbox-button")
     div_content << content_tag(:div, class: "checkbox-label", "data-ix": "check-box") do
