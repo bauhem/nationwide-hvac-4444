@@ -10,7 +10,7 @@ module FilterHelpers
 
   def brands_filter
     brand_filters = []
-    brand_filters << filter_with_checkbox_link('all', 'All Brands')
+    # brand_filters << filter_with_checkbox_link('all', 'All Brands')
 
     brands_list.each do |brand|
       brand_filters << filter_with_checkbox_link(".#{brand_data_filter(brand)}", brand)
@@ -34,18 +34,18 @@ module FilterHelpers
     end
 
     link_content = []
-    link_content << image_tag("5bd752cd69d9224e90c87dfa_check-sign-in-a-rounded-black-square.svg", alt: "", class: "image-check-inactive")
     link_content << content_tag(:div, class: "checkbox-field") do
       div_content.join
     end
 
-    link_to '#', class: "filter_button w-inline-block", 'data-filter': filter do
+    link_to '#', class: "filter_button w-inline-block", 'data-toggle': filter do
       link_content.join
     end
   end
 
   def tonnages_filter
     tonnage_filters = []
+    # tonnage_filters << filter_with_checkbox_link('', 'All Tonnage')
 
     tonnages.each do |tons|
       tonnage_filters << filter_with_checkbox_link(".#{tonnage_filter_data(tons)}", tons.to_s)
@@ -60,6 +60,7 @@ module FilterHelpers
 
   def seers_filter
     seer_filters = []
+    # seer_filters << filter_with_checkbox_link('', 'All SEER')
 
     seer_ranges.each do |min, max|
       label = "#{min}-#{max}"

@@ -75,7 +75,7 @@
   brand_logos.push("<%= asset_path :images, brand_name_to_logo(brand) %>");
   <% end %>
 
-  // This method is used to get the z-index of the filters checkboxes. 
+  // This method is used to get the z-index of the filters checkboxes.
   function getStyleProp(el, styleProp) {
     let y;
     if (window.getComputedStyle) {
@@ -93,6 +93,42 @@
       scrollTop: $(containerSelector).offset().top
     }, 300);
   }
+
+  function onMixEnd(state, scrollContainerSelector) {
+    let el = state.triggerElement;
+
+    toggleCB(el);
+    scrollToContainer(scrollContainerSelector);
+  }
+
+  function toggleCB(el) {
+    let greyCB = el.children[0].children[0];
+    let activeCB = el.children[0].children[1];
+
+    const tmpZ = getStyleProp(greyCB, "z-index");
+    greyCB.style.zIndex = getStyleProp(activeCB, "z-index");
+    activeCB.style.zIndex = tmpZ;
+  }
+
+  function disableCB(el) {
+    let greyCB = el.children[0].children[0];
+    let activeCB = el.children[0].children[1];
+
+    greyCB.style.zIndex = 1;
+    activeCB.style.zIndex = 'auto';
+  }
+
+  function disableAllFilters(el) {
+    let parent = el.parentNode;
+    let filters = Array.from(parent.children);
+
+    filters.forEach((filter) => {
+      if (filter !== el) {
+        Quote.disableCB(filter);
+      }
+    });
+  }
+
 
 </script>
 

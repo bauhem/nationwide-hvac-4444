@@ -19,34 +19,6 @@ class Quote extends React.Component {
     return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
 
-  static toggleCB(el) {
-    let greyCB = el.children[0].children[0];
-    let activeCB = el.children[0].children[1];
-
-    const tmpZ = getStyleProp(greyCB, "z-index");
-    greyCB.style.zIndex = getStyleProp(activeCB, "z-index");
-    activeCB.style.zIndex = tmpZ;
-  }
-
-  static disableCB(el) {
-    let greyCB = el.children[0].children[0];
-    let activeCB = el.children[0].children[1];
-
-    greyCB.style.zIndex = 1;
-    activeCB.style.zIndex = 'auto';
-  }
-
-  static disableAllFilters(el) {
-    let parent = el.parentNode;
-    let filters = Array.from(parent.children);
-
-    filters.forEach((filter) => {
-      if (filter !== el) {
-        Quote.disableCB(filter);
-      }
-    });
-  }
-
   orderMetaData(ctx) {
     let metaData = {
       air_filter_side: ctx.air_filter_side,
@@ -79,10 +51,7 @@ class Quote extends React.Component {
       },
       callbacks: {
         onMixEnd: (state) => {
-          let el = state.triggerElement;
-
-          Quote.toggleCB(el);
-          scrollToContainer('.form-full-width');
+          onMixEnd(state, '.form-full-width');
         },
         onMixFail: (state) => {
           console.log('Mix failed: ');
