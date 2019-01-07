@@ -26,46 +26,33 @@ class Unit extends React.Component {
     let seer_range = seerRange(unit['SEER']);
 
     return (
-      <div
-        className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range}`}>
-        <div class="div-image">
-        <img src={img_src}/>
+      <a href={"#"}
+         onClick={this.handleClick}
+         className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
+        <div className="div-image">
+          <img src={img_src} alt={model_name}/>
         </div>
         <div className="div-flex-h align-center">
-          <div className="product-name smaller">{model_name}</div>
+          <div className="product-name">{model_name}</div>
           <img src={brand_img} width="80"
                alt={unit['Brand']}
-               className="image-brand"/></div>
-        <div className="div-product-details smaller">
+               className="image-brand"/>
+        </div>
+        <div className="div-product-details">
           <div className="blue-text">Tons</div>
           <div><strong>{unit['Tons']}</strong></div>
         </div>
-        <div className="div-product-details smaller">
+        <div className="div-product-details">
           <div className="blue-text">SEER</div>
           <div><strong>{unit['SEER']}</strong></div>
         </div>
-        <div className="div-product-details smaller">
-          <div className="blue-text">Condenser</div>
-          <div><strong>{unit['CU Model']}</strong></div>
-        </div>
-        <div className="div-product-details smaller">
-          <div className="blue-text">Air Handler</div>
-          <div><strong>{unit['AHU Model']}</strong></div>
-        </div>
-        <div className="div-product-details smaller">
+        <div className="div-product-details">
           <div className="blue-text">Price including
             installation
           </div>
-          <div><strong>{price + installation_price}</strong></div>
+          <div><strong>${price + installation_price}</strong></div>
         </div>
-        <div className="">
-          <a href="#next"
-             className="button w-button"
-             onClick={this.handleClick}>
-            See unit details
-          </a>
-        </div>
-      </div>
+      </a>
     );
   }
 }

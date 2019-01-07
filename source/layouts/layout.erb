@@ -28,13 +28,15 @@
 </head>
 
 <body data-ix="body-load">
-  <div>
-    <div data-ix="close-modal-produits" class="overlay-black"></div>
-    <div class="div-added-to-cart">
-      <h3>This item was added to your cart</h3>
-      <div><a href="#" data-ix="close-item-added" class="button w-button">Continue</a><a href="#" data-ix="close-modal-produits-2" class="button-underline left-margin w-button">See my cart</a></div>
-    </div>
+<div>
+  <div data-ix="close-modal-produits" class="overlay-black"></div>
+  <div class="div-added-to-cart">
+    <h3>This item was added to your cart</h3>
+    <div>
+      <a href="#" data-ix="close-item-added" class="button w-button">Continue</a><a href="#" data-ix="close-modal-produits-2" class="button-underline left-margin w-button">See
+      my cart</a></div>
   </div>
+</div>
 <%= partial "/partials/header" %>
 
 <%= yield %>
@@ -57,7 +59,7 @@
   <%= partial "/partials/snipcart.production" %>
 <% end %>
 
-<%= javascript_include_tag "lib/jquery.inputmask.bundle"%>
+<%= javascript_include_tag "lib/jquery.inputmask.bundle" %>
 <%= javascript_include_tag "lib/validate", async: true %>
 <%= javascript_include_tag "lib/lazysizes.min", async: true %>
 
@@ -66,10 +68,32 @@
 <%= javascript_include_tag "lib/mixitup-pagination" %>
 
 <script>
+  // This is used to map the brand logo path once deployed since netlify will
+  // mingle the file name.
   var brand_logos = [];
   <% data.products.map {|p| p['Brand']}.uniq.each do |brand| %>
-    brand_logos.push("<%= asset_path :images, brand_name_to_logo(brand) %>");
+  brand_logos.push("<%= asset_path :images, brand_name_to_logo(brand) %>");
   <% end %>
+
+  // This method is used to get the z-index of the filters checkboxes. 
+  function getStyleProp(el, styleProp) {
+    let y;
+    if (window.getComputedStyle) {
+      y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+    }
+    else if (el.currentStyle) {
+      y = el.currentStyle[styleProp];
+    }
+
+    return y;
+  }
+
+  function scrollToContainer(containerSelector = '.breadcrumbs') {
+    $('html, body').animate({
+      scrollTop: $(containerSelector).offset().top
+    }, 300);
+  }
+
 </script>
 
 <%= yield_content :footer_scripts %>

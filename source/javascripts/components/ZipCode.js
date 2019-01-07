@@ -54,7 +54,7 @@ class ZipCode extends React.Component {
           <input type="text" pattern="[0-9]{5}" className="zipcode w-input" maxLength="5"
                  name="Zipcode" placeholder="You zip code"
                  id="Zipcode" required={true}
-                 ref={this.zip} value={this.context.zip_code}/>
+                 ref={this.zip} value={this.context.zip_code || ''}/>
         </div>
         <div className="next-button w-slider-arrow-right"
              onClick={this.handleClick}>

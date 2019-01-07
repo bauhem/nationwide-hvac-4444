@@ -5,6 +5,7 @@ import mixitupMultifilter from '../lib/mixitup-multifilter'; // loaded from a di
 
 import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
+import MixitupFilter from "./MixitupFilter";
 
 mixitup.use(mixitupMultifilter);
 
@@ -12,6 +13,38 @@ class Quote extends React.Component {
   constructor(props) {
     super(props);
     this.startMixitUp = this.startMixitUp.bind(this);
+  }
+
+  static renderUnit(unit, props) {
+    return <Unit key={unit['AHRI']} unit={unit} {...props} />;
+  }
+
+  static toggleCB(el) {
+    let greyCB = el.children[0].children[0];
+    let activeCB = el.children[0].children[1];
+
+    const tmpZ = getStyleProp(greyCB, "z-index");
+    greyCB.style.zIndex = getStyleProp(activeCB, "z-index");
+    activeCB.style.zIndex = tmpZ;
+  }
+
+  static disableCB(el) {
+    let greyCB = el.children[0].children[0];
+    let activeCB = el.children[0].children[1];
+
+    greyCB.style.zIndex = 1;
+    activeCB.style.zIndex = 'auto';
+  }
+
+  static disableAllFilters(el) {
+    let parent = el.parentNode;
+    let filters = Array.from(parent.children);
+
+    filters.forEach((filter) => {
+      if (filter !== el) {
+        Quote.disableCB(filter);
+      }
+    });
   }
 
   orderMetaData(ctx) {
@@ -31,12 +64,13 @@ class Quote extends React.Component {
     return metaData;
   }
 
-  renderUnit(unit, props) {
-    return <Unit key={unit['AHRI']} unit={unit} {...props} />;
-  }
-
   startMixitUp() {
+    let quoteObj = this;
+
     mixitup('.container', {
+      controls: {
+        toggleLogic: 'or'
+      },
       multifilter: {
         enable: true
       },
@@ -44,7 +78,16 @@ class Quote extends React.Component {
         enable: false
       },
       callbacks: {
-        onMixEnd: null
+        onMixEnd: (state) => {
+          let el = state.triggerElement;
+
+          Quote.toggleCB(el);
+          scrollToContainer('.form-full-width');
+        },
+        onMixFail: (state) => {
+          console.log('Mix failed: ');
+          console.table(state)
+        }
       }
     })
   }
@@ -55,6 +98,32 @@ class Quote extends React.Component {
 
   componentDidUpdate() {
     this.startMixitUp();
+  }
+
+  renderBrandsFilters(brands) {
+    let filters = [];
+    brands.forEach(brand => {
+      filters.push(<MixitupFilter
+        key={brand}
+        dataFilterType={"data-toggle"}
+        dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
+        value={brand}/>);
+    });
+
+    return filters;
+  }
+
+  renderSEERFilters(seers) {
+    let filters = [];
+    seers.forEach(seer => {
+      filters.push(<MixitupFilter
+        key={seer}
+        dataFilterType={"data-toggle"}
+        dataFilter={`.seer-${seer}`}
+        value={seer}/>);
+    });
+
+    return filters;
   }
 
   render() {
@@ -72,53 +141,68 @@ class Quote extends React.Component {
       brands = this.context.selected_brands;
     }
 
+    let brandsFilters = this.renderBrandsFilters(brands);
+    let seersFilters = this.renderSEERFilters(config.get('seer_ranges'));
+
     return (
       <>
         <div className="div-heading-slide">
-          <h3 className="titre-big">Here are your results</h3>
+          <h3 className="titre-big">Here are the best results for you:</h3>
         </div>
-        <div className="div-full-width quote-filters">
-          <div className="dropdown w-inline-block" data-filter-group={'brand'}>
-          <select className={"select-field"} multiple={true}>
-            <option>Select Brand(s)</option>
+        <div className="div-flex-h align-start">
+          <div className="div-20">
+            <div className="div-search">
+              <div
+                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
+                <img src="images/arrow-right.svg" width="20" alt=""
+                     className="arrow-icon"/>
+              </div>
+              <div className="div-search-header">
+                <div>Brand(s)</div>
+              </div>
+              <form className="div-search-form">
+                <div>
+                  <div className="div-search-dropdown">
+                    <div className="dropdown" data-filter-group={'brand'}>
+                      {brandsFilters}
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div className="div-search">
+              <div
+                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
+                <img src="images/arrow-right.svg" width="20" alt=""
+                     className="arrow-icon"/>
+              </div>
+              <div className="div-search-header">
+                <div>SEER</div>
+              </div>
+              <div className="div-search-form">
+                <div>
+                  <div className="div-search-dropdown">
+                    <div className="dropdown" data-filter-group={'seer'}>
+                      {seersFilters}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="div-flex-h justify-start _75-with container">
             {
-              brands.map(brand => {
-                return <Filter
-                  key={brand}
-                  dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
-                  value={brand}/>
+              this.context.units.map(unit => {
+                return Quote.renderUnit(unit, props);
               })
             }
-          </select>
           </div>
-          <div className="w-inline-block" data-filter-group={'seer'}>
-            <select className={"select-field"}>
-              <option>Select SEER</option>
-              {
-                config.get('seer_ranges').map(seer => {
-                  return <Filter key={seer} dataFilter={`.seer-${seer}`} value={seer}/>
-                })
-              }
-            </select>
-          </div>
-        </div>
-        <div className="flex-third div-full-height container">
-          {
-            this.context.units.map(unit => {
-              return this.renderUnit(unit, props);
-            })
-          }
         </div>
       </>
     )
   }
 }
 
-const Filter = ({dataFilter, value}) => {
-  return (
-    <option value={dataFilter}>{value}</option>
-  )
-}
 Quote.contextType = QuoteCtx;
 
 export default Quote;

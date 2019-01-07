@@ -39,7 +39,7 @@ class Accessories extends React.Component {
           <div className="div-product-details smaller">
             <div className="blue-text">Price</div>
             <div>
-              <strong>{acc['Price $']}</strong>
+              <strong>${acc['Price $']}</strong>
             </div>
           </div>
         </div>
