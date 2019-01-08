@@ -18,57 +18,69 @@ const repositoryName = GIT_REPO || 'nationwide-hvac-4444'
 const gitBranch = GIT_BRANCH || 'master'
 const owner = 'bauhem';
 
-function runCommand(commandString, options) {
-  const [command, ...args] = commandString.match(/(".*?")|(\S+)/g)
-  const cmd = spawnSync(command, args, options)
+async function getBranchRefs() {
+  try {
+    let result = await github.git.getRef({
+      owner: owner,
+      repo: repositoryName,
+      ref: `heads/${gitBranch}`
+    });
 
-  // you should probably obfuscate the credentials before logging
-  const errorString = cmd.stderr.toString()
-  if (errorString) {
-    throw new Error(
-      `Git command failed
-      ${commandString}
-      ${errorString}`
-    )
+    return result.data.object.sha;
+
+  } catch (e) {
+    console.log(e);
   }
 }
 
-async function updateGitFile(filename) {
-  console.log(`Updating file ${filename}`);
-  let file_path = path.join(process.cwd(), filename);
+async function getBranchTree(sha) {
+  try {
+    let result = await github.git.getTree({
+      owner: owner,
+      repo: repositoryName,
+      tree_sha: sha,
+      recursive: 1
+    });
+
+    return result.data.tree;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function updateGitFile(file) {
+  console.log(`Updating file ${file.filename}`);
+  let file_path = path.join(process.cwd(), file.filename);
   let fileContent = Buffer.from(fs.readFileSync(file_path, 'utf8')).toString('base64');
 
   try {
-    github.repos.getContents({
+    let blobResult = await github.git.getBlob({
       owner: owner,
       repo: repositoryName,
-      ref: gitBranch,
-      path: filename,
-    }).then(result => {
-      console.log(`getContents returned with status ${result.status}`);
-      if (result.status !== 200) {
-        throw new Error("unable to get file content: " + JSON.stringify(result));
-      }
-
-      if (result.data.content !== fileContent) {
-        console.log(`getContents sha: ${result.data.sha}`);
-        github.repos.updateFile({
-          owner: owner,
-          repo: repositoryName,
-          branch: gitBranch,
-          path: filename,
-          message: "Update Airtable content for file " + filename,
-          content: fileContent,
-          sha: result.data.sha
-        }).then(result => {
-          if (result.status !== 200) {
-            throw new Error("updating file: " + JSON.stringify(result));
-          }
-        });
-      }
+      sha: file.sha
     });
-  } catch(e) {
-    console.log(e);
+
+    console.log(fileContent);
+    console.log(blobResult.data.content);
+    
+    if (blobResult.status === 200 && blobResult.data.content !== fileContent) {
+      await github.repos.updateFile({
+        owner: owner,
+        repo: repositoryName,
+        branch: gitBranch,
+        path: file.filename,
+        message: "Update Airtable content for file " + file.filename,
+        content: fileContent,
+        sha: file.sha
+      });
+    }
+
+    console.log(result);
+    if (result.status !== 200) {
+      throw new Error("updating file: " + JSON.stringify(result));
+    }
+  } catch (e) {
+    //console.log(e);
   }
 }
 
@@ -102,17 +114,28 @@ exports.handler = async function (event, context, callback) {
 
   //await api.syncAll(base, output_dir);
 
-  for (let [key, filename] of Object.entries(api.dataFiles)) {
+  let branchSHA = await getBranchRefs();
+  let branchTree = await getBranchTree(branchSHA);
+  let files = [];
+
+  branchTree.forEach((file) => {
+    if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
+      files.push({filename: file.path, sha: file.sha});
+    }
+  });
+
+  console.log(files);
+
+  files.forEach((file) => {
     try {
-      await
-        updateGitFile(filename);
+      let result = updateGitFile(file);
     } catch (e) {
       callback(null, {
         statusCode: 500,
         body: "An error occured: " + e
       })
     }
-  }
+  });
 
   process.chdir(orig_dir);
 

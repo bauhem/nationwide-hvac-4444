@@ -584,10 +584,10 @@ function omit (object, keysToOmit) {
 /*!******************************************************!*\
   !*** ../node_modules/@octokit/endpoint/package.json ***!
   \******************************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, bundlesize, dependencies, deprecated, description, devDependencies, directories, files, homepage, keywords, license, main, name, publishConfig, release, repository, scripts, standard, version, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, bundlesize, dependencies, description, devDependencies, directories, files, homepage, keywords, license, main, name, publishConfig, release, repository, scripts, standard, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@octokit/endpoint@^3.0.0","_id":"@octokit/endpoint@3.1.1","_inBundle":false,"_integrity":"sha512-KPkoTvKwCTetu/UqonLs1pfwFO5HAqTv/Ksp9y4NAg//ZgUCpvJsT4Hrst85uEzJvkB8+LxKyR4Bfv2X8O4cmQ==","_location":"/@octokit/endpoint","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"@octokit/endpoint@^3.0.0","name":"@octokit/endpoint","escapedName":"@octokit%2fendpoint","scope":"@octokit","rawSpec":"^3.0.0","saveSpec":null,"fetchSpec":"^3.0.0"},"_requiredBy":["/@octokit/request"],"_resolved":"https://registry.npmjs.org/@octokit/endpoint/-/endpoint-3.1.1.tgz","_shasum":"ede9afefaa4d6b7584169e12346425c6fbb45cc3","_spec":"@octokit/endpoint@^3.0.0","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444/node_modules/@octokit/request","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/endpoint.js/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/octokit-endpoint.min.js.gz","maxSize":"3KB"}],"dependencies":{"deepmerge":"3.0.0","is-plain-object":"^2.0.4","universal-user-agent":"^2.0.1","url-template":"^2.0.8"},"deprecated":false,"description":"Turns REST API endpoints into generic request options","devDependencies":{"chai":"^4.2.0","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.2","cypress":"^3.1.0","mkdirp":"^0.5.1","mocha":"^5.2.0","npm-run-all":"^4.1.3","nyc":"^13.1.0","semantic-release":"^15.10.3","sinon-chai":"^3.2.0","standard":"^12.0.1","standard-markdown":"^5.0.1","webpack":"^4.21.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.1.2"},"directories":{"test":"test"},"files":["lib","with-defaults.js"],"homepage":"https://github.com/octokit/endpoint.js#readme","keywords":["octokit","github","api","rest"],"license":"MIT","main":"index.js","name":"@octokit/endpoint","publishConfig":{"access":"public","tag":"latest"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/endpoint.js.git"},"scripts":{"build":"npm-run-all build:*","build:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-endpoint.js --profile --json > dist/bundle-stats.json","build:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-endpoint.min.js --devtool source-map","bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","prebuild":"mkdirp dist/","pretest":"standard && standard-markdown *.md","semantic-release":"semantic-release","test":"nyc mocha test/*-test.js","test:browser":"cypress run --browser chrome"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect"]},"version":"3.1.1"};
+module.exports = {"_args":[["@octokit/endpoint@3.1.1","/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444"]],"_from":"@octokit/endpoint@3.1.1","_id":"@octokit/endpoint@3.1.1","_inBundle":false,"_integrity":"sha512-KPkoTvKwCTetu/UqonLs1pfwFO5HAqTv/Ksp9y4NAg//ZgUCpvJsT4Hrst85uEzJvkB8+LxKyR4Bfv2X8O4cmQ==","_location":"/@octokit/endpoint","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@octokit/endpoint@3.1.1","name":"@octokit/endpoint","escapedName":"@octokit%2fendpoint","scope":"@octokit","rawSpec":"3.1.1","saveSpec":null,"fetchSpec":"3.1.1"},"_requiredBy":["/@octokit/request"],"_resolved":"https://registry.npmjs.org/@octokit/endpoint/-/endpoint-3.1.1.tgz","_spec":"3.1.1","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/endpoint.js/issues"},"bundlesize":[{"path":"./dist/octokit-endpoint.min.js.gz","maxSize":"3KB"}],"dependencies":{"deepmerge":"3.0.0","is-plain-object":"^2.0.4","universal-user-agent":"^2.0.1","url-template":"^2.0.8"},"description":"Turns REST API endpoints into generic request options","devDependencies":{"chai":"^4.2.0","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.2","cypress":"^3.1.0","mkdirp":"^0.5.1","mocha":"^5.2.0","npm-run-all":"^4.1.3","nyc":"^13.1.0","semantic-release":"^15.10.3","sinon-chai":"^3.2.0","standard":"^12.0.1","standard-markdown":"^5.0.1","webpack":"^4.21.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.1.2"},"directories":{"test":"test"},"files":["lib","with-defaults.js"],"homepage":"https://github.com/octokit/endpoint.js#readme","keywords":["octokit","github","api","rest"],"license":"MIT","main":"index.js","name":"@octokit/endpoint","publishConfig":{"access":"public","tag":"latest"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/endpoint.js.git"},"scripts":{"build":"npm-run-all build:*","build:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-endpoint.js --profile --json > dist/bundle-stats.json","build:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-endpoint.min.js --devtool source-map","bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","prebuild":"mkdirp dist/","pretest":"standard && standard-markdown *.md","semantic-release":"semantic-release","test":"nyc mocha test/*-test.js","test:browser":"cypress run --browser chrome"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect"]},"version":"3.1.1"};
 
 /***/ }),
 
@@ -837,10 +837,10 @@ function withDefaults (oldEndpoint, newDefaults) {
 /*!*****************************************************!*\
   !*** ../node_modules/@octokit/request/package.json ***!
   \*****************************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, browser, bugs, bundleDependencies, bundlesize, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, main, name, publishConfig, release, repository, scripts, standard, version, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, files, homepage, keywords, license, main, name, publishConfig, release, repository, scripts, standard, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@octokit/request@2.2.0","_id":"@octokit/request@2.2.0","_inBundle":false,"_integrity":"sha512-4P9EbwKZ4xfyupVMb3KVuHmM+aO2fye3nufjGKz/qDssvdJj9Rlx44O0FdFvUp4kIzToy3AHLTOulEIDAL+dpg==","_location":"/@octokit/request","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@octokit/request@2.2.0","name":"@octokit/request","escapedName":"@octokit%2frequest","scope":"@octokit","rawSpec":"2.2.0","saveSpec":null,"fetchSpec":"2.2.0"},"_requiredBy":["/@octokit/rest"],"_resolved":"https://registry.npmjs.org/@octokit/request/-/request-2.2.0.tgz","_shasum":"f4b2d1ad7c4c8a0b148193610c912046961f8be5","_spec":"@octokit/request@2.2.0","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444/node_modules/@octokit/rest","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"browser":{"./lib/get-request-agent.js":false,"./lib/request/get-buffer-response.js":"./lib/request/get-buffer-response-browser.js"},"bugs":{"url":"https://github.com/octokit/request.js/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/octokit-request.min.js.gz","maxSize":"5KB"}],"dependencies":{"@octokit/endpoint":"^3.0.0","is-plain-object":"^2.0.4","node-fetch":"^2.3.0","universal-user-agent":"^2.0.1"},"deprecated":false,"description":"Send parameterized requests to GitHub’s APIs with sensible defaults in browsers and Node","devDependencies":{"chai":"^4.2.0","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.2","cypress":"^3.1.0","fetch-mock":"^7.2.0","mkdirp":"^0.5.1","mocha":"^5.2.0","npm-run-all":"^4.1.3","nyc":"^13.1.0","semantic-release":"^15.10.5","simple-mock":"^0.8.0","standard":"^12.0.1","webpack":"^4.22.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.1.2"},"files":["lib"],"homepage":"https://github.com/octokit/request.js#readme","keywords":["octokit","github","api","request"],"license":"MIT","main":"index.js","name":"@octokit/request","publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/request.js.git"},"scripts":{"build":"npm-run-all build:*","build:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-request.js --profile --json > dist/bundle-stats.json","build:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-request.min.js --devtool source-map","bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","prebuild":"mkdirp dist/","pretest":"standard","semantic-release":"semantic-release","test":"nyc mocha test/*-test.js","test:browser":"cypress run --browser chrome"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect"]},"version":"2.2.0"};
+module.exports = {"_args":[["@octokit/request@2.2.0","/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444"]],"_from":"@octokit/request@2.2.0","_id":"@octokit/request@2.2.0","_inBundle":false,"_integrity":"sha512-4P9EbwKZ4xfyupVMb3KVuHmM+aO2fye3nufjGKz/qDssvdJj9Rlx44O0FdFvUp4kIzToy3AHLTOulEIDAL+dpg==","_location":"/@octokit/request","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@octokit/request@2.2.0","name":"@octokit/request","escapedName":"@octokit%2frequest","scope":"@octokit","rawSpec":"2.2.0","saveSpec":null,"fetchSpec":"2.2.0"},"_requiredBy":["/@octokit/rest"],"_resolved":"https://registry.npmjs.org/@octokit/request/-/request-2.2.0.tgz","_spec":"2.2.0","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"browser":{"./lib/get-request-agent.js":false,"./lib/request/get-buffer-response.js":"./lib/request/get-buffer-response-browser.js"},"bugs":{"url":"https://github.com/octokit/request.js/issues"},"bundlesize":[{"path":"./dist/octokit-request.min.js.gz","maxSize":"5KB"}],"dependencies":{"@octokit/endpoint":"^3.0.0","is-plain-object":"^2.0.4","node-fetch":"^2.3.0","universal-user-agent":"^2.0.1"},"description":"Send parameterized requests to GitHub’s APIs with sensible defaults in browsers and Node","devDependencies":{"chai":"^4.2.0","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.2","cypress":"^3.1.0","fetch-mock":"^7.2.0","mkdirp":"^0.5.1","mocha":"^5.2.0","npm-run-all":"^4.1.3","nyc":"^13.1.0","semantic-release":"^15.10.5","simple-mock":"^0.8.0","standard":"^12.0.1","webpack":"^4.22.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.1.2"},"files":["lib"],"homepage":"https://github.com/octokit/request.js#readme","keywords":["octokit","github","api","request"],"license":"MIT","main":"index.js","name":"@octokit/request","publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/request.js.git"},"scripts":{"build":"npm-run-all build:*","build:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-request.js --profile --json > dist/bundle-stats.json","build:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-request.min.js --devtool source-map","bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","prebuild":"mkdirp dist/","pretest":"standard","semantic-release":"semantic-release","test":"nyc mocha test/*-test.js","test:browser":"cypress run --browser chrome"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect"]},"version":"2.2.0"};
 
 /***/ }),
 
@@ -1049,10 +1049,10 @@ function requestWithHook (hook, endpoint, route, options) {
 /*!**************************************************!*\
   !*** ../node_modules/@octokit/rest/package.json ***!
   \**************************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, apidoc, author, bugs, bundleDependencies, bundlesize, contributors, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, name, nyc, publishConfig, release, repository, scripts, standard, types, version, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, apidoc, author, bugs, bundlesize, contributors, dependencies, description, devDependencies, files, homepage, keywords, license, name, nyc, publishConfig, release, repository, scripts, standard, types, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@octokit/rest","_id":"@octokit/rest@16.2.0","_inBundle":false,"_integrity":"sha512-4OyWqvF0mZhSe0NEcsXboq4WJ3HC2pThHCKWeJNd/8M10zDu0q9/Ct8u0IBzHXdgmfpE2hrJJdkIBSF2NlyB9A==","_location":"/@octokit/rest","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@octokit/rest","name":"@octokit/rest","escapedName":"@octokit%2frest","scope":"@octokit","rawSpec":"","saveSpec":null,"fetchSpec":"latest"},"_requiredBy":["#USER","/"],"_resolved":"https://registry.npmjs.org/@octokit/rest/-/rest-16.2.0.tgz","_shasum":"790d4189e8befd61e5cfebc4a6171b274d0526cb","_spec":"@octokit/rest","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444","apidoc":{"template":{"withCompare":false}},"author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/rest.js/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/octokit-rest.min.js.gz","maxSize":"33 kB"}],"contributors":[{"name":"Mike de Boer","email":"info@mikedeboer.nl"},{"name":"Fabian Jakobs","email":"fabian@c9.io"},{"name":"Joe Gallo","email":"joe@brassafrax.com"},{"name":"Gregor Martynus","url":"https://github.com/gr2m"}],"dependencies":{"@octokit/request":"2.2.0","before-after-hook":"^1.2.0","btoa-lite":"^1.0.0","lodash.get":"^4.4.2","lodash.pick":"^4.4.0","lodash.set":"^4.3.2","lodash.uniq":"^4.5.0","octokit-pagination-methods":"^1.1.0","universal-user-agent":"^2.0.0","url-template":"^2.0.8"},"deprecated":false,"description":"GitHub REST API client for Node.js","devDependencies":{"@gimenete/type-writer":"^0.1.3","@octokit/fixtures-server":"^3.0.3","@octokit/routes":"15.4.1","@types/node":"^10.1.2","apidoc":"^0.17.6","bundlesize":"^0.17.0","chai":"^4.1.2","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.0","cypress":"^3.0.0","dotenv":"^6.0.0","gh-pages-with-token":"^1.0.0","glob":"^7.1.2","http-proxy-agent":"^2.1.0","lodash.camelcase":"^4.3.0","lodash.merge":"^4.6.1","lodash.upperfirst":"^4.3.1","mkdirp":"^0.5.1","mocha":"^5.0.0","mustache":"^3.0.0","nock":"^10.0.0","npm-run-all":"^4.1.2","nyc":"^12.0.1","prettier":"^1.14.2","proxy":"^0.2.4","semantic-release":"^15.0.0","sinon":"^6.0.0","sinon-chai":"^3.0.0","sort-keys":"^2.0.0","standard":"^12.0.0","string-to-arraybuffer":"^1.0.0","typescript":"^2.9.2","webpack":"^4.0.0","webpack-bundle-analyzer":"^3.0.0","webpack-cli":"^3.0.0"},"files":["index.js","index.d.ts","lib","plugins"],"homepage":"https://github.com/octokit/rest.js#readme","keywords":["octokit","github","rest","api-client"],"license":"MIT","name":"@octokit/rest","nyc":{"ignore":["test"]},"publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/rest.js.git"},"scripts":{"build":"npm-run-all build:*","build:browser":"npm-run-all build:browser:*","build:browser:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-rest.js --profile --json > dist/bundle-stats.json","build:browser:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-rest.min.js --devtool source-map","build:docs":"node scripts/generate-api-docs","build:ts":"node scripts/generate-types","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","deploy-docs":"gh-pages-with-token -d doc","generate-bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","generate-routes":"node scripts/generate-routes","postbuild:docs":"apidoc -i doc/ -o doc/","postvalidate:ts":"tsc --noEmit --target es6 test/typescript-validate.ts","prebuild:browser":"mkdirp dist/","prebuild:docs":"mkdirp doc/","pretest":"standard","prevalidate:ts":"npm run -s build:ts","semantic-release":"semantic-release","start-fixtures-server":"octokit-fixtures-server","test":"nyc mocha test/mocha-node-setup.js \"test/**/*-test.js\"","test:browser":"cypress run --browser chrome","validate:ts":"tsc --target es6 --noImplicitAny index.d.ts"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect","cy"]},"types":"index.d.ts","version":"16.2.0"};
+module.exports = {"_args":[["@octokit/rest@16.2.0","/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444"]],"_from":"@octokit/rest@16.2.0","_id":"@octokit/rest@16.2.0","_inBundle":false,"_integrity":"sha512-4OyWqvF0mZhSe0NEcsXboq4WJ3HC2pThHCKWeJNd/8M10zDu0q9/Ct8u0IBzHXdgmfpE2hrJJdkIBSF2NlyB9A==","_location":"/@octokit/rest","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@octokit/rest@16.2.0","name":"@octokit/rest","escapedName":"@octokit%2frest","scope":"@octokit","rawSpec":"16.2.0","saveSpec":null,"fetchSpec":"16.2.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/@octokit/rest/-/rest-16.2.0.tgz","_spec":"16.2.0","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444","apidoc":{"template":{"withCompare":false}},"author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/rest.js/issues"},"bundlesize":[{"path":"./dist/octokit-rest.min.js.gz","maxSize":"33 kB"}],"contributors":[{"name":"Mike de Boer","email":"info@mikedeboer.nl"},{"name":"Fabian Jakobs","email":"fabian@c9.io"},{"name":"Joe Gallo","email":"joe@brassafrax.com"},{"name":"Gregor Martynus","url":"https://github.com/gr2m"}],"dependencies":{"@octokit/request":"2.2.0","before-after-hook":"^1.2.0","btoa-lite":"^1.0.0","lodash.get":"^4.4.2","lodash.pick":"^4.4.0","lodash.set":"^4.3.2","lodash.uniq":"^4.5.0","octokit-pagination-methods":"^1.1.0","universal-user-agent":"^2.0.0","url-template":"^2.0.8"},"description":"GitHub REST API client for Node.js","devDependencies":{"@gimenete/type-writer":"^0.1.3","@octokit/fixtures-server":"^3.0.3","@octokit/routes":"15.4.1","@types/node":"^10.1.2","apidoc":"^0.17.6","bundlesize":"^0.17.0","chai":"^4.1.2","compression-webpack-plugin":"^2.0.0","coveralls":"^3.0.0","cypress":"^3.0.0","dotenv":"^6.0.0","gh-pages-with-token":"^1.0.0","glob":"^7.1.2","http-proxy-agent":"^2.1.0","lodash.camelcase":"^4.3.0","lodash.merge":"^4.6.1","lodash.upperfirst":"^4.3.1","mkdirp":"^0.5.1","mocha":"^5.0.0","mustache":"^3.0.0","nock":"^10.0.0","npm-run-all":"^4.1.2","nyc":"^12.0.1","prettier":"^1.14.2","proxy":"^0.2.4","semantic-release":"^15.0.0","sinon":"^6.0.0","sinon-chai":"^3.0.0","sort-keys":"^2.0.0","standard":"^12.0.0","string-to-arraybuffer":"^1.0.0","typescript":"^2.9.2","webpack":"^4.0.0","webpack-bundle-analyzer":"^3.0.0","webpack-cli":"^3.0.0"},"files":["index.js","index.d.ts","lib","plugins"],"homepage":"https://github.com/octokit/rest.js#readme","keywords":["octokit","github","rest","api-client"],"license":"MIT","name":"@octokit/rest","nyc":{"ignore":["test"]},"publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/rest.js.git"},"scripts":{"build":"npm-run-all build:*","build:browser":"npm-run-all build:browser:*","build:browser:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-rest.js --profile --json > dist/bundle-stats.json","build:browser:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-rest.min.js --devtool source-map","build:docs":"node scripts/generate-api-docs","build:ts":"node scripts/generate-types","coverage":"nyc report --reporter=html && open coverage/index.html","coverage:upload":"nyc report --reporter=text-lcov | coveralls","deploy-docs":"gh-pages-with-token -d doc","generate-bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","generate-routes":"node scripts/generate-routes","postbuild:docs":"apidoc -i doc/ -o doc/","postvalidate:ts":"tsc --noEmit --target es6 test/typescript-validate.ts","prebuild:browser":"mkdirp dist/","prebuild:docs":"mkdirp doc/","pretest":"standard","prevalidate:ts":"npm run -s build:ts","semantic-release":"semantic-release","start-fixtures-server":"octokit-fixtures-server","test":"nyc mocha test/mocha-node-setup.js \"test/**/*-test.js\"","test:browser":"cypress run --browser chrome","validate:ts":"tsc --target es6 --noImplicitAny index.d.ts"},"standard":{"globals":["describe","before","beforeEach","afterEach","after","it","expect","cy"]},"types":"index.d.ts","version":"16.2.0"};
 
 /***/ }),
 
@@ -68229,10 +68229,10 @@ Store.prototype.getAllCookies = function(cb) {
 /*!*************************************************!*\
   !*** ../node_modules/tough-cookie/package.json ***!
   \*************************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, contributors, dependencies, deprecated, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, contributors, dependencies, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"tough-cookie@~2.4.3","_id":"tough-cookie@2.4.3","_inBundle":false,"_integrity":"sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==","_location":"/tough-cookie","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"tough-cookie@~2.4.3","name":"tough-cookie","escapedName":"tough-cookie","rawSpec":"~2.4.3","saveSpec":null,"fetchSpec":"~2.4.3"},"_requiredBy":["/request"],"_resolved":"https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.4.3.tgz","_shasum":"53f36da3f47783b0925afa06ff9f3b165280f781","_spec":"tough-cookie@~2.4.3","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444/node_modules/request","author":{"name":"Jeremy Stashewsky","email":"jstash@gmail.com"},"bugs":{"url":"https://github.com/salesforce/tough-cookie/issues"},"bundleDependencies":false,"contributors":[{"name":"Alexander Savin"},{"name":"Ian Livingstone"},{"name":"Ivan Nikulin"},{"name":"Lalit Kapoor"},{"name":"Sam Thompson"},{"name":"Sebastian Mayr"}],"dependencies":{"psl":"^1.1.24","punycode":"^1.4.1"},"deprecated":false,"description":"RFC6265 Cookies and Cookie Jar for node.js","devDependencies":{"async":"^1.4.2","nyc":"^11.6.0","string.prototype.repeat":"^0.2.0","vows":"^0.8.1"},"engines":{"node":">=0.8"},"files":["lib"],"homepage":"https://github.com/salesforce/tough-cookie","keywords":["HTTP","cookie","cookies","set-cookie","cookiejar","jar","RFC6265","RFC2965"],"license":"BSD-3-Clause","main":"./lib/cookie","name":"tough-cookie","repository":{"type":"git","url":"git://github.com/salesforce/tough-cookie.git"},"scripts":{"cover":"nyc --reporter=lcov --reporter=html vows test/*_test.js","test":"vows test/*_test.js"},"version":"2.4.3"};
+module.exports = {"_args":[["tough-cookie@2.4.3","/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444"]],"_from":"tough-cookie@2.4.3","_id":"tough-cookie@2.4.3","_inBundle":false,"_integrity":"sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==","_location":"/tough-cookie","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"tough-cookie@2.4.3","name":"tough-cookie","escapedName":"tough-cookie","rawSpec":"2.4.3","saveSpec":null,"fetchSpec":"2.4.3"},"_requiredBy":["/request"],"_resolved":"https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.4.3.tgz","_spec":"2.4.3","_where":"/Users/jpboily/projects/logicielsjpb/bauhem/nationwide-hvac-4444","author":{"name":"Jeremy Stashewsky","email":"jstash@gmail.com"},"bugs":{"url":"https://github.com/salesforce/tough-cookie/issues"},"contributors":[{"name":"Alexander Savin"},{"name":"Ian Livingstone"},{"name":"Ivan Nikulin"},{"name":"Lalit Kapoor"},{"name":"Sam Thompson"},{"name":"Sebastian Mayr"}],"dependencies":{"psl":"^1.1.24","punycode":"^1.4.1"},"description":"RFC6265 Cookies and Cookie Jar for node.js","devDependencies":{"async":"^1.4.2","nyc":"^11.6.0","string.prototype.repeat":"^0.2.0","vows":"^0.8.1"},"engines":{"node":">=0.8"},"files":["lib"],"homepage":"https://github.com/salesforce/tough-cookie","keywords":["HTTP","cookie","cookies","set-cookie","cookiejar","jar","RFC6265","RFC2965"],"license":"BSD-3-Clause","main":"./lib/cookie","name":"tough-cookie","repository":{"type":"git","url":"git://github.com/salesforce/tough-cookie.git"},"scripts":{"cover":"nyc --reporter=lcov --reporter=html vows test/*_test.js","test":"vows test/*_test.js"},"version":"2.4.3"};
 
 /***/ }),
 
@@ -73307,36 +73307,6 @@ module.exports = release => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -73373,22 +73343,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function _toArray(arr) {
-  return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
 __webpack_require__(/*! @babel/polyfill */ "../node_modules/@babel/polyfill/lib/index.js");
 
 var github = __webpack_require__(/*! @octokit/rest */ "../node_modules/@octokit/rest/index.js")();
@@ -73422,78 +73376,158 @@ var repositoryName = GIT_REPO || 'nationwide-hvac-4444';
 var gitBranch = GIT_BRANCH || 'master';
 var owner = 'bauhem';
 
-function runCommand(commandString, options) {
-  var _commandString$match = commandString.match(/(".*?")|(\S+)/g),
-      _commandString$match2 = _toArray(_commandString$match),
-      command = _commandString$match2[0],
-      args = _commandString$match2.slice(1);
-
-  var cmd = spawnSync(command, args, options); // you should probably obfuscate the credentials before logging
-
-  var errorString = cmd.stderr.toString();
-
-  if (errorString) {
-    throw new Error("Git command failed\n      ".concat(commandString, "\n      ").concat(errorString));
-  }
+function getBranchRefs() {
+  return _getBranchRefs.apply(this, arguments);
 }
 
-function updateGitFile(_x) {
+function _getBranchRefs() {
+  _getBranchRefs = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2() {
+    var _result2;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return github.git.getRef({
+              owner: owner,
+              repo: repositoryName,
+              ref: "heads/".concat(gitBranch)
+            });
+
+          case 3:
+            _result2 = _context2.sent;
+            return _context2.abrupt("return", _result2.data.object.sha);
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0);
+
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this, [[0, 7]]);
+  }));
+  return _getBranchRefs.apply(this, arguments);
+}
+
+function getBranchTree(_x) {
+  return _getBranchTree.apply(this, arguments);
+}
+
+function _getBranchTree() {
+  _getBranchTree = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(sha) {
+    var _result3;
+
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return github.git.getTree({
+              owner: owner,
+              repo: repositoryName,
+              tree_sha: sha,
+              recursive: 1
+            });
+
+          case 3:
+            _result3 = _context3.sent;
+            return _context3.abrupt("return", _result3.data.tree);
+
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+            console.log(_context3.t0);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, this, [[0, 7]]);
+  }));
+  return _getBranchTree.apply(this, arguments);
+}
+
+function updateGitFile(_x2) {
   return _updateGitFile.apply(this, arguments);
 }
 
 function _updateGitFile() {
   _updateGitFile = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(filename) {
-    var file_path, fileContent;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+  regeneratorRuntime.mark(function _callee4(file) {
+    var file_path, fileContent, blobResult;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            console.log("Updating file ".concat(filename));
-            file_path = path.join(process.cwd(), filename);
+            console.log("Updating file ".concat(file.filename));
+            file_path = path.join(process.cwd(), file.filename);
             fileContent = Buffer.from(fs.readFileSync(file_path, 'utf8')).toString('base64');
+            _context4.prev = 3;
+            _context4.next = 6;
+            return github.git.getBlob({
+              owner: owner,
+              repo: repositoryName,
+              sha: file.sha
+            });
 
-            try {
-              github.repos.getContents({
-                owner: owner,
-                repo: repositoryName,
-                ref: gitBranch,
-                path: filename
-              }).then(function (result) {
-                console.log("getContents returned with status ".concat(result.status));
+          case 6:
+            blobResult = _context4.sent;
+            console.log(fileContent);
+            console.log(blobResult.data.content);
 
-                if (result.status !== 200) {
-                  throw new Error("unable to get file content: " + JSON.stringify(result));
-                }
-
-                if (result.data.content !== fileContent) {
-                  console.log("getContents sha: ".concat(result.data.sha));
-                  github.repos.updateFile({
-                    owner: owner,
-                    repo: repositoryName,
-                    branch: gitBranch,
-                    path: filename,
-                    message: "Update Airtable content for file " + filename,
-                    content: fileContent,
-                    sha: result.data.sha
-                  }).then(function (result) {
-                    if (result.status !== 200) {
-                      throw new Error("updating file: " + JSON.stringify(result));
-                    }
-                  });
-                }
-              });
-            } catch (e) {
-              console.log(e);
+            if (!(blobResult.status === 200 && blobResult.data.content !== fileContent)) {
+              _context4.next = 12;
+              break;
             }
 
-          case 4:
+            _context4.next = 12;
+            return github.repos.updateFile({
+              owner: owner,
+              repo: repositoryName,
+              branch: gitBranch,
+              path: file.filename,
+              message: "Update Airtable content for file " + file.filename,
+              content: fileContent,
+              sha: file.sha
+            });
+
+          case 12:
+            console.log(result);
+
+            if (!(result.status !== 200)) {
+              _context4.next = 15;
+              break;
+            }
+
+            throw new Error("updating file: " + JSON.stringify(result));
+
+          case 15:
+            _context4.next = 19;
+            break;
+
+          case 17:
+            _context4.prev = 17;
+            _context4.t0 = _context4["catch"](3);
+
+          case 19:
           case "end":
-            return _context2.stop();
+            return _context4.stop();
         }
       }
-    }, _callee2, this);
+    }, _callee4, this, [[3, 17]]);
   }));
   return _updateGitFile.apply(this, arguments);
 }
@@ -73504,8 +73538,7 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(event, context, callback) {
-    var orig_dir, base, output_dir, data_dir, _arr, _i, _arr$_i, key, filename;
-
+    var orig_dir, base, output_dir, data_dir, branchSHA, branchTree, files;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -73533,38 +73566,36 @@ function () {
 
             process.chdir(output_dir); //await api.syncAll(base, output_dir);
 
-            _arr = Object.entries(api.dataFiles);
-            _i = 0;
+            _context.next = 11;
+            return getBranchRefs();
 
           case 11:
-            if (!(_i < _arr.length)) {
-              _context.next = 24;
-              break;
-            }
+            branchSHA = _context.sent;
+            _context.next = 14;
+            return getBranchTree(branchSHA);
 
-            _arr$_i = _slicedToArray(_arr[_i], 2), key = _arr$_i[0], filename = _arr$_i[1];
-            _context.prev = 13;
-            _context.next = 16;
-            return updateGitFile(filename);
-
-          case 16:
-            _context.next = 21;
-            break;
-
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](13);
-            callback(null, {
-              statusCode: 500,
-              body: "An error occured: " + _context.t0
+          case 14:
+            branchTree = _context.sent;
+            files = [];
+            branchTree.forEach(function (file) {
+              if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
+                files.push({
+                  filename: file.path,
+                  sha: file.sha
+                });
+              }
             });
-
-          case 21:
-            _i++;
-            _context.next = 11;
-            break;
-
-          case 24:
+            console.log(files);
+            files.forEach(function (file) {
+              try {
+                var _result = updateGitFile(file);
+              } catch (e) {
+                callback(null, {
+                  statusCode: 500,
+                  body: "An error occured: " + e
+                });
+              }
+            });
             process.chdir(orig_dir); // terminate the lambda
 
             callback(null, {
@@ -73572,15 +73603,15 @@ function () {
               body: "All synched!"
             });
 
-          case 26:
+          case 21:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[13, 18]]);
+    }, _callee, this);
   }));
 
-  return function (_x2, _x3, _x4) {
+  return function (_x3, _x4, _x5) {
     return _ref.apply(this, arguments);
   };
 }();
