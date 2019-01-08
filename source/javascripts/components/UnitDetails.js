@@ -66,7 +66,7 @@ class UnitDetails extends React.Component {
             <div className="blue-text">
               Price including installation
             </div>
-            <div><strong>{price + installation_price}</strong></div>
+            <div><strong>${price + installation_price}</strong></div>
           </div>
           <a data-ix="open-item-added" href="#"
              data-item-id={item_id}
@@ -79,8 +79,7 @@ class UnitDetails extends React.Component {
              data-item-metadata={this.props.orderMetaData}
              className="button added-top-margin  w-button snipcart-add-item"
              onClick={this.handleClick}>
-            I want this unit
-            installed
+            I want this unit installed
           </a>
           <a href={brochure_url} target="_blank"
              className="button-underline left-margin w-button">

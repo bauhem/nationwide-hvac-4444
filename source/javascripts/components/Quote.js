@@ -10,9 +10,13 @@ import MixitupFilter from "./MixitupFilter";
 mixitup.use(mixitupMultifilter);
 
 class Quote extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.startMixitUp = this.startMixitUp.bind(this);
+
+    this.state = {
+      unitsFound: (context.units.length >= 1)
+    }
   }
 
   static renderUnit(unit, props) {
@@ -63,11 +67,11 @@ class Quote extends React.Component {
   }
 
   componentDidMount() {
-    this.startMixitUp();
+    this.state.unitsFound && this.startMixitUp();
   }
 
   componentDidUpdate() {
-    this.startMixitUp();
+    this.state.unitsFound && this.startMixitUp();
   }
 
   renderBrandsFilters(brands) {
@@ -114,6 +118,18 @@ class Quote extends React.Component {
     let brandsFilters = this.renderBrandsFilters(brands);
     let seersFilters = this.renderSEERFilters(config.get('seer_ranges'));
 
+    let units;
+
+    units = this.context.units.map(unit => {
+      return Quote.renderUnit(unit, props);
+    });
+
+    if (!this.state.unitsFound) {
+      units =
+        <p>Sorry, no units match your options.
+          Please try to change your selection</p>
+    }
+
     return (
       <>
         <div className="div-heading-slide">
@@ -130,7 +146,7 @@ class Quote extends React.Component {
               <div className="div-search-header">
                 <div>Brand(s)</div>
               </div>
-              <form className="div-search-form">
+              <div className="div-search-form">
                 <div>
                   <div className="div-search-dropdown">
                     <div className="dropdown" data-filter-group={'brand'}>
@@ -138,7 +154,7 @@ class Quote extends React.Component {
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
             <div className="div-search">
               <div
@@ -161,11 +177,7 @@ class Quote extends React.Component {
             </div>
           </div>
           <div className="div-flex-h justify-start _75-with container">
-            {
-              this.context.units.map(unit => {
-                return Quote.renderUnit(unit, props);
-              })
-            }
+            {units}
           </div>
         </div>
       </>
