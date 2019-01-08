@@ -54,8 +54,8 @@ class Accessories extends React.Component {
         <div className="div-full-height">
           {accComponents}
         </div>
-        <input type="submit" data-wait="Please wait..." value="Go to checkout"
-               className="next final w-button snipcart-checkout"/>
+        <input data-ix="open-item-added" type="submit" data-wait="Please wait..." value="Go to checkout"
+               className="next-button w-button snipcart-checkout"/>
       </>
     )
   }
