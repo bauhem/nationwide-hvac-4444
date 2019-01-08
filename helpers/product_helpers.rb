@@ -4,6 +4,8 @@ module ProductHelpers
   end
 
   def brand_name_to_logo(brand_val)
+    return "" if brand_val.nil?
+
     "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
   end
 
