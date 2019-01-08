@@ -1677,12 +1677,14 @@ ul {
 .div-full-width.added-top-margin {
   position: relative;
   margin: 0px 14px 20px;
-  padding-bottom: 60px;
+  padding: 14px;
   -webkit-box-flex: 22%;
   -webkit-flex: 22%;
   -ms-flex: 22%;
   flex: 22%;
-  border-bottom: 1px solid #f6c9ca;
+  border-bottom: 1px solid #f0181f;
+  border-radius: 4px;
+  box-shadow: 1px 1px 16px 0 rgba(0, 0, 0, .18);
 }
 
 .div-full-width.flex-margin {
@@ -3069,7 +3071,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
     margin-top: 20px;
   }
   .div-full-width.added-top-margin {
-    margin-top: 30px;
+    margin-top: 0px;
     margin-right: 0px;
     margin-left: 0px;
   }
