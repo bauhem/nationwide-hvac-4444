@@ -6,7 +6,7 @@
 
 <%
   if system_type_query.present?
-    products = data.products.select { |p| p['System Type'].lstrip.rstrip == system_type_query }
+    products = data.products.select { |p| p['System Type'].present? && p['System Type'].lstrip.rstrip == system_type_query }
   else
     products = data.products.reject { |p| p['System Type'].nil? }
   end
