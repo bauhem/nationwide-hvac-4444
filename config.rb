@@ -96,6 +96,7 @@ proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", local
 
 data.products.each do |prod|
   next if prod['AHRI'].nil?
+  next if prod['System Type'].nil?
   ahri = prod['AHRI'].lstrip.rstrip
   proxy "/ac-units/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
