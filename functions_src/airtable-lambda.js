@@ -18,6 +18,10 @@ const repositoryName = GIT_REPO || 'nationwide-hvac-4444'
 const gitBranch = GIT_BRANCH || 'master'
 const owner = 'bauhem';
 
+function logError(e) {
+  console.log(e);
+}
+
 async function getBranchRefs() {
   try {
     let result = await github.git.getRef({
@@ -48,100 +52,116 @@ async function getBranchTree(sha) {
   }
 }
 
+function decodeFileContent(content) {
+  return Buffer.from(content, 'base64');
+}
+
 async function updateGitFile(file) {
   console.log(`Updating file ${file.filename}`);
   let file_path = path.join(process.cwd(), file.filename);
-  let fileContent = Buffer.from(fs.readFileSync(file_path, 'utf8')).toString('base64');
+  let fileContent = fs.readFileSync(file_path, 'utf8');
+  let fileContentBase64 = Buffer.from(fileContent).toString('base64');
+
+  let result = null;
 
   try {
-    let blobResult = await github.git.getBlob({
+    result = await github.git.getBlob({
       owner: owner,
       repo: repositoryName,
-      sha: file.sha
+      file_sha: file.sha
     });
-
-    console.log(fileContent);
-    console.log(blobResult.data.content);
-    
-    if (blobResult.status === 200 && blobResult.data.content !== fileContent) {
-      await github.repos.updateFile({
-        owner: owner,
-        repo: repositoryName,
-        branch: gitBranch,
-        path: file.filename,
-        message: "Update Airtable content for file " + file.filename,
-        content: fileContent,
-        sha: file.sha
-      });
-    }
-
-    console.log(result);
-    if (result.status !== 200) {
-      throw new Error("updating file: " + JSON.stringify(result));
-    }
   } catch (e) {
-    //console.log(e);
+    logError(e);
   }
+
+
+  if (result !== null && result.status === 200) {
+    let remoteContent = decodeFileContent(result.data.content);
+
+    if (!Buffer.from(fileContent, 'utf8').equals(remoteContent)) {
+      console.log(`File ${file_path} content modified`);
+      try {
+        result = await github.repos.updateFile({
+          owner: owner,
+          repo: repositoryName,
+          branch: gitBranch,
+          path: file.filename,
+          message: "Update Airtable content for file " + file.filename,
+          content: fileContentBase64,
+          sha: result.data.sha
+        });
+      } catch (e) {
+        logError(e);
+      }
+    }
+  }
+
+  return result;
 }
 
 exports.handler = async function (event, context, callback) {
-  let orig_dir = process.cwd();
+  try {
 
-  const base = new Airtable({
-    apiKey: AIRTABLE_API_KEY
-  }).base(AIRTABLE_API_BASE);
+    github.authenticate({
+      type: 'token',
+      token: GITHUB_TOKEN
+    });
 
-  github.authenticate({
-    type: 'token',
-    token: GITHUB_TOKEN
-  });
+    let orig_dir = process.cwd();
+    process.chdir('/tmp');
 
-  process.chdir('/tmp');
+    let output_dir = path.join(process.cwd(), repositoryName);
 
-  let output_dir = path.join(process.cwd(), repositoryName);
-
-  if (!fs.existsSync(output_dir)) {
-    fs.mkdirSync(output_dir, 0o0774);
-  }
-
-  let data_dir = path.join(output_dir, 'data');
-
-  if (!fs.existsSync(data_dir)) {
-    fs.mkdirSync(data_dir, 0o0774);
-  }
-
-  process.chdir(output_dir);
-
-  //await api.syncAll(base, output_dir);
-
-  let branchSHA = await getBranchRefs();
-  let branchTree = await getBranchTree(branchSHA);
-  let files = [];
-
-  branchTree.forEach((file) => {
-    if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
-      files.push({filename: file.path, sha: file.sha});
+    if (!fs.existsSync(output_dir)) {
+      fs.mkdirSync(output_dir, 0o0774);
     }
-  });
 
-  console.log(files);
+    let data_dir = path.join(output_dir, 'data');
 
-  files.forEach((file) => {
-    try {
-      let result = updateGitFile(file);
-    } catch (e) {
-      callback(null, {
-        statusCode: 500,
-        body: "An error occured: " + e
-      })
+    if (!fs.existsSync(data_dir)) {
+      fs.mkdirSync(data_dir, 0o0774);
     }
-  });
 
-  process.chdir(orig_dir);
+    process.chdir(output_dir);
 
-  // terminate the lambda
-  callback(null, {
-    statusCode: 200,
-    body: "All synched!"
-  })
+    const base = new Airtable({
+      apiKey: AIRTABLE_API_KEY
+    }).base(AIRTABLE_API_BASE);
+
+    await api.syncAll(base, output_dir);
+
+    // Use git branch sha and tree to find each files sha. Since some files
+    // might be greater than 1 MB in size, we can not use the getContents method
+    // to retrieve the content and the sha in 1 operation
+    let branchSHA = await getBranchRefs();
+    let branchTree = await getBranchTree(branchSHA);
+    let files = [];
+
+    branchTree.forEach((file) => {
+      if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
+        files.push({filename: file.path, sha: file.sha});
+      }
+    });
+
+    files.forEach(async (file) => {
+      try {
+        let result = await updateGitFile(file);
+      } catch (e) {
+        throw(e);
+      }
+    });
+
+    process.chdir(orig_dir);
+
+    // terminate the lambda
+    callback(null, {
+      statusCode: 200,
+      body: "All synched!"
+    })
+  } catch (e) {
+    callback(null, {
+      statusCode: 500,
+      body: "An error occured: " + e
+    })
+  }
 }
