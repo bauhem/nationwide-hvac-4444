@@ -1,5 +1,5 @@
 function validateZip(e) {
-  let install_options = $(this).data('item-custom1-options').split('|');
+  let install_options = jQuery(this).data('item-custom1-options').split('|');
   let zip = prompt("Please enter your zip code", "");
   if (zip != null) {
     let zone = installZoneFromZip(parseInt(zip));
@@ -9,7 +9,7 @@ function validateZip(e) {
       e.preventDefault();
       return false;
     } else {
-      $(this).data('item-custom1-options', install_options[zone - 1]);
+      jQuery(this).data('item-custom1-options', install_options[zone - 1]);
     }
   }
 }
