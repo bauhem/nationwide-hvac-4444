@@ -1,9 +1,8 @@
-
 export function unitsFilter(ctx) {
   const state = ctx; // DO NOT MODIFY ctx DIRECTLY
   let units = require('../../../data/products.json');
 
-  let filtered_units = [] ;
+  let filtered_units = [];
   filtered_units = units.filter(filterOutBySystemType.bind(this, state.system_type))
     .filter(filterOutByTons.bind(this, state.tonnage))
     .filter(filterOutClosetWaterUnderAirHandler.bind(this, state.air_handler_location, state.water_heater_under_air_handler))
@@ -14,15 +13,30 @@ export function unitsFilter(ctx) {
 
 export function brandsFilter(ctx) {
   let units = require('../../../data/products.json');
+  units = units.filter(function (unit) {
+    return unit['Brand'] !== undefined && unit['Brand'] !== null
+  });
   return [...new Set(units.map(unit => unit['Brand']))];
 }
 
 function filterOutBySystemType(type, unit) {
+  let unitType = unit['System Type'];
+
+  if (unitType === undefined || unitType === null) {
+    return false;
+  }
+
   return type.trim() === unit['System Type'].trim();
 }
 
 function filterOutByTons(tons, unit) {
-  return tons === unit['Tons'];
+  let unitTons = unit['Tons'];
+
+  if (unitTons === undefined || unitTons === null) {
+    return false;
+  }
+
+  return tons === unitTons;
 }
 
 function filterOutClosetWaterUnderAirHandler(ah_loc, wh_under_ah, unit) {

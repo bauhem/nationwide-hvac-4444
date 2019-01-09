@@ -23,7 +23,7 @@ function installZoneFromZip(zip_code) {
 }
 
 function loadZipData() {
-  $.get({
+  jQuery.get({
     url: '/javascripts/data/zip_codes.json'
   })
     .done(function (data) {
