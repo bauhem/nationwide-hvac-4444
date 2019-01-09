@@ -6,6 +6,7 @@ require 'redcarpet'
 require "sanitize"
 require 'middleman-inliner'
 
+Middleman::Util::EnhancedHash.disable_warnings
 
 activate :protect_emails
 
