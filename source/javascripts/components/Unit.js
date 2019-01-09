@@ -26,7 +26,7 @@ class Unit extends React.Component {
     let seer_range = seerRange(unit['SEER']);
 
     return (
-      <a href={"#"}
+      <a href={"#next"}
          onClick={this.handleClick}
          className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
         <div className="div-image">
