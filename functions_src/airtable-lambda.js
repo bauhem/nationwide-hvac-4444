@@ -18,107 +18,150 @@ const repositoryName = GIT_REPO || 'nationwide-hvac-4444'
 const gitBranch = GIT_BRANCH || 'master'
 const owner = 'bauhem';
 
-function runCommand(commandString, options) {
-  const [command, ...args] = commandString.match(/(".*?")|(\S+)/g)
-  const cmd = spawnSync(command, args, options)
-
-  // you should probably obfuscate the credentials before logging
-  const errorString = cmd.stderr.toString()
-  if (errorString) {
-    throw new Error(
-      `Git command failed
-      ${commandString}
-      ${errorString}`
-    )
-  }
+function logError(e) {
+  console.log(e);
 }
 
-async function updateGitFile(filename) {
-  console.log(`Updating file ${filename}`);
-  let file_path = path.join(process.cwd(), filename);
-  let fileContent = Buffer.from(fs.readFileSync(file_path, 'utf8')).toString('base64');
-
+async function getBranchRefs() {
   try {
-    github.repos.getContents({
+    let result = await github.git.getRef({
       owner: owner,
       repo: repositoryName,
-      ref: gitBranch,
-      path: filename,
-    }).then(result => {
-      console.log(`getContents returned with status ${result.status}`);
-      if (result.status !== 200) {
-        throw new Error("unable to get file content: " + JSON.stringify(result));
-      }
-
-      if (result.data.content !== fileContent) {
-        console.log(`getContents sha: ${result.data.sha}`);
-        github.repos.updateFile({
-          owner: owner,
-          repo: repositoryName,
-          branch: gitBranch,
-          path: filename,
-          message: "Update Airtable content for file " + filename,
-          content: fileContent,
-          sha: result.data.sha
-        }).then(result => {
-          if (result.status !== 200) {
-            throw new Error("updating file: " + JSON.stringify(result));
-          }
-        });
-      }
+      ref: `heads/${gitBranch}`
     });
-  } catch(e) {
+
+    return result.data.object.sha;
+
+  } catch (e) {
     console.log(e);
   }
 }
 
-exports.handler = async function (event, context, callback) {
-  let orig_dir = process.cwd();
+async function getBranchTree(sha) {
+  try {
+    let result = await github.git.getTree({
+      owner: owner,
+      repo: repositoryName,
+      tree_sha: sha,
+      recursive: 1
+    });
 
-  const base = new Airtable({
-    apiKey: AIRTABLE_API_KEY
-  }).base(AIRTABLE_API_BASE);
+    return result.data.tree;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-  github.authenticate({
-    type: 'token',
-    token: GITHUB_TOKEN
-  });
+function decodeFileContent(content) {
+  return Buffer.from(content, 'base64');
+}
 
-  process.chdir('/tmp');
+async function updateGitFile(file) {
+  console.log(`Updating file ${file.filename}`);
+  let file_path = path.join(process.cwd(), file.filename);
+  let fileContent = fs.readFileSync(file_path, 'utf8');
+  let fileContentBase64 = Buffer.from(fileContent).toString('base64');
 
-  let output_dir = path.join(process.cwd(), repositoryName);
+  let result = null;
 
-  if (!fs.existsSync(output_dir)) {
-    fs.mkdirSync(output_dir, 0o0774);
+  try {
+    result = await github.git.getBlob({
+      owner: owner,
+      repo: repositoryName,
+      file_sha: file.sha
+    });
+  } catch (e) {
+    logError(e);
   }
 
-  let data_dir = path.join(output_dir, 'data');
 
-  if (!fs.existsSync(data_dir)) {
-    fs.mkdirSync(data_dir, 0o0774);
-  }
+  if (result !== null && result.status === 200) {
+    let remoteContent = decodeFileContent(result.data.content);
 
-  process.chdir(output_dir);
-
-  //await api.syncAll(base, output_dir);
-
-  for (let [key, filename] of Object.entries(api.dataFiles)) {
-    try {
-      await
-        updateGitFile(filename);
-    } catch (e) {
-      callback(null, {
-        statusCode: 500,
-        body: "An error occured: " + e
-      })
+    if (!Buffer.from(fileContent, 'utf8').equals(remoteContent)) {
+      console.log(`File ${file_path} content modified`);
+      try {
+        result = await github.repos.updateFile({
+          owner: owner,
+          repo: repositoryName,
+          branch: gitBranch,
+          path: file.filename,
+          message: "Update Airtable content for file " + file.filename,
+          content: fileContentBase64,
+          sha: result.data.sha
+        });
+      } catch (e) {
+        logError(e);
+      }
     }
   }
 
-  process.chdir(orig_dir);
+  return result;
+}
 
-  // terminate the lambda
-  callback(null, {
-    statusCode: 200,
-    body: "All synched!"
-  })
+exports.handler = async function (event, context, callback) {
+  try {
+
+    github.authenticate({
+      type: 'token',
+      token: GITHUB_TOKEN
+    });
+
+    let orig_dir = process.cwd();
+    process.chdir('/tmp');
+
+    let output_dir = path.join(process.cwd(), repositoryName);
+
+    if (!fs.existsSync(output_dir)) {
+      fs.mkdirSync(output_dir, 0o0774);
+    }
+
+    let data_dir = path.join(output_dir, 'data');
+
+    if (!fs.existsSync(data_dir)) {
+      fs.mkdirSync(data_dir, 0o0774);
+    }
+
+    process.chdir(output_dir);
+
+    const base = new Airtable({
+      apiKey: AIRTABLE_API_KEY
+    }).base(AIRTABLE_API_BASE);
+
+    await api.syncAll(base, output_dir);
+
+    // Use git branch sha and tree to find each files sha. Since some files
+    // might be greater than 1 MB in size, we can not use the getContents method
+    // to retrieve the content and the sha in 1 operation
+    let branchSHA = await getBranchRefs();
+    let branchTree = await getBranchTree(branchSHA);
+    let files = [];
+
+    branchTree.forEach((file) => {
+      if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
+        files.push({filename: file.path, sha: file.sha});
+      }
+    });
+
+    files.forEach(async (file) => {
+      try {
+        let result = await updateGitFile(file);
+      } catch (e) {
+        throw(e);
+      }
+    });
+
+    process.chdir(orig_dir);
+
+    // terminate the lambda
+    callback(null, {
+      statusCode: 200,
+      body: "All synched!"
+    })
+  } catch (e) {
+    callback(null, {
+      statusCode: 500,
+      body: "An error occured: " + e
+    })
+  }
 }
