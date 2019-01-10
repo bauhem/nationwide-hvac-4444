@@ -2,18 +2,15 @@ require("@babel/polyfill");
 
 const github = require('@octokit/rest')();
 const api = require("../airtable-api");
-const util = require('util');
 
 const Airtable = require('airtable');
 
 const fs = require('fs')
 const path = require('path')
 const process = require('process')
-const {spawnSync} = require('child_process')
 
 const {AIRTABLE_API_KEY, AIRTABLE_API_BASE, GITHUB_TOKEN, GITHUB_USERNAME, GITHUB_EMAIL, GIT_BRANCH, GIT_REPO} = process.env
 // leaving this without https:// in order to reuse it when adding the remote
-const gitRepositoryURL = 'github.com/bauhem/nationwide-hvac-4444.git'
 const repositoryName = GIT_REPO || 'nationwide-hvac-4444'
 const gitBranch = GIT_BRANCH || 'master'
 const owner = 'bauhem';
@@ -100,6 +97,8 @@ async function updateGitFile(file) {
 }
 
 exports.handler = async function (event, context, callback) {
+  console.time("exectime");
+
   try {
 
     github.authenticate({
@@ -128,7 +127,10 @@ exports.handler = async function (event, context, callback) {
       apiKey: AIRTABLE_API_KEY
     }).base(AIRTABLE_API_BASE);
 
+    console.time('syncAll');
+
     await api.syncAll(base, output_dir);
+    console.timeEnd('syncAll');
 
     // Use git branch sha and tree to find each files sha. Since some files
     // might be greater than 1 MB in size, we can not use the getContents method
@@ -143,6 +145,8 @@ exports.handler = async function (event, context, callback) {
       }
     });
 
+    let fileUpdatePromises = [];
+    
     files.forEach(async (file) => {
       try {
         let result = await updateGitFile(file);
@@ -164,4 +168,6 @@ exports.handler = async function (event, context, callback) {
       body: "An error occured: " + e
     })
   }
+
+  console.timeEnd("exectime");
 }
