@@ -73718,7 +73718,8 @@ function () {
             return _context2.abrupt("break", 35);
 
           case 35:
-            syncPromise.then(function () {
+            _context2.next = 37;
+            return syncPromise.then(function () {
               console.timeEnd('sync');
               branchTree.forEach(function (file) {
                 if (dataFiles.indexOf(file.path) > -1) {
@@ -73772,23 +73773,25 @@ function () {
                 body: "All synched!"
               });
             });
-            _context2.next = 41;
+
+          case 37:
+            _context2.next = 42;
             break;
 
-          case 38:
-            _context2.prev = 38;
+          case 39:
+            _context2.prev = 39;
             _context2.t1 = _context2["catch"](0);
             callback(null, {
               statusCode: 500,
               body: "An error occured: " + _context2.t1
             });
 
-          case 41:
+          case 42:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, this, [[0, 38]]);
+    }, _callee2, this, [[0, 39]]);
   }));
 
   return function (_x3, _x4, _x5) {

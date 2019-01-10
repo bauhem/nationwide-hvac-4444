@@ -160,7 +160,7 @@ exports.handler = async function (event, context, callback) {
         break;
     }
 
-    syncPromise.then(() => {
+    await syncPromise.then(() => {
 
       console.timeEnd('sync');
 
