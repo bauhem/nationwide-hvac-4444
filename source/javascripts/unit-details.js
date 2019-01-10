@@ -32,3 +32,11 @@ function loadZipData() {
       zipData = data
     });
 }
+
+var zipData = [];
+
+loadZipData();
+
+jQuery(document).ready(function ($) {
+  $('a.snipcart-add-item').click(validateZip);
+});

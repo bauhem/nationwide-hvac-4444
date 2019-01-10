@@ -91,13 +91,5 @@
 <%= partial "/partials/section-cta" %>
 
 <% content_for(:footer_scripts) do %>
-  <script>
-    $(document).ready(function ($) {
-      var zipData = [];
-
-      loadZipData();
-
-      $('a.snipcart-add-item').click(validateZip);
-    });
-  </script>
+  <%= javascript_include_tag "unit-details" %>
 <% end %>
