@@ -101,8 +101,8 @@ exports.handler = async function (event, context, callback) {
   try {
     let syncMethod = 'syncAll';
 
-    if (event.queryStringParameters.method !== undefined) {
-      syncMethod = event.queryStringParameters.method;
+    if (event.queryStringParameters.sync !== undefined) {
+      syncMethod = event.queryStringParameters.sync;
     }
 
     github.authenticate({
@@ -143,16 +143,16 @@ exports.handler = async function (event, context, callback) {
     let syncPromise = api[syncMethod](base, output_dir);
 
     switch (syncMethod) {
-      case 'syncProducts':
+      case 'products':
         dataFiles[0] = api.dataFiles.products;
         break;
-      case 'syncVendors':
+      case 'vendors':
         dataFiles[0] = api.dataFiles.vendors;
         break;
-      case 'syncAccessories':
+      case 'accessories':
         dataFiles[0] = api.dataFiles.accessories;
         break;
-      case 'syncZones':
+      case 'zones':
         dataFiles[0] = api.dataFiles.zones;
         break;
       default:

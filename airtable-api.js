@@ -1,5 +1,5 @@
 const jsonFile = require('jsonfile');
-const path = require('path');
+const path = require('path')
 
 const dataFiles = {
   products: 'data/products.json',
@@ -92,7 +92,7 @@ async function syncZones(base, output_dir) {
   }])
 }
 
-exports.syncProducts = syncProducts;
-exports.syncVendors = syncVendors;
-exports.syncAccessories = syncAccessories;
-exports.syncZones = syncZones;
+exports.products = syncProducts;
+exports.vendors = syncVendors;
+exports.accessories = syncAccessories;
+exports.zones = syncZones;
