@@ -68,7 +68,7 @@ class UnitDetails extends React.Component {
             </div>
             <div><strong>${price + installation_price}</strong></div>
           </div>
-          <a data-ix="open-item-added" href="#"
+          <a href="#"
              data-item-id={item_id}
              data-item-url={url}
              data-item-name={model_name + " " + item_id}

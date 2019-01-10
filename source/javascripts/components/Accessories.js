@@ -17,8 +17,7 @@ class Accessories extends React.Component {
       return (
         <div key={acc['id']} className="div-full-width added-top-margin">
           <div className="unit-overlay">
-            <a data-ix="open-item-added"
-               href="#"
+            <a href="#"
                data-item-id={acc.id}
                data-item-name={acc['Item']}
                data-item-price={acc['Price $']}

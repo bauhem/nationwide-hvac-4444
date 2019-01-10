@@ -1,4 +1,5 @@
 function validateZip(e) {
+
   let installation_options = jQuery(this).data('item-custom1-options').split('|');
   let zip = prompt("Please enter your zip code", "");
   if (zip != null) {
@@ -39,4 +40,6 @@ loadZipData();
 
 jQuery(document).ready(function ($) {
   $('a.snipcart-add-item').click(validateZip);
+
+  Snipcart.subscribe('item.added', itemAddedPopup);
 });
