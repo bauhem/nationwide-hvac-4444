@@ -97,9 +97,13 @@ async function updateGitFile(file) {
 }
 
 exports.handler = async function (event, context, callback) {
-  console.time("exectime");
 
   try {
+    let syncMethod = 'syncAll';
+
+    if (event.queryStringParameters.method !== undefined) {
+      syncMethod = event.queryStringParameters.method;
+    }
 
     github.authenticate({
       type: 'token',
@@ -127,47 +131,66 @@ exports.handler = async function (event, context, callback) {
       apiKey: AIRTABLE_API_KEY
     }).base(AIRTABLE_API_BASE);
 
-    console.time('syncAll');
-
-    await api.syncAll(base, output_dir);
-    console.timeEnd('syncAll');
-
     // Use git branch sha and tree to find each files sha. Since some files
     // might be greater than 1 MB in size, we can not use the getContents method
     // to retrieve the content and the sha in 1 operation
     let branchSHA = await getBranchRefs();
     let branchTree = await getBranchTree(branchSHA);
-    let files = [];
+    let gitFiles = [];
+    let dataFiles = [];
+    console.time('sync');
 
-    branchTree.forEach((file) => {
-      if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
-        files.push({filename: file.path, sha: file.sha});
-      }
+    let syncPromise = api[syncMethod](base, output_dir);
+
+    switch (syncMethod) {
+      case 'syncProducts':
+        dataFiles[0] = api.dataFiles.products;
+        break;
+      case 'syncVendors':
+        dataFiles[0] = api.dataFiles.vendors;
+        break;
+      case 'syncAccessories':
+        dataFiles[0] = api.dataFiles.accessories;
+        break;
+      case 'syncZones':
+        dataFiles[0] = api.dataFiles.zones;
+        break;
+      default:
+        dataFiles = Object.values(api.dataFiles);
+        break;
+    }
+
+    syncPromise.then(() => {
+
+      console.timeEnd('sync');
+
+      branchTree.forEach((file) => {
+        if (dataFiles.indexOf(file.path) > -1) {
+          gitFiles.push({filename: file.path, sha: file.sha});
+        }
+      });
+
+      gitFiles.forEach(async (file) => {
+        try {
+          let result = await updateGitFile(file);
+        } catch (e) {
+          throw(e);
+        }
+      });
+
+      process.chdir(orig_dir);
+
+      // terminate the lambda
+      callback(null, {
+        statusCode: 200,
+        body: "All synched!"
+      });
     });
 
-    let fileUpdatePromises = [];
-    
-    files.forEach(async (file) => {
-      try {
-        let result = await updateGitFile(file);
-      } catch (e) {
-        throw(e);
-      }
-    });
-
-    process.chdir(orig_dir);
-
-    // terminate the lambda
-    callback(null, {
-      statusCode: 200,
-      body: "All synched!"
-    })
   } catch (e) {
     callback(null, {
       statusCode: 500,
       body: "An error occured: " + e
     })
   }
-
-  console.timeEnd("exectime");
-}
+};

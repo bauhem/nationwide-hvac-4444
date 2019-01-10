@@ -1,23 +1,23 @@
 const jsonFile = require('jsonfile');
-const path = require('path')
+const path = require('path');
 
 const dataFiles = {
   products: 'data/products.json',
   vendors: 'data/vendors.json',
   accessories: 'data/accessories.json',
   zones: 'data/zip_codes.json'
-}
+};
 
 exports.dataFiles = dataFiles;
 
-var select = function (base, column_name, output_file, sort_fields = []) {
+var select = function (base, column_name, sort_fields = []) {
   let dataJson = [];
 
   return base(column_name).select({
     //sort
     sort: sort_fields
   }).all();
-}
+};
 
 var saveRecords = function (records, output_file) {
   let dataJson = [];
@@ -28,51 +28,71 @@ var saveRecords = function (records, output_file) {
   });
   jsonFile.writeFileSync(output_file, dataJson, {flag: 'w'});
   console.log(`Saved records to ${output_file}`)
-}
+};
 
 exports.syncAll = async function (base, output_dir = '.') {
-  const productsFile = path.join(output_dir, dataFiles.products);
-  const vendorsFile = path.join(output_dir, dataFiles.vendors);
-  const accessoriesFile = path.join(output_dir, dataFiles.accessories);
-  const zonesFile = path.join(output_dir, dataFiles.zones);
+  let promises = [];
 
-  let promises = []
+  promises.push(syncProducts(base, output_dir));
+
+  promises.push(syncVendors(base, output_dir));
+
+  promises.push(syncAccessories(base, output_dir));
+
+  promises.push(syncZones(base, output_dir));
+
+  return Promise.all(promises);
+};
+
+function sync(base, table, output_file, sort_fields) {
+  return select(base, table, sort_fields)
+    .then((records) => {
+      saveRecords(records, output_file)
+    })
+}
+
+async function syncProducts(base, output_dir) {
   console.log('Syncing Match-Ups');
-  promises.push(select(base, 'Match-Ups', productsFile, [{
+  const output_file = path.join(output_dir, dataFiles.products);
+
+  return sync(base, 'Match-Ups', output_file, [{
     field: "AHRI",
     direction: "asc"
   }])
-    .then((records) => {
-      saveRecords(records, productsFile)
-    }));
+}
 
+async function syncVendors(base, output_dir) {
   console.log('Syncing Vendors');
-  promises.push(select(base, 'Vendors', vendorsFile, [{
+  const output_file = path.join(output_dir, dataFiles.vendors);
+
+  return sync(base, 'Vendors', output_file, [{
     field: "Name",
     direction: "asc"
   }])
-    .then((records) => {
-      saveRecords(records, vendorsFile)
-    }));
+}
 
+async function syncAccessories(base, output_dir) {
   console.log('Syncing Accessories');
-  promises.push(select(base, 'Accessories', accessoriesFile, [{
+  const output_file = path.join(output_dir, dataFiles.accessories);
+
+  return sync(base, 'Accessories', output_file, [{
     field: "Model",
     direction: "asc"
   }])
-    .then((records) => {
-      saveRecords(records, accessoriesFile)
-    }));
 
+}
+
+async function syncZones(base, output_dir) {
   console.log('Syncing Zones');
-  promises.push(select(base, 'Zones', zonesFile, [{
+  const output_file = path.join(output_dir, dataFiles.zones);
+
+  return sync(base, 'Zones', output_file, [{
     field: "Zip",
     direction: "asc"
   }])
-    .then((records) => {
-      saveRecords(records, zonesFile)
-    }));
-
-  return Promise.all(promises);
 }
 
+exports.syncProducts = syncProducts;
+exports.syncVendors = syncVendors;
+exports.syncAccessories = syncAccessories;
+exports.syncZones = syncZones;

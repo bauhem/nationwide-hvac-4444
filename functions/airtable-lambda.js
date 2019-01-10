@@ -174,8 +174,8 @@ var dataFiles = {
 };
 exports.dataFiles = dataFiles;
 
-var select = function select(base, column_name, output_file) {
-  var sort_fields = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+var select = function select(base, column_name) {
+  var sort_fields = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
   var dataJson = [];
   return base(column_name).select({
     //sort
@@ -203,10 +203,6 @@ function () {
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(base) {
     var output_dir,
-        productsFile,
-        vendorsFile,
-        accessoriesFile,
-        zonesFile,
         promises,
         _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -214,42 +210,14 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             output_dir = _args.length > 1 && _args[1] !== undefined ? _args[1] : '.';
-            productsFile = path.join(output_dir, dataFiles.products);
-            vendorsFile = path.join(output_dir, dataFiles.vendors);
-            accessoriesFile = path.join(output_dir, dataFiles.accessories);
-            zonesFile = path.join(output_dir, dataFiles.zones);
             promises = [];
-            console.log('Syncing Match-Ups');
-            promises.push(select(base, 'Match-Ups', productsFile, [{
-              field: "AHRI",
-              direction: "asc"
-            }]).then(function (records) {
-              saveRecords(records, productsFile);
-            }));
-            console.log('Syncing Vendors');
-            promises.push(select(base, 'Vendors', vendorsFile, [{
-              field: "Name",
-              direction: "asc"
-            }]).then(function (records) {
-              saveRecords(records, vendorsFile);
-            }));
-            console.log('Syncing Accessories');
-            promises.push(select(base, 'Accessories', accessoriesFile, [{
-              field: "Model",
-              direction: "asc"
-            }]).then(function (records) {
-              saveRecords(records, accessoriesFile);
-            }));
-            console.log('Syncing Zones');
-            promises.push(select(base, 'Zones', zonesFile, [{
-              field: "Zip",
-              direction: "asc"
-            }]).then(function (records) {
-              saveRecords(records, zonesFile);
-            }));
+            promises.push(syncProducts(base, output_dir));
+            promises.push(syncVendors(base, output_dir));
+            promises.push(syncAccessories(base, output_dir));
+            promises.push(syncZones(base, output_dir));
             return _context.abrupt("return", Promise.all(promises));
 
-          case 15:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -261,6 +229,137 @@ function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+function sync(base, table, output_file, sort_fields) {
+  return select(base, table, sort_fields).then(function (records) {
+    saveRecords(records, output_file);
+  });
+}
+
+function syncProducts(_x2, _x3) {
+  return _syncProducts.apply(this, arguments);
+}
+
+function _syncProducts() {
+  _syncProducts = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(base, output_dir) {
+    var output_file;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            console.log('Syncing Match-Ups');
+            output_file = path.join(output_dir, dataFiles.products);
+            return _context2.abrupt("return", sync(base, 'Match-Ups', output_file, [{
+              field: "AHRI",
+              direction: "asc"
+            }]));
+
+          case 3:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this);
+  }));
+  return _syncProducts.apply(this, arguments);
+}
+
+function syncVendors(_x4, _x5) {
+  return _syncVendors.apply(this, arguments);
+}
+
+function _syncVendors() {
+  _syncVendors = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(base, output_dir) {
+    var output_file;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            console.log('Syncing Vendors');
+            output_file = path.join(output_dir, dataFiles.vendors);
+            return _context3.abrupt("return", sync(base, 'Vendors', output_file, [{
+              field: "Name",
+              direction: "asc"
+            }]));
+
+          case 3:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, this);
+  }));
+  return _syncVendors.apply(this, arguments);
+}
+
+function syncAccessories(_x6, _x7) {
+  return _syncAccessories.apply(this, arguments);
+}
+
+function _syncAccessories() {
+  _syncAccessories = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee4(base, output_dir) {
+    var output_file;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            console.log('Syncing Accessories');
+            output_file = path.join(output_dir, dataFiles.accessories);
+            return _context4.abrupt("return", sync(base, 'Accessories', output_file, [{
+              field: "Model",
+              direction: "asc"
+            }]));
+
+          case 3:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this);
+  }));
+  return _syncAccessories.apply(this, arguments);
+}
+
+function syncZones(_x8, _x9) {
+  return _syncZones.apply(this, arguments);
+}
+
+function _syncZones() {
+  _syncZones = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee5(base, output_dir) {
+    var output_file;
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            console.log('Syncing Zones');
+            output_file = path.join(output_dir, dataFiles.zones);
+            return _context5.abrupt("return", sync(base, 'Zones', output_file, [{
+              field: "Zip",
+              direction: "asc"
+            }]));
+
+          case 3:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, this);
+  }));
+  return _syncZones.apply(this, arguments);
+}
+
+exports.syncProducts = syncProducts;
+exports.syncVendors = syncVendors;
+exports.syncAccessories = syncAccessories;
+exports.syncZones = syncZones;
 
 /***/ }),
 
@@ -73543,13 +73642,18 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(event, context, callback) {
-    var orig_dir, output_dir, data_dir, base, branchSHA, branchTree, files, fileUpdatePromises;
+    var syncMethod, orig_dir, output_dir, data_dir, base, branchSHA, branchTree, gitFiles, dataFiles, syncPromise;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.time("exectime");
-            _context2.prev = 1;
+            _context2.prev = 0;
+            syncMethod = 'syncAll';
+
+            if (event.queryStringParameters.method !== undefined) {
+              syncMethod = event.queryStringParameters.method;
+            }
+
             github.authenticate({
               type: 'token',
               token: GITHUB_TOKEN
@@ -73571,99 +73675,120 @@ function () {
             process.chdir(output_dir);
             base = new Airtable({
               apiKey: AIRTABLE_API_KEY
-            }).base(AIRTABLE_API_BASE);
-            console.time('syncAll');
-            _context2.next = 14;
-            return api.syncAll(base, output_dir);
-
-          case 14:
-            console.timeEnd('syncAll'); // Use git branch sha and tree to find each files sha. Since some files
+            }).base(AIRTABLE_API_BASE); // Use git branch sha and tree to find each files sha. Since some files
             // might be greater than 1 MB in size, we can not use the getContents method
             // to retrieve the content and the sha in 1 operation
 
-            _context2.next = 17;
+            _context2.next = 14;
             return getBranchRefs();
 
-          case 17:
+          case 14:
             branchSHA = _context2.sent;
-            _context2.next = 20;
+            _context2.next = 17;
             return getBranchTree(branchSHA);
 
-          case 20:
+          case 17:
             branchTree = _context2.sent;
-            files = [];
-            branchTree.forEach(function (file) {
-              if (Object.values(api.dataFiles).indexOf(file.path) > -1) {
-                files.push({
-                  filename: file.path,
-                  sha: file.sha
-                });
-              }
-            });
-            fileUpdatePromises = [];
-            files.forEach(
-            /*#__PURE__*/
-            function () {
-              var _ref2 = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee(file) {
-                var result;
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                  while (1) {
-                    switch (_context.prev = _context.next) {
-                      case 0:
-                        _context.prev = 0;
-                        _context.next = 3;
-                        return updateGitFile(file);
-
-                      case 3:
-                        result = _context.sent;
-                        _context.next = 9;
-                        break;
-
-                      case 6:
-                        _context.prev = 6;
-                        _context.t0 = _context["catch"](0);
-                        throw _context.t0;
-
-                      case 9:
-                      case "end":
-                        return _context.stop();
-                    }
-                  }
-                }, _callee, this, [[0, 6]]);
-              }));
-
-              return function (_x6) {
-                return _ref2.apply(this, arguments);
-              };
-            }());
-            process.chdir(orig_dir); // terminate the lambda
-
-            callback(null, {
-              statusCode: 200,
-              body: "All synched!"
-            });
-            _context2.next = 32;
+            gitFiles = [];
+            dataFiles = [];
+            console.time('sync');
+            syncPromise = api[syncMethod](base, output_dir);
+            _context2.t0 = syncMethod;
+            _context2.next = _context2.t0 === 'syncProducts' ? 25 : _context2.t0 === 'syncVendors' ? 27 : _context2.t0 === 'syncAccessories' ? 29 : _context2.t0 === 'syncZones' ? 31 : 33;
             break;
 
-          case 29:
-            _context2.prev = 29;
-            _context2.t0 = _context2["catch"](1);
-            callback(null, {
-              statusCode: 500,
-              body: "An error occured: " + _context2.t0
-            });
+          case 25:
+            dataFiles[0] = api.dataFiles.products;
+            return _context2.abrupt("break", 35);
 
-          case 32:
-            console.timeEnd("exectime");
+          case 27:
+            dataFiles[0] = api.dataFiles.vendors;
+            return _context2.abrupt("break", 35);
+
+          case 29:
+            dataFiles[0] = api.dataFiles.accessories;
+            return _context2.abrupt("break", 35);
+
+          case 31:
+            dataFiles[0] = api.dataFiles.zones;
+            return _context2.abrupt("break", 35);
 
           case 33:
+            dataFiles = Object.values(api.dataFiles);
+            return _context2.abrupt("break", 35);
+
+          case 35:
+            syncPromise.then(function () {
+              console.timeEnd('sync');
+              branchTree.forEach(function (file) {
+                if (dataFiles.indexOf(file.path) > -1) {
+                  gitFiles.push({
+                    filename: file.path,
+                    sha: file.sha
+                  });
+                }
+              });
+              gitFiles.forEach(
+              /*#__PURE__*/
+              function () {
+                var _ref2 = _asyncToGenerator(
+                /*#__PURE__*/
+                regeneratorRuntime.mark(function _callee(file) {
+                  var result;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.prev = 0;
+                          _context.next = 3;
+                          return updateGitFile(file);
+
+                        case 3:
+                          result = _context.sent;
+                          _context.next = 9;
+                          break;
+
+                        case 6:
+                          _context.prev = 6;
+                          _context.t0 = _context["catch"](0);
+                          throw _context.t0;
+
+                        case 9:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, this, [[0, 6]]);
+                }));
+
+                return function (_x6) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+              process.chdir(orig_dir); // terminate the lambda
+
+              callback(null, {
+                statusCode: 200,
+                body: "All synched!"
+              });
+            });
+            _context2.next = 41;
+            break;
+
+          case 38:
+            _context2.prev = 38;
+            _context2.t1 = _context2["catch"](0);
+            callback(null, {
+              statusCode: 500,
+              body: "An error occured: " + _context2.t1
+            });
+
+          case 41:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, this, [[1, 29]]);
+    }, _callee2, this, [[0, 38]]);
   }));
 
   return function (_x3, _x4, _x5) {
