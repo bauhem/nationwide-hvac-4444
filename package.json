@@ -46,6 +46,7 @@
     "gulp-tap": "^1.0.1",
     "gulp-uglify": "^3.0.1",
     "gulplog": "^1.0.0",
+    "netlify-identity-widget": "^1.5.2",
     "vinyl-buffer": "^1.0.1"
   }
 }

@@ -81,6 +81,7 @@ page "/thank-you.html", :layout => "no-contact-layout"
 # Proxy pages
 # https://middlemanapp.com/advanced/dynamic-pages/
 ignore '/templates/*'
+ignore '/sync'
 
 page "/index.html", :layout => "layout"
 

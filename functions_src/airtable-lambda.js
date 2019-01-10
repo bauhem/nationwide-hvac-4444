@@ -76,7 +76,6 @@ async function updateGitFile(file) {
     let remoteContent = decodeFileContent(result.data.content);
 
     if (!Buffer.from(fileContent, 'utf8').equals(remoteContent)) {
-      console.log(`File ${file_path} content modified`);
       try {
         result = await github.repos.updateFile({
           owner: owner,
@@ -97,9 +96,13 @@ async function updateGitFile(file) {
 }
 
 exports.handler = async function (event, context, callback) {
-
+  const claims = context.clientContext && context.clientContext.user;
+  if (!claims) {
+    return callback(null, { statusCode: 401, body: "You must be signed in to call this function" });
+  }
+  
   try {
-    let syncMethod = 'syncAll';
+    let syncMethod = 'All';
 
     if (event.queryStringParameters.sync !== undefined) {
       syncMethod = event.queryStringParameters.sync;
@@ -138,7 +141,6 @@ exports.handler = async function (event, context, callback) {
     let branchTree = await getBranchTree(branchSHA);
     let gitFiles = [];
     let dataFiles = [];
-    console.time('sync');
 
     let syncPromise = api[syncMethod](base, output_dir);
 
@@ -162,8 +164,6 @@ exports.handler = async function (event, context, callback) {
 
     await syncPromise.then(() => {
 
-      console.timeEnd('sync');
-
       branchTree.forEach((file) => {
         if (dataFiles.indexOf(file.path) > -1) {
           gitFiles.push({filename: file.path, sha: file.sha});
@@ -183,14 +183,14 @@ exports.handler = async function (event, context, callback) {
       // terminate the lambda
       callback(null, {
         statusCode: 200,
-        body: "All synched!"
+        body: JSON.stringify({ msg: `${syncMethod} sync completed!`})
       });
     });
 
   } catch (e) {
     callback(null, {
       statusCode: 500,
-      body: "An error occured: " + e
+      body: JSON.stringify({ msg:"An error occured: " + e})
     })
   }
 };
