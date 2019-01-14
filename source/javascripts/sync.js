@@ -17,6 +17,9 @@ function onReady(completed) {
 }
 
 onReady(function () {
+  const appDiv = document.getElementById('sync-app');
 
-  ReactDOM.render(<SyncApp/>, document.getElementById('sync-app'));
+  if (appDiv) {
+    ReactDOM.render(<SyncApp {...(appDiv.dataset)}/>, appDiv);
+  }
 });

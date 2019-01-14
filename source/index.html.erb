@@ -3,9 +3,15 @@
     <h1 class="cta-heading" data-ix="hero-appear-1">We are Florida&#x27;s<br>
       <strong>Air Conditioning Specialists</strong>
     </h1>
-    <p data-ix="hero-appear-2">Nationwide HVAC Corp. is a full-service, licensed, bonded &amp; insured air conditioning installation and repair service. We are open for business 24 hours a day and 365 days a year so that our customers can get the service
-      they deserve whenever they need it. Customer service is our #1 priority. Our mission is to provide the best service at the best price with a smile.</p>
-    <a href="/instant-quote" class="button w-button" data-ix="hero-appear-3">Get my instant quote</a>
+    <p data-ix="hero-appear-2">Nationwide HVAC Corp. is a full-service,
+      licensed, bonded &amp; insured air conditioning installation and repair
+      service. We are open for business 24 hours a day and 365 days a year so
+      that our customers can get the service
+      they deserve whenever they need it. Customer service is our #1 priority.
+      Our mission is to provide the best service at the best price with a
+      smile.</p>
+    <a href="/instant-quote" class="button w-button" data-ix="hero-appear-3">Get
+      my instant quote</a>
   </div>
 </div>
 <div class="section-quote-call">
@@ -13,13 +19,15 @@
     <h2>Beat my<br>quote</h2>
     <a href="/beat-my-quote" class="button w-button">Upload your quote</a>
   </div>
-  <div class="div-quote-block main"><img src="images/quote.svg" width="50" alt="">
+  <div class="div-quote-block main">
+    <img src="images/quote.svg" width="50" alt="">
     <h2>Get an<br>exact quote</h2>
     <a href="/instant-quote" class="button w-button">Get an instant quote</a>
   </div>
   <div class="div-quote-block"><img src="images/ac-icon.svg" width="70" alt="">
     <h2>Browse<br>A/C Systems</h2>
-    <a href="ac-units/all-types" class="button w-button">Browse through our units</a>
+    <a href="ac-units/all-types" class="button w-button">Browse through our
+      units</a>
   </div>
 </div>
 <div class="section-cta">
@@ -28,8 +36,16 @@
       <strong>repair</strong>
       your
       <strong>A/C</strong>?</h3>
-    <p>Nationwide HVAC provides professional AC Repair Services throughout the South Florida areas, including Palm Beach, Broward, and Miami-Dade Counties. A/C Unit is not working or needs a tune-up, our expert technicians are experienced in all areas of
-      HVAC Servicing &amp; Repair. We take pride in providing quality HVAC Services for both residential home owners and commercial properties.<br><br>Contact us today for servicing and free estimates for all your air conditioning repair needs. Our team of professional installers, technicians, inspectors and office personel are ready to help with any AC project or problems you may have.</p>
+    <p>Nationwide HVAC provides professional AC Repair Services throughout the
+      South Florida areas, including Palm Beach, Broward, and Miami-Dade
+      Counties. A/C Unit is not working or needs a tune-up, our expert
+      technicians are experienced in all areas of
+      HVAC Servicing &amp; Repair. We take pride in providing quality HVAC
+      Services for both residential home owners and commercial
+      properties.<br><br>Contact us today for servicing and free estimates for
+      all your air conditioning repair needs. Our team of professional
+      installers, technicians, inspectors and office personel are ready to help
+      with any AC project or problems you may have.</p>
     <a href="tel:1954673837" class="button dark-color w-button">Call us</a>
   </div>
 </div>
@@ -49,3 +65,12 @@
 </div>
 
 <%= partial "/partials/testimonials" %>
+
+<% content_for(:footer_scripts) do %>
+  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    netlifyIdentity.on('login', (user) => {
+      window.location = '/sync';
+    });
+  </script>
+<% end %>

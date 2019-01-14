@@ -31,6 +31,12 @@ set :relative_links, true
 set :fonts_dir, 'fonts'
 set :cloudinary_name, 'nationwide-hvac'
 
+set :lambda_base_url, 'http://localhost:9005/'
+
+configure :build do
+  set :lambda_base_url, 'https://nationwide-hvac.netlify.com/.netlify/functions/'
+end
+
 activate :sitemap_ping do |config|
   config.host         = 'https://www.nationwide-hvac.com' # (required)                       Host of your website
   config.sitemap_file = 'sitemap.xml' # (optional, default: sitemap.xml) Name of your sitemap file

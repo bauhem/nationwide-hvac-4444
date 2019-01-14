@@ -1,5 +1,6 @@
 import React from 'react';
 import netlifyIdentity from 'netlify-identity-widget';
+import urljoin from 'url-join';
 
 const netlifyAuth = {
   isAuthenticated: false,
@@ -29,10 +30,12 @@ const netlifyAuth = {
     });
   },
   generateHeaders() {
-    const headers = {"Content-Type": "application/json"};
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
     if (netlifyIdentity.currentUser()) {
       return netlifyIdentity.currentUser().jwt().then((token) => {
-        return {...headers, Authorization: `Bearer ${token}`};
+        headers.append('Authorization', `Bearer ${token}`);
+        return headers;
       })
     }
     return Promise.resolve(headers);
@@ -67,13 +70,13 @@ class SyncApp extends React.Component {
   }
 
   sync(method) {
-    console.log(`Syncing ${method}`)
-    this.setState({loading: true});
+    this.setState({loading: true, msg: ''});
 
     netlifyAuth.generateHeaders().then((headers) => {
-      fetch('https://nationwide-hvac.netlify.com/.netlify/functions/airtable-lambda?sync=' + method, {
+      // TODO - function name should come from a prop or config as well
+      fetch(urljoin(this.props.lambdaUrl, 'airtable-lambda', '?sync=' + method), {
         method: "GET",
-        headers
+        headers: headers
       })
         .then(response => response.json())
         .then(json => this.setState({loading: false, msg: json.msg}))
@@ -87,7 +90,6 @@ class SyncApp extends React.Component {
                                        sync={this.sync} {...this.state}/>) : (
         <Login onLogin={this.handleLogin}/>)
     );
-
   }
 }
 
@@ -105,25 +107,25 @@ function SyncMenu(props) {
       </div>
       <div>{props.msg}</div>
       <div>
-        <button onClick={() => props.sync('products')} disabled={props.loading}>
-          {props.loading ? 'Synchronizing...' : 'Sync Products'}
-        </button>
-        <button onClick={() => props.sync('accessories')}
-                disabled={props.loading}>
-          {props.loading ? 'Synchronizing...' : 'Sync Accessories'}
-        </button>
-        <button onClick={() => props.sync('vendors')} disabled={props.loading}>
-          {props.loading ? 'Synchronizing...' : 'Sync Vendors'}
-        </button>
-        <button onClick={() => props.sync('zones')} disabled={props.loading}>
-          {props.loading ? 'Synchronizing...' : 'Sync Zones'}
-        </button>
-        <button onClick={() => props.sync('')} disabled={props.loading}>
-          {props.loading ? 'Synchronizing...' : 'Sync All'}
-        </button>
+        <p>Select what you want to synchronize</p>
+        <SyncBtn label={"Products"} syncMethod={"products"} {...props}/>
+        <SyncBtn label={"Accessories"} syncMethod={"accessories"} {...props}/>
+        <SyncBtn label={"Vendors"} syncMethod={"vendors"} {...props}/>
+        <SyncBtn label={"Zones"} syncMethod={"zones"} {...props}/>
+        <SyncBtn label={"All"} syncMethod={"all"} {...props}/>
       </div>
     </>
   );
+}
+
+function SyncBtn(props) {
+  return (
+    <button className="button"
+            onClick={() => props.sync(props.syncMethod)}
+            disabled={props.loading}>
+      {props.loading ? 'Synchronizing...' : props.label}
+    </button>
+  )
 }
 
 class Login extends React.Component {
