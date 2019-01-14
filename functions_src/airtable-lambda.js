@@ -179,7 +179,7 @@ exports.handler = async function (event, context, callback) {
       break;
   }
 
-  syncPromise.then(() => {
+  await syncPromise.then(() => {
 
     branchTree.forEach((file) => {
       if (dataFiles.indexOf(file.path) > -1) {
@@ -194,16 +194,15 @@ exports.handler = async function (event, context, callback) {
     })
 
     Promise.all(fileSyncPromises)
-      .then((result) => {
-        process.chdir(orig_dir);
-
-        // terminate the lambda
-        callback(null, {
-          statusCode: 200,
-          body: JSON.stringify({msg: `${syncMethod} sync completed!`})
-        });
-
-      }).catch(e => catchError(e, callback));
+      .catch(e => catchError(e, callback));
   }).catch(e => catchError(e, callback));
+
+  process.chdir(orig_dir);
+
+  // terminate the lambda
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify({msg: `${syncMethod} sync completed!`})
+  });
 
 };
