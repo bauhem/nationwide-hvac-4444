@@ -144,7 +144,7 @@ class Login extends React.Component {
     return (
       <div>
         <p>You must log in to view this page</p>
-        <button onClick={this.login}>Log in</button>
+        <button className={"button"} onClick={this.login}>Log in</button>
       </div>
     );
   }
