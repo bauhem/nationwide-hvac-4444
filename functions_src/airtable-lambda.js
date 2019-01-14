@@ -26,53 +26,53 @@ function catchError(e, callback) {
 
 }
 
-async function getBranchRefs() {
-  try {
-    let result = await github.git.getRef({
-      owner: owner,
-      repo: repositoryName,
-      ref: `heads/${gitBranch}`
-    });
+process.on(
+    "unhandledRejection",
+    function handleWarning( reason, promise ) {
 
-    return result.data.object.sha;
+        console.log( "[PROCESS] Unhandled Promise Rejection" );
+        console.log( "- - - - - - - - - - - - - - - - - - -" );
+        console.log( reason );
+        console.log( promise );
+        console.log( "- -" );
 
-  } catch (e) {
-    console.log(e);
-  }
+    }
+);
+
+function getBranchRefs() {
+  return github.git.getRef({
+    owner: owner,
+    repo: repositoryName,
+    ref: `heads/${gitBranch}`
+  });
 }
 
-async function getBranchTree(sha) {
-  try {
-    let result = await github.git.getTree({
-      owner: owner,
-      repo: repositoryName,
-      tree_sha: sha,
-      recursive: 1
-    });
-
-    return result.data.tree;
-  } catch (e) {
-    console.log(e);
-  }
+function getBranchTree(sha) {
+  return github.git.getTree({
+    owner: owner,
+    repo: repositoryName,
+    tree_sha: sha,
+    recursive: 1
+  });
 }
 
 function decodeFileContent(content) {
   return Buffer.from(content, 'base64');
 }
 
-function updateGitFile(file) {
+async function updateGitFile(file) {
   console.log(`Updating file ${file.filename}`);
   let file_path = path.join(process.cwd(), file.filename);
   let fileContent = fs.readFileSync(file_path, 'utf8');
   let fileContentBase64 = Buffer.from(fileContent).toString('base64');
 
-  return github.git.getBlob({
-    owner: owner,
-    repo: repositoryName,
-    file_sha: file.sha
-  }).catch(e => {
-    console.log(e);
-  }).then((result) => {
+  try {
+    let result = await github.git.getBlob({
+      owner: owner,
+      repo: repositoryName,
+      file_sha: file.sha
+    })
+
     if (result !== null && result.status === 200) {
       let remoteContent = decodeFileContent(result.data.content);
 
@@ -88,10 +88,22 @@ function updateGitFile(file) {
         });
       }
     }
-  })
+  } catch(e) {
+    console.log(e);
+  }
 }
 
-exports.handler = function (event, context, callback) {
+async function loadBranchTree() {
+  try {
+    let branch = await getBranchRefs();
+    let tree = await getBranchTree(branch.data.object.sha)
+    return tree.data.tree;
+  } catch(e) {
+    throw(e);
+  }
+}
+
+exports.handler = async function (event, context, callback) {
   if (NODE_ENV === 'production') {
     const claims = context.clientContext && context.clientContext.user;
     if (!claims) {
@@ -141,9 +153,11 @@ exports.handler = function (event, context, callback) {
   let dataFiles = [];
   let branchTree = [];
 
-  getBranchRefs().then((branchSHA) => {
-    getBranchTree(branchSHA).then((tree) => {branchTree = tree})
-  })
+  try {
+    branchTree = await loadBranchTree();
+  } catch(e) {
+    catchError(e, callback);
+  }
 
   let syncPromise = api[syncMethod](base, output_dir);
 
@@ -175,7 +189,7 @@ exports.handler = function (event, context, callback) {
 
     let fileSyncPromises = [];
 
-    gitFiles.forEach(async (file) => {
+    gitFiles.forEach((file) => {
       fileSyncPromises.push(updateGitFile(file));
     })
 
