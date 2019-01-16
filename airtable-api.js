@@ -11,12 +11,13 @@ const dataFiles = {
 exports.dataFiles = dataFiles;
 
 var select = function (base, column_name, sort_fields = []) {
-  let dataJson = [];
+  let config = {};
 
-  return base(column_name).select({
-    //sort
-    sort: sort_fields
-  }).all();
+  if (sort_fields.length > 0) {
+    config['sort'] = sort_fields
+  }
+
+  return base(column_name).select(config).all();
 };
 
 var saveRecords = function (records, output_file) {
@@ -55,10 +56,7 @@ async function syncProducts(base, output_dir) {
   console.log('Syncing Match-Ups');
   const output_file = path.join(output_dir, dataFiles.products);
 
-  return sync(base, 'Match-Ups', output_file, [{
-    field: "AHRI",
-    direction: "asc"
-  }])
+  return sync(base, 'Match-Ups', output_file)
 }
 
 async function syncVendors(base, output_dir) {

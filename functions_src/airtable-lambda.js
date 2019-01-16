@@ -104,6 +104,7 @@ async function loadBranchTree() {
 }
 
 exports.handler = async function (event, context, callback) {
+  console.time('global-sync');
   if (NODE_ENV === 'production') {
     const claims = context.clientContext && context.clientContext.user;
     if (!claims) {
@@ -212,6 +213,7 @@ exports.handler = async function (event, context, callback) {
       statusCode: 200,
       body: JSON.stringify({msg: `${syncMethod} sync completed!`})
     });
+    console.timeEnd('global-sync');
   } catch(e) {
     catchError(e, callback)
   }
