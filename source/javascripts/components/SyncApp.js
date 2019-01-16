@@ -78,10 +78,8 @@ class SyncApp extends React.Component {
         method: "GET",
         headers: headers
       })
-        .then((response) => {
-          let json = response.json()
-          this.setState({loading: false, msg: json.msg});
-        })
+        .then(response => response.json())
+        .then(json => this.setState({ loading: false, msg: json.msg }))
         .catch(err => this.setState({loading: false, msg: err.toString()}))
     });
   }
@@ -114,7 +112,7 @@ function SyncMenu(props) {
         <SyncBtn label={"Accessories"} syncMethod={"accessories"} {...props}/>
         <SyncBtn label={"Vendors"} syncMethod={"vendors"} {...props}/>
         <SyncBtn label={"Zones"} syncMethod={"zones"} {...props}/>
-        <SyncBtn label={"All"} syncMethod={"all"} {...props}/>
+        <SyncBtn label={"All"} syncMethod={"syncAll"} {...props}/>
       </div>
     </>
   );
@@ -125,7 +123,7 @@ function SyncBtn(props) {
     <button className="button"
             onClick={() => props.sync(props.syncMethod)}
             disabled={props.loading}>
-      {props.loading ? 'Synchronizing...' : props.label}
+      {props.label}
     </button>
   )
 }

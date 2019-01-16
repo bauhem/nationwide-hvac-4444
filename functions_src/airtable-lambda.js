@@ -107,16 +107,22 @@ exports.handler = async function (event, context, callback) {
   if (NODE_ENV === 'production') {
     const claims = context.clientContext && context.clientContext.user;
     if (!claims) {
-      return callback(null, {
+      callback(null, {
         statusCode: 401,
         body: JSON.stringify({msg: "You must be signed in to call this function"})
       });
+
+      return;
     }
+
+    console.log('Synchronizing as user:');
+    console.log(context.clientContext.user)
+
   }
 
   try {
 
-    let syncMethod = 'all';
+    let syncMethod = 'syncAll';
 
     if (event.queryStringParameters.sync !== undefined) {
       syncMethod = event.queryStringParameters.sync;
