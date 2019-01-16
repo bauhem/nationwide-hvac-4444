@@ -78,8 +78,10 @@ class SyncApp extends React.Component {
         method: "GET",
         headers: headers
       })
-        .then(response => response.json())
-        .then(json => this.setState({loading: false, msg: json.msg}))
+        .then((response) => {
+          let json = response.json()
+          this.setState({loading: false, msg: json.msg});
+        })
         .catch(err => this.setState({loading: false, msg: err.toString()}))
     });
   }

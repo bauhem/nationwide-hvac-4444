@@ -109,100 +109,105 @@ exports.handler = async function (event, context, callback) {
     if (!claims) {
       return callback(null, {
         statusCode: 401,
-        body: "You must be signed in to call this function"
+        body: JSON.stringify({msg: "You must be signed in to call this function"})
       });
     }
   }
 
-  let syncMethod = 'all';
-
-  if (event.queryStringParameters.sync !== undefined) {
-    syncMethod = event.queryStringParameters.sync;
-  }
-
-  github.authenticate({
-    type: 'token',
-    token: GITHUB_TOKEN
-  });
-
-  let orig_dir = process.cwd();
-  process.chdir('/tmp');
-
-  let output_dir = path.join(process.cwd(), repositoryName);
-
-  if (!fs.existsSync(output_dir)) {
-    fs.mkdirSync(output_dir, 0o0774);
-  }
-
-  let data_dir = path.join(output_dir, 'data');
-
-  if (!fs.existsSync(data_dir)) {
-    fs.mkdirSync(data_dir, 0o0774);
-  }
-
-  process.chdir(output_dir);
-
-  const base = new Airtable({
-    apiKey: AIRTABLE_API_KEY
-  }).base(AIRTABLE_API_BASE);
-
-  // Use git branch sha and tree to find each files sha. Since some files
-  // might be greater than 1 MB in size, we can not use the getContents method
-  // to retrieve the content and the sha in 1 operation
-  let gitFiles = [];
-  let dataFiles = [];
-  let branchTree = [];
-
   try {
-    branchTree = await loadBranchTree();
-  } catch(e) {
-    catchError(e, callback);
-  }
 
-  let syncPromise = api[syncMethod](base, output_dir);
+    let syncMethod = 'all';
 
-  switch (syncMethod) {
-    case 'products':
-      dataFiles[0] = api.dataFiles.products;
-      break;
-    case 'vendors':
-      dataFiles[0] = api.dataFiles.vendors;
-      break;
-    case 'accessories':
-      dataFiles[0] = api.dataFiles.accessories;
-      break;
-    case 'zones':
-      dataFiles[0] = api.dataFiles.zones;
-      break;
-    default:
-      dataFiles = Object.values(api.dataFiles);
-      break;
-  }
+    if (event.queryStringParameters.sync !== undefined) {
+      syncMethod = event.queryStringParameters.sync;
+    }
 
-  await syncPromise.then(() => {
-
-    branchTree.forEach((file) => {
-      if (dataFiles.indexOf(file.path) > -1) {
-        gitFiles.push({filename: file.path, sha: file.sha});
-      }
+    github.authenticate({
+      type: 'token',
+      token: GITHUB_TOKEN
     });
 
-    let fileSyncPromises = [];
+    let orig_dir = process.cwd();
+    process.chdir('/tmp');
 
-    gitFiles.forEach((file) => {
-      fileSyncPromises.push(updateGitFile(file));
-    })
+    let output_dir = path.join(process.cwd(), repositoryName);
 
-    Promise.all(fileSyncPromises)
-      .catch(e => catchError(e, callback));
-  }).catch(e => catchError(e, callback));
+    if (!fs.existsSync(output_dir)) {
+      fs.mkdirSync(output_dir, 0o0774);
+    }
 
-  process.chdir(orig_dir);
+    let data_dir = path.join(output_dir, 'data');
 
-  // terminate the lambda
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify({msg: `${syncMethod} sync completed!`})
-  });
+    if (!fs.existsSync(data_dir)) {
+      fs.mkdirSync(data_dir, 0o0774);
+    }
+
+    process.chdir(output_dir);
+
+    const base = new Airtable({
+      apiKey: AIRTABLE_API_KEY
+    }).base(AIRTABLE_API_BASE);
+
+    // Use git branch sha and tree to find each files sha. Since some files
+    // might be greater than 1 MB in size, we can not use the getContents method
+    // to retrieve the content and the sha in 1 operation
+    let gitFiles = [];
+    let dataFiles = [];
+    let branchTree = [];
+
+    try {
+      branchTree = await loadBranchTree();
+    } catch (e) {
+      catchError(e, callback);
+    }
+
+    let syncPromise = api[syncMethod](base, output_dir);
+
+    switch (syncMethod) {
+      case 'products':
+        dataFiles[0] = api.dataFiles.products;
+        break;
+      case 'vendors':
+        dataFiles[0] = api.dataFiles.vendors;
+        break;
+      case 'accessories':
+        dataFiles[0] = api.dataFiles.accessories;
+        break;
+      case 'zones':
+        dataFiles[0] = api.dataFiles.zones;
+        break;
+      default:
+        dataFiles = Object.values(api.dataFiles);
+        break;
+    }
+
+    await syncPromise.then(() => {
+
+      branchTree.forEach((file) => {
+        if (dataFiles.indexOf(file.path) > -1) {
+          gitFiles.push({filename: file.path, sha: file.sha});
+        }
+      });
+
+      let fileSyncPromises = [];
+
+      gitFiles.forEach((file) => {
+        fileSyncPromises.push(updateGitFile(file));
+      })
+
+      Promise.all(fileSyncPromises)
+        .catch(e => catchError(e, callback));
+    }).catch(e => catchError(e, callback));
+
+    process.chdir(orig_dir);
+
+    // terminate the lambda
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({msg: `${syncMethod} sync completed!`})
+    });
+  } catch(e) {
+    catchError(e, callback)
+  }
 
 };
