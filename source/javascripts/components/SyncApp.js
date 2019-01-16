@@ -97,7 +97,7 @@ function SyncMenu(props) {
   return (
     <>
       <div>
-        Welcome {netlifyAuth.user.user_metadata.full_name}!
+        Welcome {netlifyAuth.user.user_metadata.full_name || netlifyAuth.user.email}!
         (Not you? <button
           onClick={() => {
             netlifyAuth.signout(() => props.onLogout());
