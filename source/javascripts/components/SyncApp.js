@@ -98,16 +98,17 @@ function SyncMenu(props) {
     <>
       <div>
         Welcome {netlifyAuth.user.user_metadata.full_name}!
-        <button
+        (Not you? <button
           onClick={() => {
             netlifyAuth.signout(() => props.onLogout());
-          }}>
+          }} className={"button dark-color w-button"}>
           Logout
-        </button>
+        </button>)
       </div>
       <div>{props.msg}</div>
       <div>
         <p>Select what you want to synchronize</p>
+        
         <SyncBtn label={"Products"} syncMethod={"products"} {...props}/>
         <SyncBtn label={"Accessories"} syncMethod={"accessories"} {...props}/>
         <SyncBtn label={"Vendors"} syncMethod={"vendors"} {...props}/>

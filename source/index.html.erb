@@ -68,9 +68,4 @@
 
 <% content_for(:footer_scripts) do %>
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    netlifyIdentity.on('login', (user) => {
-      window.location = '/sync';
-    });
-  </script>
 <% end %>
