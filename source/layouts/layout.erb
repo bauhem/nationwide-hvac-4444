@@ -108,9 +108,11 @@
     let greyCB = el.children[0].children[0];
     let activeCB = el.children[0].children[1];
 
-    const tmpZ = getStyleProp(greyCB, "z-index");
-    greyCB.style.zIndex = getStyleProp(activeCB, "z-index");
-    activeCB.style.zIndex = tmpZ;
+    const tmpGreyVal = getStyleProp(greyCB, "z-index");
+    const tmpActiveVal = getStyleProp(activeCB, "z-index");
+
+    greyCB.style.zIndex = (tmpGreyVal === '1') ? '0' : '1';
+    activeCB.style.zIndex = (tmpActiveVal === '1') ? '0' : '1';
   }
 
   function disableCB(el) {
