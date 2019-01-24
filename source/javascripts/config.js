@@ -50,7 +50,7 @@ const configuration = {
     {footage: '2101-2400', tons: 4},
     {footage: '2401-3000', tons: 5}
   ],
-  root_url: 'https://cultum.serveo.net',
+  root_url: (process.env.NODE_ENV === 'production') ? 'https://www.nationwide-hvac.com' : 'https://obviam.serveo.net',
   cloudinary_resize_url: 'https://res.cloudinary.com/nationwide-hvac/image/fetch',
   seer_ranges: ['14-16', '16-18', '18-20', '20+'],
   no_image_path: 'images/product-photo-unavailable.png'
