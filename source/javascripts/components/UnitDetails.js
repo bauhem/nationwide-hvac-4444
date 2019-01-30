@@ -53,7 +53,7 @@ class UnitDetails extends React.Component {
           <div>Up to {unit['SEER']} SEER Performance</div>
           <div className="more-spec">
           <div className="div-product-details smaller">
-            <div><strong>Payment as low as <red>${financing_amount}</red></strong></div>
+            <div><strong>Payment as low as ${financing_amount}</strong></div>
           </div>
             <div className="div-product-details smaller">
               <div className="blue-text">Tons</div>
