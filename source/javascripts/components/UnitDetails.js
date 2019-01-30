@@ -44,46 +44,52 @@ class UnitDetails extends React.Component {
         </div>
         <div className={"div-60"}>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller">{`${unit['Brand']} ${model_name}`}</div>
+            <div className="product-name smaller"><h1 className="product-name smaller"><strong>{`${unit['Brand']} ${model_name}`} - 1.5 tons</strong></h1></div>
             <img src={brand_img} width="80"
                  alt={unit['Brand']}
                  className="image-brand"/>
           </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">Tons</div>
-            <div><strong>{unit['Tons']}</strong></div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">SEER</div>
-            <div><strong>{unit['SEER']}</strong></div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">AHRI</div>
-            <div><strong>{unit['AHRI']}</strong></div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">Condenser</div>
-            <div><strong>{unit['CU Model']}</strong></div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">Air Handler</div>
-            <div><strong>{unit['AHU Model']}</strong></div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">
-              Warranty
-            </div>
-            <div>{unit['Warranty']}</div>
-          </div>
-          <div className="div-product-details smaller">
-            <div className="blue-text">
-              Price including installation
-            </div>
-            <div><strong>${floatToPrice(price + installation_price)}</strong></div>
-          </div>
+          <div className="pricing smaller">${floatToPrice(price + installation_price)}</div>
+          <div>Up to {unit['SEER']} SEER Performance</div>
+          <div className="more-spec">
           <div className="div-product-details smaller">
             <div><strong>Payment as low as <red>${financing_amount}</red></strong></div>
           </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">Tons</div>
+              <div><strong>{unit['Tons']}</strong></div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">SEER</div>
+              <div><strong>{unit['SEER']}</strong></div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">AHRI</div>
+              <div><strong>{unit['AHRI']}</strong></div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">Condenser</div>
+              <div><strong>{unit['CU Model']}</strong></div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">Air Handler</div>
+              <div><strong>{unit['AHU Model']}</strong></div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">
+                Warranty
+              </div>
+              <div>{unit['Warranty']}</div>
+            </div>
+            <div className="div-product-details smaller">
+              <div className="blue-text">
+                Price including installation
+              </div>
+              <div><strong>${floatToPrice(price + installation_price)}</strong></div>
+            </div>
+
+          </div>
+
           <a href="#"
              data-item-id={item_id}
              data-item-url={url}

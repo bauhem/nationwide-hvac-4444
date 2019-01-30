@@ -23,37 +23,39 @@
         <%= partial '/partials/slider_photo', locals: { unit: unit } %>
       </div>
       <div class="div-60">
-        <h3 class="cta-heading no-bot-margin">
-          <strong><%= model(unit) %></strong></h3>
-        <div class="price"><%= display_price(unit) %></div>
-        <div>
-          <div class="div-product-details">
+
+        <h1 class="product-name smaller">
+          <strong><%= model(unit) %> - <%= tons(unit) %> tons</strong></h1>
+        <div class="pricing smaller"><%= display_price(unit) %></div>
+        <div>Up to <%= seer(unit) %> SEER Performance</div>
+        <div class="more-spec">
+          <div class="div-product-details smaller">
             <div class="blue-text">Tons</div>
             <div><strong><%= tons(unit) %></strong></div>
           </div>
+          <div class="div-product-details smaller">
+            <div class="blue-text">SEER</div>
+            <div><strong><%= seer(unit) %></strong></div>
+          </div>
+          <% if unit['CU Model'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Condenser</div>
+              <div><strong><%= unit['CU Model'] %></strong></div>
+            </div>
+          <% end %>
+          <% if unit['AHU Model'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Air Handler</div>
+              <div><strong><%= unit['AHU Model'] %></strong></div>
+            </div>
+          <% end %>
+          <% if unit['Heater model'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Heater</div>
+              <div><strong><%= unit['Heater model'] %></strong></div>
+            </div>
+          <% end %>
         </div>
-        <div class="div-product-details">
-          <div class="blue-text">SEER</div>
-          <div><strong><%= seer(unit) %></strong></div>
-        </div>
-        <% if unit['CU Model'] %>
-          <div class="div-product-details">
-            <div class="blue-text">Condenser</div>
-            <div><strong><%= unit['CU Model'] %></strong></div>
-          </div>
-        <% end %>
-        <% if unit['AHU Model'] %>
-          <div class="div-product-details">
-            <div class="blue-text">Air Handler</div>
-            <div><strong><%= unit['AHU Model'] %></strong></div>
-          </div>
-        <% end %>
-        <% if unit['Heater model'] %>
-          <div class="div-product-details">
-            <div class="blue-text">Heater</div>
-            <div><strong><%= unit['Heater model'] %></strong></div>
-          </div>
-        <% end %>
         <a data-item-id="<%= item_id(unit) %>"
            data-item-name="<%= model(unit) %>"
            data-item-price="<%= price(unit) %>"
