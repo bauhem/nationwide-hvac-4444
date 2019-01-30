@@ -44,7 +44,7 @@ class UnitDetails extends React.Component {
         </div>
         <div className={"div-60"}>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller"><h1 className="product-name smaller"><strong>{`${unit['Brand']} ${model_name}`} - 1.5 tons</strong></h1></div>
+            <div className="product-name smaller"><h1 className="product-name smaller"><strong>{`${unit['Brand']} ${model_name}`} - {`${unit['Tons']}`} tons</strong></h1></div>
             <img src={brand_img} width="80"
                  alt={unit['Brand']}
                  className="image-brand"/>
