@@ -158,6 +158,16 @@
   }
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+  // Listen for Escape Key Press and Show Icon
+  document.addEventListener('keydown', function (e) {
+    if ( e.keyCode === 27 ) {
+  window.open("https://nationwide-hvac.admin.datocms.com",'_blank');
+    }
+  });
+});
+</script>
 <%= yield_content :footer_scripts %>
 
 </html>

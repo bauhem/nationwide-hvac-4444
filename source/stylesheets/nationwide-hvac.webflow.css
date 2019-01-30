@@ -1,11 +1,17 @@
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans';
   color: #333;
   font-size: 14px;
   line-height: 20px;
+  font-weight: 300;
+}
+
+p {
+  margin-bottom: 10px;
 }
 
 a {
+  color: #f0181f;
   text-decoration: underline;
 }
 
@@ -278,6 +284,7 @@ ul {
 }
 
 .div-50.bg-color-1 {
+  width: 100%;
   padding: 100px 8%;
   background-color: #104794;
   color: #fff;
@@ -519,6 +526,10 @@ ul {
 
 .slider-temoignages {
   height: auto;
+}
+
+.slide-temoignages {
+  width: 50%;
 }
 
 .brand {
@@ -1038,6 +1049,9 @@ ul {
 }
 
 .smaller-explanation {
+  overflow: hidden;
+  height: 0px;
+  margin-bottom: 0px;
   font-size: 15px;
   line-height: 22px;
 }
@@ -1129,6 +1143,7 @@ ul {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  font-size: 22px;
 }
 
 .div-heading-slide.absolute {
@@ -1241,17 +1256,16 @@ ul {
 }
 
 .options.different-color-font.pale-border {
-  width: 48%;
-  min-height: 150px;
+  width: 32%;
   margin-top: 40px;
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1263,6 +1277,17 @@ ul {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
+  -webkit-transition: background-color 200ms ease, border-color 200ms ease, -webkit-transform 200ms ease;
+  transition: background-color 200ms ease, border-color 200ms ease, -webkit-transform 200ms ease;
+  transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease;
+  transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease, -webkit-transform 200ms ease;
+  cursor: pointer;
+}
+
+.options.different-color-font.pale-border:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .options.different-color-font.pale-border.smaller {
@@ -1384,8 +1409,8 @@ ul {
 
 .titre-big {
   margin-bottom: 10px;
-  color: #0f1033;
-  font-size: 25px;
+  color: #f0181f;
+  font-size: 32px;
 }
 
 .titre-big.bigger {
@@ -1549,9 +1574,9 @@ ul {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  height: 100%;
-  margin-top: 0px;
-  padding: 25px 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0px 50px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2286,6 +2311,16 @@ ul {
 
 .next-button.final:hover {
   background-color: #000;
+}
+
+.radio-button-label {
+  margin-bottom: 0px;
+}
+
+.div-more-detail {
+  margin-bottom: 20px;
+  color: #f0181f;
+  font-size: 14px;
 }
 
 html.w-mod-js *[data-ix="hero-appear-1"] {

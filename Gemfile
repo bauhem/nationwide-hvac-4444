@@ -27,3 +27,5 @@ gem 'middleman-sitemap-ping'
 gem 'money'
 gem 'middleman-pry'
 gem 'middleman-meta-tags'
+gem "middleman-dato", ">=0.7.2"
+gem "dato", ">=0.3.11"

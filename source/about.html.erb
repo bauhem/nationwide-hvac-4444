@@ -1,20 +1,15 @@
-<%=
-  content_for(:head) do
-    display_meta_tags title: "About"
-  end
-%>
+<% content_for(:head) do %>
+  <%= dato_meta_tags(dato.about) %>
+   <link href="<%= current_page.url %>" rel="canonical" />
+<% end %>
 
 <div class="section-hero-interior">
-    <h1 class="cta-heading" data-ix="hero-appear-1">About <strong>Us</strong></h1>
+    <h1 class="cta-heading" data-ix="hero-appear-1"><%= dato.about.title %></h1>
   </div>
   <div class="section-about">
     <div class="w-container">
       <div class="w-richtext">
-        <p>Nationwide-HVAC is a fully licensed and insured (CAC1818319) service residential and commercial heating, cooling and refrigeration company established in Southeast Florida. Operating in the tri-county areas of Palm Beach, Broward, and Miami-Dade we are quickly expanding our operations across the southern United States! </p>
-        <p>‍</p>
-        <p>Whether it is air duct cleaning or a new cooling system installation we strive to provide all our customers with the best service in the industry. Unlike many contractors in the HVAC business we offer fully licensed, insured and unrivaled 100% satisfaction guarantee for our work. </p>
-        <p>‍</p>
-        <p>Natiowide-HVAC sets itself apart by proactively working with HVAC service quality organizations like NATE (Northern American Technician Excellence) and NADCA (The HVAC Inspection, Maintenance and Restoration Association) amongst others to maintain the highest level or service. All of our technicians undergo stringest background checks to ensure they meet our high hiring standards.</p>
+        <%= dato.about.description %>
       </div>
     </div>
   </div>

@@ -1,51 +1,37 @@
+<% content_for(:head) do %>
+  <%= dato_meta_tags(dato.homepage) %>
+   <link href="<%= current_page.url %>" rel="canonical" />
+<% end %>
+
+
 <div class="section-hero">
   <div class="div-cta">
-    <h1 class="cta-heading" data-ix="hero-appear-1">
-      <strong>Florida’s Air Conditioning Specialists </strong>
-    </h1>
+    <%= dato.homepage.hero_title %>
 
-    <a href="/instant-quote" class="button w-button" data-ix="hero-appear-3">Get Installation Quote
+    <a href="/instant-quote" class="button w-button" data-ix="hero-appear-3"><%= dato.homepage.hero_button %>
 </a>
   </div>
 </div>
 <div class="section-quote-call">
-  <div class="div-quote-block"><img src="images/ac-icon.svg" width="70" alt="">
-    <h2>Beat my<br>quote</h2>
-    <a href="/beat-my-quote" class="button w-button">Upload your quote</a>
+  <% dato.homepage.block.each do |block| %>
+  <div class="div-quote-block"><img src="<%= block.image.url %>" width="70" alt="">
+    <h2><%= block.title %></h2>
+    <a href="/beat-my-quote" class="button w-button"><%= block.button %></a>
   </div>
-  <div class="div-quote-block main">
-    <img src="images/quote.svg" width="50" alt="">
-    <h2>Get an<br>exact quote</h2>
-    <a href="/instant-quote" class="button w-button">Get an instant quote</a>
-  </div>
-  <div class="div-quote-block"><img src="images/ac-icon.svg" width="70" alt="">
-    <h2>Browse<br>A/C Systems</h2>
-    <a href="ac-units/all-types" class="button w-button">Browse through our
-      units</a>
-  </div>
+  <% end %>
+
 </div>
 <div class="section-cta">
   <div class="div-65" data-ix="appear-from-bottom">
-    <h3 class="cta-heading"><strong>General Information</strong></h3>
-    <p>We are taking the <strong>headaches</strong> and <strong>time-wasting</strong> out of your Home Services estimate, installation and <strong>repair</strong> process! Our <strong>licensed</strong> and trained team of experienced <strong>pro-technicians, installers, and customer service personnel</strong> guarantee the <strong>fastest and most accurate</strong> Home Services experiencefrom choosing and sizing the equipment you and your home need to the installation, from A to Z!</p>
-    <h3 class="cta-heading"><strong>Brands & Equipment Warranty</strong></h3>
-    <p>We only sell the brands <strong>most trusted by consumers,</strong> check out our product line-up now. All of our <strong>equipment is new</strong> (never used), with a <strong>full manufacturer backed warranty,</strong> as well as a Nationwide HVAC backed <strong>labor warranty</strong>. Please <strong>see your estimate</strong> or invoice <strong>for full detail</strong> son the parts and labor details of your warranty.</p>
-    <h3 class="cta-heading"><strong>Licensing, Insurance, and Certifications</strong></h3>
-    <p>Nationwide HVAC holds its own <strong>mechanical licenses and is fully licensed and insured</strong> in the State of Florida –CAC1818319. We aim to put our best foot forward to all our service and installation clients, at the same time we are strongly dedicated to <strong>continuous learning</strong> and <strong>ongoing training</strong> for all of our team members!</p>
-  </div>
+    <%= dato.homepage.general_information %></div>
 </div>
 <div class="section-brands">
-  <h3 class="cta-heading">Have a
-    <strong>specific brand</strong>
-    in
-    <strong>mind</strong>?</h3>
+  <h3 class="cta-heading"<%= dato.homepage.brand_copy %></h3>
   <div class="div-flex-h logos">
-    <a href="#" class="div-logo w-inline-block"><img src="images/ameristar-logo.png" width="275" alt=""></a>
-    <a href="#" class="div-logo w-inline-block"><img src="images/goodman-logo.png" width="275" alt=""></a>
-    <a href="#" class="div-logo w-inline-block"><img src="images/rheem-logo.png" width="275" alt=""></a>
-    <a href="#" class="div-logo w-inline-block"><img src="images/ruud-logo.png" width="220" alt=""></a>
-    <a href="#" class="div-logo w-inline-block"><img src="images/trane-logo.png" width="275" alt=""></a>
-    <a href="#" class="div-logo w-inline-block"><img src="images/york-logo.png" width="250" alt=""></a>
+    <% dato.brands.each do |brand| %>
+    <a href="<%= brand.url %>" class="div-logo w-inline-block"><img src="<%= brand.logo.url %>" width="275" alt=""></a>
+    <% end %>
+
   </div>
 </div>
 

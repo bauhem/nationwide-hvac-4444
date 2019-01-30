@@ -1,24 +1,14 @@
+<% content_for(:head) do %>
+  <%= dato_meta_tags(dato.thank) %>
+   <link href="<%= current_page.url %>" rel="canonical" />
+<% end %>
+
 <div class="section-hero-interior"></div>
 <div class="section-about">
   <div class="w-container">
-    <h3 class="cta-heading" data-ix="hero-appear-1"><strong>Thank you!</strong>
+    <h3 class="cta-heading" data-ix="hero-appear-1"><strong><%= dato.thank.title %></strong>
     </h3>
-    <h3 class="cta-heading no-top-margin" data-ix="hero-appear-2">A member of
-      our team will contact you <strong>as soon as possible</strong></h3>
-    <a href="index.html" class="button-underline w-button" data-ix="hero-appear-3">Back
+    <%= dato.thank.description %>
+    <a href="/" class="button-underline w-button" data-ix="hero-appear-3">Back
       to the website</a></div>
-</div>
-<div>
-  <div class="section-contact centered">
-    <p>Tel:
-      <a href="tel:19548009954" class="simple-red-link">954-800-9954</a><br>Toll
-      Free:
-      <a href="http://18779104822" class="simple-red-link">877-910-HVAC</a><br><br>110
-      North Federal Hwy Fort<br>Lauderdale, FL, 33301</p>
-  </div>
-  <div id="contact">
-    <div class="section-copyright">
-      <p>© 2018 Nationwide HVAC. All Rights Reserved - Web design by Bauhem</p>
-    </div>
-  </div>
 </div>

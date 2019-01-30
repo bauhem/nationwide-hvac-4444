@@ -6,6 +6,9 @@ require 'redcarpet'
 require "sanitize"
 require 'middleman-inliner'
 
+activate :dato, live_reload: true, token: '92d113325496fb6d6c5b65623b9e21'
+
+
 Middleman::Util::EnhancedHash.disable_warnings
 
 activate :protect_emails
@@ -78,7 +81,7 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 page "/templates/*", :layout => "layout"
-page "/thank-you.html", :layout => "no-contact-layout"
+page "/thank-you.html", :layout => "layout"
 
 
 # With alternative layout

@@ -1,11 +1,11 @@
-<%=
-  content_for(:head) do
-    display_meta_tags title: "Beat my Quote", description: "Received a cheap estimate from a competitor? Send it to us and we will reach out to you"
-  end
-%>
+<% content_for(:head) do %>
+  <%= dato_meta_tags(dato.beat) %>
+   <link href="<%= current_page.url %>" rel="canonical" />
+<% end %>
+
 
 <div class="section-hero-interior">
-  <h1 class="cta-heading" data-ix="hero-appear-1">Beat <strong>My Quote</strong></h1>
+  <h1 class="cta-heading" data-ix="hero-appear-1"> <%= dato.beat.title %></h1>
 </div>
 <div class="section-about">
   <div class="msp-holder">
@@ -13,8 +13,7 @@
       <form id="beat-my-quote" name="wf-form-beat-my-quote" data-name="beat-my-quote" method="post" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" class="w-clearfix">
         <div class="div-tow-collumn">
           <div class="div-40 form">
-            <h3>Received a cheap estimate from a competitor?</h3>
-            <p>Submit your written estimate or cheaper advertised price and we will reach out to you as soon as possible.<br><br>If you have a custom situation or would like to speak with someone regarding a quote please feel to<strong> </strong><a href="tel:19548009954" class="simple-red-link">Contact Us</a></p>
+            <%= dato.beat.description %>
           </div>
           <div class="div-50-2 form">
             <div class="div-flex-h-2 no-min-height"><input type="text" id="first-name" name="first-name" data-name="first-name" placeholder="First Name" maxlength="256" class="text-field-2 bigger-field added-right-margin w-input"><input type="text" id="second-name" name="second-name" data-name="second-name" placeholder="Second Name" maxlength="256" required="" class="text-field-2 bigger-field w-input"></div><input type="email" id="email-3" name="email" data-name="email" required="" maxlength="256" placeholder="Email Address" class="text-field-2 bigger-field w-input">

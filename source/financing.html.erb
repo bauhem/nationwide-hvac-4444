@@ -1,12 +1,11 @@
-<%=
-  content_for(:head) do
-    display_meta_tags title: "Financing", description: "Nationwide HVAC Corp. extend you the opportunity to save on the upfront costs and identify the best payment plans that will meet your purchase needs"
-  end
-%>
+<% content_for(:head) do %>
+  <%= dato_meta_tags(dato.financing) %>
+   <link href="<%= current_page.url %>" rel="canonical" />
+<% end %>
 
 
 <div class="section-hero-interior">
-  <h1 class="cta-heading" data-ix="hero-appear-1"><strong>Financing</strong></h1>
+  <h1 class="cta-heading" data-ix="hero-appear-1"><strong><%= dato.financing.title %></strong></h1>
 </div>
 <div class="section-about">
   <div class="msp-holder no-height">
@@ -14,27 +13,7 @@
       <div class="form-wrapper second no-bot-margin w-form">
         <form id="wf-form-Financing" name="wf-form-Financing" data-name="Financing" action="/thank-you" method="post" data-netlify="true" netlify-honeypot="bot-field" class="w-clearfix">
           <div class="div-tow-collumn vertical">
-            <div class="div-full-width">
-              <h3>Financing Application</h3>
-              <p>Nationwide HVAC Corp. understands that the purchase of a new air conditioner is a major expenditure. That is why we extend you the opportunity to save on the upfront costs and identify the best payment plans that will meet your purchase needs.<br><br>Working with our financing partners our certified sales technicians can quickly process your home HVAC system finance application. Call us today or chat LIVE. Our experts are standing by just click the chat box on the bottom right of the screen.</p>
-            </div>
-            <div class="div-full-width flex-margin">
-              <div class="div-50 padding-right">
-                <p>Finance your new Air Conditioning System with No Money Down and No Interest for up to 24 Months. Just click below and fill out the confidential credit application to get started! Apply NowYou can also send us a message with your information and what you are looking to finance and one of our financing experts will get back to within 1-2 business hours.</p>
-              </div>
-              <div class="div-50 padding-right">
-                <div class="w-richtext">
-                  <ul>
-                    <li>Instant Approvals</li>
-                    <li>No Interest for Up To 24 Months</li>
-                    <li>No Obligation Pre-Approval</li>
-                    <li>Bad Credit OK</li>
-                    <li>Easy Payments</li>
-                    <li>If Not Approved Call Us for a Manual Review<br></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <%= dato.financing.description %>
             <div class="div-full-width">
               <div class="div-flex-h-2 no-min-height">
                 <input type="text" id="bot-field" name="bot-field" data-name="bot-field" placeholder="bot-field" maxlength="256" class="text-field-2 bigger-field added-right-margin bot-field w-input"><input type="text" id="First-Name" name="First-Name" data-name="First Name" placeholder="First Name" maxlength="256" class="text-field-2 bigger-field added-right-margin w-input"><input type="text" id="last-name" name="last-name" data-name="last-name" placeholder="Last Name" maxlength="256" required="" class="text-field-2 bigger-field w-input"></div>
@@ -155,7 +134,7 @@
 <option value="WY">Wyoming</option>
 </select></div><select id="Credit-Score-Range" name="Credit-Score-Range" data-name="Credit Score Range" class="select-field w-select"><option value="Credit Score Range">Credit Score Range</option><option value="500-599">500-599</option><option value="600-699">600-699</option><option value="700+">700+</option></select>
               <div class="div-full-width">
-                <p>By checking the &quot;Agreement to T&amp;C&#x27;s&quot; at the end of this form you agree that everything stated in this application is correct and you are providing &#x27;written instructions&#x27; to Nationwide HVAC and its authorized third-party financing partners to pull a potential soft or hard credit-check for the purposes of determining your eligibility for various financing programs under the Fair Credit Reporting Act (“FCRA”). <br><br>Approvals or eligibility cannot be guaranteed for any programs until  determined by our authorized third-party financing partners. All personal data is stored in compliance with Federal, State, local and PCI Data Storage Guidelines for Merchants; 2018 Nationwide HVAC Corp.</p>
+                <%= dato.financing.agreement %>
                 <div class="checkbox-form w-checkbox"><input type="checkbox" id="Agreement" name="Agreement" data-name="Agreement" required="" class="w-checkbox-input"><label for="Agreement" class="w-form-label"><strong>I agree</strong></label></div>
               </div>
             </div>
