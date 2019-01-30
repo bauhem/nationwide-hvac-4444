@@ -149,7 +149,6 @@ configure :build do
   activate :minify_html
   activate :relative_assets
   activate :asset_hash, :ignore => [%r{#fonts/.*}, %r{#stylesheets/fonts/.*}]
-  activate :gzip
   activate :automatic_image_sizes
   activate :automatic_alt_tags
 end

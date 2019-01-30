@@ -56,19 +56,25 @@
             </div>
           <% end %>
         </div>
-        <a data-item-id="<%= item_id(unit) %>"
-           data-item-name="<%= model(unit) %>"
-           data-item-price="<%= price(unit) %>"
-           data-item-url="<%= product_url(unit) %>"
-           data-item-description="<%= cart_description(unit) %>"
-           data-item-custom1-name="Installation Fees (based on zip code)"
-           data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
-           href="#" class="button added-top-margin snipcart-add-item w-button">
-          Buy now
-        </a>
-        <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
-          View brochure
-        </a>
+        <div class="div-flex-h align-new">
+
+          <a data-item-id="<%= item_id(unit) %>"
+             data-item-name="<%= model(unit) %>"
+             data-item-price="<%= price(unit) %>"
+             data-item-url="<%= product_url(unit) %>"
+             data-item-description="<%= cart_description(unit) %>"
+             data-item-custom1-name="Installation Fees (based on zip code)"
+             data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
+             href="#" class="button added-top-margin w-button snipcart-add-item">
+            Buy now
+          </a>
+          <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
+            View brochure
+          </a>
+
+        </div>
+        <div class="div-product-details"><%= unit['Details'] %></div>
+
       </div>
     </div>
   </div>

@@ -90,6 +90,8 @@ class UnitDetails extends React.Component {
 
           </div>
 
+
+          <div className="div-flex-h align-new">
           <a href="#"
              data-item-id={item_id}
              data-item-url={url}
@@ -107,9 +109,9 @@ class UnitDetails extends React.Component {
              className="button-underline left-margin w-button">
             Product Brochure
           </a>
-          <div className="div-flex-h align-center">
-            <div className={"div-product-details"}>{unit['Details']}</div>
           </div>
+          <div className={"div-product-details"}>{unit['Details']}</div>
+
         </div>
       </div>
     );
