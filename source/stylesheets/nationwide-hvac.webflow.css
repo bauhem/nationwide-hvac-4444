@@ -1090,7 +1090,7 @@ ul {
 
 .smaller-explanation {
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 0px;
   margin-bottom: 40px;
   font-size: 15px;
   line-height: 22px;
@@ -1175,7 +1175,7 @@ ul {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -3202,6 +3202,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
   .checkbox-field {
     height: 30px;
   }
+  .smaller-explanation {
+    margin-bottom: 20px;
+  }
   .next.final {
     bottom: 5px;
     margin-top: 30px;
@@ -3263,7 +3266,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
     padding-bottom: 30px;
   }
   .titre-big {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 22px;
   }
   .div-forfaits {
