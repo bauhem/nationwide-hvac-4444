@@ -107,8 +107,11 @@ proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", local
 data.products.each do |prod|
   next if prod['AHRI'].nil?
   next if prod['System Type'].nil?
+  next if prod['Brand Series'].nil?
   ahri = prod['AHRI'].lstrip.rstrip
-  proxy "/ac-units/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
+  brand_series = prod['Brand Series'].lstrip.rstrip
+  brand = prod['Brand'].lstrip.rstrip
+  proxy "/ac-units/#{brand}/#{brand_series}/#{ahri}/index.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
 
 data.accessories.each do |acc|
