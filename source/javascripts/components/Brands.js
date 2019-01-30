@@ -1,8 +1,5 @@
 import React from "react";
 import QuoteCtx from "./QuoteCtx";
-import Quote from "./Quote";
-
-var selected_brands = [];
 
 class Brands extends React.Component {
   constructor(props) {
@@ -12,6 +9,7 @@ class Brands extends React.Component {
 
   handleChange(e) {
     let brand = e.target.value;
+    let selected_brands = this.context.selected_brands;
 
     let index = selected_brands.indexOf(brand);
     if (index !== -1) {
@@ -23,18 +21,9 @@ class Brands extends React.Component {
     this.props.saveValues({selected_brands: selected_brands});
   }
 
-  static checkAndAssignSelectedBrand(ctx, brand) {
-    let selected = ctx.selected_brands.includes(brand);
-
-    if (selected && selected_brands.indexOf(brand) === -1) {
-      selected_brands.push(brand);
-    }
-
-    return selected;
-  }
-
+ 
   render() {
-    if (this.context.brands.length == 0) {
+    if (this.context.brands.length === 0) {
       return (
         <div>
           <span>No Brands matches your query. Please start again by</span>
@@ -61,7 +50,7 @@ class Brands extends React.Component {
                       <input type="checkbox" id={brand} name="brand"
                              className="checkbox w-checkbox-input" value={brand}
                              onChange={this.handleChange}
-                             checked={Brands.checkAndAssignSelectedBrand(context, brand)}/>
+                             checked={context.selected_brands.includes(brand)}/>
                       <label
                         htmlFor={brand}
                         className="checkbox-label-form w-form-label">{brand}</label>
