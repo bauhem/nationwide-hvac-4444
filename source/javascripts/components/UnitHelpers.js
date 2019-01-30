@@ -63,3 +63,10 @@ export function unitBrochureURL(unit) {
   return unit["Product Brochure url"]
 }
 
+export function floatToPrice(price) {
+  if (price >= 0) {
+    return price.toFixed(2);
+  }
+
+  return 'N/A';
+}

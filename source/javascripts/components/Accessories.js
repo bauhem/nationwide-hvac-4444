@@ -4,6 +4,10 @@ import config from "react-global-configuration";
 const accessories = require('../../../data/accessories.json');
 
 class Accessories extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const accComponents = accessories.map((acc) => {
       let img = '';

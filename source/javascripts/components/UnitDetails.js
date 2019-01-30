@@ -2,7 +2,8 @@ import React from "react";
 import {
   brandLogoImage, seerRange, unitBrochureURL, unitDescription, unitID,
   unitImage,
-  unitURL
+  unitURL,
+  floatToPrice
 } from "./UnitHelpers";
 import QuoteCtx from "./QuoteCtx";
 
@@ -24,6 +25,8 @@ class UnitDetails extends React.Component {
     let brand_img = brandLogoImage(unit);
     let zone_id = this.context.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
+    let financing = `Financing Payment Zone ${zone_id}`;
+    let financing_amount = floatToPrice(unit[financing]);
     let item_id = unitID(unit);
     let model_name = unit['Brand Series'];
     let price = unit['Shop Online Price'];
@@ -41,7 +44,7 @@ class UnitDetails extends React.Component {
         </div>
         <div className={"div-60"}>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller">{model_name}</div>
+            <div className="product-name smaller">{`${unit['Brand']} ${model_name}`}</div>
             <img src={brand_img} width="80"
                  alt={unit['Brand']}
                  className="image-brand"/>
@@ -55,6 +58,10 @@ class UnitDetails extends React.Component {
             <div><strong>{unit['SEER']}</strong></div>
           </div>
           <div className="div-product-details smaller">
+            <div className="blue-text">AHRI</div>
+            <div><strong>{unit['AHRI']}</strong></div>
+          </div>
+          <div className="div-product-details smaller">
             <div className="blue-text">Condenser</div>
             <div><strong>{unit['CU Model']}</strong></div>
           </div>
@@ -64,14 +71,23 @@ class UnitDetails extends React.Component {
           </div>
           <div className="div-product-details smaller">
             <div className="blue-text">
+              Warranty
+            </div>
+            <div>{unit['Warranty']}</div>
+          </div>
+          <div className="div-product-details smaller">
+            <div className="blue-text">
               Price including installation
             </div>
-            <div><strong>${price + installation_price}</strong></div>
+            <div><strong>${floatToPrice(price + installation_price)}</strong></div>
+          </div>
+          <div className="div-product-details smaller">
+            <div><strong>Payment as low as <red>${financing_amount}</red></strong></div>
           </div>
           <a href="#"
              data-item-id={item_id}
              data-item-url={url}
-             data-item-name={model_name + " " + item_id}
+             data-item-name={model_name}
              data-item-price={price}
              data-item-description={description}
              data-item-custom1-name="Installation Fees (based on zip code)"
@@ -79,12 +95,15 @@ class UnitDetails extends React.Component {
              data-item-metadata={this.props.orderMetaData}
              className="button added-top-margin  w-button snipcart-add-item"
              onClick={this.handleClick}>
-            I want this unit installed
+            Schedule Installation
           </a>
           <a href={brochure_url} target="_blank"
              className="button-underline left-margin w-button">
-            View brochure
+            Product Brochure
           </a>
+          <div className="div-flex-h align-center">
+            <div className={"div-product-details"}>{unit['Details']}</div>
+          </div>
         </div>
       </div>
     );

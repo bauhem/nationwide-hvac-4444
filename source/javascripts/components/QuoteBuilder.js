@@ -61,6 +61,9 @@ class QuoteBuilder extends React.Component {
     this.saveValues = this.saveValues.bind(this);
     this.saveAndContinue = this.saveAndContinue.bind(this);
     this.transition = this.transition.bind(this);
+    this.onOrderCompleted = this.onOrderCompleted.bind(this);
+
+    Snipcart.subscribe('order.completed', this.onOrderCompleted);
   }
 
   static defaultState() {
@@ -86,6 +89,11 @@ class QuoteBuilder extends React.Component {
       selected_seers: [],
       selected_unit: null
     }
+  }
+
+  onOrderCompleted(data) {
+      Snipcart.api.modal.close();
+      this.transition({type: 'RESET'});
   }
 
   transition(event) {

@@ -135,7 +135,11 @@ const QuoteSM = Machine({
       }
     },
     Accessories: {
-      type: 'final'
+      type: 'final',
+      on: {
+        // TODO - use initial state in case this changes in the future
+        SUBMIT: 'SystemTypeStructure'
+      }
     },
   },
   on: {
