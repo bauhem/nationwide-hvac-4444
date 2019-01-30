@@ -202,7 +202,7 @@ class QuoteBuilder extends React.Component {
           <div className="multi-step-form w-slider">
             <div className="w-slider-mask">
               <div className="slide w-slide">
-                <div className={"form-wrapper w-form " + second_slide}>
+                <div className="form-wrapper w-form second">
                   <form id="wf-form-msf" name="wf-form-msf" className="form-full-width">
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
