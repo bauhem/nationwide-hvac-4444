@@ -2974,6 +2974,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
     min-height: 0px;
     margin-top: 30px;
     margin-bottom: 0px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    padding-left: 20px;
   }
   .options.different-color-font.pale-border.smaller {
     width: 48%;
@@ -2991,7 +2994,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
     align-self: stretch;
   }
   .form-wrapper.second {
-    padding-top: 40px;
+    padding-top: 80px;
     padding-right: 30px;
     padding-left: 30px;
   }
@@ -3251,6 +3254,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
     padding-left: 0px;
   }
   .options.different-color-font.pale-border {
+    padding-top: 10px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
