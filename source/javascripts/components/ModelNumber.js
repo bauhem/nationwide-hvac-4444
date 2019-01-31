@@ -22,7 +22,7 @@ class ModelNumber extends React.Component {
                 model number please input those numbers.</p>
             </div>
 
-            <div className="div-flex-h justify-start added-top-margin">
+            <div className="div-flex-h justify-start">
               <div className="div-diagram">
                 <img src="/images/number-locate.png"
                      id="w-node-ec8688239c87-33000f20"
@@ -33,7 +33,7 @@ class ModelNumber extends React.Component {
                   config.get('model_to_tons').map((data) => {
                     return (
                       <div
-                           className="options different-color-font pale-border smallest">
+                           className="options different-color-font pale-border smaller">
                         <div className="radio-button-field grey-border w-radio"
                              onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
                                type: 'SUBMIT',
@@ -45,7 +45,7 @@ class ModelNumber extends React.Component {
                                  value={data.model}
                                  data-name="model-number"
                                  className="radio-button w-radio-input"/>
-                          <label className="form-label w-form-label">
+                          <label className="w-form-label">
                             <strong>{data.model}</strong>
                           </label>
                         </div>
@@ -54,7 +54,7 @@ class ModelNumber extends React.Component {
                   })
                 }
                 <div
-                     className="options different-color-font pale-border smallest">
+                     className="options different-color-font pale-border smaller">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
                     onClick={() => this.props.transition({type: "LOAD_SQUARE_FOOTAGE"})}>
@@ -62,7 +62,7 @@ class ModelNumber extends React.Component {
                     <input type="radio" id="not-sure-2" name="model-number"
                            value="not-sure" data-name="model-number"
                            className="radio-button w-radio-input"/>
-                    <label htmlFor="not-sure-2" className="form-label w-form-label">
+                    <label htmlFor="not-sure-2" className="w-form-label">
                       <strong>Not sure</strong>
                     </label>
                   </div>

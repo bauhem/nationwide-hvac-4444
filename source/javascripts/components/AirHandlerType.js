@@ -22,7 +22,7 @@ class AirHandlerType extends React.Component {
                      value="horizontal" data-name="handler-type"
                      className="radio-button w-radio-input"/>
               <label htmlFor="horizontal"
-                     className="form-label w-form-label"><strong>Horizontal</strong></label>
+                     className="w-form-label"><strong>Horizontal</strong></label>
             </div>
           </div>
           <div
@@ -34,7 +34,7 @@ class AirHandlerType extends React.Component {
                      value="vertical" data-name="handler-type"
                      className="radio-button w-radio-input"/>
               <label htmlFor="vertical"
-                     className="form-label w-form-label"><strong>Vertical</strong></label>
+                     className="w-form-label"><strong>Vertical</strong></label>
             </div>
           </div>
         </div>

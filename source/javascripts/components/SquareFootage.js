@@ -13,13 +13,13 @@ class SquareFootage extends React.Component {
               <h3 className="titre-big">What's your building square
                 footage?</h3>
             </div>
-            <div className="div-flex-h justify-start added-top-margin">
-              <div className="div-flex-h tonnage-form">
+
+              <div className="div-flex-h justify-start">
                 {
                   config.get('square_footage_to_tons').map((data) => {
                     return (
                       <div
-                           className="options different-color-font pale-border smallest">
+                           className="options different-color-font pale-border smaller">
                         <div className="radio-button-field grey-border w-radio"
                              onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
                                type: 'SUBMIT',
@@ -31,8 +31,8 @@ class SquareFootage extends React.Component {
                                  value={data.footage}
                                  data-name="square-footage"
                                  className="radio-button w-radio-input"/>
-                          <label className="form-label w-form-label">
-                            <strong>{data.footage}</strong>
+                          <label className="w-form-label">
+                            <strong>{data.footage} sqft</strong>
                           </label>
                         </div>
                       </div>
@@ -40,7 +40,7 @@ class SquareFootage extends React.Component {
                   })
                 }
                 <div
-                     className="options different-color-font pale-border smallest">
+                     className="options different-color-font pale-border smaller">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
                     onClick={() => this.props.transition({type: "CALL_US"})}>
@@ -48,13 +48,13 @@ class SquareFootage extends React.Component {
                     <input type="radio" id="not-sure-2" name="square-footage"
                            value="not-sure" data-name="square-footage"
                            className="radio-button w-radio-input"/>
-                    <label htmlFor="not-sure-2" className="form-label w-form-label">
+                    <label htmlFor="not-sure-2" className="w-form-label">
                       <strong>Not sure</strong>
                     </label>
                   </div>
                 </div>
               </div>
-            </div>
+
           </>
         )}
       </QuoteCtx.Consumer>
