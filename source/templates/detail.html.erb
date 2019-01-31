@@ -3,6 +3,8 @@
     display_meta_tags title: "#{model(unit)}"
   end
 %>
+<%= input_tag 'hidden', id: 'price-zone-1', value: unit['Installed Price Zone 1'] %>
+<%= input_tag 'hidden', id: 'price-zone-2', value: unit['Installed Price Zone 2'] %>
 
 <div class="section-hero-interior">
   <%= image_tag brand_logo(unit), width: 200, 'data-ix': "hereo-appear-1" %>
@@ -26,7 +28,7 @@
 
         <h1 class="product-name smaller">
           <strong><%= model(unit) %> - <%= tons(unit) %> tons</strong></h1>
-        <div class="pricing smaller"><%= display_price(unit) %></div>
+        <div class="pricing smaller"></div>
         <div>Up to <%= seer(unit) %> SEER Performance</div>
         <div class="more-spec">
           <div class="div-product-details smaller">
@@ -58,6 +60,7 @@
         </div>
         <div class="div-flex-h align-new">
 
+          <%# Button will be hidden until we have the user's zip code %>
           <a data-item-id="<%= item_id(unit) %>"
              data-item-name="<%= model(unit) %>"
              data-item-price="<%= price(unit) %>"
@@ -65,9 +68,11 @@
              data-item-description="<%= cart_description(unit) %>"
              data-item-custom1-name="Installation Fees (based on zip code)"
              data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
-             href="#" class="button added-top-margin w-button snipcart-add-item">
+             href="#" class="button added-top-margin w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-button snipcart-add-item">
             Buy now
           </a>
+
+          <a href="#" id="get-installed-price" class="button added-top-margin w-button">Show Installed Price</a>
           <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
             View brochure
           </a>

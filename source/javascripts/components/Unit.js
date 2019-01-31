@@ -21,8 +21,7 @@ class Unit extends React.Component {
     let zone_id = this.context.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
     let model_name = unit['Brand Series'];
-    let price = unit['Shop Online Price'];
-    let installation_price = unit[zone] - price;
+    let installation_price = unit[zone];
     let seer_range = seerRange(unit['SEER']);
 
     return (
@@ -50,7 +49,7 @@ class Unit extends React.Component {
           <div className="blue-text">Price including
             installation
           </div>
-          <div><strong>${price + installation_price}</strong></div>
+          <div><strong>${installation_price}</strong></div>
         </div>
       </a>
     );
