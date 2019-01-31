@@ -84,20 +84,11 @@ page "/templates/*", :layout => "layout"
 page "/thank-you.html", :layout => "layout"
 
 
-# With alternative layout
-# page '/path/to/file.html', layout: 'other_layout'
-
 # Proxy pages
-# https://middlemanapp.com/advanced/dynamic-pages/
 ignore '/templates/*'
 ignore '/sync'
 
 page "/index.html", :layout => "layout"
-
-
-# Helpers
-# Methods defined in the helpers block are available in templates
-# https://middlemanapp.com/basics/helper-methods/
 
 proxy "_redirects", "netlify-redirects", ignore: true
 proxy "_headers", "netlify-headers", ignore: true
@@ -108,10 +99,10 @@ data.products.each do |prod|
   next if prod['AHRI'].nil?
   next if prod['System Type'].nil?
   next if prod['Brand Series'].nil?
-  ahri = prod['AHRI'].lstrip.rstrip
-  brand_series = prod['Brand Series'].lstrip.rstrip
-  brand = prod['Brand'].lstrip.rstrip
-  proxy "/ac-units/#{brand}/#{brand_series}/#{ahri}/index.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
+  ahri = prod['AHRI'].downcase.lstrip.rstrip.gsub(/ /, '-')
+  brand_series = prod['Brand Series'].downcase.lstrip.rstrip.gsub(/ /, '-')
+  brand = prod['Brand'].downcase.lstrip.rstrip.gsub(/ /, '-')
+  proxy "/ac-units/#{brand}/#{brand_series}/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
 
 data.accessories.each do |acc|
@@ -129,10 +120,6 @@ system_types.each do |st|
 end
 
 helpers do
-  # def strip_tags(html)
-  #   Sanitize.clean(html.strip).strip
-  # end
-
   def markdown(text)
     renderer = Redcarpet::Render::HTML.new
     Redcarpet::Markdown.new(renderer).render(text)

@@ -6,7 +6,7 @@ module ProductHelpers
   def brand_name_to_logo(brand_val)
     return "" if brand_val.nil?
 
-    "#{brand_val.downcase.gsub(/ /, '-')}-logo.png"
+    "#{to_slug(brand_val)}-logo.png"
   end
 
   def brand_logo(unit)
@@ -56,8 +56,14 @@ module ProductHelpers
   end
 
   def product_uri(unit)
-    "/ac-units/#{unit['AHRI'].lstrip.rstrip}.html"
+    "/ac-units/#{to_slug(unit['Brand'])}/#{to_slug(unit['Brand Series'])}/#{to_slug(unit['AHRI'])}.html"
   end
+
+  def to_slug(str)
+    return '' unless str
+    str.downcase.lstrip.rstrip.gsub(/ /, '-')
+  end
+
 
   def product_image(unit)
     attachments = unit['Attachments']
@@ -153,7 +159,7 @@ module ProductHelpers
 
   def system_type_key_to_slug(type)
     return '' if type.nil? || type == ''
-    type.downcase.rstrip.gsub(/ /, '-')
+    to_slug(type)
   end
 
   def system_type_slug_to_key(slug)

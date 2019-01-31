@@ -24,7 +24,7 @@ export function unitImage(unit, width = 300, height = 200, crop = 'fit') {
 }
 
 export function brandLogoImage(unit) {
-  let brand = unit['Brand'].toLowerCase().replace(/ /g, "-");
+  let brand = toSlug(unit['Brand']);
   return brand_logos.find((logo) => {
     return logo.indexOf(brand) !== -1;
   });
@@ -39,8 +39,12 @@ export function unitID(unit) {
   return unit['AHRI'].toLowerCase().trim();
 }
 
+function toSlug(val) {
+  return val.toLowerCase().replace(/ /g, "-");
+}
+
 export function unitURL(unit) {
-  return config.get('root_url') + '/ac-units/' + unitID(unit) + '.html';
+  return `${config.get('root_url')}/ac-units/${toSlug(unit['Brand'])}/${toSlug(unit['Brand Series'])}/${unitID(unit)}.html`;
 }
 
 export function seerRange(seer) {
