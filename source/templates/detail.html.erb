@@ -27,7 +27,7 @@
       <div class="div-60">
 
         <h1 class="product-name smaller">
-          <strong><%= model(unit) %> - <%= tons(unit) %> tons</strong></h1>
+          <strong><%= brand(unit) %> - <%= model(unit) %> - <%= tons(unit) %> tons</strong></h1>
         <div class="pricing smaller"><%= display_price(unit) %></div>
         <div>Up to <%= seer(unit) %> SEER Performance</div>
         <div class="more-spec">
@@ -57,6 +57,17 @@
               <div><strong><%= unit['Heater model'] %></strong></div>
             </div>
           <% end %>
+          <% if unit['Warranty'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Warranty</div>
+              <div><strong><%= unit['Warranty'] %></strong></div>
+            </div>
+          <% end %>
+          <div class="div-product-details smaller">
+            <div class="blue-text">Price including installation</div>
+            <div><strong></strong></div>
+          </div>
+
         </div>
         <div class="div-flex-h align-new">
 
@@ -75,8 +86,8 @@
           </a>
 
         </div>
-        <div class="div-product-details new"><%= unit['Details'] %></div>
-        <div class="div-product-details new"><strong>Installation Includes:‍</strong><br/><br/>• Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation of new digital thermostat<br/><br/>‍• Installation of a new float switch (where required)<br/><br/>‍• Complete final cleanup and haul away debris<br/><br/></div>
+        <div class="div-product-details smaller"><%= unit['Details'] %></div>
+        <div class="div-product-details smaller"><strong>Installation Includes:‍</strong><br/>• Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation of new digital thermostat<br/><br/>‍• Installation of a new float switch (where required)<br/><br/>‍• Complete final cleanup and haul away debris<br/><br/></div>
 
       </div>
     </div>
