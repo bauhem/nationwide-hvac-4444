@@ -15,12 +15,13 @@ class ModelNumber extends React.Component {
           <>
             <div className="div-heading-slide">
               <h3 className="titre-big">See the diagram</h3>
+              <p className="smaller-explanation">Please see the diagram to locate
+                the
+                model number. If one of the following series of numbers appears in
+                the
+                model number please input those numbers.</p>
             </div>
-            <p className="smaller-explanation">Please see the diagram to locate
-              the
-              model number. If one of the following series of numbers appears in
-              the
-              model number please input those numbers.</p>
+
             <div className="div-flex-h justify-start added-top-margin">
               <div className="div-diagram">
                 <img src="/images/number-locate.png"
@@ -44,7 +45,7 @@ class ModelNumber extends React.Component {
                                  value={data.model}
                                  data-name="model-number"
                                  className="radio-button w-radio-input"/>
-                          <label className="w-form-label">
+                          <label className="form-label w-form-label">
                             <strong>{data.model}</strong>
                           </label>
                         </div>
@@ -61,7 +62,7 @@ class ModelNumber extends React.Component {
                     <input type="radio" id="not-sure-2" name="model-number"
                            value="not-sure" data-name="model-number"
                            className="radio-button w-radio-input"/>
-                    <label htmlFor="not-sure-2" className="w-form-label">
+                    <label htmlFor="not-sure-2" className="form-label w-form-label">
                       <strong>Not sure</strong>
                     </label>
                   </div>

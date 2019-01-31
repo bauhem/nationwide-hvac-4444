@@ -9,14 +9,14 @@ class SystemTypeStructure extends React.Component {
 
   systemType(title, description, type) {
     return (
-        <div className="options different-color-font pale-border">
+        <div className="options different-color-font pale-border top">
           <div className="radio-button-field grey-border w-radio"
                onClick={() => this.props.saveAndContinue({system_type_structure: type, system_types: config.get(type)})}>
             <div className="div-hover"></div>
             <input type="radio" name="type"
                    value={type} data-name="type"
                    className="radio-button w-radio-input"/>
-            <label htmlFor={type} className="w-form-label">
+            <label htmlFor={type} className="form-label w-form-label">
               <strong>{title}</strong>
             </label>
             <p className="smaller-explanation">{description}</p>

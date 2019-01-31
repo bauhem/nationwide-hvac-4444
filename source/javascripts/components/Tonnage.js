@@ -1,6 +1,6 @@
 import React from "react";
 import config from "react-global-configuration";
-import QuoteCtx from "./QuoteCtx"; 
+import QuoteCtx from "./QuoteCtx";
 
 class Tonnage extends React.Component {
   constructor(props) {

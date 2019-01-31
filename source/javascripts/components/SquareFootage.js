@@ -31,7 +31,7 @@ class SquareFootage extends React.Component {
                                  value={data.footage}
                                  data-name="square-footage"
                                  className="radio-button w-radio-input"/>
-                          <label className="w-form-label">
+                          <label className="form-label w-form-label">
                             <strong>{data.footage}</strong>
                           </label>
                         </div>
@@ -48,7 +48,7 @@ class SquareFootage extends React.Component {
                     <input type="radio" id="not-sure-2" name="square-footage"
                            value="not-sure" data-name="square-footage"
                            className="radio-button w-radio-input"/>
-                    <label htmlFor="not-sure-2" className="w-form-label">
+                    <label htmlFor="not-sure-2" className="form-label w-form-label">
                       <strong>Not sure</strong>
                     </label>
                   </div>

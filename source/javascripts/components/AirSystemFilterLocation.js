@@ -22,7 +22,7 @@ class AirSystemFilterLocation extends React.Component {
                      value="left" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>
               <label htmlFor="left"
-                     className="w-form-label"><strong>Left</strong></label>
+                     className="form-label w-form-label"><strong>Left</strong></label>
             </div>
           </div>
           <div
@@ -34,7 +34,7 @@ class AirSystemFilterLocation extends React.Component {
                      value="right" data-name="air-filter-side"
                      className="radio-button w-radio-input"/>
               <label htmlFor="right"
-                     className="w-form-label"><strong>Right</strong></label>
+                     className="form-label w-form-label"><strong>Right</strong></label>
             </div>
           </div>
         </div>

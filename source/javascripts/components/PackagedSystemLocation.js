@@ -6,8 +6,9 @@ class PackagedSystemLocation extends React.Component {
       <>
         <div className="div-heading-slide">
           <h3 className="titre-big">Packaged System location</h3>
+          <p className="smaller-explanation">Where is the Packaged System located?</p>
+
         </div>
-        <p className="smaller-explanation">Where is the Packaged System located?</p>
         <div className="div-flex-h">
           <div
                className="options different-color-font pale-border">
@@ -67,7 +68,7 @@ class PackagedSystemLocation extends React.Component {
       </>
     );
   }
-  
+
 }
 
 export default PackagedSystemLocation;
