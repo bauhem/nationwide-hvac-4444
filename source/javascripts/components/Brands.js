@@ -21,7 +21,7 @@ class Brands extends React.Component {
     this.props.saveValues({selected_brands: selected_brands});
   }
 
- 
+
   render() {
     if (this.context.brands.length === 0) {
       return (
@@ -40,7 +40,7 @@ class Brands extends React.Component {
         {context =>
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">Select brand(s) (optional)</h3>
+              <h3 className="titre-big">Choose Preferred Brands (optional)</h3>
             </div>
             <div className="flex-third div-flex-h justify-start">
               {
