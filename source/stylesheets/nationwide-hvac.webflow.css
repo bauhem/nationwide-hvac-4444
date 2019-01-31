@@ -3216,6 +3216,22 @@ html.w-mod-js *[data-ix="slider-anim"] {
   .button-underline.left-margin {
     font-size: 18px;
   }
+  .section-hero-interior {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 35vh;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-position: 0px 0px, 50% 0px;
+    background-size: auto, cover;
+    background-repeat: repeat, no-repeat;
+    background-attachment: scroll, scroll;
+  }
   .section-about {
     padding-right: 0%;
     padding-left: 0%;
@@ -3269,6 +3285,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
   .div-40.form {
     padding-right: 0px;
   }
+  .msp-holder {
+    top: -144px;
+  }
   .div-heading-slide {
     margin-top: 30px;
     padding-left: 0px;
@@ -3321,7 +3340,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
     justify-content: center;
   }
   .form-wrapper.second {
-    padding-top: 20px;
+    padding-top: 60px;
     padding-bottom: 30px;
   }
   .titre-big {
