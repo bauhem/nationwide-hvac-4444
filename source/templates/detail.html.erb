@@ -1,6 +1,7 @@
-<%=
-  content_for(:head) do
+<%= content_for(:head) do
     display_meta_tags title: "#{model(unit)}"
+    <link href="<%= current_page.url %>" rel="canonical"/>
+
   end
 %>
 
