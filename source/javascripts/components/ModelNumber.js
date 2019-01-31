@@ -28,7 +28,7 @@ class ModelNumber extends React.Component {
                      id="w-node-ec8688239c87-33000f20"
                      alt=""/>
               </div>
-              <div className="div-flex-h tonnage-form">
+              <div className="div-flex-h justify-start">
                 {
                   config.get('model_to_tons').map((data) => {
                     return (

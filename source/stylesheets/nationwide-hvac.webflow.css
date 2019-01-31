@@ -399,6 +399,10 @@ ul {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .div-flex-h.justify-start._75-with {
@@ -2531,6 +2535,10 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
   }
   .div-flex-h.justify-start._75-with {
     width: 60%;
@@ -2686,6 +2694,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -webkit-flex-basis: 32%;
+    -ms-flex-preferred-size: 32%;
+    flex-basis: 32%;
   }
   .options.brand {
     width: 47%;
@@ -2781,6 +2792,10 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     grid-auto-columns: 1fr;
     grid-column-gap: 16px;
     grid-row-gap: 16px;
@@ -3050,6 +3065,14 @@ html.w-mod-js *[data-ix="slider-anim"] {
     padding-right: 8%;
     padding-left: 8%;
   }
+  .div-diagram {
+    width: 100%;
+    padding-right: 0px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 auto;
+    -ms-flex: 0 auto;
+    flex: 0 auto;
+  }
   .units-quote {
     width: 100%;
     margin-right: 0%;
@@ -3241,8 +3264,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
     align-content: flex-start;
   }
   .options.different-color-font.pale-border.smaller {
-    width: 47%;
+    width: 100%;
     min-height: 60px;
+    margin-top: 10px;
     margin-right: 0px;
     padding-top: 0px;
     padding-right: 2px;
