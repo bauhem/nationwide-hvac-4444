@@ -19,8 +19,8 @@ class SystemTypeStructure extends React.Component {
             <label htmlFor={type} className="w-form-label">
               <strong>{title}</strong>
             </label>
+            <p className="smaller-explanation">{description}</p>
           </div>
-          <p className="smaller-explanation">{description}</p>
         </div>
     )
   }
