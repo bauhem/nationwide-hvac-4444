@@ -1,6 +1,6 @@
 import React from "react";
 import config from "react-global-configuration";
-import QuoteCtx from "./QuoteCtx"; 
+import QuoteCtx from "./QuoteCtx";
 
 class Tonnage extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Tonnage extends React.Component {
         {context => (
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">Please select system tonnage</h3>
+              <h3 className="titre-big">Select System Tonnage</h3>
             </div>
             <div className="div-flex-h justify-start">
               {

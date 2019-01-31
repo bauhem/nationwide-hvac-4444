@@ -36,7 +36,7 @@ class RoofAccess extends React.Component {
               <input type="radio" id="crane" name="roof-access" value="crane"
                      data-name="roof-access"
                      className="radio-button w-radio-input"/>
-              <img src="images/crane-icon.png" alt=""/>
+              <img src="/images/crane-icon.png" alt=""/>
               <label htmlFor="crane"
                      className="radio-button-label-top-margin w-form-label">
                 <strong>Crane required</strong>

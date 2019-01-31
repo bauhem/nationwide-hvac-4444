@@ -11,9 +11,9 @@ class CondenserUnitLocation extends React.Component {
       <>
         <div className="div-heading-slide">
           <h3 className="titre-big">Condenser Unit location</h3>
+          <p className="smaller-explanation">Is the Condenser Unit Located on the
+            ground or on the roof of the building?</p>
         </div>
-        <p className="smaller-explanation">Is the Condenser Unit Located on the
-          ground or on the roof of the building?</p>
         <div className="div-flex-h">
           <div
                className="options different-color-font pale-border">

@@ -14,25 +14,22 @@ class ModelNumber extends React.Component {
         {context => (
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">See the diagram</h3>
+              <h3 className="titre-big">Find the Nameplate on Your Condenser</h3>
+              <p className="smaller-explanation">See the picture below. Choose the number you find on the nameplate, this identifies how the tonnage of your system (by BTUs).</p>
             </div>
-            <p className="smaller-explanation">Please see the diagram to locate
-              the
-              model number. If one of the following series of numbers appears in
-              the
-              model number please input those numbers.</p>
-            <div className="div-flex-h justify-start added-top-margin">
+
+            <div className="div-flex-h justify-start">
               <div className="div-diagram">
                 <img src="/images/number-locate.png"
                      id="w-node-ec8688239c87-33000f20"
                      alt=""/>
               </div>
-              <div className="div-flex-h tonnage-form">
+              <div className="div-flex-h justify-start">
                 {
                   config.get('model_to_tons').map((data) => {
                     return (
                       <div
-                           className="options different-color-font pale-border smallest">
+                           className="options different-color-font pale-border smaller">
                         <div className="radio-button-field grey-border w-radio"
                              onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
                                type: 'SUBMIT',
@@ -53,7 +50,7 @@ class ModelNumber extends React.Component {
                   })
                 }
                 <div
-                     className="options different-color-font pale-border smallest">
+                     className="options different-color-font pale-border smaller">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
                     onClick={() => this.props.transition({type: "LOAD_SQUARE_FOOTAGE"})}>
