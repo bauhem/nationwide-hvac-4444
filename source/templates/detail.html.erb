@@ -1,9 +1,10 @@
 <%= content_for(:head) do
     display_meta_tags title: "#{model(unit)}"
-    <link href="<%= current_page.url %>" rel="canonical"/>
-
   end
 %>
+<% content_for(:head) do %>
+  <link href="<%= current_page.url %>" rel="canonical"/>
+<% end %>
 
 <div class="section-hero-interior">
   <%= image_tag brand_logo(unit), width: 200, 'data-ix': "hereo-appear-1" %>

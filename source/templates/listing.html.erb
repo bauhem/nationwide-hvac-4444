@@ -4,6 +4,10 @@
   end
 %>
 
+<% content_for(:head) do %>
+  <link href="<%= current_page.url %>" rel="canonical"/>
+<% end %>
+
 <%
   if system_type_query.present?
     products = data.products.select { |p| p['System Type'].present? && p['System Type'].lstrip.rstrip == system_type_query }
