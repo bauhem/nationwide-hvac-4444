@@ -10,8 +10,7 @@ class SquareFootage extends React.Component {
 
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">What's your building square
-                footage?</h3>
+              <h3 className="titre-big">How many square feet is your home or condominium?</h3>
             </div>
 
               <div className="div-flex-h justify-start">

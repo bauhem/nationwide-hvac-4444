@@ -15,8 +15,7 @@ class SystemTypes extends React.Component {
           <>
             <div className="div-heading-slide">
               <h3 className="titre-big">System Type</h3>
-              <p className="smaller-explanation">What kind of system do you
-                want?</p>
+
             </div>
 
             <div className="div-flex-h">

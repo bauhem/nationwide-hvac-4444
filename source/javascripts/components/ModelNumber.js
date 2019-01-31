@@ -14,12 +14,8 @@ class ModelNumber extends React.Component {
         {context => (
           <>
             <div className="div-heading-slide">
-              <h3 className="titre-big">See the diagram</h3>
-              <p className="smaller-explanation">Please see the diagram to locate
-                the
-                model number. If one of the following series of numbers appears in
-                the
-                model number please input those numbers.</p>
+              <h3 className="titre-big">Find the Nameplate on Your Condenser</h3>
+              <p className="smaller-explanation">See the picture below. Choose the number you find on the nameplate, this identifies how the tonnage of your system (by BTUs).</p>
             </div>
 
             <div className="div-flex-h justify-start">
