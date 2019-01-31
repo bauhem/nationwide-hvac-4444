@@ -3186,12 +3186,6 @@ html.w-mod-js *[data-ix="slider-anim"] {
     font-size: 30px;
     line-height: 35px;
   }
-  .div-quote-block.main {
-    -webkit-box-ordinal-group: 0;
-    -webkit-order: -1;
-    -ms-flex-order: -1;
-    order: -1;
-  }
   .div-flex-h.justify-start {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
