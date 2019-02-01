@@ -111,7 +111,7 @@ class UnitDetails extends React.Component {
           </a>
           </div>
           <div className={"div-product-details smaller"}>{unit['Details']}</div>
-          <div className={"div-product-details smaller"}><br/><strong>Installation Includes:‍</strong><br/><br/>• Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation of new digital thermostat<br/><br/>‍• Installation of a new float switch (where required)<br/><br/>‍• Complete final cleanup and haul away debris</div>
+          <div className={"div-product-details smaller"}><br/><strong>Installation Includes:‍</strong><br/>• Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation of new digital thermostat<br/><br/>‍• Installation of a new float switch (where required)<br/><br/>‍• Complete final cleanup and haul away debris</div>
 
         </div>
       </div>
