@@ -27,7 +27,7 @@ function updateForZone(zone) {
   let installation_price = installation_options[zone - 1];
   let price = jQuery(`input#price-zone-${zone}`).val();
   cart_btn.data('item-custom1-options', installation_price);
-  jQuery('div.pricing').html(`$${price}`);
+  jQuery('.pricing').html(`$${price}`);
   cart_btn.removeClass('w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny');
 }
 
