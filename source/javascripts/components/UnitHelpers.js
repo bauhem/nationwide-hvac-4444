@@ -48,19 +48,14 @@ export function unitURL(unit) {
 }
 
 export function seerRange(seer) {
-  if (seer >= 20) {
-    return "20+"
-  }
+  let seer_ranges = config.get('seer_ranges');
+  let last_min_seer = seer_ranges.slice(-1)[0].min
 
-  return config.get('seer_ranges').find((seer_range) => {
-    let vals = seer_range.split('-');
-
-    if (vals.length !== 2) {
-      return false;
-    }
-
-    return seer >= vals[0] && seer < vals[1];
+  let range = seer_ranges.find((seer_range) => {
+    return seer >= seer_range.min && seer < seer_range.max;
   });
+
+  return range.min;
 }
 
 export function unitBrochureURL(unit) {

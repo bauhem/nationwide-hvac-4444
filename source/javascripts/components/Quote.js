@@ -89,12 +89,21 @@ class Quote extends React.Component {
 
   renderSEERFilters(seers) {
     let filters = [];
-    seers.forEach(seer => {
+    let last_min_seer = seers.slice(-1)[0].min
+
+    seers.forEach(range => {
+      let seer = range.min;
+      let seer_label = seer;
+
+      if (seer >= last_min_seer) {
+        seer_label = `${last_min_seer}+`;
+      }
+
       filters.push(<MixitupFilter
         key={seer}
         dataFilterType={"data-toggle"}
         dataFilter={`.seer-${seer}`}
-        value={seer}/>);
+        value={seer_label}/>);
     });
 
     return filters;

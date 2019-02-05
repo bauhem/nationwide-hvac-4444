@@ -52,7 +52,7 @@ const configuration = {
   ],
   root_url: (process.env.NODE_ENV === 'production') ? 'https://www.nationwide-hvac.com' : 'https://obviam.serveo.net',
   cloudinary_resize_url: 'https://res.cloudinary.com/nationwide-hvac/image/fetch',
-  seer_ranges: ['14-16', '16-18', '18-20', '20+'],
+  seer_ranges: [{min: 14, max: 15}, {min: 15, max: 16}, {min: 16, max: 17}, {min: 17, max: 18}, {min: 18, max: 19}, {min: 19, max: 99999}],
   no_image_path: 'images/product-photo-unavailable.png'
 };
 
