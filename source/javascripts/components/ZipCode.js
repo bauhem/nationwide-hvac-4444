@@ -1,5 +1,6 @@
 import React from "react";
 import QuoteCtx from './QuoteCtx';
+import {getZone} from './UnitHelpers';
 
 const zipData = require('../../../data/zip_codes.json');
 
@@ -9,20 +10,6 @@ class ZipCode extends React.Component {
     this.zip = React.createRef();
 
     this.handleClick = this.handleClick.bind(this);
-    this.getZone = this.getZone.bind(this);
-  }
-
-  getZone(zip_code) {
-    // We take for granted that the zips will be sorted already
-    if (/^\d+$/.test(zip_code)) {
-      let idx = zipData.findIndex(obj => obj['Zip'] === parseInt(zip_code));
-
-      if (idx === -1) return null;
-
-      return zipData[idx]['Zone'];
-    }
-
-    return null;
   }
 
   handleClick() {
@@ -30,7 +17,7 @@ class ZipCode extends React.Component {
     // TODO - Validate zip code in zones.
     // If in no zones, redirect to call us
     if (this.zip.current.validity.valid) {
-      let zone = this.getZone(zip_code);
+      let zone = getZone(zip_code);
 
       if (zone === null) {
         return this.props.transition({type: 'INVALID_ZIP'});

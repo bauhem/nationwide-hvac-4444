@@ -1,5 +1,7 @@
 import config from "react-global-configuration";
 
+const zipData = require('../../../data/zip_codes.json');
+
 function systemTypeName(systemTypes, type) {
   let system_type_info = systemTypes.find((type_info) => {
     return type_info.type === type
@@ -68,4 +70,17 @@ export function floatToPrice(price) {
   }
 
   return 'N/A';
+}
+
+export function getZone(zip_code) {
+  // We take for granted that the zips will be sorted already
+  if (/^\d+$/.test(zip_code)) {
+    let idx = zipData.findIndex(obj => obj['Zip'] === parseInt(zip_code));
+
+    if (idx === -1) return null;
+
+    return zipData[idx]['Zone'];
+  }
+
+  return null;
 }

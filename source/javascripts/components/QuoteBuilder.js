@@ -92,8 +92,8 @@ class QuoteBuilder extends React.Component {
   }
 
   onOrderCompleted(data) {
-      Snipcart.api.modal.close();
-      this.transition({type: 'RESET'});
+    Snipcart.api.modal.close();
+    this.transition({type: 'RESET'});
   }
 
   transition(event) {
@@ -203,7 +203,8 @@ class QuoteBuilder extends React.Component {
             <div className="w-slider-mask">
               <div className="slide w-slide">
                 <div className="form-wrapper second w-form">
-                  <form id="wf-form-msf" name="wf-form-msf" className="form-full-width">
+                  <form id="wf-form-msf" name="wf-form-msf"
+                        className="form-full-width">
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}/>

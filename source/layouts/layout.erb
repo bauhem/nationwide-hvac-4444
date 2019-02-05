@@ -69,6 +69,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>
 <%= javascript_include_tag "lib/mixitup-multifilter" %>
 <%= javascript_include_tag "lib/mixitup-pagination" %>
+<%= javascript_include_tag "lib/main" %>
 
 <script>
   // This is used to map the brand logo path once deployed since netlify will
@@ -80,93 +81,21 @@
   var greyCBImgUrl = "<%= asset_path :images, 'checkbox-grey.png' %>";
   var activeCBImgUrl = "<%= asset_path :images, 'checkbox.png' %>";
 
-  // This method is used to get the z-index of the filters checkboxes.
-  function getStyleProp(el, styleProp) {
-    let y;
-    if (window.getComputedStyle) {
-      y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
-    } else if (el.currentStyle) {
-      y = el.currentStyle[styleProp];
-    }
+  var zipData = [];
 
-    return y;
-  }
+  loadZipData();
 
-  function scrollToContainer(containerSelector = '.breadcrumbs') {
-    $('html, body').animate({
-      scrollTop: $(containerSelector).offset().top
-    }, 300);
-  }
-
-  function handleMixClick(state, futureState) {
-    if (this.classList.contains('filter_button')) {
-      toggleCB(this);
-    }
-  }
-
-  function toggleCB(el) {
-    let greyCB = el.children[0].children[0];
-    let activeCB = el.children[0].children[1];
-
-    const tmpGreyVal = getStyleProp(greyCB, "z-index");
-    const tmpActiveVal = getStyleProp(activeCB, "z-index");
-
-    greyCB.style.zIndex = (tmpGreyVal === '1') ? '0' : '1';
-    activeCB.style.zIndex = (tmpActiveVal === '1') ? '0' : '1';
-  }
-
-  function disableCB(el) {
-    let greyCB = el.children[0].children[0];
-    let activeCB = el.children[0].children[1];
-
-    greyCB.style.zIndex = 1;
-    activeCB.style.zIndex = 'auto';
-  }
-
-  function disableAllFilters(el) {
-    let parent = el.parentNode;
-    let filters = Array.from(parent.children);
-
-    filters.forEach((filter) => {
-      if (filter !== el) {
-        Quote.disableCB(filter);
-      }
-    });
-  }
-
-  function itemAddedPopup(item) {
-    var ix = Webflow.require('ix');
-    var $el = $('.div-added-to-cart');
-
-    var trigger = {
-      "type": "click",
-      "selector": ".div-added-to-cart",
-      "stepsA": [{"wait": "300ms"}, {
-        "display": "flex",
-        "opacity": 1,
-        "height": "300px",
-        "transition": "opacity 750ms ease 0, height 750ms ease 0"
-      }, {"wait": "2000ms"}, {
-        "opacity": 0,
-        "height": "0px",
-        "transition": "opacity 750ms ease 0, height 750ms ease 0"
-      }],
-      "stepsB": []
-    }
-
-    ix.run(trigger, $el);
-  }
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function(){
-  // Listen for Escape Key Press and Show Icon
-  document.addEventListener('keydown', function (e) {
-    if ( e.keyCode === 27 ) {
-  window.open("https://nationwide-hvac.admin.datocms.com",'_blank');
-    }
+  document.addEventListener('DOMContentLoaded', function () {
+    // Listen for Escape Key Press and Show Icon
+    document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 27) {
+        window.open("https://nationwide-hvac.admin.datocms.com", '_blank');
+      }
+    });
   });
-});
 </script>
 <%= yield_content :footer_scripts %>
 
