@@ -485,8 +485,9 @@ ul {
   display: -ms-flexbox;
   display: flex;
   width: 19%;
+  max-height: 175px;
   min-height: 150px;
-  margin-bottom: 3%;
+  margin-bottom: 1%;
   padding: 20px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -2610,6 +2611,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .div-logo {
     width: 24%;
+    margin-bottom: 1.5%;
   }
   .nav-link {
     padding-top: 15px;
