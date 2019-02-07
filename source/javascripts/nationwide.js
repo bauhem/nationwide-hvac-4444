@@ -1,6 +1,7 @@
 // This method is used to get the z-index of the filters checkboxes.
 function getStyleProp(el, styleProp) {
-  let y;
+  var y;
+
   if (window.getComputedStyle) {
     y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
   } else if (el.currentStyle) {
