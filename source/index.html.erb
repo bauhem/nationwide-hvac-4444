@@ -25,7 +25,7 @@
   <% dato.homepage.block.each do |block| %>
   <div class="div-quote-block"><img src="<%= block.image.url %>" width="70" alt="">
     <h2><%= block.title %></h2>
-    <a href="/beat-my-quote" class="button w-button"><%= block.button %></a>
+    <a href="<%= block.url %>" class="button w-button"><%= block.button %></a>
   </div>
   <% end %>
 
