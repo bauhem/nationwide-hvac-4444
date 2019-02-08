@@ -1,5 +1,7 @@
 const jsonFile = require('jsonfile');
 const path = require('path')
+const process = require('process')
+const fs = require('fs')
 
 const dataFiles = {
   products: 'data/products.json',
@@ -9,6 +11,22 @@ const dataFiles = {
 };
 
 exports.dataFiles = dataFiles;
+
+exports.createOutputDir = function(dir, repositoryName) {
+  let output_dir = path.join(dir, repositoryName);
+
+  if (!fs.existsSync(output_dir)) {
+    fs.mkdirSync(output_dir, 0o0774);
+  }
+
+  let data_dir = path.join(output_dir, 'data');
+
+  if (!fs.existsSync(data_dir)) {
+    fs.mkdirSync(data_dir, 0o0774);
+  }
+
+  return output_dir;
+}
 
 var select = function (base, column_name, sort_fields = []) {
   let config = {};

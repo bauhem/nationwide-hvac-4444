@@ -1,12 +1,11 @@
 require('dotenv').config()
 
 const api = require("./airtable-api");
-const Airtable = require('airtable');
+const apiGH = require("./airtable-github");
 
-const productsFile = 'data/products.json';
-const vendorsFile = 'data/vendors.json';
-const accessoriesFile = 'data/accessories.json';
-const zonesFile = 'data/zip_codes.json';
+const Airtable = require('airtable');
+const process = require('process')
+const path = require('path')
 
 process.on(
     "unhandledRejection",
@@ -21,20 +20,34 @@ process.on(
     }
 );
 
+console.time('cli-sync')
 const base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY
 }).base(process.env.AIRTABLE_API_BASE);
 
 let args = process.argv.slice(2);
 
-console.time('sync');
 let promise;
+
+let outputDir = api.createOutputDir('/tmp', apiGH.repositoryName);
+
+let files = [];
 if (typeof api[args[0]] === 'function') {
-  promise = api[args[0]](base, '.');
+  promise = api[args[0]](base, outputDir);
+  files.push(path.join(outputDir, api.dataFiles[args[0]]));
 } else {
-  promise = api.syncAll(base, '.');
+  promise = api.syncAll(base, outputDir);
+  for (let property in api.dataFiles) {
+      if (api.dataFiles.hasOwnProperty(property)) {
+          files.push(path.join(outputDir, api.dataFiles[property]))
+      }
+  }
 }
 
 promise.then(() => {
-  console.timeEnd('sync');
+  let fileSyncPromises = apiGH.updateAllFiles(outputDir, files);
+  fileSyncPromises.then(() => {
+    console.log('sync complete')
+    console.timeEnd('cli-sync')
+  })
 })
