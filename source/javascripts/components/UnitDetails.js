@@ -7,6 +7,18 @@ import {
 } from "./UnitHelpers";
 import QuoteCtx from "./QuoteCtx";
 
+const META_EXCLUDED_KEYS = [
+  "currentState",
+  "system_types",
+  "brands",
+  "selected_brands",
+  "units",
+  "zone_num",
+  "history",
+  "selected_seers",
+  "selected_unit"
+];
+
 class UnitDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +31,22 @@ class UnitDetails extends React.Component {
   }
 
 
+  unitMetaData(ctx) {
+    let metaData = {};
+
+    Object.keys(ctx).forEach((key) => {
+      if (ctx[key] != null && ctx[key] !== undefined && !META_EXCLUDED_KEYS.includes(key)) {
+        metaData[key] = ctx[key];
+      }
+    });
+
+    return metaData;
+  }
+
+
   render() {
+    let metaData = this.unitMetaData(this.context);
+
     let unit = this.context.selected_unit;
     let img_src = unitImage(unit, 500, 400);
     let brand_img = brandLogoImage(unit);
@@ -100,7 +127,7 @@ class UnitDetails extends React.Component {
              data-item-description={description}
              data-item-custom1-name="Installation Fees (based on zip code)"
              data-item-custom1-options={installation_options}
-             data-item-metadata={this.props.orderMetaData}
+             data-item-metadata={JSON.stringify(metaData)}
              className="button added-top-margin  w-button snipcart-add-item"
              onClick={this.handleClick}>
             Schedule Installation

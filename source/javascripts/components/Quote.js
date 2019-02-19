@@ -23,23 +23,6 @@ class Quote extends React.Component {
     return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
 
-  orderMetaData(ctx) {
-    let metaData = {
-      air_filter_side: ctx.air_filter_side,
-      air_handler_location: ctx.air_handler_location,
-      air_handler_type: ctx.air_handler_type,
-      condenser_unit_location: ctx.condenser_unit_location,
-      packaged_system_location: ctx.packaged_system_location,
-      roof_access: ctx.roof_access,
-      water_heater_under_air_handler: ctx.water_heater_under_air_handler,
-      zip_code: ctx.zip_code
-    };
-
-    Object.keys(metaData).forEach((key) => (metaData[key] == null) && delete metaData[key]);
-
-    return metaData;
-  }
-
   startMixitUp() {
     let quoteObj = this;
 
@@ -110,11 +93,9 @@ class Quote extends React.Component {
   }
 
   render() {
-    let orderMetaData = this.orderMetaData(this.context);
 
     let props = {
       saveAndContinue: this.props.saveAndContinue,
-      orderMetaData: JSON.stringify(orderMetaData),
       zone_num: this.context.zone_num
     };
 

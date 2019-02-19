@@ -6,6 +6,12 @@ import QuoteCtx from "./QuoteCtx";
 class ModelNumber extends React.Component {
   constructor(props) {
     super(props);
+    this.notSure = this.notSure.bind(this);
+  }
+
+  notSure() {
+    this.props.saveValues({condenser_model_number: "Not Sure"})
+    this.props.transition({type: "LOAD_SQUARE_FOOTAGE"});
   }
 
   render() {
@@ -31,7 +37,7 @@ class ModelNumber extends React.Component {
                       <div
                            className="options different-color-font pale-border smaller">
                         <div className="radio-button-field grey-border w-radio"
-                             onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
+                             onClick={() => this.props.saveAndContinue({condenser_model_number: data.model, tonnage: data.tons}, {
                                type: 'SUBMIT',
                                value: context.system_type_structure
                              })}>
@@ -53,7 +59,7 @@ class ModelNumber extends React.Component {
                      className="options different-color-font pale-border smaller">
                   <div
                     className="radio-button-field grey-border less-padding w-radio"
-                    onClick={() => this.props.transition({type: "LOAD_SQUARE_FOOTAGE"})}>
+                    onClick={this.notSure}>
                     <div className="div-hover"></div>
                     <input type="radio" id="not-sure-2" name="model-number"
                            value="not-sure" data-name="model-number"

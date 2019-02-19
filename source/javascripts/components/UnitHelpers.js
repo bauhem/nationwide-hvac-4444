@@ -57,6 +57,10 @@ export function seerRange(seer) {
     return seer >= seer_range.min && seer < seer_range.max;
   });
 
+  if (range === undefined) {
+    return 0;
+  }
+  
   return range.min;
 }
 

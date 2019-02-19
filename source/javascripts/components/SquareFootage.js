@@ -20,7 +20,7 @@ class SquareFootage extends React.Component {
                       <div
                            className="options different-color-font pale-border smaller">
                         <div className="radio-button-field grey-border w-radio"
-                             onClick={() => this.props.saveAndContinue({tonnage: data.tons}, {
+                             onClick={() => this.props.saveAndContinue({sqft: data.footage, tonnage: data.tons}, {
                                type: 'SUBMIT',
                                value: context.system_type_structure
                              })}>

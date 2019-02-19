@@ -80,6 +80,8 @@ class QuoteBuilder extends React.Component {
       roof_access: null,
       packaged_system_location: null,
       air_filter_side: null,
+      condenser_model_number: null,
+      sqft: null,
       brands: [],
       selected_brands: [],
       units: null,
@@ -93,6 +95,7 @@ class QuoteBuilder extends React.Component {
 
   onOrderCompleted(data) {
     Snipcart.api.modal.close();
+    console.log('order completed: '  + data);
     this.transition({type: 'RESET'});
   }
 
