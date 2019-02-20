@@ -1,0 +1,104 @@
+<%= content_for(:head) do
+    display_meta_tags title: "#{landing.title} - Nationwide HVAC"
+  end
+%>
+<% content_for(:head) do %>
+  <link href="<%= current_page.url %>" rel="canonical"/>
+<% end %>
+
+
+<div class="section-hero-ldp">
+  <picture>
+                <source
+                  srcset="<%= landing.hero_image.file.fit('fill').lossless('true').width(1920).q(56).to_url %> 1x,
+                          <%= landing.hero_image.file.fit('fill').lossless('true').width(1920).q(56).dpr(2).to_url %> 2x"
+                 media="(min-width: 1770px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1770).q(56).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1770).q(56).dpr(2).to_url %> 2x"
+                 media="(min-width: 1440px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1440).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1440).q(50).dpr(2).to_url %> 2x"
+                 media="(min-width: 1280px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1280).height(1024).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1280).height(1024).q(50).dpr(2).to_url %> 2x"
+                  media="(min-width: 1024px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1024).height(960).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(1024).height(960).q(50).dpr(2).to_url %> 2x"
+                  media="(min-width: 768px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(768).height(768).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(768).height(768).q(50).dpr(2).to_url %> 2x"
+                  media="(min-width: 480px)"
+                >
+                <source
+                  srcset="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(480).height(600).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').lossless('true').width(480).height(600).q(50).dpr(2).to_url %> 2x"
+                  media="(min-width: 320px)"
+                >
+                <img alt="<%= landing.title %>" class="image-hero" data-src="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').fpx('4').lossless('true').width(600).height(600).q(50).to_url %> 1x,
+                          <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').fpx('4').lossless('true').width(600).height(600).q(50).dpr(2).to_url %> 2x">
+              </picture>
+  <div class="div-cta-ldp"><img src="/images/1549573167-carrier.png" width="200" alt="" data-ix="hero-appear-1">
+    <h1 class="cta-heading-ldp" data-ix="hero-appear-1">
+      <strong><%= landing.title %></strong></h1>
+      <% landing.button.each do |button| %>
+      <a href="<%= button.url %>" class="button-ldp w-button" data-ix="hero-appear-3"><%= button.title %></a>
+      <% end %>
+    </div>
+</div>
+<div class="logo-provider-ldp">
+  <div class="logo-provider-item"><img src="/images/home-advisor.png" alt=""></div>
+  <div class="logo-provider-item"><img src="/images/Google-guaranteed.png" alt=""></div>
+  <div class="logo-provider-item"><img src="/images/yelp.png" alt=""></div>
+  <div class="logo-provider-item"><img src="/images/Google-reviews.png" alt=""></div>
+  <div class="logo-provider-item"><img src="/images/BBC-Accredited.png" alt=""></div>
+  <div class="logo-provider-item"><img src="images/angies-list-certified.png" alt=""></div>
+  <div class="logo-provider-item"><img src="images/bonded-insured.png" alt=""></div>
+</div>
+<div class="section-quote-ldp">
+  <div class="title-ldp w-richtext">
+    <h2><%= landing.sub_title %></h2>
+  </div>
+  <div class="div-flex-h-ldp">
+
+    <a href="#" data-number="1" class="mix-ldp w-inline-block">
+      <div class="div-image"><img src="/images/Capture-d’écran-2019-02-19-à-16.01.03.png" alt=""></div>
+      <div class="div-flex-h align-center">
+        <div class="product-name"><strong>Comfort Series</strong></div><img src="/images/1549573167-carrier.png" width="100" alt="" class="image-brand"></div>
+      <div>
+        <div class="div-product-details">
+          <div class="blue-text">Tons</div>
+          <div><strong>1.5</strong></div>
+        </div>
+        <div class="div-product-details smaller">
+          <div class="blue-text">SEER</div>
+          <div><strong>14</strong></div>
+        </div>
+        <div class="div-product-details smaller">
+          <div class="blue-text">Price</div>
+          <div><strong>$3 700</strong></div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
+<div class="section-cta">
+  <div class="div-65" data-ix="appear-from-bottom">
+    <%= dato.homepage.general_information %></div>
+</div>
+
+<% content_for(:footer_scripts) do %>
+  <%= javascript_include_tag "unit-details" %>
+<% end %>
