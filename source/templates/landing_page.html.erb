@@ -47,7 +47,7 @@
                 <img alt="<%= landing.title %>" class="image-hero" data-src="<%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').fpx('4').lossless('true').width(600).height(600).q(50).to_url %> 1x,
                           <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').fpx('4').lossless('true').width(600).height(600).q(50).dpr(2).to_url %> 2x">
               </picture>
-  <div class="div-cta-ldp"><img src="/images/1549573167-carrier.png" width="200" alt="" data-ix="hero-appear-1">
+  <div class="div-cta-ldp"><img src="<%= landing.brand.logo.file.auto('format').fit('fill').lossless('true').width(200).q(50).to_url %>" width="200" alt="" data-ix="hero-appear-1">
     <h1 class="cta-heading-ldp" data-ix="hero-appear-1">
       <strong><%= landing.title %></strong></h1>
       <% landing.button.each do |button| %>
