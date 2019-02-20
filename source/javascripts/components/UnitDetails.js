@@ -35,8 +35,13 @@ class UnitDetails extends React.Component {
     let metaData = {};
 
     Object.keys(ctx).forEach((key) => {
-      if (ctx[key] != null && ctx[key] !== undefined && !META_EXCLUDED_KEYS.includes(key)) {
-        metaData[key] = ctx[key];
+      if (!META_EXCLUDED_KEYS.includes(key)) {
+        let val = ctx[key];
+
+        if (val === null || val === undefined) {
+          val = '';
+        }
+        metaData[key] = val;
       }
     });
 
