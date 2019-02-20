@@ -180,4 +180,20 @@ module ProductHelpers
   def tonnages
     [1.5, 2, 2.5, 3, 3.5, 4, 5]
   end
+
+  def landing_page_units(brand: "", system_type: "")
+    return [] if (brand.nil? || brand.empty?) && (system_type.nil? || system_type.empty?)
+
+    units = data.products
+
+    unless brand.nil? || brand.blank?
+      units = units.select {|p| p['Brand'] == brand}
+    end
+
+    unless system_type.nil? || system_type.blank?
+      units = units.select {|p| p['System Type'] == system_type}
+    end
+
+    return units.take(4)
+  end
 end
