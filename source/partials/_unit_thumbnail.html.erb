@@ -23,4 +23,17 @@
     <div class="blue-text-left">SEER</div>
     <div><strong><%= seer(unit) %></strong></div>
   </div>
+  <% if unit['CU Model'] %>
+    <div class="div-product-details new">
+      <div class="blue-text-left">Condenser</div>
+      <div><strong><%= unit['CU Model'] %></strong></div>
+    </div>
+  <% end %>
+  <% if unit['AHU Model'] %>
+    <div class="div-product-details new">
+      <div class="blue-text-left">Air Handler</div>
+      <div><strong><%= unit['AHU Model'] %></strong></div>
+    </div>
+  <% end %>
+
 </a>
