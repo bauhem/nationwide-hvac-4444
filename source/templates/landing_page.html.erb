@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 <%= content_for(:head) do
   display_meta_tags title: "#{landing.title} - Nationwide HVAC"
 end
@@ -5,6 +9,8 @@ end
 <% content_for(:head) do %>
   <link href="<%= current_page.url %>" rel="canonical"/>
 <% end %>
+
+
 
 <div class="section-hero-ldp">
   <picture>
