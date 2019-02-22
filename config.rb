@@ -55,7 +55,7 @@ activate :robots,
          :sitemap => "#{config.url_root}/sitemap.xml"
 
 activate :google_analytics do |ga|
-  ga.tracking_id = '' # Replace with your property ID.
+  ga.tracking_id = 'UA-68367207-1' # Replace with your property ID.
 end
 
 # Activate React using gulp
