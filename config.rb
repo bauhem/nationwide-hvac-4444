@@ -37,7 +37,7 @@ set :cloudinary_name, 'nationwide-hvac'
 set :lambda_base_url, 'http://localhost:9005/'
 
 configure :build do
-  set :lambda_base_url, 'https://nationwide-hvac.netlify.com/.netlify/functions/'
+  set :lambda_base_url, 'https://www.nationwide-hvac.com/.netlify/functions/'
 end
 
 activate :sitemap_ping do |config|
@@ -96,26 +96,26 @@ proxy "_headers", "netlify-headers", ignore: true
 proxy "/ac-units/index.html", "/templates/listing.html", layout: "layout", locals: { system_type_query: '' }
 
 dato.tap do |dato|
-    # iterate over the "Blog post" records...
-    dato.landing_pages.each do |landing|
-      if landing.active
-    # ...and create a section for each service starting from a template!
+  # iterate over the "Blog post" records...
+  dato.landing_pages.each do |landing|
+    if landing.active
+      # ...and create a section for each service starting from a template!
       proxy(
-           "/#{landing.slug}/index.html",
-           "/templates/landing_page.html",
-           locals: { landing: landing },
-         )
+        "/#{landing.slug}/index.html",
+        "/templates/landing_page.html",
+        locals: { landing: landing },
+      )
     end
-    end
+  end
 end
 
 data.products.each do |prod|
   next if prod['AHRI'].nil?
   next if prod['System Type'].nil?
   next if prod['Brand Series'].nil?
-  ahri = prod['AHRI'].downcase.lstrip.rstrip.gsub(/ /, '-')
+  ahri         = prod['AHRI'].downcase.lstrip.rstrip.gsub(/ /, '-')
   brand_series = prod['Brand Series'].downcase.lstrip.rstrip.gsub(/ /, '-')
-  brand = prod['Brand'].downcase.lstrip.rstrip.gsub(/ /, '-')
+  brand        = prod['Brand'].downcase.lstrip.rstrip.gsub(/ /, '-')
   proxy "/ac-units/#{brand}/#{brand_series}/#{ahri}.html", "/templates/detail.html", layout: "layout", locals: { unit: prod }
 end
 
