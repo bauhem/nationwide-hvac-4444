@@ -2838,6 +2838,10 @@ ul {
   margin-bottom: 0px;
 }
 
+.hide {
+  display: none;
+}
+
 html.w-mod-js *[data-ix="hero-appear-1"] {
   opacity: 0;
   -webkit-transform: translate(0px, 30px);
