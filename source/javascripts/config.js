@@ -1,3 +1,4 @@
+
 const configuration = {
   packaged_system: [
     {
@@ -50,10 +51,14 @@ const configuration = {
     {footage: '2101-2400', tons: 4},
     {footage: '2401-3000', tons: 5}
   ],
-  root_url: (process.env.NODE_ENV === 'production') ? 'https://www.nationwide-hvac.com' : 'https://nationwide-hvac.netlify.com',
+  root_url: (process.env.NODE_ENV === 'production') ? 'https://www.nationwide-hvac.com' : (process.env.ROOT_URL !== undefined) ? process.env.ROOT_URL : 'https://nationwide-hvac.netlify.com',
   cloudinary_resize_url: 'https://res.cloudinary.com/nationwide-hvac/image/fetch',
   seer_ranges: [{min: 14, max: 15}, {min: 15, max: 16}, {min: 16, max: 17}, {min: 17, max: 18}, {min: 18, max: 19}, {min: 19, max: 99999}],
   no_image_path: 'images/product-photo-unavailable.png'
 };
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log(`root url: ${configuration['root_url']}`);
+}
 
 export default configuration;

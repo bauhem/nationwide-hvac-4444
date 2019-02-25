@@ -120,15 +120,21 @@ data.products.each do |prod|
 end
 
 data.accessories.each do |acc|
-  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
+  id = acc['Product_ID'].gsub(/_/, '-')
+  id = acc['id'] unless id
+  proxy "/ac-units/accessories/#{id}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
 end
 
 data.thermostats.each do |acc|
-  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
+  id = acc['Product_ID'].gsub(/_/, '-')
+  id = acc['id'] unless id
+  proxy "/ac-units/accessories/#{id}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
 end
 
 data.warranty.each do |acc|
-  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
+  id = acc['Product_ID'].gsub(/_/, '-')
+  id = acc['id'] unless id
+  proxy "/ac-units/accessories/#{id}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
 end
 
 proxy "/ac-units/accessories/index.html", "/templates/accessories.html", layout: "layout"

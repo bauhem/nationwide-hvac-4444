@@ -105,10 +105,7 @@ async function syncThermostats(base, output_dir) {
   console.log('Syncing Thermostats');
   const output_file = path.join(output_dir, dataFiles.thermostats);
 
-  return sync(base, 'Thermostats', output_file, [{
-    field: "Model",
-    direction: "asc"
-  }])
+  return sync(base, 'Thermostats', output_file)
 
 }
 

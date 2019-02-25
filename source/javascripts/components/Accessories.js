@@ -22,6 +22,10 @@ class Accessories extends React.Component {
                   className="next-button w-button" onClick={() => this.props.transition({type: "SUBMIT"})}/>
   }
 
+  itemURL(item) {
+    return config.get('root_url') + '/ac-units/accessories/' + item['Product_ID'].replace(/_/g, '-') + '.html'
+  }
+
   render() {
     let items = [];
     let actionBtn;
@@ -47,22 +51,14 @@ class Accessories extends React.Component {
     }
 
     const accComponents = items.map((acc) => {
-      // let img = '';
-      // let img_url = '/images/product-photo-unavailable.png';
-      //
-      // if (acc['Image'] !== undefined) {
-      //   img_url = acc['Image'][0]['thumbnails']['large']['url'];
-      // }
-      // img = <img src={img_url} alt={acc['Item']}/>;
-
       return (
         <div key={acc['id']} className="div-full-width added-top-margin">
           <div className="unit-overlay">
             <a href="#"
-               data-item-id={acc.id}
+               data-item-id={acc['Product_ID']}
                data-item-name={acc['Item']}
                data-item-price={acc['Price $']}
-               data-item-url={config.get('root_url') + '/ac-units/accessories/' + acc.id + '.html'}
+               data-item-url={this.itemURL(acc)}
                data-item-description={acc['Description']}
                className="button w-button snipcart-add-item">Add to cart</a>
 
