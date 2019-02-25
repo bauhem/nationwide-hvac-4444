@@ -123,6 +123,14 @@ data.accessories.each do |acc|
   proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
 end
 
+data.thermostats.each do |acc|
+  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
+end
+
+data.warranty.each do |acc|
+  proxy "/ac-units/accessories/#{acc['id']}.html", "/templates/accessory.html", layout: "layout", locals: { accessory: acc }
+end
+
 proxy "/ac-units/accessories/index.html", "/templates/accessories.html", layout: "layout"
 
 require 'helpers/product_helpers'
