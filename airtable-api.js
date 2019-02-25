@@ -7,7 +7,9 @@ const dataFiles = {
   products: 'data/products.json',
   vendors: 'data/vendors.json',
   accessories: 'data/accessories.json',
-  zones: 'data/zip_codes.json'
+  zones: 'data/zip_codes.json',
+  thermostats: 'data/thermostats.json',
+  warranty: 'data/warranty.json'
 };
 
 exports.dataFiles = dataFiles;
@@ -60,6 +62,10 @@ exports.syncAll = async function (base, output_dir = '.') {
 
   promises.push(syncZones(base, output_dir));
 
+  promises.push(syncThermostats(base, output_dir));
+
+  promises.push(syncWarranty(base, output_dir));
+
   return Promise.all(promises);
 };
 
@@ -91,10 +97,26 @@ async function syncAccessories(base, output_dir) {
   console.log('Syncing Accessories');
   const output_file = path.join(output_dir, dataFiles.accessories);
 
-  return sync(base, 'Accessories', output_file, [{
+  return sync(base, 'Accessories', output_file)
+
+}
+
+async function syncThermostats(base, output_dir) {
+  console.log('Syncing Thermostats');
+  const output_file = path.join(output_dir, dataFiles.thermostats);
+
+  return sync(base, 'Thermostats', output_file, [{
     field: "Model",
     direction: "asc"
   }])
+
+}
+
+async function syncWarranty(base, output_dir) {
+  console.log('Syncing Warranty');
+  const output_file = path.join(output_dir, dataFiles.warranty);
+
+  return sync(base, 'Warranty', output_file)
 
 }
 
@@ -111,4 +133,6 @@ async function syncZones(base, output_dir) {
 exports.products = syncProducts;
 exports.vendors = syncVendors;
 exports.accessories = syncAccessories;
+exports.thermostats = syncThermostats;
+exports.warranty = syncWarranty;
 exports.zones = syncZones;

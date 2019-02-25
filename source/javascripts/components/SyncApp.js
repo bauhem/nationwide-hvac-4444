@@ -111,6 +111,8 @@ function SyncMenu(props) {
         
         <SyncBtn label={"Products"} syncMethod={"products"} {...props}/>
         <SyncBtn label={"Accessories"} syncMethod={"accessories"} {...props}/>
+        <SyncBtn label={"Thermostats"} syncMethod={"thermostats"} {...props}/>
+        <SyncBtn label={"Warranty"} syncMethod={"warranty"} {...props}/>
         <SyncBtn label={"Vendors"} syncMethod={"vendors"} {...props}/>
         <SyncBtn label={"Zones"} syncMethod={"zones"} {...props}/>
         <SyncBtn label={"All"} syncMethod={"syncAll"} {...props}/>
