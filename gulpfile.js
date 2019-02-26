@@ -6,6 +6,8 @@ var tap = require('gulp-tap');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var log = require('gulplog');
+var envify = require('envify/custom');
+
 
 var debug = (process.env.NODE_ENV !== 'production');
 
@@ -50,6 +52,7 @@ gulp.task("browserify", function () {
       // replace file contents with browserify's bundle stream
       file.contents = browserify(file.path, {debug: debug})
         .transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]})
+        .transform(envify({ROOT_URL: process.env.ROOT_URL}))
         .bundle();
     }))
     .on('error', swallowError)

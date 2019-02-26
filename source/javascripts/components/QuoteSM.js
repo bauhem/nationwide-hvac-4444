@@ -131,13 +131,22 @@ const QuoteSM = Machine({
     },
     UnitDetails: {
       on: {
+        SUBMIT: 'Thermostats'
+      }
+    },
+    Thermostats: {
+      on: {
         SUBMIT: 'Accessories'
       }
     },
     Accessories: {
+      on: {
+        SUBMIT: 'Warranty'
+      }
+    },
+    Warranty: {
       type: 'final',
       on: {
-        // TODO - use initial state in case this changes in the future
         SUBMIT: 'SystemTypeStructure'
       }
     },
