@@ -302,8 +302,7 @@ ul {
   width: 100%;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 100px 8%;
-  background-color: #104794;
+  padding: 100px 12%;
   color: #fff;
   font-size: 22px;
   line-height: 28px;
@@ -586,6 +585,7 @@ ul {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
+  background-color: #253c80;
 }
 
 .slide-temoignages {
@@ -595,7 +595,6 @@ ul {
   min-height: 100%;
   margin-top: auto;
   margin-bottom: auto;
-  background-color: #104794;
 }
 
 .brand {
