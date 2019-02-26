@@ -23,7 +23,7 @@
 </div>
 <div class="section-quote-call">
   <% dato.homepage.block.each do |block| %>
-  <div class="div-quote-block"><img src="<%= block.image.url %>" width="70" alt="">
+  <div class="div-quote-block"><img src="<%= block.image.file.auto('format').fit('crop').crop('center').lossless('true').width(240).height(180).q(56).to_url %>" alt="">
     <h2><%= block.title %></h2>
     <a href="<%= block.url %>" class="button w-button"><%= block.button %></a>
   </div>
