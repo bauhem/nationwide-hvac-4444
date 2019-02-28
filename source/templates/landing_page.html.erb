@@ -56,9 +56,15 @@ end
     <img src="<%= landing.brand.logo.file.auto('format').fit('fill').lossless('true').width(200).q(50).to_url %>" width="200" alt="" data-ix="hero-appear-1">
     <h1 class="cta-heading-ldp" data-ix="hero-appear-1">
       <strong><%= landing.title %></strong></h1>
-    <% landing.button.each do |button| %>
-      <a href="<%= button.url %>" class="button-ldp w-button" data-ix="hero-appear-3"><%= button.title %></a>
-    <% end %>
+      <p data-ix="hero-appear-2">
+        <%= strip_tags(landing.description) %>
+        </p><br>
+      <div>
+        <% landing.button.each do |button| %>
+          <a href="<%= button.url %>" class="button-ldp w-button" data-ix="hero-appear-3"><%= button.title %></a>
+        <% end %>
+        </div>
+
   </div>
 </div>
 <div class="logo-provider-ldp">
