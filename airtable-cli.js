@@ -29,7 +29,9 @@ let args = process.argv.slice(2);
 
 let promise;
 
-let outputDir = api.createOutputDir('/tmp', apiGH.repositoryName);
+let baseDir = '/tmp';
+
+let outputDir = api.createOutputDir(baseDir, apiGH.repositoryName);
 
 let files = [];
 if (typeof api[args[0]] === 'function') {

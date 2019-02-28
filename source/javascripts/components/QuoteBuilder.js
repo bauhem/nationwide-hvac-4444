@@ -42,7 +42,9 @@ const StatesComponents = {
   ZipCode: ZipCode,
   Quote: Quote,
   UnitDetails: UnitDetails,
-  Accessories: Accessories
+  Thermostats: Accessories,
+  Accessories: Accessories,
+  Warranty: Accessories
 };
 
 const saved_values = JSON.parse(localStorage.getItem('instantQuoteValues'));
