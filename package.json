@@ -19,6 +19,7 @@
   "dependencies": {
     "@octokit/rest": "^16.2.0",
     "airtable": "^0.5.7",
+    "datocms-plugin-preview-link": "^0.1.1",
     "dotenv": "^6.2.0",
     "jsonfile": "^5.0.0",
     "mixitup": "^3.3.1",
