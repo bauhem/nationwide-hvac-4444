@@ -23,7 +23,14 @@ class Accessories extends React.Component {
   }
 
   itemURL(item) {
-    return config.get('root_url') + '/ac-units/accessories/' + item['Product_ID'].replace(/_/g, '-') + '.html'
+    let id = item['Product_ID'];
+    if (id !== undefined && id !== null) {
+      id = id.replace(/_/g, '-');
+    } else {
+      id = item['ID'];
+    }
+
+    return config.get('root_url') + '/ac-units/accessories/' + id + '.html'
   }
 
   render() {

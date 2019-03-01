@@ -1,7 +1,13 @@
+<% landing = landing %>
+
 <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">
   <div class="div-utility"><img src="/images/phone-icon-white.png" width="16" alt="" class="phone-icon">
     <div>Call us now</div>
-    <a href="tel:19548009954" class="utility-link">954-800-9954</a>
+    <% if landing %>
+    <a href="tel:1<%= landing.phone_number %>" class="utility-link"><%= landing.phone_number %></a>
+    <% else %>
+      <a href="tel:19548009954" class="utility-link">954-800-9954</a>
+    <% end %>
   </div>
   <a href="/" class="brand w-nav-brand w--current"><img
     src="/images/6f3b56_ed75d05d16d144529a06f0606b53678f_mv2.png"
