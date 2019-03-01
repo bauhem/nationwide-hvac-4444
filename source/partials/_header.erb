@@ -14,7 +14,7 @@
     <% if landing %>
     <a href="tel:1<%= landing.phone_number %>" class="utility-link"><%= landing.phone_number %></a>
     <% else %>
-      <a href="tel:19548009954" class="utility-link"><%= dato.homepage.default_phone %></a>
+      <a href="tel:1<%= dato.homepage.default_phone %>" class="utility-link"><%= dato.homepage.default_phone %></a>
     <% end %>
   </div>
   <a href="/" class="brand w-nav-brand w--current"><img
