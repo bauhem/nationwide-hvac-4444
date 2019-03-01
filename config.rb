@@ -6,7 +6,7 @@ require 'redcarpet'
 require "sanitize"
 require 'middleman-inliner'
 
-activate :dato, live_reload: true, token: '92d113325496fb6d6c5b65623b9e21'
+activate :dato, live_reload: true, preview: true, token: '92d113325496fb6d6c5b65623b9e21'
 
 
 Middleman::Util::EnhancedHash.disable_warnings
