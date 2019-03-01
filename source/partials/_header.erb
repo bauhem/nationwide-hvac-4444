@@ -2,11 +2,19 @@
 
 <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">
   <div class="div-utility"><img src="/images/phone-icon-white.png" width="16" alt="" class="phone-icon">
+    <% if landing %>
+    <% if landing.text_front_phone != "" %>
+    <div><%= landing.text_front_phone %></div>
+    <% else %>
     <div>Call us now</div>
+    <% end %>
+    <% else %>
+    <div>Call us now</div>
+    <% end %>
     <% if landing %>
     <a href="tel:1<%= landing.phone_number %>" class="utility-link"><%= landing.phone_number %></a>
     <% else %>
-      <a href="tel:19548009954" class="utility-link">954-800-9954</a>
+      <a href="tel:19548009954" class="utility-link"><%= dato.homepage.default_phone %></a>
     <% end %>
   </div>
   <a href="/" class="brand w-nav-brand w--current"><img
