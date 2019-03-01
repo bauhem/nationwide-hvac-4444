@@ -53,7 +53,11 @@ end
                           <%= landing.hero_image.file.auto('format').fit('crop').crop('focalpoint').fpx('4').lossless('true').width(600).height(600).q(50).dpr(2).to_url %> 2x">
   </picture>
   <div class="div-cta-ldp">
+    <% if landing.small_hero_image %>
+    <img src="<%= landing.small_hero_image.file.auto('format').fit('fill').lossless('true').width(300).q(50).to_url %>" alt="" data-ix="hero-appear-1">
+    <% else %>
     <img src="<%= landing.brand.logo.file.auto('format').fit('fill').lossless('true').width(200).q(50).to_url %>" width="200" alt="" data-ix="hero-appear-1">
+    <% end %>
     <h1 class="cta-heading-ldp" data-ix="hero-appear-1">
       <strong><%= landing.title %></strong></h1>
       <p data-ix="hero-appear-2">

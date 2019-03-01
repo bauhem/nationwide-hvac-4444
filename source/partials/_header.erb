@@ -4,7 +4,7 @@
   <div class="div-utility"><img src="/images/phone-icon-white.png" width="16" alt="" class="phone-icon">
     <div>Call us now</div>
     <% if landing %>
-    <a href="tel:19548009954" class="utility-link"><%= landing.phone_number %></a>
+    <a href="tel:1<%= landing.phone_number %>" class="utility-link"><%= landing.phone_number %></a>
     <% else %>
       <a href="tel:19548009954" class="utility-link">954-800-9954</a>
     <% end %>
