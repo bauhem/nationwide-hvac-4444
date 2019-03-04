@@ -42,18 +42,18 @@ class Accessories extends React.Component {
       case 'Thermostats':
         items = thermostats;
         actionBtn = this.nextBtn();
-        title = 'Add a Thermostat?';
+        title = 'Choose Thermostat';
         break;
       case 'Warranty':
         items = warranty;
         actionBtn = Accessories.checkoutBtn();
-        title = 'Add a Warranty?';
+        title = 'Choose Warranty';
         break;
       case 'Accessories':
         actionBtn = this.nextBtn();
       default:
         items = accessories;
-        title = 'Add Accessories?';
+        title = 'Choose Accessories';
         break;
     }
 
