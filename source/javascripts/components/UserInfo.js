@@ -21,6 +21,22 @@ class UserInfo extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  static sendUserInfo(state) {
+    fetch("/", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: encode({
+              "form-name": "wf-form-price-form",
+              "name": state.user_name,
+              "email-address": state.user_email,
+              "phone-number": state.user_phone,
+              "zip-code": state.zip_code
+            })
+          })
+            .then(() => console.log("Netlify: Lead added!"))
+            .catch(error => alert(error));
+  }
+
   handleClick() {
     if (!this.props.validateForm()) {
       return false;
@@ -45,20 +61,11 @@ class UserInfo extends React.Component {
         return this.props.transition({type: 'INVALID_ZIP'});
       }
 
-      fetch("/", {
-        method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: encode({
-          "form-name": "wf-form-price-form",
-          "name": state.user_name,
-          "email-address": state.user_email,
-          "phone-number": state.user_phone,
-          "zip-code": state.zip_code
-        })
-      })
-        .then(() => console.log("Netlify: Lead added!"))
-        .catch(error => alert(error));
-
+      // Do not send the info more than once
+      if (this.context.user_email !== state.user_email) {
+        UserInfo.sendUserInfo(state);
+      }
+      
       return this.props.saveAndContinue(state);
     }
 

@@ -130,7 +130,7 @@ class Quote extends React.Component {
             <div className="div-search">
               <div
                 className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src="images/arrow-right.svg" width="20" alt=""
+                <img src={arrowRightImgUrl} width="20" alt=""
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
@@ -149,7 +149,7 @@ class Quote extends React.Component {
             <div className="div-search">
               <div
                 className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src="images/arrow-right.svg" width="20" alt=""
+                <img src={arrowRightImgUrl} width="20" alt=""
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
