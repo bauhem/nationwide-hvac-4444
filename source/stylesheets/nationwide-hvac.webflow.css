@@ -2991,6 +2991,128 @@ ul {
   align-items: flex-end;
 }
 
+.div-form-price {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 9999;
+  display: none;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .82);
+  opacity: 0;
+  color: #fff;
+}
+
+.large-button {
+  margin-top: 20px;
+  padding: 7px 20px;
+  border-radius: 4px;
+  background-color: #f0181f;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  color: #fff;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.large-button:hover {
+  background-color: #000;
+}
+
+.large-button.in-navbar {
+  margin-top: 0px;
+  margin-left: 10px;
+  padding-right: 14px;
+  padding-left: 14px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.large-button.dark-color {
+  border-color: #000;
+  background-color: #000;
+  -webkit-transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.large-button.dark-color:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.large-button.added-top-margin {
+  margin-top: 40px;
+}
+
+.form-price {
+  width: 55%;
+}
+
+.div-close {
+  position: absolute;
+  left: auto;
+  top: 30px;
+  right: 30px;
+  bottom: auto;
+}
+
+.button-phone {
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 7px 20px 7px 40px;
+  border-radius: 4px;
+  background-color: #253c80;
+  background-image: url('../images/phone-icon-white.png');
+  background-position: 10px 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  color: #fff;
+  font-weight: 700;
+}
+
+.button-phone:hover {
+  background-color: #000;
+}
+
+.button-phone.in-navbar {
+  margin-top: 0px;
+  margin-left: 10px;
+  padding-right: 14px;
+  padding-left: 14px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.button-phone.dark-color {
+  border-color: #000;
+  background-color: #000;
+  -webkit-transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.button-phone.dark-color:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.button-phone.added-top-margin {
+  margin-top: 40px;
+}
+
 html.w-mod-js *[data-ix="hero-appear-1"] {
   opacity: 0;
   -webkit-transform: translate(0px, 30px);
@@ -3476,6 +3598,15 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+  .large-button.in-navbar {
+    margin-top: 10px;
+  }
+  .form-price {
+    width: 80%;
+  }
+  .button-phone.in-navbar {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -3831,6 +3962,12 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -ms-flex-pack: center;
     justify-content: center;
   }
+  .large-button.added-top-margin.snipcart-add-item {
+    float: left;
+  }
+  .button-phone.added-top-margin.snipcart-add-item {
+    float: left;
+  }
 }
 
 @media (max-width: 479px) {
@@ -3874,10 +4011,10 @@ html.w-mod-js *[data-ix="slider-anim"] {
     justify-content: space-between;
   }
   .div-flex-h.align-new {
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
   .div-logo {
     width: 49%;
@@ -3894,6 +4031,8 @@ html.w-mod-js *[data-ix="slider-anim"] {
     width: 140px;
   }
   .button-underline.left-margin {
+    margin-top: 10px;
+    margin-left: 0px;
     font-size: 18px;
   }
   .section-hero-interior {
@@ -4201,6 +4340,21 @@ html.w-mod-js *[data-ix="slider-anim"] {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+  }
+  .large-button {
+    font-size: 20px;
+  }
+  .large-button.added-top-margin.snipcart-add-item {
+    font-size: 18px;
+  }
+  .form-price {
+    width: 90%;
+  }
+  .button-phone {
+    margin-left: 0px;
+  }
+  .button-phone.added-top-margin.snipcart-add-item {
+    font-size: 18px;
   }
 }
 
