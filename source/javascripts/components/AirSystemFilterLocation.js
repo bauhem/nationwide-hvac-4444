@@ -14,9 +14,9 @@ class AirSystemFilterLocation extends React.Component {
         </div>
         <div className="div-flex-h">
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_filter_side: 'left'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_filter_side: 'left'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <input type="radio" id="left" name="air-filter-side"
                      value="left" data-name="air-filter-side"
@@ -26,9 +26,9 @@ class AirSystemFilterLocation extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_filter_side: 'right'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_filter_side: 'right'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <input type="radio" id="right" name="air-filter-side"
                      value="right" data-name="air-filter-side"
