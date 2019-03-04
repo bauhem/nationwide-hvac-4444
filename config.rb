@@ -50,7 +50,7 @@ end
 
 activate :robots,
          :rules   => [
-           { :user_agent => '*', :allow => %w(/) }
+           { :user_agent => '*', :disallow => %w(/accessories/) }
          ],
          :sitemap => "#{config.url_root}/sitemap.xml"
 
