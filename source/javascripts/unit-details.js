@@ -1,20 +1,33 @@
-function validateZip(e) {
-  let zip = prompt("Your zip code is required to get the price with installation", "");
+function showPriceSubmit(e) {
+  e.preventDefault();
+  let form = jQuery(this);
+  let zip = form.find('input#zipcode')[0];
 
+  if (validateZip(parseInt(zip.value))) {
+    hideLeadForm();
+    // TODO - Send form data to Netlify
+    jQuery.post(form.attr("action"), form.serialize()).then(function() {
+      console.log('Netlify: lead saved!')
+    });
+  }
+}
+
+function validateZip(zip) {
   if (zip !== null) {
-    let zone = getZone(parseInt(zip));
+    let zone = getZone(zip);
 
     if (zone === null) {
       window.alert('Your zip code is not on our usual territory. Give us a call at 877-910-HVAC to chat with our live agents');
       return false;
     } else {
       sessionStorage.setItem('zone', zone);
-      updateForZone(zone);
+      showInstalledPrice(zone);
+      return true;
     }
   }
 }
 
-function updateForZone(zone) {
+function showInstalledPrice(zone) {
   if (zone === null || zone === 'undefined' || zone < 1) {
     return;
   }
@@ -31,15 +44,25 @@ function updateForZone(zone) {
   cart_btn.removeClass('w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny');
 }
 
+function showLeadForm() {
+  jQuery('div#price-display-form').show();
+}
+
+function hideLeadForm() {
+  jQuery('div#price-display-form').hide();
+}
+
 let zone = sessionStorage.getItem('zone');
 
 if (zone !== "undefined" && zone !== null) {
-  updateForZone(zone);
+  showInstalledPrice(zone);
 }
 
 jQuery(document).ready(function ($) {
 
-  $('a#get-installed-price').click(validateZip);
+  $('a#get-installed-price').click(showLeadForm);
+
+  $('form#wf-form-price-form').submit(showPriceSubmit);
 
   Snipcart.subscribe('item.added', itemAddedPopup);
 });

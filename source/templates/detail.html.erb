@@ -22,6 +22,7 @@
   <a href="#" class="breadcrumb-link active"><%= model(unit) %></a>
 </div>
 <div class="section-product-details">
+  <%= partial '/partials/price_display_form' %>
   <div class="container">
     <div class="div-flex-h justify-start added-bot-margin">
       <div class="div-40">
@@ -86,6 +87,7 @@
           </a>
 
           <a href="#" id="get-installed-price" class="button added-top-margin w-button">Show Installed Price</a>
+          <a href="tel:<%= dato.homepage.default_phone %>" class="button-phone w-button">Call US <%= dato.homepage.default_phone %></a>
           <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
             View brochure
           </a>
