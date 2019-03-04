@@ -16,9 +16,9 @@ class CondenserUnitLocation extends React.Component {
         </div>
         <div className="div-flex-h">
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({condenser_unit_location: 'roof'}, {type: 'LOAD_ROOF_ACCESS'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({condenser_unit_location: 'roof'}, {type: 'LOAD_ROOF_ACCESS'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/roof.png" alt=""/>
               <input type="radio"
@@ -34,9 +34,9 @@ class CondenserUnitLocation extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({condenser_unit_location: 'ground'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({condenser_unit_location: 'ground'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/ground.png" alt=""/>
               <input type="radio"
