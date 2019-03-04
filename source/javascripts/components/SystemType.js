@@ -4,9 +4,9 @@ class SystemType extends React.Component {
   render() {
     return (
       <div
-           className="options different-color-font pale-border top">
-        <div className="radio-button-field grey-border w-radio"
-             onClick={() => this.props.saveAndContinue({system_type: this.props.type})}>
+           className="options different-color-font pale-border top"
+           onClick={() => this.props.saveAndContinue({system_type: this.props.type})}>
+        <div className="radio-button-field grey-border w-radio">
           <div className="div-hover"></div>
           <input type="radio" name="system"
                  value={this.props.type} data-name="system"
