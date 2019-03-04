@@ -118,11 +118,11 @@ const QuoteSM = Machine({
     Brands: {
       onEntry: 'filterBrands',
       on: {
-        SUBMIT: 'ZipCode',
+        SUBMIT: 'UserInfo',
         CALL_US_ON_NO_BRANDS: 'CallUs'
       }
     },
-    ZipCode: {
+    UserInfo: {
       on: {
         SUBMIT: 'Quote',
         INVALID_ZIP: 'InvalidZip'

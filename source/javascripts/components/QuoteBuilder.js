@@ -18,7 +18,7 @@ import PackagedSystemLocation from "./PackagedSystemLocation";
 import AirSystemFilterLocation from "./AirSystemFilterLocation";
 import Brands from "./Brands";
 import Quote from "./Quote";
-import ZipCode from "./ZipCode";
+import UserInfo from "./UserInfo";
 import Accessories from "./Accessories";
 import UnitDetails from "./UnitDetails";
 
@@ -41,7 +41,7 @@ const StatesComponents = {
   CallUs: CallUs,
   InvalidZip: InvalidZip,
   Brands: Brands,
-  ZipCode: ZipCode,
+  ZipCode: UserInfo,
   Quote: Quote,
   UnitDetails: UnitDetails,
   Thermostats: Accessories,

@@ -4,7 +4,7 @@ import {getZone} from './UnitHelpers';
 
 const zipData = require('../../../data/zip_codes.json');
 
-class ZipCode extends React.Component {
+class UserInfo extends React.Component {
   constructor(props) {
     super(props);
     this.name = React.createRef();
@@ -68,6 +68,6 @@ class ZipCode extends React.Component {
   }
 }
 
-ZipCode.contextType = QuoteCtx;
+UserInfo.contextType = QuoteCtx;
 
-export default ZipCode;
+export default UserInfo;
