@@ -9,9 +9,9 @@ class SystemTypeStructure extends React.Component {
 
   systemType(title, description, type) {
     return (
-        <div className="options different-color-font pale-border top">
-          <div className="radio-button-field grey-border w-radio"
-               onClick={() => this.props.saveAndContinue({system_type_structure: type, system_types: config.get(type)})}>
+        <div className="options different-color-font pale-border top"
+             onClick={() => this.props.saveAndContinue({system_type_structure: type, system_types: config.get(type)})}>
+          <div className="radio-button-field grey-border w-radio">
             <div className="div-hover"></div>
             <input type="radio" name="type"
                    value={type} data-name="type"
