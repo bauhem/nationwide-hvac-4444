@@ -71,6 +71,12 @@ const QuoteSM = Machine({
         SUBMIT: 'CallUs'
       }
     },
+    InvalidZip: {
+      type: 'final',
+      on: {
+        SUBMIT: 'InvalidZip'
+      }
+    },
     AirHandlerLocation: {
       on: {
         LOAD_WATER_HEATER: 'WaterHeaterUnderAirHandler',
@@ -119,7 +125,7 @@ const QuoteSM = Machine({
     ZipCode: {
       on: {
         SUBMIT: 'Quote',
-        INVALID_ZIP: 'CallUs'
+        INVALID_ZIP: 'InvalidZip'
       }
     },
     Quote: {

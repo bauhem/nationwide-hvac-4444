@@ -17,7 +17,7 @@ function validateZip(zip) {
     let zone = getZone(zip);
 
     if (zone === null) {
-      window.alert('Your zip code is not on our usual territory. Give us a call at 877-910-HVAC to chat with our live agents');
+      window.alert('Your zip code is not on our usual territory. Give us a call at 877-910-4822 to chat with our live agents');
       return false;
     } else {
       sessionStorage.setItem('zone', zone);
@@ -63,6 +63,8 @@ jQuery(document).ready(function ($) {
   $('a#get-installed-price').click(showLeadForm);
 
   $('form#wf-form-price-form').submit(showPriceSubmit);
+
+  $('div.div-close').click(hideLeadForm);
 
   Snipcart.subscribe('item.added', itemAddedPopup);
 });
