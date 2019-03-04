@@ -134,7 +134,7 @@ class Quote extends React.Component {
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
-                <div>Brand(s)</div>
+                <div>Brand</div>
               </div>
               <div className="div-search-form">
                 <div>
