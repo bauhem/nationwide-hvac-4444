@@ -14,9 +14,9 @@ class AirHandlerLocation extends React.Component {
         </div>
         <div className="div-flex-h">
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_location: 'closet'}, {type: 'LOAD_WATER_HEATER'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_handler_location: 'closet'}, {type: 'LOAD_WATER_HEATER'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/door.png" alt=""/><input type="radio"
                                                          id="straight-cool"
@@ -31,9 +31,9 @@ class AirHandlerLocation extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_location: 'garage'}, {type: 'LOAD_AIR_HANDLER_TYPE'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_handler_location: 'garage'}, {type: 'LOAD_AIR_HANDLER_TYPE'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/garage.png" alt=""/><input type="radio"
                                                            id="water-sourced"
@@ -48,9 +48,9 @@ class AirHandlerLocation extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_location: 'attic'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_handler_location: 'attic'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/roof.png" alt=""/><input type="radio"
                                                          id="heat-pump"
@@ -65,9 +65,9 @@ class AirHandlerLocation extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({air_handler_location: 'other'}, {type: 'LOAD_AIR_HANDLER_TYPE'})}>
+               className="options different-color-font pale-border"
+               onClick={() => this.props.saveAndContinue({air_handler_location: 'other'}, {type: 'LOAD_AIR_HANDLER_TYPE'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <input type="radio" id="not-sure" name="system" value="not-sure"
                      data-name="system" className="radio-button w-radio-input"/>
