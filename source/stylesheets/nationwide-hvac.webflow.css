@@ -3008,7 +3008,7 @@ ul {
   -ms-flex-align: center;
   align-items: center;
   background-color: rgba(0, 0, 0, .82);
-  opacity: 0;
+  opacity: 1;
   color: #fff;
 }
 
@@ -3057,6 +3057,9 @@ ul {
 
 .form-price {
   width: 55%;
+  margin-top: 7%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .div-close {
@@ -3603,6 +3606,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .form-price {
     width: 80%;
+    margin-top: 12%;
   }
   .button-phone.in-navbar {
     margin-top: 10px;
@@ -3964,6 +3968,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .large-button.added-top-margin.snipcart-add-item {
     float: left;
+  }
+  .form-price {
+    margin-top: 16%;
   }
   .button-phone.added-top-margin.snipcart-add-item {
     float: left;
@@ -4349,6 +4356,7 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .form-price {
     width: 90%;
+    margin-top: 30%;
   }
   .button-phone {
     margin-left: 0px;
