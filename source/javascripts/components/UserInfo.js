@@ -48,7 +48,13 @@ class UserInfo extends React.Component {
       fetch("/", {
         method: "POST",
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: encode({"form-name": "wf-form-price-form", ...state})
+        body: encode({
+          "form-name": "wf-form-price-form",
+          "name": state.user_name,
+          "email-address": state.user_email,
+          "phone-number": state.user_phone,
+          "zip-code": state.zip_code
+        })
       })
         .then(() => console.log("Netlify: Lead added!"))
         .catch(error => alert(error));
@@ -74,11 +80,11 @@ class UserInfo extends React.Component {
                  id="name" required={true}
                  ref={this.name} defaultValue={this.context.user_name || ''}/>
           <input type="email" className="zipcode w-input" maxLength="256"
-                 name="email" placeholder="Your email address"
+                 name="email-address" placeholder="Your email address"
                  id="email" required={true}
                  ref={this.email} defaultValue={this.context.user_email || ''}/>
           <input type="phone" className="zipcode w-input" maxLength="256"
-                 name="phone" placeholder="Your phone number"
+                 name="phone-number" placeholder="Your phone number"
                  id="name" required={true}
                  ref={this.phone} defaultValue={this.context.user_phone || ''}/>
           <input type="text" pattern="\d{5}" className="zipcode w-input"

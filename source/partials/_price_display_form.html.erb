@@ -9,8 +9,8 @@
     <div class="div-flex-h">
       <input type="text" class="zipcode w-input" maxlength="256" name="name" data-name="name" placeholder="Your name" id="name" required="true"/>
       <input type="email" class="zipcode w-input" maxlength="256" name="email-address" data-name="email-address" placeholder="Your email address" id="email-address" required="true"/>
-      <input type="phone" class="zipcode w-input" maxlength="256" name="Phone-number" data-name="Phone-number" placeholder="Your phone number" id="phone-number" required=""/>
-      <input type="text" class="zipcode w-input" maxlength="5" pattern="[0-9]{5}" name="Zipcode" data-name="Zipcode" placeholder="Your zip code" id="zipcode" required="true"/>
+      <input type="phone" class="zipcode w-input" maxlength="256" name="phone-number" data-name="phone-number" placeholder="Your phone number" id="phone-number" required=""/>
+      <input type="text" class="zipcode w-input" maxlength="5" pattern="\d{5}" name="zip-code" data-name="zip-code" placeholder="Your zip code" id="zipcode" required="true"/>
     </div>
     <div netlify-recaptcha></div>
     <input type="submit" data-wait="Please wait..." value="Get my installation price" class="large-button w-button"/>
