@@ -8,12 +8,14 @@ import Unit from "./Unit";
 import MixitupFilter from "./MixitupFilter";
 
 mixitup.use(mixitupMultifilter);
+var mixer;
 
 class Quote extends React.Component {
   constructor(props, context) {
     super(props);
     this.startMixitUp = this.startMixitUp.bind(this);
-
+    this.sort = this.sort.bind(this);
+    
     this.state = {
       unitsFound: (context.units.length >= 1)
     }
@@ -26,7 +28,7 @@ class Quote extends React.Component {
   startMixitUp() {
     let quoteObj = this;
 
-    mixitup('.container', {
+    mixer = mixitup('.container', {
       controls: {
         toggleLogic: 'or'
       },
@@ -47,6 +49,10 @@ class Quote extends React.Component {
         }
       }
     })
+  }
+
+  sort(event) {
+    mixer.sort(event.target.selectedOptions[0].dataset.sort);
   }
 
   componentDidMount() {
@@ -134,6 +140,31 @@ class Quote extends React.Component {
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
+                <div>Sort by price</div>
+              </div>
+              <div className="div-search-form">
+                <div>
+                  <div className="div-search-dropdown">
+                    <div className="dropdown">
+                      <select className="sort-price" onChange={this.sort}>
+                        <option data-sort="default">Default</option>
+                        <option data-sort="price:asc">Lowest to Highest</option>
+                        <option data-sort="price:desc">Highest to Lowest
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="div-search">
+              <div
+                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
+                <img src={arrowRightImgUrl} width="20" alt=""
+                     className="arrow-icon"/>
+              </div>
+              <div className="div-search-header">
                 <div>Brand</div>
               </div>
               <div className="div-search-form">
@@ -146,6 +177,7 @@ class Quote extends React.Component {
                 </div>
               </div>
             </div>
+
             <div className="div-search">
               <div
                 className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
