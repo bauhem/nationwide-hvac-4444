@@ -14,6 +14,27 @@ class Unit extends React.Component {
     return this.props.saveAndContinue({selected_unit: this.props.unit});
   }
 
+  renderField(key, label = '') {
+    let value = this.props.unit[key];
+
+    // Do not render missing fields
+    if (value === '' || value === undefined || value === null) {
+      return '';
+    }
+
+    // When label is not provided, use the key
+    if (label === '') {
+      label = key;
+    }
+
+    return (
+      <div className="div-product-details">
+        <div className="blue-text-left">{label}</div>
+        <div><strong>{value}</strong></div>
+      </div>
+    )
+  }
+
   render() {
     let unit = this.props.unit;
     let img_src = unitImage(unit);
@@ -37,16 +58,14 @@ class Unit extends React.Component {
                alt={unit['Brand']}
                className="image-brand"/>
         </div>
+
+        {this.renderField('Tons')}
+        {this.renderField('SEER')}
+        {this.renderField('CU Model', 'Condenser')}
+        {this.renderField('AHU Model', 'Air Handler')}
+
         <div className="div-product-details">
-          <div className="blue-text">Tons</div>
-          <div><strong>{unit['Tons']}</strong></div>
-        </div>
-        <div className="div-product-details">
-          <div className="blue-text">SEER</div>
-          <div><strong>{unit['SEER']}</strong></div>
-        </div>
-        <div className="div-product-details">
-          <div className="blue-text">Price including
+          <div className="blue-text-left">Price including
             installation
           </div>
           <div><strong>${installation_price}</strong></div>
