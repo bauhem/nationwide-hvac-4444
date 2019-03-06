@@ -1,6 +1,6 @@
 <%= content_for(:head) do
-    display_meta_tags title: "#{brand(unit)} - #{model(unit)} - #{tons(unit)} tons - Nationwide HVAC"
-  end
+  display_meta_tags title: "#{brand(unit)} - #{model(unit)} - #{tons(unit)} tons - Nationwide HVAC"
+end
 %>
 <% content_for(:head) do %>
   <link href="<%= current_page.url %>" rel="canonical"/>
@@ -14,7 +14,7 @@
 </div>
 <div class="breadcrumbs">
   <a href="/ac-units" class="breadcrumb-link">
-    A/C Units
+    Browse AC Units
   </a>
   <span class="breadcrumb-link arrow">></span>
   <%= system_type_bc(unit) %>
@@ -31,7 +31,8 @@
       <div class="div-60">
 
         <h1 class="product-name smaller">
-          <strong><%= brand(unit) %> - <%= model(unit) %> - <%= tons(unit) %> tons</strong></h1>
+          <strong><%= brand(unit) %> - <%= model(unit) %> - <%= tons(unit) %>
+            tons</strong></h1>
         <div>Up to <%= seer(unit) %> SEER Performance</div>
         <div class="more-spec">
           <div class="div-product-details smaller">
@@ -48,16 +49,40 @@
               <div><strong><%= unit['CU Model'] %></strong></div>
             </div>
           <% end %>
+          <% if unit['Compressor Speed'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Compressor Speed</div>
+              <div><strong><%= unit['Compressor Speed'] %></strong></div>
+            </div>
+          <% end %>
           <% if unit['AHU Model'] %>
             <div class="div-product-details smaller">
               <div class="blue-text">Air Handler</div>
               <div><strong><%= unit['AHU Model'] %></strong></div>
             </div>
+            <% if unit['Air Handler Speed'] %>
+              <div class="div-product-details smaller">
+                <div class="blue-text">Air Handler Speed</div>
+                <div><strong><%= unit['Air Handler Speed'] %></strong></div>
+              </div>
+            <% end %>
+            <% if unit['Air Handler Size'] %>
+              <div class="div-product-details smaller">
+                <div class="blue-text">Air Handler Size</div>
+                <div><strong><%= unit['Air Handler Size'] %></strong></div>
+              </div>
+            <% end %>
           <% end %>
           <% if unit['Heater model'] %>
             <div class="div-product-details smaller">
               <div class="blue-text">Heater</div>
               <div><strong><%= unit['Heater model'] %></strong></div>
+            </div>
+          <% end %>
+          <% if unit['Heater Size'] %>
+            <div class="div-product-details smaller">
+              <div class="blue-text">Heater Size</div>
+              <div><strong><%= unit['Heater Size'] %></strong></div>
             </div>
           <% end %>
           <% if unit['Warranty'] %>
@@ -86,15 +111,24 @@
             Buy now
           </a>
 
-          <a href="#" id="get-installed-price" class="button added-top-margin w-button">Show Installed Price</a>
-          <a href="tel:<%= dato.homepage.default_phone %>" class="button-phone w-button">Call US <%= dato.homepage.default_phone %></a>
+          <a href="#" id="get-installed-price" class="button added-top-margin w-button">Show
+            Installed Price</a>
+          <a href="tel:<%= dato.homepage.default_phone %>" class="button-phone w-button">Call
+            US <%= dato.homepage.default_phone %></a>
           <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
             View brochure
           </a>
 
         </div>
         <div class="div-product-details smaller"><%= unit['Details'] %></div>
-        <div class="div-product-details smaller"><strong>Installation Includes:‍</strong><br/>• Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation of new digital thermostat<br/><br/>‍• Installation of a new float switch (where required)<br/><br/>‍• Complete final cleanup and haul away debris<br/><br/></div>
+        <div class="div-product-details smaller">
+          <strong>Installation Includes:‍</strong><br/>• Removal of existing
+          system, Installation of new Air Handler Unit(AHU) and Condenser Unit
+          (CU), hurricane tie downs where required, purging and vacuum of
+          existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation
+          of new digital thermostat<br/><br/>‍• Installation of a new float
+          switch (where required)<br/><br/>‍• Complete final cleanup and haul
+          away debris<br/><br/></div>
 
       </div>
     </div>
