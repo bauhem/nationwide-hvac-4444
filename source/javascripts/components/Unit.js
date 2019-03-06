@@ -37,7 +37,7 @@ class Unit extends React.Component {
 
   render() {
     let unit = this.props.unit;
-    let img_src = unitImage(unit);
+    let img_src = unitImage(unit["Attachments"]);
     let brand_img = brandLogoImage(unit);
     let zone_id = this.context.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;

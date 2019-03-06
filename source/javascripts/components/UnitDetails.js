@@ -81,7 +81,7 @@ class UnitDetails extends React.Component {
     let metaData = this.unitMetaData(this.context);
 
     let unit = this.context.selected_unit;
-    let img_src = unitImage(unit, 500, 400);
+    let img_src = unitImage(unit["Attachments"], 500, 400);
     let brand_img = brandLogoImage(unit);
     let zone_id = this.context.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;

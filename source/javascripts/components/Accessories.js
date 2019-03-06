@@ -1,6 +1,7 @@
 import React from "react";
 import config from "react-global-configuration";
 import QuoteCtx from "./QuoteCtx";
+import {unitImage} from "./UnitHelpers";
 
 const accessories = require('../../../data/accessories.json');
 const warranty = require('../../../data/warranty.json');
@@ -58,6 +59,7 @@ class Accessories extends React.Component {
     }
 
     const accComponents = items.map((acc) => {
+      let img_src = unitImage(acc['Image']);
       return (
         <div key={acc['id']} className="div-full-width added-top-margin">
           <div className="unit-overlay">
@@ -69,6 +71,9 @@ class Accessories extends React.Component {
                data-item-description={acc['Description']}
                className="button w-button snipcart-add-item">Add to cart</a>
 
+          </div>
+          <div className="div-image">
+            <img src={img_src} alt={acc['Item']}/>
           </div>
           <div className="div-flex-h align-center">
             <div className="product-name smaller">{acc['Item']}</div>

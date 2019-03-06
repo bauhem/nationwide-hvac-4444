@@ -10,10 +10,8 @@ function systemTypeName(systemTypes, type) {
   return system_type_info.name;
 }
 
-export function unitImage(unit, width = 300, height = 200, crop = 'fit') {
-  let attachments = unit["Attachments"];
-
-  if (attachments === null || attachments.length === 0) {
+export function unitImage(attachments, width = 300, height = 200, crop = 'fit') {
+  if (attachments === undefined || attachments === null || attachments.length === 0) {
     return config.get('no_image_path');
   }
   let url = attachments[0]['url'];
