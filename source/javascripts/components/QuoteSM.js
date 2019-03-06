@@ -96,37 +96,31 @@ const QuoteSM = Machine({
     },
     CondenserUnitLocation: {
       on: {
-        SUBMIT: 'Brands',
+        SUBMIT: 'UserInfo',
         LOAD_ROOF_ACCESS: 'RoofAccess'
       }
     },
     RoofAccess: {
       on: {
-        SUBMIT: 'Brands'
+        SUBMIT: 'UserInfo'
       }
     },
     PackagedSystemLocation: {
       on: {
-        SUBMIT: 'Brands'
+        SUBMIT: 'UserInfo'
       }
     },
     AirSystemFilterLocation: {
       on: {
-        SUBMIT: 'Brands'
-      }
-    },
-    Brands: {
-      onEntry: 'filterBrands',
-      on: {
-        SUBMIT: 'UserInfo',
-        CALL_US_ON_NO_BRANDS: 'CallUs'
+        SUBMIT: 'UserInfo'
       }
     },
     UserInfo: {
+      onEntry: 'filterBrands',
       on: {
         SUBMIT: 'Quote',
         INVALID_ZIP: 'InvalidZip'
-      }
+      },
     },
     Quote: {
       onEntry: 'filterResults',

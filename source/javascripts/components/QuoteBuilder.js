@@ -16,7 +16,6 @@ import CallUs from "./CallUs";
 import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import PackagedSystemLocation from "./PackagedSystemLocation";
 import AirSystemFilterLocation from "./AirSystemFilterLocation";
-import Brands from "./Brands";
 import Quote from "./Quote";
 import UserInfo from "./UserInfo";
 import Accessories from "./Accessories";
@@ -40,7 +39,6 @@ const StatesComponents = {
   AirSystemFilterLocation: AirSystemFilterLocation,
   CallUs: CallUs,
   InvalidZip: InvalidZip,
-  Brands: Brands,
   UserInfo: UserInfo,
   Quote: Quote,
   UnitDetails: UnitDetails,
