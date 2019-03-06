@@ -45,6 +45,18 @@
             </form>
           </div>
         </div>
+
+        <div class="div-search">
+          <div class="div-search-header">
+            <div>Sort by price</div>
+          </div>
+          <div class="div-search-form w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
+              <div class="div-search-dropdown bot-top-padding">
+                <select class="sort-price"><option data-sort="default">Default</option><option data-sort="price:asc">Lowest to Highest</option><option data-sort="price:desc">Highest to Lowest</option></select>              </div>
+            </form>
+          </div>
+        </div>
         <!-- Brands -->
         <div class="div-search">
           <div class="div-search-header">
@@ -95,7 +107,6 @@
 
       <!-- Search Results View -->
       <div class="div-flex-h justify-start _75-with">
-
         <% products.each do |unit| %>
           <%= partial "/partials/unit_thumbnail", locals: { unit: unit, mixit: true } %>
         <% end %>
@@ -134,6 +145,10 @@
             }
           }
         });
+
+        $('select.sort-price').change(function() {
+          mixer.sort($(this).find(":selected").attr('data-sort'));
+        })
       }
     });
   </script>
