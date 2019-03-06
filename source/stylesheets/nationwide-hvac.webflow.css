@@ -3008,7 +3008,7 @@ ul {
   -ms-flex-align: center;
   align-items: center;
   background-color: rgba(0, 0, 0, .82);
-  opacity: 1;
+  opacity: 0;
   color: #fff;
 }
 
@@ -4356,7 +4356,13 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .form-price {
     width: 90%;
-    margin-top: 30%;
+    margin-top: 11%;
+  }
+  .div-close {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
   }
   .button-phone {
     margin-left: 0px;
