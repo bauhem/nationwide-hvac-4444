@@ -1,13 +1,14 @@
-const subdomain = 'nationwide-hvac';
+const default_subdomain = 'nationwide-hvac';
 
 module.exports = function (grunt) {
   grunt.initConfig({
+    subdomain: process.env.LOCALTUNNEL_SUBDOMAIN || default_subdomain,
     pkg: grunt.file.readJSON('package.json'),
     localtunnel_client: {
       server: {
         options: {
           port: 4444,
-          subdomain: subdomain,
+          subdomain: '<%= subdomain %>',
           keepalive: true,
           onError: function (err) {
             grunt.log.error('Not cool! ', err);
