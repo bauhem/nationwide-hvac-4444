@@ -3116,6 +3116,31 @@ ul {
   margin-top: 40px;
 }
 
+.div-accessory-image {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 210px;
+  margin-bottom: 10px;
+  padding-right: 25px;
+  padding-left: 25px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.accessory-title {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 900;
+}
+
 html.w-mod-js *[data-ix="hero-appear-1"] {
   opacity: 0;
   -webkit-transform: translate(0px, 30px);
@@ -3611,6 +3636,10 @@ html.w-mod-js *[data-ix="slider-anim"] {
   .button-phone.in-navbar {
     margin-top: 10px;
   }
+  .accessory-title.smaller {
+    font-size: 4vw;
+    line-height: 4.5vw;
+  }
 }
 
 @media (max-width: 767px) {
@@ -3974,6 +4003,14 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .button-phone.added-top-margin.snipcart-add-item {
     float: left;
+  }
+  .div-accessory-image {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .accessory-title.smaller {
+    font-size: 6vw;
+    line-height: 7.5vw;
   }
 }
 
@@ -4369,6 +4406,14 @@ html.w-mod-js *[data-ix="slider-anim"] {
   }
   .button-phone.added-top-margin.snipcart-add-item {
     font-size: 18px;
+  }
+  .div-accessory-image {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  .accessory-title.smaller {
+    font-size: 8vw;
+    line-height: 10vw;
   }
 }
 
