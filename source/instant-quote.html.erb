@@ -18,5 +18,8 @@
 
 <%= partial "/partials/section-cta" %>
 
+<% content_for(:footer_scripts) do %>
+  <%= javascript_include_tag "mixitup-helpers" %>
+<% end %>
 
 
