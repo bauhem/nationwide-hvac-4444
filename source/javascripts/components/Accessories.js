@@ -76,7 +76,7 @@ class Accessories extends React.Component {
             <img src={img_src} alt={acc['Item']}/>
           </div>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller">{acc['Item']}</div>
+            <div className="accessory-title smaller">{acc['Item']}</div>
           </div>
           <div className="div-product-details smaller">
             <div className="blue-text">Details</div>
