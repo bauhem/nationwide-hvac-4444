@@ -14,8 +14,10 @@ class Unit extends React.Component {
     return this.props.saveAndContinue({selected_unit: this.props.unit});
   }
 
-  renderField(key, label = '') {
+  renderField(key, label = '', extra_cls='') {
     let value = this.props.unit[key];
+
+    let cls = `div-product-details ${extra_cls}`;
 
     // Do not render missing fields
     if (value === '' || value === undefined || value === null) {
@@ -28,7 +30,7 @@ class Unit extends React.Component {
     }
 
     return (
-      <div className="div-product-details">
+      <div className={cls}>
         <div className="blue-text-left">{label}</div>
         <div><strong>{value}</strong></div>
       </div>
@@ -61,8 +63,8 @@ class Unit extends React.Component {
 
         {this.renderField('Tons')}
         {this.renderField('SEER')}
-        {this.renderField('CU Model', 'Condenser')}
-        {this.renderField('AHU Model', 'Air Handler')}
+        {this.renderField('CU Model', 'Condenser', 'smaller')}
+        {this.renderField('AHU Model', 'Air Handler', 'smaller')}
 
         <div className="div-product-details">
           <div className="blue-text-left">Price including
