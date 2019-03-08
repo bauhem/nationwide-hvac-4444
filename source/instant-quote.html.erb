@@ -4,11 +4,6 @@
   end
 %>
 
-<% content_for(:footer_scripts) do %>
-  <%= javascript_include_tag 'instant_quote' %>
-<% end %>
-
-
 <div class="section-hero-interior">
   <h1 class="cta-heading" data-ix="hero-appear-1"><strong>Instant </strong>Quote
   </h1>
@@ -20,6 +15,7 @@
 
 <% content_for(:footer_scripts) do %>
   <%= javascript_include_tag "mixitup-helpers" %>
+  <%= javascript_include_tag 'instant_quote' %>
 <% end %>
 
 

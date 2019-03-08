@@ -1,8 +1,14 @@
+import mixitup from 'mixitup';
+import mixitupMultifilter from "./lib/mixitup-multifilter";
+import mixitupPagination from "./lib/mixitup-pagination";
+
 const FILTERS_STORAGE_KEY = 'mixitup_filters';
 const FILTER_REGEX = /(\.{1}[a-zA-Z0-9\-]+)/g;
-var mixer;
 
-function handleMixClick(state, futureState) {
+mixitup.use(mixitupMultifilter);
+mixitup.use(mixitupPagination);
+
+export function handleMixClick(state, futureState) {
   if (this.classList.contains('filter_button')) {
     toggleCB(this);
   }
@@ -17,6 +23,18 @@ function toggleCB(el) {
 
   greyCB.style.zIndex = (tmpGreyVal === '1') ? '0' : '1';
   activeCB.style.zIndex = (tmpActiveVal === '1') ? '0' : '1';
+}
+
+function getStyleProp(el, styleProp) {
+  var y;
+
+  if (window.getComputedStyle) {
+    y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+  } else if (el.currentStyle) {
+    y = el.currentStyle[styleProp];
+  }
+
+  return y;
 }
 
 function disableCB(el) {
@@ -38,18 +56,18 @@ function disableAllFilters(el) {
   });
 }
 
-function saveFilters(filters = {}) {
+export function saveFilters(filters = {}) {
   sessionStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(filters))
 }
 
-function loadFilters() {
+export function loadFilters() {
   return JSON.parse(sessionStorage.getItem(FILTERS_STORAGE_KEY));
 }
 
 function getFilterGroups() {
   let filter_groups = {};
 
-  jQuery('.div-search-dropdown .dropdown').each(function() {
+  jQuery('.div-search-dropdown .dropdown').each(function () {
     filter_groups[jQuery(this).attr('data-filter-group')] = {};
   });
 
@@ -80,6 +98,11 @@ function getFiltersByGroup(filters) {
     // Push each match to the proper filter group array using the
     // groups_by_index array
     for (let i in filter_matches) {
+      if (filter_groups[groups_by_index[i]] === undefined) {
+        // If a filter changes name when the session is still active, group
+        // won't be valid
+        continue;
+      }
       filter_groups[groups_by_index[i]][filter_matches[i]] = true;
     }
   });
@@ -87,48 +110,55 @@ function getFiltersByGroup(filters) {
   return filter_groups;
 }
 
-jQuery(document).ready(function ($) {
-  var containerEl = document.querySelector('.container');
+function scrollToContainer(containerSelector = '.breadcrumbs') {
+  jQuery('html, body').animate({
+    scrollTop: jQuery(containerSelector).offset().top
+  }, 300);
+}
 
-  if (containerEl) {
-    let filters = loadFilters();
-
-    mixer = mixitup(containerEl, {
-      pagination: {
-        limit: 12
+export function initializeMixitup(container, cfg) {
+  let mixer = mixitup(container, {
+    pagination: {
+      limit: 12
+    },
+    multifilter: {
+      enable: true
+    },
+    animation: {
+      enable: false
+    },
+    callbacks: {
+      onMixClick: handleMixClick,
+      onMixEnd: (state) => {
+        saveFilters(state.activeFilter.selector);
+        scrollToContainer('.section-hero-interior');
       },
-      multifilter: {
-        enable: true
-      },
-      animation: {
-        enable: false
-      },
-      callbacks: {
-        onMixClick: handleMixClick,
-        onMixEnd: (state) => {
-          saveFilters(state.activeFilter.selector);
-          scrollToContainer('.breadcrumbs');
-        }
+      onMixFail: (state) => {
+        console.log('Mix failed: ');
+        console.table(state)
       }
-    });
-
-    if (filters !== undefined && filters !== null && filters !== '' && filters !== '.mix') {
-      let filtersGroup = getFiltersByGroup(filters);
-
-      for (let key in filtersGroup) {
-        let selectors = Object.keys(filtersGroup[key]);
-        mixer.setFilterGroupSelectors(key, selectors);
-        selectors.forEach((selector) => {
-          let el = jQuery(`*[data-toggle="${selector}"]`)[0];
-          if (el === undefined) {
-            return;
-          }
-          toggleCB(el);
-        });
-      }
-
-      mixer.parseFilterGroups();
     }
-  }
-});
+  });
 
+  let filters = loadFilters();
+
+  if (filters !== undefined && filters !== null && filters !== '' && filters !== '.mix') {
+    let filtersGroup = getFiltersByGroup(filters);
+
+    for (let key in filtersGroup) {
+      let selectors = Object.keys(filtersGroup[key]);
+      selectors.forEach((selector) => {
+        let el = jQuery(`*[data-toggle="${selector}"]`)[0];
+        if (el === undefined) {
+          return;
+        }
+        toggleCB(el);
+      });
+      mixer.setFilterGroupSelectors(key, selectors);
+    }
+
+    mixer.parseFilterGroups();
+  }
+
+  return mixer;
+}

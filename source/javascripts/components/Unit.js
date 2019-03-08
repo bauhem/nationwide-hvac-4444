@@ -50,7 +50,7 @@ class Unit extends React.Component {
     return (
       <a href={"#next"}
          onClick={this.handleClick}
-         className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
+         className={`mix ${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
         <div className="div-image">
           <img src={img_src} alt={model_name}/>
         </div>

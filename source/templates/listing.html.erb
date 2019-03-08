@@ -113,4 +113,19 @@
 
 <% content_for(:footer_scripts) do %>
   <%= javascript_include_tag "mixitup-helpers" %>
+
+  <script>
+  import {initializeMixitup} from "../javascripts/mixitup-helpers";
+
+  jQuery(document).ready(function ($) {
+    var containerEl = document.querySelector('.container');
+    var mixer;
+
+    if (containerEl) {
+
+      mixer = initializeMixitup(containerEl);
+    }
+  });
+  </script>
+
 <% end %>

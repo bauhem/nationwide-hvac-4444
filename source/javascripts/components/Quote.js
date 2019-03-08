@@ -1,13 +1,12 @@
 import React from "react";
-import mixitup from 'mixitup';
 import config from "react-global-configuration";
-import mixitupMultifilter from '../lib/mixitup-multifilter'; // loaded from a directory of your choice within your project
 
 import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
 import MixitupFilter from "./MixitupFilter";
+import {initializeMixitup} from "../mixitup-helpers";
 
-mixitup.use(mixitupMultifilter);
+var mixer;
 
 class Quote extends React.Component {
   constructor(props, context) {
@@ -24,29 +23,7 @@ class Quote extends React.Component {
   }
 
   startMixitUp() {
-    let quoteObj = this;
-
-    mixitup('.container', {
-      controls: {
-        toggleLogic: 'or'
-      },
-      multifilter: {
-        enable: true
-      },
-      animation: {
-        enable: false
-      },
-      callbacks: {
-        onMixClick: handleMixClick,
-        onMixEnd: (state) => {
-          scrollToContainer('.form-full-width');
-        },
-        onMixFail: (state) => {
-          console.log('Mix failed: ');
-          console.table(state)
-        }
-      }
-    })
+    mixer = initializeMixitup('.container')
   }
 
   componentDidMount() {
@@ -63,7 +40,7 @@ class Quote extends React.Component {
       filters.push(<MixitupFilter
         key={brand}
         dataFilterType={"data-toggle"}
-        dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
+        dataFilter={`.${brand.toLowerCase().replace(/ /, '-')}`}
         value={brand}/>);
     });
 
