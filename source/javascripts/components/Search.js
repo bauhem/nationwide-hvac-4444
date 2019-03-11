@@ -126,7 +126,7 @@ class Search extends React.Component {
   render() {
     return (
       <>
-        <div>Search Results for query: {this.state.query}</div>
+        <div>Search Results for: {this.state.query}</div>
         {this.isLoading() && Search.printLoadingMsg()}
         {!this.isLoading() && this.renderResults()}
       </>
