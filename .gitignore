@@ -8,3 +8,4 @@ tmp/**
 .DS_Store
 build/**
 .env
+ngrok
