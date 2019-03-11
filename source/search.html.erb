@@ -1,0 +1,20 @@
+<%=
+  content_for(:head) do
+    display_meta_tags title: "Search Results", description: ""
+  end
+%>
+
+<div class="section-hero-interior">
+  <h1 class="cta-heading" data-ix="hero-appear-1"><strong>Search </strong>Results
+  </h1>
+</div>
+<div id="search_results" class="section-quote-builder">
+</div>
+
+<%= partial "/partials/section-cta" %>
+
+<% content_for(:footer_scripts) do %>
+  <%= javascript_include_tag 'search' %>
+<% end %>
+
+

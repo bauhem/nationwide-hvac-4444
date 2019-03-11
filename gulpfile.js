@@ -52,7 +52,11 @@ gulp.task("browserify", function () {
       // replace file contents with browserify's bundle stream
       file.contents = browserify(file.path, {debug: debug})
         .transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]})
-        .transform(envify({ROOT_URL: process.env.ROOT_URL}))
+        .transform(envify({
+          ROOT_URL: process.env.ROOT_URL,
+          AIRTABLE_API_KEY: process.env.AIRTABLE_API_KEY,
+          AIRTABLE_API_BASE: process.env.AIRTABLE_API_BASE
+        }))
         .bundle();
     }))
     .on('error', swallowError)

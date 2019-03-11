@@ -1,6 +1,5 @@
 import React from "react";
 import {brandLogoImage, seerRange, unitImage} from "./UnitHelpers";
-import QuoteCtx from "./QuoteCtx";
 
 class Unit extends React.Component {
   constructor(props) {
@@ -41,7 +40,7 @@ class Unit extends React.Component {
     let unit = this.props.unit;
     let img_src = unitImage(unit["Attachments"]);
     let brand_img = brandLogoImage(unit);
-    let zone_id = this.context.zone_num;
+    let zone_id = this.props.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
     let model_name = unit['Brand Series'];
     let installation_price = unit[zone];
@@ -66,18 +65,19 @@ class Unit extends React.Component {
         {this.renderField('CU Model', 'Condenser', 'smaller')}
         {this.renderField('AHU Model', 'Air Handler', 'smaller')}
 
-        <div className="div-product-details">
-          <div className="blue-text-left">Price including
-            installation
-          </div>
-          <div><strong>${installation_price}</strong></div>
-        </div>
+        {
+          installation_price !== undefined && (
+            <div className="div-product-details">
+              <div className="blue-text-left">Price including
+                installation
+              </div>
+              <div><strong>${installation_price}</strong></div>
+            </div>
+          )
+        }
       </a>
     );
   }
 }
-
-Unit.contextType = QuoteCtx;
-
 
 export default Unit;
