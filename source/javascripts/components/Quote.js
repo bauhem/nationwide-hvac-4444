@@ -5,13 +5,15 @@ import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
 import MixitupFilter from "./MixitupFilter";
 import {initializeMixitup} from "../mixitup-helpers";
+import BrandFilters from "./BrandFilters";
+import SEERFilters from "./SEERFilters";
+import {withMixitup} from "./hoc/UseMixitup";
 
-var mixer;
 
 class Quote extends React.Component {
   constructor(props, context) {
     super(props);
-    this.startMixitUp = this.startMixitUp.bind(this);
+    // this.startMixitUp = this.startMixitUp.bind(this);
 
     this.state = {
       unitsFound: (context.units.length >= 1)
@@ -22,52 +24,17 @@ class Quote extends React.Component {
     return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
 
-  startMixitUp() {
-    mixer = initializeMixitup('.container')
-  }
-
-  componentDidMount() {
-    this.state.unitsFound && this.startMixitUp();
-  }
-
-  componentDidUpdate() {
-    this.state.unitsFound && this.startMixitUp();
-  }
-
-  renderBrandsFilters(brands) {
-    let filters = [];
-    brands.forEach(brand => {
-      filters.push(<MixitupFilter
-        key={brand}
-        dataFilterType={"data-toggle"}
-        dataFilter={`.${brand.toLowerCase().replace(/ /, '-')}`}
-        value={brand}/>);
-    });
-
-    return filters;
-  }
-
-  renderSEERFilters(seers) {
-    let filters = [];
-    let last_min_seer = seers.slice(-1)[0].min
-
-    seers.forEach(range => {
-      let seer = range.min;
-      let seer_label = seer;
-
-      if (seer >= last_min_seer) {
-        seer_label = `${last_min_seer}+`;
-      }
-
-      filters.push(<MixitupFilter
-        key={seer}
-        dataFilterType={"data-toggle"}
-        dataFilter={`.seer-${seer}`}
-        value={seer_label}/>);
-    });
-
-    return filters;
-  }
+  // startMixitUp() {
+  //   mixer = initializeMixitup('.container')
+  // }
+  //
+  // componentDidMount() {
+  //   this.state.unitsFound && this.startMixitUp();
+  // }
+  //
+  // componentDidUpdate() {
+  //   this.state.unitsFound && this.startMixitUp();
+  // }
 
   render() {
 
@@ -81,9 +48,6 @@ class Quote extends React.Component {
     if (this.context.selected_brands.length > 0) {
       brands = this.context.selected_brands;
     }
-
-    let brandsFilters = this.renderBrandsFilters(brands);
-    let seersFilters = this.renderSEERFilters(config.get('seer_ranges'));
 
     let units;
 
@@ -104,44 +68,8 @@ class Quote extends React.Component {
         </div>
         <div className="div-flex-h align-start">
           <div className="div-20">
-            <div className="div-search">
-              <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src={arrowRightImgUrl} width="20" alt=""
-                     className="arrow-icon"/>
-              </div>
-              <div className="div-search-header">
-                <div>Brand</div>
-              </div>
-              <div className="div-search-form">
-                <div>
-                  <div className="div-search-dropdown">
-                    <div className="dropdown" data-filter-group={'brand'}>
-                      {brandsFilters}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="div-search">
-              <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src={arrowRightImgUrl} width="20" alt=""
-                     className="arrow-icon"/>
-              </div>
-              <div className="div-search-header">
-                <div>SEER</div>
-              </div>
-              <div className="div-search-form">
-                <div>
-                  <div className="div-search-dropdown">
-                    <div className="dropdown" data-filter-group={'seer'}>
-                      {seersFilters}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BrandFilters name="Brand" brands={brands}/>
+            <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
           </div>
           <div className="div-flex-h justify-start _75-with container">
             {units}
@@ -154,4 +82,4 @@ class Quote extends React.Component {
 
 Quote.contextType = QuoteCtx;
 
-export default Quote;
+export default withMixitup(Quote);
