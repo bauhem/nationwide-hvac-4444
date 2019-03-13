@@ -10,6 +10,7 @@ import SEERFilters from "./SEERFilters";
 import {brandsFilter} from "./UnitsFilter";
 import {withMixitup} from "./hoc/UseMixitup";
 import MixitupPaginationLayout from "./MixitupPaginationLayout";
+import TonnageFilters from "./TonnageFilters";
 
 const units = require('../../../data/products.json');
 
@@ -142,6 +143,7 @@ class Search extends React.Component {
           <div className="div-20">
             <BrandFilters name="Brand" brands={brandsFilter()}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
+            <TonnageFilters name="Tonnage" tonnages={config.get('tonnage')}/>
           </div>
           {/* class container is used by HOC UseMixitup to start the filtering */}
           <div className="div-flex-h justify-start _75-with container">
