@@ -9,7 +9,23 @@
 %>
 <a href="<%= product_uri(unit) %>" class="<%= css_class %> w-inline-block">
   <div class="div-image">
-  <img data-src="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %>" class="lazyload"/>
+    <picture class="lazyload">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 1770px)">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 1440px)">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 1280px)">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 1024px)">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 450, 300, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 768px)">
+      <source srcset="<%= cloudinary_resize(product_image(unit), 400, 300, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+        media="(min-width: 480px)">
+        <source srcset="<%= cloudinary_resize(product_image(unit), 150, 120, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
+          media="(min-width: 320px)">
+      <img srcset="<%= cloudinary_resize(product_image(unit), 200, 120, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 2x">
+    </picture>
   </div>
   <div class="div-flex-h align-center">
     <div class="product-name smaller"><%= model(unit) %></div>
