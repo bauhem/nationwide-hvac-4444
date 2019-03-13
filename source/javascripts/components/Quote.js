@@ -34,6 +34,7 @@ class Quote extends React.Component {
     this.state.unitsFound && this.startMixitUp();
   }
 
+
   renderBrandsFilters(brands) {
     let filters = [];
     brands.forEach(brand => {
@@ -105,13 +106,13 @@ class Quote extends React.Component {
         <div className="div-flex-h align-start">
           <div className="div-20">
             <div className="div-search">
-              <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src={arrowRightImgUrl} width="20" alt=""
-                     className="arrow-icon"/>
-              </div>
               <div className="div-search-header">
                 <div>Brand</div>
+                <div
+                  className="button-overlay-mobile">
+                  <img src={arrowRightImgUrl} width="20" alt=""
+                       className="arrow-icon"/>
+                </div>
               </div>
               <div className="div-search-form">
                 <div>
@@ -125,12 +126,17 @@ class Quote extends React.Component {
             </div>
             <div className="div-search">
               <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
+                className="button-overlay-mobile">
                 <img src={arrowRightImgUrl} width="20" alt=""
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
                 <div>SEER</div>
+                <div
+                  className="button-overlay-mobile">
+                  <img src={arrowRightImgUrl} width="20" alt=""
+                       className="arrow-icon"/>
+                </div>
               </div>
               <div className="div-search-form">
                 <div>
