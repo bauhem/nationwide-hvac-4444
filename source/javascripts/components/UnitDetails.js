@@ -127,7 +127,6 @@ class UnitDetails extends React.Component {
             {this.renderField('AHU Model', 'Air Handler')}
             {hasAHU && this.renderField('Air Handler Speed')}
             {hasAHU && this.renderField('Air Handler Size')}
-            {this.renderField('Heater model', 'Heater')}
             {this.renderField('Heater Size')}
             {this.renderField('Warranty')}
             <div className="div-product-details smaller">
