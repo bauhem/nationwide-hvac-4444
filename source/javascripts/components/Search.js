@@ -1,8 +1,16 @@
 import React from "react";
+
 import queryString from 'query-string'
 import {hasProperty} from "../utils";
 import Unit from "./Unit";
 import {unitURL} from "./UnitHelpers";
+import config from "react-global-configuration";
+import BrandFilters from "./BrandFilters";
+import SEERFilters from "./SEERFilters";
+import {brandsFilter} from "./UnitsFilter";
+import {withMixitup} from "./hoc/UseMixitup";
+import MixitupPaginationLayout from "./MixitupPaginationLayout";
+import TonnageFilters from "./TonnageFilters";
 
 const units = require('../../../data/products.json');
 
@@ -114,24 +122,39 @@ class Search extends React.Component {
       )
     });
 
-    return (
-      <div className="div-flex-h align-start">
-        <div className="div-flex-h justify-start _75-with container">
-          {units}
-        </div>
-      </div>
-    );
+    return units;
   }
+
+  componentDidUpdate() {
+    this.props.mixer.forceRefresh();
+    this.props.mixer.forceRender();
+    this.props.mixer.sort();
+  }
+
 
   render() {
     return (
-      <>
-        <div>Search Results for query: {this.state.query}</div>
-        {this.isLoading() && Search.printLoadingMsg()}
-        {!this.isLoading() && this.renderResults()}
-      </>
+      <form id="wf-form-msf" name="wf-form-msf"
+            className="form-full-width">
+        <div className="div-heading-slide">
+          <h3 className="titre-big">Search Results for: {this.state.query}</h3>
+        </div>
+        <div className="div-flex-h align-start">
+          <div className="div-20">
+            <BrandFilters name="Brand" brands={brandsFilter()}/>
+            <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
+            <TonnageFilters name="Tonnage" tonnages={config.get('tonnage')}/>
+          </div>
+          {/* class container is used by HOC UseMixitup to start the filtering */}
+          <div className="div-flex-h justify-start _75-with container">
+            {this.isLoading() && Search.printLoadingMsg()}
+            {!this.isLoading() && this.renderResults()}
+            <MixitupPaginationLayout/>
+          </div>
+        </div>
+      </form>
     )
   }
 }
 
-export default Search
+export default withMixitup(Search);

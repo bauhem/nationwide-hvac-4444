@@ -51,7 +51,7 @@ function disableAllFilters(el) {
 
   filters.forEach((filter) => {
     if (filter !== el) {
-      Quote.disableCB(filter);
+      disableCB(filter);
     }
   });
 }
@@ -116,7 +116,7 @@ function scrollToContainer(containerSelector = '.breadcrumbs') {
   }, 300);
 }
 
-export function initializeMixitup(container, cfg) {
+export function initializeMixitup(container, useSavedFilters = true) {
   let mixer = mixitup(container, {
     pagination: {
       limit: 12
@@ -140,24 +140,26 @@ export function initializeMixitup(container, cfg) {
     }
   });
 
-  let filters = loadFilters();
+  if (useSavedFilters) {
+    let filters = loadFilters();
 
-  if (filters !== undefined && filters !== null && filters !== '' && filters !== '.mix') {
-    let filtersGroup = getFiltersByGroup(filters);
+    if (filters !== undefined && filters !== null && filters !== '' && filters !== '.mix') {
+      let filtersGroup = getFiltersByGroup(filters);
 
-    for (let key in filtersGroup) {
-      let selectors = Object.keys(filtersGroup[key]);
-      selectors.forEach((selector) => {
-        let el = jQuery(`*[data-toggle="${selector}"]`)[0];
-        if (el === undefined) {
-          return;
-        }
-        toggleCB(el);
-      });
-      mixer.setFilterGroupSelectors(key, selectors);
+      for (let key in filtersGroup) {
+        let selectors = Object.keys(filtersGroup[key]);
+        selectors.forEach((selector) => {
+          let el = jQuery(`*[data-toggle="${selector}"]`)[0];
+          if (el === undefined) {
+            return;
+          }
+          toggleCB(el);
+        });
+        mixer.setFilterGroupSelectors(key, selectors);
+      }
+
+      mixer.parseFilterGroups();
     }
-
-    mixer.parseFilterGroups();
   }
 
   return mixer;

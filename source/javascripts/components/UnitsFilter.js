@@ -11,7 +11,7 @@ export function unitsFilter(ctx) {
   return filtered_units;
 }
 
-export function brandsFilter(ctx) {
+export function brandsFilter() {
   let units = require('../../../data/products.json');
   units = units.filter(function (unit) {
     return unit['Brand'] !== undefined && unit['Brand'] !== null

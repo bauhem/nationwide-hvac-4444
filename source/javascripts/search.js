@@ -20,7 +20,7 @@ onReady(function () {
   let search_div = document.getElementById("search_results");
   if (search_div) {
     ReactDOM.render(
-      <Search/>,
+      <Search useSavedFilters={false}/>,
       search_div
     );
   }

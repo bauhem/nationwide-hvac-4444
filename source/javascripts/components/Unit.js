@@ -36,6 +36,18 @@ class Unit extends React.Component {
     )
   }
 
+  brandFilterCls() {
+    return this.props.unit['Brand'].toLowerCase().replace(/ /, '-')
+  }
+
+  seerFilterCls() {
+    return `seer-${seerRange(this.props.unit['SEER'])}`
+  }
+  
+  tonnageFilterCls() {
+    return `ton-${this.props.unit['Tons'].toString().replace(/\./g, '-')}`
+  }
+
   render() {
     let unit = this.props.unit;
     let img_src = unitImage(unit["Attachments"]);
@@ -44,12 +56,14 @@ class Unit extends React.Component {
     let zone = `Installed Price Zone ${zone_id}`;
     let model_name = unit['Brand Series'];
     let installation_price = unit[zone];
-    let seer_range = seerRange(unit['SEER']);
+    let brand_filter_cls = this.brandFilterCls();
+    let seer_filter_cls = this.seerFilterCls();
+    let tonnage_filter_cls = this.tonnageFilterCls();
 
     return (
       <a href={"#next"}
          onClick={this.handleClick}
-         className={`mix ${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
+         className={`mix ${brand_filter_cls} ${seer_filter_cls} ${tonnage_filter_cls} w-inline-block`}>
         <div className="div-image">
           <img src={img_src} alt={model_name}/>
         </div>

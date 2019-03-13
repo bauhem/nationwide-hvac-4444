@@ -7,6 +7,7 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var log = require('gulplog');
 var envify = require('envify/custom');
+var changed = require('gulp-changed');
 
 
 var debug = (process.env.NODE_ENV !== 'production');
@@ -27,6 +28,8 @@ var dataFiles = {
   ]
 };
 
+const dest = "./dist/javascripts/";
+
 function swallowError(error) {
 
   if (debug) {
@@ -44,6 +47,7 @@ gulp.task('data_files', function () {
 
 gulp.task("browserify", function () {
   return gulp.src(jsFiles.source, {read: false})
+    //.pipe(changed(dest))
     .pipe(tap(function (file) {
       if (debug) {
         log.info("bundling " + file.path);
@@ -59,7 +63,6 @@ gulp.task("browserify", function () {
         }))
         .bundle();
     }))
-    .on('error', swallowError)
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(tap(function (file) {
@@ -67,11 +70,18 @@ gulp.task("browserify", function () {
         uglify(file);
       }
     }))
+    .on('error', swallowError)
     .pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest("./dist/javascripts/"));
+    .pipe(gulp.dest(dest));
 });
+
 gulp.task("concat", function () {
   return gulp.src(jsFiles.no_browserify)
+    .pipe(tap(function (file) {
+      if (debug === false) {
+        uglify(file);
+      }
+    }))
     .pipe(gulp.dest("./dist/javascripts/lib/"));
 });
 

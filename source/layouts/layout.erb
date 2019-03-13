@@ -137,6 +137,10 @@
 
   loadZipData();
 
+  jQuery(document).ready(function() {
+    window.Webflow.destroy();
+    window.Webflow.ready();
+  })
 </script>
 
 <script>
