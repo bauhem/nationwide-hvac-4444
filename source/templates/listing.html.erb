@@ -34,8 +34,10 @@
       <div class="div-20">
         <!-- Products -->
         <div class="div-search">
-          <div class="div-search-header">
+          <div class="div-search-header" data-ix="increase-size-filter">
             <div>Type</div>
+            <div class="button-overlay-mobile" data-ix="increase-size-filter"><img src="/images/arrow-right.svg" width="20" alt="" class="arrow-icon"></div>
+
           </div>
           <div class="div-search-form w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
@@ -47,8 +49,10 @@
         </div>
         <!-- Brands -->
         <div class="div-search">
-          <div class="div-search-header">
+          <div class="div-search-header" data-ix="increase-size-filter">
             <div>Brands</div>
+            <div class="button-overlay-mobile" data-ix="increase-size-filter"><img src="/images/arrow-right.svg" width="20" alt="" class="arrow-icon"></div>
+
           </div>
           <div class="div-search-form w-form">
             <form id="brand-form" name="brand-form" data-name="Brand Form">
@@ -61,9 +65,11 @@
           </div>
         </div>
         <!-- Seer -->
-        <div class="div-search w-hidden-tiny">
-          <div class="div-search-header">
+        <div class="div-search">
+          <div class="div-search-header" data-ix="increase-size-filter">
             <div>SEER</div>
+            <div class="button-overlay-mobile" data-ix="increase-size-filter"><img src="/images/arrow-right.svg" width="20" alt="" class="arrow-icon"></div>
+
           </div>
           <div class="div-search-form w-form">
             <form id="seer-form" name="seer-form" data-name="Seer Form">
@@ -76,9 +82,11 @@
           </div>
         </div>
         <!-- Tonnage -->
-        <div class="div-search w-hidden-tiny">
-          <div class="div-search-header">
+        <div class="div-search">
+          <div class="div-search-header" data-ix="increase-size-filter">
             <div>Tonnage</div>
+            <div class="button-overlay-mobile" data-ix="increase-size-filter"><img src="/images/arrow-right.svg" width="20" alt="" class="arrow-icon"></div>
+
           </div>
           <div class="div-search-form w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
@@ -112,29 +120,6 @@
 <%= partial "/partials/section-cta" %>
 
 <% content_for(:footer_scripts) do %>
-  <script>
-    $(document).ready(function ($) {
-      var containerEl = document.querySelector('.container');
-
-      if (containerEl) {
-        var mixer = mixitup(containerEl, {
-          pagination: {
-            limit: 12
-          },
-          multifilter: {
-            enable: true
-          },
-          animation: {
-            enable: false
-          },
-          callbacks: {
-            onMixClick: handleMixClick,
-            onMixEnd: (state) => {
-              scrollToContainer('.breadcrumbs');
-            }
-          }
-        });
-      }
-    });
-  </script>
+  <%= javascript_include_tag "mixitup-helpers" %>
+  <%= javascript_include_tag "listing-mixitup" %>
 <% end %>

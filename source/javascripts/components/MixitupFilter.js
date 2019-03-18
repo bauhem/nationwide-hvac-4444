@@ -10,14 +10,14 @@ class MixitupFilter extends React.Component {
     let extraProps = {};
     extraProps[dataFilterType] = dataFilter;
 
-    // NOTE: DO NOT UPDATE THE IMAGES ORDER WITHOUT MODIFYING handleMixClick in layout.erb
+    // NOTE: DO NOT UPDATE THE IMAGES ORDER WITHOUT MODIFYING handleMixClick in mixitup-helpers.js
     let filter_inner_content = (
       <div className="checkbox-field">
         <img src={greyCBImgUrl} alt=""
              className="checkbox-button-grey"/>
         <img src={activeCBImgUrl} alt=""
              className="checkbox-button"/>
-        <div className="checkbox-label" data-ix="check-box">
+        <div className="checkbox-label">
           {value}
         </div>
       </div>

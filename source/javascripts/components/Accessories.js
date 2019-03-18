@@ -1,6 +1,7 @@
 import React from "react";
 import config from "react-global-configuration";
 import QuoteCtx from "./QuoteCtx";
+import {unitImage} from "./UnitHelpers";
 
 const accessories = require('../../../data/accessories.json');
 const warranty = require('../../../data/warranty.json');
@@ -42,22 +43,23 @@ class Accessories extends React.Component {
       case 'Thermostats':
         items = thermostats;
         actionBtn = this.nextBtn();
-        title = 'Add a Thermostat?';
+        title = 'Choose Thermostat';
         break;
       case 'Warranty':
         items = warranty;
         actionBtn = Accessories.checkoutBtn();
-        title = 'Add a Warranty?';
+        title = 'Choose Warranty';
         break;
       case 'Accessories':
         actionBtn = this.nextBtn();
       default:
         items = accessories;
-        title = 'Add Accessories?';
+        title = 'Choose Accessories';
         break;
     }
 
     const accComponents = items.map((acc) => {
+      let img_src = unitImage(acc['Image']);
       return (
         <div key={acc['id']} className="div-full-width added-top-margin">
           <div className="unit-overlay">
@@ -70,8 +72,11 @@ class Accessories extends React.Component {
                className="button w-button snipcart-add-item">Add to cart</a>
 
           </div>
+          <div className="div-accessory-image">
+            <img src={img_src} alt={acc['Item']}/>
+          </div>
           <div className="div-flex-h align-center">
-            <div className="product-name smaller">{acc['Item']}</div>
+            <div className="accessory-title smaller">{acc['Item']}</div>
           </div>
           <div className="div-product-details smaller">
             <div className="blue-text">Details</div>

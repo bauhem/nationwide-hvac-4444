@@ -1,13 +1,12 @@
 import React from "react";
-import mixitup from 'mixitup';
 import config from "react-global-configuration";
-import mixitupMultifilter from '../lib/mixitup-multifilter'; // loaded from a directory of your choice within your project
 
 import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
 import MixitupFilter from "./MixitupFilter";
+import {initializeMixitup} from "../mixitup-helpers";
 
-mixitup.use(mixitupMultifilter);
+var mixer;
 
 class Quote extends React.Component {
   constructor(props, context) {
@@ -24,29 +23,7 @@ class Quote extends React.Component {
   }
 
   startMixitUp() {
-    let quoteObj = this;
-
-    mixitup('.container', {
-      controls: {
-        toggleLogic: 'or'
-      },
-      multifilter: {
-        enable: true
-      },
-      animation: {
-        enable: false
-      },
-      callbacks: {
-        onMixClick: handleMixClick,
-        onMixEnd: (state) => {
-          scrollToContainer('.form-full-width');
-        },
-        onMixFail: (state) => {
-          console.log('Mix failed: ');
-          console.table(state)
-        }
-      }
-    })
+    mixer = initializeMixitup('.container')
   }
 
   componentDidMount() {
@@ -57,13 +34,14 @@ class Quote extends React.Component {
     this.state.unitsFound && this.startMixitUp();
   }
 
+
   renderBrandsFilters(brands) {
     let filters = [];
     brands.forEach(brand => {
       filters.push(<MixitupFilter
         key={brand}
         dataFilterType={"data-toggle"}
-        dataFilter={`.brand-${brand.toLowerCase().replace(/ /, '-')}`}
+        dataFilter={`.${brand.toLowerCase().replace(/ /, '-')}`}
         value={brand}/>);
     });
 
@@ -128,13 +106,13 @@ class Quote extends React.Component {
         <div className="div-flex-h align-start">
           <div className="div-20">
             <div className="div-search">
-              <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src="images/arrow-right.svg" width="20" alt=""
-                     className="arrow-icon"/>
-              </div>
               <div className="div-search-header">
-                <div>Brand(s)</div>
+                <div>Brand</div>
+                <div
+                  className="button-overlay-mobile">
+                  <img src={arrowRightImgUrl} width="20" alt=""
+                       className="arrow-icon"/>
+                </div>
               </div>
               <div className="div-search-form">
                 <div>
@@ -148,12 +126,17 @@ class Quote extends React.Component {
             </div>
             <div className="div-search">
               <div
-                className="button-overlay-mobile w-hidden-main w-hidden-medium w-hidden-small">
-                <img src="images/arrow-right.svg" width="20" alt=""
+                className="button-overlay-mobile">
+                <img src={arrowRightImgUrl} width="20" alt=""
                      className="arrow-icon"/>
               </div>
               <div className="div-search-header">
                 <div>SEER</div>
+                <div
+                  className="button-overlay-mobile">
+                  <img src={arrowRightImgUrl} width="20" alt=""
+                       className="arrow-icon"/>
+                </div>
               </div>
               <div className="div-search-form">
                 <div>

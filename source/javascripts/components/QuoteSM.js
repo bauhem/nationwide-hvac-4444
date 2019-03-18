@@ -71,6 +71,12 @@ const QuoteSM = Machine({
         SUBMIT: 'CallUs'
       }
     },
+    InvalidZip: {
+      type: 'final',
+      on: {
+        SUBMIT: 'InvalidZip'
+      }
+    },
     AirHandlerLocation: {
       on: {
         LOAD_WATER_HEATER: 'WaterHeaterUnderAirHandler',
@@ -90,37 +96,31 @@ const QuoteSM = Machine({
     },
     CondenserUnitLocation: {
       on: {
-        SUBMIT: 'Brands',
+        SUBMIT: 'UserInfo',
         LOAD_ROOF_ACCESS: 'RoofAccess'
       }
     },
     RoofAccess: {
       on: {
-        SUBMIT: 'Brands'
+        SUBMIT: 'UserInfo'
       }
     },
     PackagedSystemLocation: {
       on: {
-        SUBMIT: 'Brands'
+        SUBMIT: 'UserInfo'
       }
     },
     AirSystemFilterLocation: {
       on: {
-        SUBMIT: 'Brands'
+        SUBMIT: 'UserInfo'
       }
     },
-    Brands: {
+    UserInfo: {
       onEntry: 'filterBrands',
       on: {
-        SUBMIT: 'ZipCode',
-        CALL_US_ON_NO_BRANDS: 'CallUs'
-      }
-    },
-    ZipCode: {
-      on: {
         SUBMIT: 'Quote',
-        INVALID_ZIP: 'CallUs'
-      }
+        INVALID_ZIP: 'InvalidZip'
+      },
     },
     Quote: {
       onEntry: 'filterResults',

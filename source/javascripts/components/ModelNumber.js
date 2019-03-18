@@ -35,12 +35,12 @@ class ModelNumber extends React.Component {
                   config.get('model_to_tons').map((data) => {
                     return (
                       <div
-                           className="options different-color-font pale-border smaller">
-                        <div className="radio-button-field grey-border w-radio"
-                             onClick={() => this.props.saveAndContinue({condenser_model_number: data.model, tonnage: data.tons}, {
-                               type: 'SUBMIT',
-                               value: context.system_type_structure
-                             })}>
+                           className="options different-color-font pale-border smaller"
+                           onClick={() => this.props.saveAndContinue({condenser_model_number: data.model, tonnage: data.tons}, {
+                             type: 'SUBMIT',
+                             value: context.system_type_structure
+                           })}>
+                        <div className="radio-button-field grey-border w-radio">
                           <div
                                className="div-hover"></div>
                           <input type="radio" name="model-number"
@@ -56,10 +56,10 @@ class ModelNumber extends React.Component {
                   })
                 }
                 <div
-                     className="options different-color-font pale-border smaller">
+                     className="options different-color-font pale-border smaller"
+                     onClick={this.notSure}>
                   <div
-                    className="radio-button-field grey-border less-padding w-radio"
-                    onClick={this.notSure}>
+                    className="radio-button-field grey-border less-padding w-radio">
                     <div className="div-hover"></div>
                     <input type="radio" id="not-sure-2" name="model-number"
                            value="not-sure" data-name="model-number"

@@ -1,5 +1,5 @@
 <a href="#" class="w-inline-block w-lightbox">
-  <% photo_url =  cloudinary_resize(product_image(unit), 500, 400, 'fit') %>
+  <% photo_url =  cloudinary_resize(product_image(unit), 500, 300, 'fit') %>
   <%= image_tag photo_url %>
   <% if product_has_image?(unit) %>
     <% photo = unit['Attachments'][0] %>

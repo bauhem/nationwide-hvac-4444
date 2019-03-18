@@ -11,9 +11,9 @@ class PackagedSystemLocation extends React.Component {
         </div>
         <div className="div-flex-h">
           <div
-               className="options different-color-font pale-border top">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({packaged_system_location: 'side_of_home'})}>
+               className="options different-color-font pale-border top"
+               onClick={() => this.props.saveAndContinue({packaged_system_location: 'side_of_home'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/side-of-home.png" alt=""/>
               <input type="radio"
@@ -30,9 +30,9 @@ class PackagedSystemLocation extends React.Component {
             <p className="smaller-explanation">Is your condensing unit somewhere on the side or the rear of your home sitting on the ground or on a concrete pad?</p>
           </div>
           <div
-               className="options different-color-font pale-border top">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({packaged_system_location: 'ground'})}>
+               className="options different-color-font pale-border top"
+               onClick={() => this.props.saveAndContinue({packaged_system_location: 'ground'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/stand.png" alt=""/>
               <input type="radio"
@@ -49,9 +49,9 @@ class PackagedSystemLocation extends React.Component {
             <p className="smaller-explanation">Some homes will have their condensing units on a raised-stand on the side of their home, elevated way above the ground.</p>
           </div>
           <div
-               className="options different-color-font pale-border top">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({packaged_system_location: 'roof'})}>
+               className="options different-color-font pale-border top"
+               onClick={() => this.props.saveAndContinue({packaged_system_location: 'roof'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <img src="/images/roof-2.png" alt=""/>
               <input type="radio"

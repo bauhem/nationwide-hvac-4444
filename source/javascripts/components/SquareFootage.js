@@ -18,12 +18,12 @@ class SquareFootage extends React.Component {
                   config.get('square_footage_to_tons').map((data) => {
                     return (
                       <div
-                           className="options different-color-font pale-border smaller">
-                        <div className="radio-button-field grey-border w-radio"
-                             onClick={() => this.props.saveAndContinue({sqft: data.footage, tonnage: data.tons}, {
-                               type: 'SUBMIT',
-                               value: context.system_type_structure
-                             })}>
+                           className="options different-color-font pale-border smaller"
+                           onClick={() => this.props.saveAndContinue({sqft: data.footage, tonnage: data.tons}, {
+                             type: 'SUBMIT',
+                             value: context.system_type_structure
+                           })}>
+                        <div className="radio-button-field grey-border w-radio">
                           <div
                                className="div-hover"></div>
                           <input type="radio" name="square-footage"
@@ -39,10 +39,10 @@ class SquareFootage extends React.Component {
                   })
                 }
                 <div
-                     className="options different-color-font pale-border smaller">
+                     className="options different-color-font pale-border smaller"
+                     onClick={() => this.props.transition({type: "CALL_US"})}>
                   <div
-                    className="radio-button-field grey-border less-padding w-radio"
-                    onClick={() => this.props.transition({type: "CALL_US"})}>
+                    className="radio-button-field grey-border less-padding w-radio">
                     <div className="div-hover"></div>
                     <input type="radio" id="not-sure-2" name="square-footage"
                            value="not-sure" data-name="square-footage"

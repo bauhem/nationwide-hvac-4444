@@ -14,9 +14,32 @@ class Unit extends React.Component {
     return this.props.saveAndContinue({selected_unit: this.props.unit});
   }
 
+  renderField(key, label = '', extra_cls='') {
+    let value = this.props.unit[key];
+
+    let cls = `div-product-details ${extra_cls}`;
+
+    // Do not render missing fields
+    if (value === '' || value === undefined || value === null) {
+      return '';
+    }
+
+    // When label is not provided, use the key
+    if (label === '') {
+      label = key;
+    }
+
+    return (
+      <div className={cls}>
+        <div className="blue-text-left">{label}</div>
+        <div><strong>{value}</strong></div>
+      </div>
+    )
+  }
+
   render() {
     let unit = this.props.unit;
-    let img_src = unitImage(unit);
+    let img_src = unitImage(unit["Attachments"]);
     let brand_img = brandLogoImage(unit);
     let zone_id = this.context.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
@@ -27,7 +50,7 @@ class Unit extends React.Component {
     return (
       <a href={"#next"}
          onClick={this.handleClick}
-         className={`mix brand-${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
+         className={`mix ${unit['Brand'].toLowerCase().replace(/ /, '-')} seer-${seer_range} w-inline-block`}>
         <div className="div-image">
           <img src={img_src} alt={model_name}/>
         </div>
@@ -37,16 +60,14 @@ class Unit extends React.Component {
                alt={unit['Brand']}
                className="image-brand"/>
         </div>
+
+        {this.renderField('Tons')}
+        {this.renderField('SEER')}
+        {this.renderField('CU Model', 'Condenser', 'smaller')}
+        {this.renderField('AHU Model', 'Air Handler', 'smaller')}
+
         <div className="div-product-details">
-          <div className="blue-text">Tons</div>
-          <div><strong>{unit['Tons']}</strong></div>
-        </div>
-        <div className="div-product-details">
-          <div className="blue-text">SEER</div>
-          <div><strong>{unit['SEER']}</strong></div>
-        </div>
-        <div className="div-product-details">
-          <div className="blue-text">Price including
+          <div className="blue-text-left">Price including
             installation
           </div>
           <div><strong>${installation_price}</strong></div>

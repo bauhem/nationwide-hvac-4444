@@ -14,9 +14,9 @@ class RoofAccess extends React.Component {
         </div>
         <div className="div-flex-h">
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({roof_access: 'stair'})}>
+            className="options different-color-font pale-border"
+            onClick={() => this.props.saveAndContinue({roof_access: 'stair'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <input type="radio" id="stair" name="roof-access" value="stair"
                      data-name="roof-access"
@@ -29,9 +29,9 @@ class RoofAccess extends React.Component {
             </div>
           </div>
           <div
-               className="options different-color-font pale-border">
-            <div className="radio-button-field grey-border w-radio"
-                 onClick={() => this.props.saveAndContinue({roof_access: 'crane'})}>
+            className="options different-color-font pale-border"
+            onClick={() => this.props.saveAndContinue({roof_access: 'crane'})}>
+            <div className="radio-button-field grey-border w-radio">
               <div className="div-hover"></div>
               <input type="radio" id="crane" name="roof-access" value="crane"
                      data-name="roof-access"

@@ -16,13 +16,13 @@ import CallUs from "./CallUs";
 import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
 import PackagedSystemLocation from "./PackagedSystemLocation";
 import AirSystemFilterLocation from "./AirSystemFilterLocation";
-import Brands from "./Brands";
 import Quote from "./Quote";
-import ZipCode from "./ZipCode";
+import UserInfo from "./UserInfo";
 import Accessories from "./Accessories";
 import UnitDetails from "./UnitDetails";
 
 import {unitsFilter, brandsFilter} from "./UnitsFilter";
+import InvalidZip from "./InvalidZip";
 
 const StatesComponents = {
   SystemTypeStructure: SystemTypeStructure,
@@ -38,8 +38,8 @@ const StatesComponents = {
   PackagedSystemLocation: PackagedSystemLocation,
   AirSystemFilterLocation: AirSystemFilterLocation,
   CallUs: CallUs,
-  Brands: Brands,
-  ZipCode: ZipCode,
+  InvalidZip: InvalidZip,
+  UserInfo: UserInfo,
   Quote: Quote,
   UnitDetails: UnitDetails,
   Thermostats: Accessories,
@@ -53,6 +53,7 @@ const stateMachine = QuoteSM;
 class QuoteBuilder extends React.Component {
   constructor(props) {
     super(props);
+    this.form = React.createRef();
 
     this.state = QuoteBuilder.defaultState();
 
@@ -60,6 +61,7 @@ class QuoteBuilder extends React.Component {
       this.state = Object.assign(this.state, saved_values);
     }
 
+    this.validateForm = this.validateForm.bind(this);
     this.saveValues = this.saveValues.bind(this);
     this.saveAndContinue = this.saveAndContinue.bind(this);
     this.transition = this.transition.bind(this);
@@ -88,6 +90,9 @@ class QuoteBuilder extends React.Component {
       selected_brands: [],
       units: null,
       zip_code: null,
+      user_name: null,
+      user_email: null,
+      user_phone: null,
       zone_num: null,
       history: [],
       selected_seers: [],
@@ -105,6 +110,11 @@ class QuoteBuilder extends React.Component {
     if (event.type === "BACK") {
       this.prevState();
     } else {
+      // This verification allows us to use HTML5 field validation
+      if (!this.validateForm()) {
+        return false;
+      }
+
       const nextQuoteState = stateMachine.transition(this.state.currentState, event);
       const nextState = nextQuoteState.actions.reduce(
         (state, action) => this.command(action, event) || state,
@@ -187,6 +197,10 @@ class QuoteBuilder extends React.Component {
     )
   }
 
+  validateForm() {
+    return this.form.current.reportValidity();
+  }
+
   componentDidUpdate() {
     localStorage.setItem('instantQuoteValues', JSON.stringify(this.state));
   }
@@ -209,10 +223,12 @@ class QuoteBuilder extends React.Component {
               <div className="slide w-slide">
                 <div className="form-wrapper second w-form">
                   <form id="wf-form-msf" name="wf-form-msf"
-                        className="form-full-width">
+                        className="form-full-width" ref={this.form}>
                     <SlideComponent saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
-                                    transition={this.transition}/>
+                                    transition={this.transition}
+                                    validateForm={this.validateForm}
+                    />
                   </form>
                 </div>
               </div>
