@@ -1,4 +1,4 @@
-const github = require('@octokit/rest')();
+const Octokit = require('@octokit/rest');
 const fs = require('fs')
 const path = require('path')
 const process = require('process')
@@ -14,9 +14,8 @@ var branchTree = [];
 exports.repositoryName = repositoryName;
 exports.branchTree = branchTree;
 
-github.authenticate({
-  type: 'token',
-  token: GITHUB_TOKEN
+const github = Octokit({
+  auth: `token ${GITHUB_TOKEN}`
 });
 
 function getBranchRefs() {
