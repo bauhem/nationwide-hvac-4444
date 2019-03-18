@@ -90,7 +90,7 @@ var $win = $(window);
 var $doc = $(document);
 var isFunction = $.isFunction;
 var _ = Webflow._ = __webpack_require__(42);
-var tram = Webflow.tram = __webpack_require__(27) && $.tram;
+var tram = Webflow.tram = __webpack_require__(28) && $.tram;
 var domready = false;
 var destroyed = false;
 tram.config.hideBackface = false;
@@ -432,7 +432,7 @@ module.exports = __webpack_require__(5) ? function (object, key, value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(11);
-var IE8_DOM_DEFINE = __webpack_require__(30);
+var IE8_DOM_DEFINE = __webpack_require__(31);
 var toPrimitive = __webpack_require__(17);
 var dP = Object.defineProperty;
 
@@ -508,7 +508,7 @@ module.exports = true;
 /* 10 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -614,7 +614,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(34);
+var $keys = __webpack_require__(35);
 var enumBugKeys = __webpack_require__(22);
 
 module.exports = Object.keys || function keys(O) {
@@ -647,7 +647,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(9) ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -705,6 +705,81 @@ exports.f = {}.propertyIsEnumerable;
 
 /***/ }),
 /* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
+/**
+ * Webflow: IX Event triggers for other modules
+ */
+
+
+var $ = window.jQuery;
+var api = {};
+var eventQueue = [];
+var namespace = '.w-ix';
+
+var eventTriggers = {
+  reset: function reset(i, el) {
+    el.__wf_intro = null;
+  },
+  intro: function intro(i, el) {
+    if (el.__wf_intro) {
+      return;
+    }
+    el.__wf_intro = true;
+    $(el).triggerHandler(api.types.INTRO);
+  },
+  outro: function outro(i, el) {
+    if (!el.__wf_intro) {
+      return;
+    }
+    el.__wf_intro = null;
+    $(el).triggerHandler(api.types.OUTRO);
+  }
+};
+
+api.triggers = {};
+
+api.types = {
+  INTRO: 'w-ix-intro' + namespace,
+  OUTRO: 'w-ix-outro' + namespace
+};
+
+// Trigger any events in queue + restore trigger methods
+api.init = function () {
+  var count = eventQueue.length;
+  for (var i = 0; i < count; i++) {
+    var memo = eventQueue[i];
+    memo[0](0, memo[1]);
+  }
+  eventQueue = [];
+  $.extend(api.triggers, eventTriggers);
+};
+
+// Replace all triggers with async wrapper to queue events until init
+api.async = function () {
+  for (var key in eventTriggers) {
+    var func = eventTriggers[key];
+    if (!eventTriggers.hasOwnProperty(key)) {
+      continue;
+    }
+
+    // Replace trigger method with async wrapper
+    api.triggers[key] = function (i, el) {
+      eventQueue.push([func, el]);
+    };
+  }
+};
+
+// Default triggers to async queue
+api.async();
+
+module.exports = api;
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1140,14 +1215,14 @@ window.tram = function (a) {
 }(window.jQuery);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var LIBRARY = __webpack_require__(9);
-var $export = __webpack_require__(29);
-var redefine = __webpack_require__(32);
+var $export = __webpack_require__(30);
+var redefine = __webpack_require__(33);
 var hide = __webpack_require__(3);
 var Iterators = __webpack_require__(18);
 var $iterCreate = __webpack_require__(50);
@@ -1216,7 +1291,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(1);
@@ -1284,16 +1359,16 @@ module.exports = $export;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(5) && !__webpack_require__(12)(function () {
-  return Object.defineProperty(__webpack_require__(31)('div'), 'a', { get: function () { return 7; } }).a != 7;
+  return Object.defineProperty(__webpack_require__(32)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(8);
@@ -1306,14 +1381,14 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(3);
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
@@ -1327,7 +1402,7 @@ var PROTOTYPE = 'prototype';
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function () {
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(31)('iframe');
+  var iframe = __webpack_require__(32)('iframe');
   var i = enumBugKeys.length;
   var lt = '<';
   var gt = '>';
@@ -1360,7 +1435,7 @@ module.exports = Object.create || function create(O, Properties) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(2);
@@ -1383,7 +1458,7 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -1394,18 +1469,18 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__(34);
+var $keys = __webpack_require__(35);
 var hiddenKeys = __webpack_require__(22).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
@@ -1414,87 +1489,15 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Webflow: IX Event triggers for other modules
- */
-
-var $ = window.jQuery;
-var api = {};
-var eventQueue = [];
-var namespace = '.w-ix';
-
-var eventTriggers = {
-  reset: function reset(i, el) {
-    el.__wf_intro = null;
-  },
-  intro: function intro(i, el) {
-    if (el.__wf_intro) {
-      return;
-    }
-    el.__wf_intro = true;
-    $(el).triggerHandler(api.types.INTRO);
-  },
-  outro: function outro(i, el) {
-    if (!el.__wf_intro) {
-      return;
-    }
-    el.__wf_intro = null;
-    $(el).triggerHandler(api.types.OUTRO);
-  }
-};
-
-api.triggers = {};
-
-api.types = {
-  INTRO: 'w-ix-intro' + namespace,
-  OUTRO: 'w-ix-outro' + namespace
-};
-
-// Trigger any events in queue + restore trigger methods
-api.init = function () {
-  var count = eventQueue.length;
-  for (var i = 0; i < count; i++) {
-    var memo = eventQueue[i];
-    memo[0](0, memo[1]);
-  }
-  eventQueue = [];
-  $.extend(api.triggers, eventTriggers);
-};
-
-// Replace all triggers with async wrapper to queue events until init
-api.async = function () {
-  for (var key in eventTriggers) {
-    var func = eventTriggers[key];
-    if (!eventTriggers.hasOwnProperty(key)) {
-      continue;
-    }
-
-    // Replace trigger method with async wrapper
-    api.triggers[key] = function (i, el) {
-      eventQueue.push([func, el]);
-    };
-  }
-};
-
-// Default triggers to async queue
-api.async();
-
-module.exports = api;
-
-/***/ }),
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 
 
-var IXEvents = __webpack_require__(38);
+var IXEvents = __webpack_require__(27);
 
 function dispatchCustomEvent(element, eventName) {
   var event = document.createEvent('CustomEvent');
@@ -1540,14 +1543,15 @@ module.exports = api;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(41);
+__webpack_require__(27);
 __webpack_require__(74);
+__webpack_require__(75);
 __webpack_require__(76);
 __webpack_require__(77);
 __webpack_require__(78);
 __webpack_require__(79);
 __webpack_require__(80);
-__webpack_require__(81);
-module.exports = __webpack_require__(82);
+module.exports = __webpack_require__(81);
 
 
 /***/ }),
@@ -1557,6 +1561,8 @@ module.exports = __webpack_require__(82);
 "use strict";
 
 
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 /**
  * Webflow: Brand pages on the subdomain
  */
@@ -1600,7 +1606,7 @@ Webflow.define('brand', module.exports = function ($) {
   function createBadge() {
     var $brand = $('<a class="w-webflow-badge"></a>').attr('href', 'https://webflow.com?utm_campaign=brandjs');
 
-    var $logoArt = $('<img>').attr('src', 'https://d1otoma47x30pg.cloudfront.net/img/webflow-badge-icon.60efbf6ec9.svg').css({
+    var $logoArt = $('<img>').attr('src', 'https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-icon.f67cd735e3.svg').css({
       marginRight: '8px',
       width: '16px'
     });
@@ -1646,7 +1652,7 @@ Webflow.define('brand', module.exports = function ($) {
 
 // Include tram for frame-throttling
 var $ = window.$;
-var tram = __webpack_require__(27) && $.tram;
+var tram = __webpack_require__(28) && $.tram;
 
 /*eslint-disable */
 
@@ -2049,7 +2055,7 @@ module.exports = __webpack_require__(24).f('iterator');
 var $at = __webpack_require__(47)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(28)(String, 'String', function (iterated) {
+__webpack_require__(29)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -2129,7 +2135,7 @@ module.exports = function (it) {
 
 "use strict";
 
-var create = __webpack_require__(33);
+var create = __webpack_require__(34);
 var descriptor = __webpack_require__(13);
 var setToStringTag = __webpack_require__(23);
 var IteratorPrototype = {};
@@ -2167,7 +2173,7 @@ module.exports = __webpack_require__(5) ? Object.defineProperties : function def
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(35);
+var cof = __webpack_require__(36);
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
@@ -2306,7 +2312,7 @@ var toIObject = __webpack_require__(6);
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(28)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(29)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -2375,8 +2381,8 @@ module.exports = __webpack_require__(10).Symbol;
 var global = __webpack_require__(1);
 var has = __webpack_require__(2);
 var DESCRIPTORS = __webpack_require__(5);
-var $export = __webpack_require__(29);
-var redefine = __webpack_require__(32);
+var $export = __webpack_require__(30);
+var redefine = __webpack_require__(33);
 var META = __webpack_require__(66).KEY;
 var $fails = __webpack_require__(12);
 var shared = __webpack_require__(21);
@@ -2392,7 +2398,7 @@ var isObject = __webpack_require__(8);
 var toIObject = __webpack_require__(6);
 var toPrimitive = __webpack_require__(17);
 var createDesc = __webpack_require__(13);
-var _create = __webpack_require__(33);
+var _create = __webpack_require__(34);
 var gOPNExt = __webpack_require__(69);
 var $GOPD = __webpack_require__(70);
 var $DP = __webpack_require__(4);
@@ -2519,9 +2525,9 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(37).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(38).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(26).f = $propertyIsEnumerable;
-  __webpack_require__(36).f = $getOwnPropertySymbols;
+  __webpack_require__(37).f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(9)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
@@ -2671,7 +2677,7 @@ var meta = module.exports = {
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(19);
-var gOPS = __webpack_require__(36);
+var gOPS = __webpack_require__(37);
 var pIE = __webpack_require__(26);
 module.exports = function (it) {
   var result = getKeys(it);
@@ -2691,7 +2697,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(35);
+var cof = __webpack_require__(36);
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
@@ -2703,7 +2709,7 @@ module.exports = Array.isArray || function isArray(arg) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var toIObject = __webpack_require__(6);
-var gOPN = __webpack_require__(37).f;
+var gOPN = __webpack_require__(38).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -2731,7 +2737,7 @@ var createDesc = __webpack_require__(13);
 var toIObject = __webpack_require__(6);
 var toPrimitive = __webpack_require__(17);
 var has = __webpack_require__(2);
-var IE8_DOM_DEFINE = __webpack_require__(30);
+var IE8_DOM_DEFINE = __webpack_require__(31);
 var gOPD = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(5) ? gOPD : function getOwnPropertyDescriptor(O, P) {
@@ -2771,6 +2777,973 @@ __webpack_require__(25)('observable');
 "use strict";
 
 
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
+/**
+ * Webflow: Interactions
+ */
+
+var Webflow = __webpack_require__(0);
+var IXEvents = __webpack_require__(27);
+
+Webflow.define('ix', module.exports = function ($, _) {
+  var api = {};
+  var designer;
+  var $win = $(window);
+  var namespace = '.w-ix';
+  var tram = $.tram;
+  var env = Webflow.env;
+  var inApp = env();
+  var emptyFix = env.chrome && env.chrome < 35;
+  var transNone = 'none 0s ease 0s';
+  var $subs = $();
+  var config = {};
+  var anchors = [];
+  var loads = [];
+  var readys = [];
+  var destroyed;
+  var readyDelay = 1;
+
+  // Component types and proxy selectors
+  var components = {
+    tabs: '.w-tab-link, .w-tab-pane',
+    dropdown: '.w-dropdown',
+    slider: '.w-slide',
+    navbar: '.w-nav'
+  };
+
+  // -----------------------------------
+  // Module methods
+
+  api.init = function (list) {
+    setTimeout(function () {
+      configure(list);
+    }, 1);
+  };
+
+  api.preview = function () {
+    designer = false;
+    readyDelay = 100;
+    setTimeout(function () {
+      configure(window.__wf_ix);
+    }, 1);
+  };
+
+  api.design = function () {
+    designer = true;
+    api.destroy();
+  };
+
+  api.destroy = function () {
+    destroyed = true;
+    $subs.each(teardown);
+    Webflow.scroll.off(scroll);
+    IXEvents.async();
+    anchors = [];
+    loads = [];
+    readys = [];
+  };
+
+  api.ready = function () {
+    // Redirect IX init while in design/preview modes
+    if (inApp) {
+      return env('design') ? api.design() : api.preview();
+    }
+
+    // Ready should only be used after destroy, as a way to re-init
+    if (config && destroyed) {
+      destroyed = false;
+      init();
+    }
+  };
+
+  api.run = run;
+  api.style = inApp ? styleApp : stylePub;
+
+  // -----------------------------------
+  // Private methods
+
+  function configure(list) {
+    if (!list) {
+      return;
+    }
+
+    // Map all interactions by slug
+    config = {};
+    _.each(list, function (item) {
+      config[item.slug] = item.value;
+    });
+
+    // Init ix after config
+    init();
+  }
+
+  function init() {
+    initIX1Engine();
+
+    // Need init IXEvents regardless if IX1 events exist since
+    // IXEvents _also_ dispatch IX2 events.
+
+    // Trigger queued events, must happen after init
+    IXEvents.init();
+
+    // Trigger a redraw to ensure all IX intros play
+    Webflow.redraw.up();
+  }
+
+  function initIX1Engine() {
+    // Build each element's interaction keying from data attribute
+    var els = $('[data-ix]');
+    if (!els.length) {
+      return;
+    }
+
+    els.each(teardown);
+    els.each(build);
+
+    // Listen for scroll events if any anchors exist
+    if (anchors.length) {
+      Webflow.scroll.on(scroll);
+      setTimeout(scroll, 1);
+    }
+
+    // Handle loads or readys if they exist
+    if (loads.length) {
+      Webflow.load(runLoads);
+    }
+    if (readys.length) {
+      setTimeout(runReadys, readyDelay);
+    }
+  }
+
+  function build(i, el) {
+    var $el = $(el);
+    var id = $el.attr('data-ix');
+    var ix = config[id];
+    if (!ix) {
+      return;
+    }
+    var triggers = ix.triggers;
+    if (!triggers) {
+      return;
+    }
+
+    // Set styles immediately to provide tram with starting transform values
+    api.style($el, ix.style);
+
+    _.each(triggers, function (trigger) {
+      var state = {};
+      var type = trigger.type;
+      var stepsB = trigger.stepsB && trigger.stepsB.length;
+
+      function runA() {
+        run(trigger, $el, { group: 'A' });
+      }
+      function runB() {
+        run(trigger, $el, { group: 'B' });
+      }
+
+      if (type === 'load') {
+        trigger.preload && !inApp ? loads.push(runA) : readys.push(runA);
+        return;
+      }
+
+      if (type === 'click') {
+        $el.on('click' + namespace, function (evt) {
+          // Avoid late clicks on touch devices
+          if (!Webflow.validClick(evt.currentTarget)) {
+            return;
+          }
+
+          // Prevent default on empty hash urls
+          if ($el.attr('href') === '#') {
+            evt.preventDefault();
+          }
+
+          run(trigger, $el, { group: state.clicked ? 'B' : 'A' });
+          if (stepsB) {
+            state.clicked = !state.clicked;
+          }
+        });
+        $subs = $subs.add($el);
+        return;
+      }
+
+      if (type === 'hover') {
+        $el.on('mouseenter' + namespace, runA);
+        $el.on('mouseleave' + namespace, runB);
+        $subs = $subs.add($el);
+        return;
+      }
+
+      if (type === 'scroll') {
+        anchors.push({
+          el: $el,
+          trigger: trigger,
+          state: { active: false },
+          offsetTop: convert(trigger.offsetTop),
+          offsetBot: convert(trigger.offsetBot)
+        });
+        return;
+      }
+
+      // Check for a proxy component selector
+      // type == [tabs, dropdown, slider, navbar]
+      var proxy = components[type];
+      if (proxy) {
+        var $proxy = $el.closest(proxy);
+        $proxy.on(IXEvents.types.INTRO, runA).on(IXEvents.types.OUTRO, runB);
+        $subs = $subs.add($proxy);
+        return;
+      }
+    });
+  }
+
+  function convert(offset) {
+    if (!offset) {
+      return 0;
+    }
+    offset = String(offset);
+    var result = parseInt(offset, 10);
+    if (result !== result) {
+      return 0;
+    }
+    if (offset.indexOf('%') > 0) {
+      result /= 100;
+      if (result >= 1) {
+        result = 0.999;
+      }
+    }
+    return result;
+  }
+
+  function teardown(i, el) {
+    $(el).off(namespace);
+  }
+
+  function scroll() {
+    var viewTop = $win.scrollTop();
+    var viewHeight = $win.height();
+
+    // Check each anchor for a valid scroll trigger
+    var count = anchors.length;
+    for (var i = 0; i < count; i++) {
+      var anchor = anchors[i];
+      var $el = anchor.el;
+      var trigger = anchor.trigger;
+      var stepsB = trigger.stepsB && trigger.stepsB.length;
+      var state = anchor.state;
+      var top = $el.offset().top;
+      var height = $el.outerHeight();
+      var offsetTop = anchor.offsetTop;
+      var offsetBot = anchor.offsetBot;
+      if (offsetTop < 1 && offsetTop > 0) {
+        offsetTop *= viewHeight;
+      }
+      if (offsetBot < 1 && offsetBot > 0) {
+        offsetBot *= viewHeight;
+      }
+      var active = top + height - offsetTop >= viewTop && top + offsetBot <= viewTop + viewHeight;
+      if (active === state.active) {
+        continue;
+      }
+      if (active === false && !stepsB) {
+        continue;
+      }
+      state.active = active;
+      run(trigger, $el, { group: active ? 'A' : 'B' });
+    }
+  }
+
+  function runLoads() {
+    var count = loads.length;
+    for (var i = 0; i < count; i++) {
+      loads[i]();
+    }
+  }
+
+  function runReadys() {
+    var count = readys.length;
+    for (var i = 0; i < count; i++) {
+      readys[i]();
+    }
+  }
+
+  function run(trigger, $el, opts, replay) {
+    opts = opts || {};
+    var done = opts.done;
+    var preserve3d = trigger.preserve3d;
+
+    // Do not run in designer unless forced
+    if (designer && !opts.force) {
+      return;
+    }
+
+    // Operate on a set of grouped steps
+    var group = opts.group || 'A';
+    var loop = trigger['loop' + group];
+    var steps = trigger['steps' + group];
+    if (!steps || !steps.length) {
+      return;
+    }
+    if (steps.length < 2) {
+      loop = false;
+    }
+
+    // One-time init before any loops
+    if (!replay) {
+      // Find selector within element descendants, siblings, or query whole document
+      var selector = trigger.selector;
+      if (selector) {
+        if (trigger.descend) {
+          $el = $el.find(selector);
+        } else if (trigger.siblings) {
+          $el = $el.siblings(selector);
+        } else {
+          $el = $(selector);
+        }
+        if (inApp) {
+          $el.attr('data-ix-affect', 1);
+        }
+      }
+
+      // Apply empty fix for certain Chrome versions
+      if (emptyFix) {
+        $el.addClass('w-ix-emptyfix');
+      }
+
+      // Set preserve3d for triggers with 3d transforms
+      if (preserve3d) {
+        $el.css('transform-style', 'preserve-3d');
+      }
+    }
+
+    var _tram = tram($el);
+
+    // Add steps
+    var meta = { omit3d: !preserve3d };
+    for (var i = 0; i < steps.length; i++) {
+      addStep(_tram, steps[i], meta);
+    }
+
+    function fin() {
+      // Run trigger again if looped
+      if (loop) {
+        return run(trigger, $el, opts, true);
+      }
+
+      // Reset any 'auto' values
+      if (meta.width === 'auto') {
+        _tram.set({ width: 'auto' });
+      }
+      if (meta.height === 'auto') {
+        _tram.set({ height: 'auto' });
+      }
+
+      // Run callback
+      done && done();
+    }
+
+    // Add final step to queue if tram has started
+    meta.start ? _tram.then(fin) : fin();
+  }
+
+  function addStep(_tram, step, meta) {
+    var addMethod = 'add';
+    var startMethod = 'start';
+
+    // Once the transition has started, we will always use then() to add to the queue.
+    if (meta.start) {
+      addMethod = startMethod = 'then';
+    }
+
+    // Parse transitions string on the current step
+    var transitions = step.transition;
+    if (transitions) {
+      transitions = transitions.split(',');
+      for (var i = 0; i < transitions.length; i++) {
+        var transition = transitions[i];
+        _tram[addMethod](transition);
+      }
+    }
+
+    // Build a clean object to pass to the tram method
+    var clean = tramify(step, meta) || {};
+
+    // Store last width and height values
+    if (clean.width != null) {
+      meta.width = clean.width;
+    }
+    if (clean.height != null) {
+      meta.height = clean.height;
+    }
+
+    // When transitions are not present, set values immediately and continue queue.
+    if (transitions == null) {
+      // If we have started, wrap set() in then() and reset queue
+      if (meta.start) {
+        _tram.then(function () {
+          var queue = this.queue;
+          this.set(clean);
+          if (clean.display) {
+            _tram.redraw();
+            Webflow.redraw.up();
+          }
+          this.queue = queue;
+          this.next();
+        });
+      } else {
+        _tram.set(clean);
+
+        // Always redraw after setting display
+        if (clean.display) {
+          _tram.redraw();
+          Webflow.redraw.up();
+        }
+      }
+
+      // Use the wait() method to kick off queue in absence of transitions.
+      var wait = clean.wait;
+      if (wait != null) {
+        _tram.wait(wait);
+        meta.start = true;
+      }
+
+      // Otherwise, when transitions are present
+    } else {
+      // If display is present, handle it separately
+      if (clean.display) {
+        var display = clean.display;
+        delete clean.display;
+
+        // If we've already started, we need to wrap it in a then()
+        if (meta.start) {
+          _tram.then(function () {
+            var queue = this.queue;
+            this.set({ display: display }).redraw();
+            Webflow.redraw.up();
+            this.queue = queue;
+            this.next();
+          });
+        } else {
+          _tram.set({ display: display }).redraw();
+          Webflow.redraw.up();
+        }
+      }
+
+      // Otherwise, start a transition using the current start method.
+      _tram[startMethod](clean);
+      meta.start = true;
+    }
+  }
+
+  // (In app) Set styles immediately and manage upstream transition
+  function styleApp(el, data) {
+    var _tram = tram(el);
+
+    // Exit early when data is empty to avoid clearing upstream
+    if ($.isEmptyObject(data)) {
+      return;
+    }
+
+    // Get computed transition value
+    el.css('transition', '');
+    var computed = el.css('transition');
+
+    // If computed is set to none, clear upstream
+    if (computed === transNone) {
+      computed = _tram.upstream = null;
+    }
+
+    // Set upstream transition to none temporarily
+    _tram.upstream = transNone;
+
+    // Set values immediately
+    _tram.set(tramify(data));
+
+    // Only restore upstream in preview mode
+    _tram.upstream = computed;
+  }
+
+  // (Published) Set styles immediately on specified jquery element
+  function stylePub(el, data) {
+    tram(el).set(tramify(data));
+  }
+
+  // Build a clean object for tram
+  function tramify(obj, meta) {
+    var omit3d = meta && meta.omit3d;
+    var result = {};
+    var found = false;
+    for (var key in obj) {
+      if (key === 'transition') {
+        continue;
+      }
+      if (key === 'keysort') {
+        continue;
+      }
+      if (omit3d) {
+        if (key === 'z' || key === 'rotateX' || key === 'rotateY' || key === 'scaleZ') {
+          continue;
+        }
+      }
+      result[key] = obj[key];
+      found = true;
+    }
+    // If empty, return null for tram.set/stop compliance
+    return found ? result : null;
+  }
+
+  // Export module
+  return api;
+});
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
+/**
+ * Webflow: Auto-select links to current page or section
+ */
+
+var Webflow = __webpack_require__(0);
+
+Webflow.define('links', module.exports = function ($, _) {
+  var api = {};
+  var $win = $(window);
+  var designer;
+  var inApp = Webflow.env();
+  var location = window.location;
+  var tempLink = document.createElement('a');
+  var linkCurrent = 'w--current';
+  var validHash = /^#[\w:.-]+$/;
+  var indexPage = /index\.(html|php)$/;
+  var dirList = /\/$/;
+  var anchors;
+  var slug;
+
+  // -----------------------------------
+  // Module methods
+
+  api.ready = api.design = api.preview = init;
+
+  // -----------------------------------
+  // Private methods
+
+  function init() {
+    designer = inApp && Webflow.env('design');
+    slug = Webflow.env('slug') || location.pathname || '';
+
+    // Reset scroll listener, init anchors
+    Webflow.scroll.off(scroll);
+    anchors = [];
+
+    // Test all links for a selectable href
+    var links = document.links;
+    for (var i = 0; i < links.length; ++i) {
+      select(links[i]);
+    }
+
+    // Listen for scroll if any anchors exist
+    if (anchors.length) {
+      Webflow.scroll.on(scroll);
+      scroll();
+    }
+  }
+
+  function select(link) {
+    var href = designer && link.getAttribute('href-disabled') || link.getAttribute('href');
+    tempLink.href = href;
+
+    // Ignore any hrefs with a colon to safely avoid all uri schemes
+    if (href.indexOf(':') >= 0) {
+      return;
+    }
+
+    var $link = $(link);
+
+    // Check for valid hash links w/ sections and use scroll anchor
+    if (href.indexOf('#') === 0 && validHash.test(href)) {
+      var $section = $(href);
+      $section.length && anchors.push({ link: $link, sec: $section, active: false });
+      return;
+    }
+
+    // Ignore empty # links
+    if (href === '#' || href === '') {
+      return;
+    }
+
+    // Determine whether the link should be selected
+    var match = tempLink.href === location.href || href === slug || indexPage.test(href) && dirList.test(slug);
+    setClass($link, linkCurrent, match);
+  }
+
+  function scroll() {
+    var viewTop = $win.scrollTop();
+    var viewHeight = $win.height();
+
+    // Check each anchor for a section in view
+    _.each(anchors, function (anchor) {
+      var $link = anchor.link;
+      var $section = anchor.sec;
+      var top = $section.offset().top;
+      var height = $section.outerHeight();
+      var offset = viewHeight * 0.5;
+      var active = $section.is(':visible') && top + height - offset >= viewTop && top + offset <= viewTop + viewHeight;
+      if (anchor.active === active) {
+        return;
+      }
+      anchor.active = active;
+      setClass($link, linkCurrent, active);
+    });
+  }
+
+  function setClass($elem, className, add) {
+    var exists = $elem.hasClass(className);
+    if (add && exists) {
+      return;
+    }
+    if (!add && !exists) {
+      return;
+    }
+    add ? $elem.addClass(className) : $elem.removeClass(className);
+  }
+
+  // Export module
+  return api;
+});
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
+/**
+ * Webflow: Smooth scroll
+ */
+
+var Webflow = __webpack_require__(0);
+
+Webflow.define('scroll', module.exports = function ($) {
+  var $doc = $(document);
+  var win = window;
+  var loc = win.location;
+  var history = inIframe() ? null : win.history;
+  var validHash = /^[a-zA-Z0-9][\w:.-]*$/;
+
+  function inIframe() {
+    try {
+      return Boolean(win.frameElement);
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function ready() {
+    // The current page url without the hash part.
+    var locHref = loc.href.split('#')[0];
+
+    // When clicking on a link, check if it links to another part of the page
+    $doc.on('click', 'a', function (e) {
+      if (Webflow.env('design')) {
+        return;
+      }
+
+      // Ignore links being used by jQuery mobile
+      if (window.$.mobile && $(e.currentTarget).hasClass('ui-link')) {
+        return;
+      }
+
+      // Ignore empty # links
+      if (this.getAttribute('href') === '#') {
+        e.preventDefault();
+        return;
+      }
+
+      // The href property always contains the full url so we can compare
+      // with the document’s location to only target links on this page.
+      var parts = this.href.split('#');
+      var hash = parts[0] === locHref ? parts[1] : null;
+      if (hash) {
+        findEl(hash, e);
+      }
+    });
+  }
+
+  function findEl(hash, e) {
+    if (!validHash.test(hash)) {
+      return;
+    }
+
+    var el = $('#' + hash);
+    if (!el.length) {
+      return;
+    }
+
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // Push new history state
+    if (loc.hash !== hash && history && history.pushState &&
+    // Navigation breaks Chrome when the protocol is `file:`.
+    !(Webflow.env.chrome && loc.protocol === 'file:')) {
+      var oldHash = history.state && history.state.hash;
+      if (oldHash !== hash) {
+        history.pushState({ hash: hash }, '', '#' + hash);
+      }
+    }
+
+    // If a fixed header exists, offset for the height
+    var rootTag = Webflow.env('editor') ? '.w-editor-body' : 'body';
+    var header = $('header, ' + rootTag + ' > .header, ' + rootTag + ' > .w-nav:not([data-no-scroll])');
+    var offset = header.css('position') === 'fixed' ? header.outerHeight() : 0;
+
+    win.setTimeout(function () {
+      scroll(el, offset);
+    }, e ? 0 : 300);
+  }
+
+  function scroll(el, offset) {
+    var start = $(win).scrollTop();
+    var end = el.offset().top - offset;
+
+    // If specified, scroll so that the element ends up in the middle of the viewport
+    if (el.data('scroll') === 'mid') {
+      var available = $(win).height() - offset;
+      var elHeight = el.outerHeight();
+      if (elHeight < available) {
+        end -= Math.round((available - elHeight) / 2);
+      }
+    }
+
+    var mult = 1;
+
+    // Check for custom time multiplier on the body and the element
+    $('body').add(el).each(function () {
+      var time = parseFloat($(this).attr('data-scroll-time'), 10);
+      if (!isNaN(time) && (time === 0 || time > 0)) {
+        mult = time;
+      }
+    });
+
+    // Shim for IE8 and below
+    if (!Date.now) {
+      Date.now = function () {
+        return new Date().getTime();
+      };
+    }
+
+    var clock = Date.now();
+    var animate = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function (fn) {
+      win.setTimeout(fn, 15);
+    };
+    var duration = (472.143 * Math.log(Math.abs(start - end) + 125) - 2000) * mult;
+
+    var step = function step() {
+      var elapsed = Date.now() - clock;
+      win.scroll(0, getY(start, end, elapsed, duration));
+
+      if (elapsed <= duration) {
+        animate(step);
+      }
+    };
+
+    step();
+  }
+
+  function getY(start, end, elapsed, duration) {
+    if (elapsed > duration) {
+      return end;
+    }
+
+    return start + (end - start) * ease(elapsed / duration);
+  }
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+  }
+
+  // Export module
+  return { ready: ready };
+});
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
+/**
+ * Webflow: Touch events
+ */
+
+var Webflow = __webpack_require__(0);
+
+Webflow.define('touch', module.exports = function ($) {
+  var api = {};
+  var fallback = !document.addEventListener;
+  var getSelection = window.getSelection;
+
+  // Fallback to click events in old IE
+  if (fallback) {
+    $.event.special.tap = { bindType: 'click', delegateType: 'click' };
+  }
+
+  api.init = function (el) {
+    if (fallback) {
+      return null;
+    }
+    el = typeof el === 'string' ? $(el).get(0) : el;
+    return el ? new Touch(el) : null;
+  };
+
+  function Touch(el) {
+    var active = false;
+    var dirty = false;
+    var useTouch = false;
+    var thresholdX = Math.min(Math.round(window.innerWidth * 0.04), 40);
+    var startX;
+    var startY;
+    var lastX;
+
+    el.addEventListener('touchstart', start, false);
+    el.addEventListener('touchmove', move, false);
+    el.addEventListener('touchend', end, false);
+    el.addEventListener('touchcancel', cancel, false);
+    el.addEventListener('mousedown', start, false);
+    el.addEventListener('mousemove', move, false);
+    el.addEventListener('mouseup', end, false);
+    el.addEventListener('mouseout', cancel, false);
+
+    function start(evt) {
+      // We don’t handle multi-touch events yet.
+      var touches = evt.touches;
+      if (touches && touches.length > 1) {
+        return;
+      }
+
+      active = true;
+      dirty = false;
+
+      if (touches) {
+        useTouch = true;
+        startX = touches[0].clientX;
+        startY = touches[0].clientY;
+      } else {
+        startX = evt.clientX;
+        startY = evt.clientY;
+      }
+
+      lastX = startX;
+    }
+
+    function move(evt) {
+      if (!active) {
+        return;
+      }
+
+      if (useTouch && evt.type === 'mousemove') {
+        evt.preventDefault();
+        evt.stopPropagation();
+        return;
+      }
+
+      var touches = evt.touches;
+      var x = touches ? touches[0].clientX : evt.clientX;
+      var y = touches ? touches[0].clientY : evt.clientY;
+
+      var velocityX = x - lastX;
+      lastX = x;
+
+      // Allow swipes while pointer is down, but prevent them during text selection
+      if (Math.abs(velocityX) > thresholdX && getSelection && String(getSelection()) === '') {
+        triggerEvent('swipe', evt, {
+          direction: velocityX > 0 ? 'right' : 'left'
+        });
+        cancel();
+      }
+
+      // If pointer moves more than 10px flag to cancel tap
+      if (Math.abs(x - startX) > 10 || Math.abs(y - startY) > 10) {
+        dirty = true;
+      }
+    }
+
+    function end(evt) {
+      if (!active) {
+        return;
+      }
+      active = false;
+
+      if (useTouch && evt.type === 'mouseup') {
+        evt.preventDefault();
+        evt.stopPropagation();
+        useTouch = false;
+        return;
+      }
+
+      if (!dirty) {
+        triggerEvent('tap', evt);
+      }
+    }
+
+    function cancel() {
+      active = false;
+    }
+
+    function destroy() {
+      el.removeEventListener('touchstart', start, false);
+      el.removeEventListener('touchmove', move, false);
+      el.removeEventListener('touchend', end, false);
+      el.removeEventListener('touchcancel', cancel, false);
+      el.removeEventListener('mousedown', start, false);
+      el.removeEventListener('mousemove', move, false);
+      el.removeEventListener('mouseup', end, false);
+      el.removeEventListener('mouseout', cancel, false);
+      el = null;
+    }
+
+    // Public instance methods
+    this.destroy = destroy;
+  }
+
+  // Wrap native event to supoprt preventdefault + stopPropagation
+  function triggerEvent(type, evt, data) {
+    var newEvent = $.Event(type, { originalEvent: evt });
+    $(evt.target).trigger(newEvent, data);
+  }
+
+  // Listen for touch events on all nodes by default.
+  api.instance = api.init(document);
+
+  // Export module
+  return api;
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 /**
  * Webflow: Forms
  */
@@ -2779,9 +3752,6 @@ var Webflow = __webpack_require__(0);
 
 Webflow.define('forms', module.exports = function ($, _) {
   var api = {};
-
-  // Cross-Domain AJAX for IE8
-  __webpack_require__(75);
 
   var $doc = $(document);
   var $forms;
@@ -2858,7 +3828,8 @@ Webflow.define('forms', module.exports = function ($, _) {
 
     // MailChimp form
     if (chimpRegex.test(action)) {
-      data.handler = submitMailChimp;return;
+      data.handler = submitMailChimp;
+      return;
     }
 
     // Custom form action
@@ -3259,603 +4230,14 @@ Webflow.define('forms', module.exports = function ($, _) {
 });
 
 /***/ }),
-/* 75 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-/*!
- * jQuery-ajaxTransport-XDomainRequest - v1.0.3
- * 2014-12-16 WEBFLOW - Removed UMD wrapper
- * https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest
- * Copyright (c) 2014 Jason Moon (@JSONMOON)
- * @license MIT (/blob/master/LICENSE.txt)
- */
-module.exports = function ($) {
-  if ($.support.cors || !$.ajaxTransport || !window.XDomainRequest) {
-    return;
-  }var httpRegEx = /^https?:\/\//i;var getOrPostRegEx = /^get|post$/i;var sameSchemeRegEx = new RegExp("^" + location.protocol, "i");$.ajaxTransport("* text html xml json", function (options, userOptions, jqXHR) {
-    if (!options.crossDomain || !options.async || !getOrPostRegEx.test(options.type) || !httpRegEx.test(options.url) || !sameSchemeRegEx.test(options.url)) {
-      return;
-    }var xdr = null;return { send: function send(headers, complete) {
-        var postData = "";var userType = (userOptions.dataType || "").toLowerCase();xdr = new XDomainRequest();if (/^\d+$/.test(userOptions.timeout)) {
-          xdr.timeout = userOptions.timeout;
-        }xdr.ontimeout = function () {
-          complete(500, "timeout");
-        };xdr.onload = function () {
-          var allResponseHeaders = "Content-Length: " + xdr.responseText.length + "\r\nContent-Type: " + xdr.contentType;var status = { code: 200, message: "success" };var responses = { text: xdr.responseText };try {
-            if (userType === "html" || /text\/html/i.test(xdr.contentType)) {
-              responses.html = xdr.responseText;
-            } else if (userType === "json" || userType !== "text" && /\/json/i.test(xdr.contentType)) {
-              try {
-                responses.json = $.parseJSON(xdr.responseText);
-              } catch (e) {
-                status.code = 500;status.message = "parseerror";
-              }
-            } else if (userType === "xml" || userType !== "text" && /\/xml/i.test(xdr.contentType)) {
-              var doc = new ActiveXObject("Microsoft.XMLDOM");doc.async = false;try {
-                doc.loadXML(xdr.responseText);
-              } catch (e) {
-                doc = undefined;
-              }if (!doc || !doc.documentElement || doc.getElementsByTagName("parsererror").length) {
-                status.code = 500;status.message = "parseerror";throw "Invalid XML: " + xdr.responseText;
-              }responses.xml = doc;
-            }
-          } catch (parseMessage) {
-            throw parseMessage;
-          } finally {
-            complete(status.code, status.message, responses, allResponseHeaders);
-          }
-        };xdr.onprogress = function () {};xdr.onerror = function () {
-          complete(500, "error", { text: xdr.responseText });
-        };if (userOptions.data) {
-          postData = $.type(userOptions.data) === "string" ? userOptions.data : $.param(userOptions.data);
-        }xdr.open(options.type, options.url);xdr.send(postData);
-      }, abort: function abort() {
-        if (xdr) {
-          xdr.abort();
-        }
-      } };
-  });
-}(window.jQuery);
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Webflow: Interactions
- */
-
-var Webflow = __webpack_require__(0);
-var IXEvents = __webpack_require__(38);
-
-Webflow.define('ix', module.exports = function ($, _) {
-  var api = {};
-  var designer;
-  var $win = $(window);
-  var namespace = '.w-ix';
-  var tram = $.tram;
-  var env = Webflow.env;
-  var inApp = env();
-  var emptyFix = env.chrome && env.chrome < 35;
-  var transNone = 'none 0s ease 0s';
-  var $subs = $();
-  var config = {};
-  var anchors = [];
-  var loads = [];
-  var readys = [];
-  var destroyed;
-  var readyDelay = 1;
-
-  // Component types and proxy selectors
-  var components = {
-    tabs: '.w-tab-link, .w-tab-pane',
-    dropdown: '.w-dropdown',
-    slider: '.w-slide',
-    navbar: '.w-nav'
-  };
-
-  // -----------------------------------
-  // Module methods
-
-  api.init = function (list) {
-    setTimeout(function () {
-      configure(list);
-    }, 1);
-  };
-
-  api.preview = function () {
-    designer = false;
-    readyDelay = 100;
-    setTimeout(function () {
-      configure(window.__wf_ix);
-    }, 1);
-  };
-
-  api.design = function () {
-    designer = true;
-    api.destroy();
-  };
-
-  api.destroy = function () {
-    destroyed = true;
-    $subs.each(teardown);
-    Webflow.scroll.off(scroll);
-    IXEvents.async();
-    anchors = [];
-    loads = [];
-    readys = [];
-  };
-
-  api.ready = function () {
-    // Redirect IX init while in design/preview modes
-    if (inApp) {
-      return env('design') ? api.design() : api.preview();
-    }
-
-    // Ready should only be used after destroy, as a way to re-init
-    if (config && destroyed) {
-      destroyed = false;
-      init();
-    }
-  };
-
-  api.run = run;
-  api.style = inApp ? styleApp : stylePub;
-
-  // -----------------------------------
-  // Private methods
-
-  function configure(list) {
-    if (!list) {
-      return;
-    }
-
-    // Map all interactions by slug
-    config = {};
-    _.each(list, function (item) {
-      config[item.slug] = item.value;
-    });
-
-    // Init ix after config
-    init();
-  }
-
-  function init() {
-
-    initIX1Engine();
-
-    // Need init IXEvents regardless if IX1 events exist since
-    // IXEvents _also_ dispatch IX2 events.
-
-    // Trigger queued events, must happen after init
-    IXEvents.init();
-
-    // Trigger a redraw to ensure all IX intros play
-    Webflow.redraw.up();
-  }
-
-  function initIX1Engine() {
-    // Build each element's interaction keying from data attribute
-    var els = $('[data-ix]');
-    if (!els.length) {
-      return;
-    }
-
-    els.each(teardown);
-    els.each(build);
-
-    // Listen for scroll events if any anchors exist
-    if (anchors.length) {
-      Webflow.scroll.on(scroll);
-      setTimeout(scroll, 1);
-    }
-
-    // Handle loads or readys if they exist
-    if (loads.length) {
-      Webflow.load(runLoads);
-    }
-    if (readys.length) {
-      setTimeout(runReadys, readyDelay);
-    }
-  }
-
-  function build(i, el) {
-    var $el = $(el);
-    var id = $el.attr('data-ix');
-    var ix = config[id];
-    if (!ix) {
-      return;
-    }
-    var triggers = ix.triggers;
-    if (!triggers) {
-      return;
-    }
-
-    // Set styles immediately to provide tram with starting transform values
-    api.style($el, ix.style);
-
-    _.each(triggers, function (trigger) {
-      var state = {};
-      var type = trigger.type;
-      var stepsB = trigger.stepsB && trigger.stepsB.length;
-
-      function runA() {
-        run(trigger, $el, { group: 'A' });
-      }
-      function runB() {
-        run(trigger, $el, { group: 'B' });
-      }
-
-      if (type === 'load') {
-        trigger.preload && !inApp ? loads.push(runA) : readys.push(runA);
-        return;
-      }
-
-      if (type === 'click') {
-        $el.on('click' + namespace, function (evt) {
-          // Avoid late clicks on touch devices
-          if (!Webflow.validClick(evt.currentTarget)) {
-            return;
-          }
-
-          // Prevent default on empty hash urls
-          if ($el.attr('href') === '#') {
-            evt.preventDefault();
-          }
-
-          run(trigger, $el, { group: state.clicked ? 'B' : 'A' });
-          if (stepsB) {
-            state.clicked = !state.clicked;
-          }
-        });
-        $subs = $subs.add($el);
-        return;
-      }
-
-      if (type === 'hover') {
-        $el.on('mouseenter' + namespace, runA);
-        $el.on('mouseleave' + namespace, runB);
-        $subs = $subs.add($el);
-        return;
-      }
-
-      if (type === 'scroll') {
-        anchors.push({
-          el: $el, trigger: trigger, state: { active: false },
-          offsetTop: convert(trigger.offsetTop),
-          offsetBot: convert(trigger.offsetBot)
-        });
-        return;
-      }
-
-      // Check for a proxy component selector
-      // type == [tabs, dropdown, slider, navbar]
-      var proxy = components[type];
-      if (proxy) {
-        var $proxy = $el.closest(proxy);
-        $proxy.on(IXEvents.types.INTRO, runA).on(IXEvents.types.OUTRO, runB);
-        $subs = $subs.add($proxy);
-        return;
-      }
-    });
-  }
-
-  function convert(offset) {
-    if (!offset) {
-      return 0;
-    }
-    offset = String(offset);
-    var result = parseInt(offset, 10);
-    if (result !== result) {
-      return 0;
-    }
-    if (offset.indexOf('%') > 0) {
-      result /= 100;
-      if (result >= 1) {
-        result = 0.999;
-      }
-    }
-    return result;
-  }
-
-  function teardown(i, el) {
-    $(el).off(namespace);
-  }
-
-  function scroll() {
-    var viewTop = $win.scrollTop();
-    var viewHeight = $win.height();
-
-    // Check each anchor for a valid scroll trigger
-    var count = anchors.length;
-    for (var i = 0; i < count; i++) {
-      var anchor = anchors[i];
-      var $el = anchor.el;
-      var trigger = anchor.trigger;
-      var stepsB = trigger.stepsB && trigger.stepsB.length;
-      var state = anchor.state;
-      var top = $el.offset().top;
-      var height = $el.outerHeight();
-      var offsetTop = anchor.offsetTop;
-      var offsetBot = anchor.offsetBot;
-      if (offsetTop < 1 && offsetTop > 0) {
-        offsetTop *= viewHeight;
-      }
-      if (offsetBot < 1 && offsetBot > 0) {
-        offsetBot *= viewHeight;
-      }
-      var active = top + height - offsetTop >= viewTop && top + offsetBot <= viewTop + viewHeight;
-      if (active === state.active) {
-        continue;
-      }
-      if (active === false && !stepsB) {
-        continue;
-      }
-      state.active = active;
-      run(trigger, $el, { group: active ? 'A' : 'B' });
-    }
-  }
-
-  function runLoads() {
-    var count = loads.length;
-    for (var i = 0; i < count; i++) {
-      loads[i]();
-    }
-  }
-
-  function runReadys() {
-    var count = readys.length;
-    for (var i = 0; i < count; i++) {
-      readys[i]();
-    }
-  }
-
-  function run(trigger, $el, opts, replay) {
-    opts = opts || {};
-    var done = opts.done;
-    var preserve3d = trigger.preserve3d;
-
-    // Do not run in designer unless forced
-    if (designer && !opts.force) {
-      return;
-    }
-
-    // Operate on a set of grouped steps
-    var group = opts.group || 'A';
-    var loop = trigger['loop' + group];
-    var steps = trigger['steps' + group];
-    if (!steps || !steps.length) {
-      return;
-    }
-    if (steps.length < 2) {
-      loop = false;
-    }
-
-    // One-time init before any loops
-    if (!replay) {
-
-      // Find selector within element descendants, siblings, or query whole document
-      var selector = trigger.selector;
-      if (selector) {
-        if (trigger.descend) {
-          $el = $el.find(selector);
-        } else if (trigger.siblings) {
-          $el = $el.siblings(selector);
-        } else {
-          $el = $(selector);
-        }
-        if (inApp) {
-          $el.attr('data-ix-affect', 1);
-        }
-      }
-
-      // Apply empty fix for certain Chrome versions
-      if (emptyFix) {
-        $el.addClass('w-ix-emptyfix');
-      }
-
-      // Set preserve3d for triggers with 3d transforms
-      if (preserve3d) {
-        $el.css('transform-style', 'preserve-3d');
-      }
-    }
-
-    var _tram = tram($el);
-
-    // Add steps
-    var meta = { omit3d: !preserve3d };
-    for (var i = 0; i < steps.length; i++) {
-      addStep(_tram, steps[i], meta);
-    }
-
-    function fin() {
-      // Run trigger again if looped
-      if (loop) {
-        return run(trigger, $el, opts, true);
-      }
-
-      // Reset any 'auto' values
-      if (meta.width === 'auto') {
-        _tram.set({ width: 'auto' });
-      }
-      if (meta.height === 'auto') {
-        _tram.set({ height: 'auto' });
-      }
-
-      // Run callback
-      done && done();
-    }
-
-    // Add final step to queue if tram has started
-    meta.start ? _tram.then(fin) : fin();
-  }
-
-  function addStep(_tram, step, meta) {
-    var addMethod = 'add';
-    var startMethod = 'start';
-
-    // Once the transition has started, we will always use then() to add to the queue.
-    if (meta.start) {
-      addMethod = startMethod = 'then';
-    }
-
-    // Parse transitions string on the current step
-    var transitions = step.transition;
-    if (transitions) {
-      transitions = transitions.split(',');
-      for (var i = 0; i < transitions.length; i++) {
-        var transition = transitions[i];
-        _tram[addMethod](transition);
-      }
-    }
-
-    // Build a clean object to pass to the tram method
-    var clean = tramify(step, meta) || {};
-
-    // Store last width and height values
-    if (clean.width != null) {
-      meta.width = clean.width;
-    }
-    if (clean.height != null) {
-      meta.height = clean.height;
-    }
-
-    // When transitions are not present, set values immediately and continue queue.
-    if (transitions == null) {
-
-      // If we have started, wrap set() in then() and reset queue
-      if (meta.start) {
-        _tram.then(function () {
-          var queue = this.queue;
-          this.set(clean);
-          if (clean.display) {
-            _tram.redraw();
-            Webflow.redraw.up();
-          }
-          this.queue = queue;
-          this.next();
-        });
-      } else {
-        _tram.set(clean);
-
-        // Always redraw after setting display
-        if (clean.display) {
-          _tram.redraw();
-          Webflow.redraw.up();
-        }
-      }
-
-      // Use the wait() method to kick off queue in absence of transitions.
-      var wait = clean.wait;
-      if (wait != null) {
-        _tram.wait(wait);
-        meta.start = true;
-      }
-
-      // Otherwise, when transitions are present
-    } else {
-
-      // If display is present, handle it separately
-      if (clean.display) {
-        var display = clean.display;
-        delete clean.display;
-
-        // If we've already started, we need to wrap it in a then()
-        if (meta.start) {
-          _tram.then(function () {
-            var queue = this.queue;
-            this.set({ display: display }).redraw();
-            Webflow.redraw.up();
-            this.queue = queue;
-            this.next();
-          });
-        } else {
-          _tram.set({ display: display }).redraw();
-          Webflow.redraw.up();
-        }
-      }
-
-      // Otherwise, start a transition using the current start method.
-      _tram[startMethod](clean);
-      meta.start = true;
-    }
-  }
-
-  // (In app) Set styles immediately and manage upstream transition
-  function styleApp(el, data) {
-    var _tram = tram(el);
-
-    // Exit early when data is empty to avoid clearing upstream
-    if ($.isEmptyObject(data)) {
-      return;
-    }
-
-    // Get computed transition value
-    el.css('transition', '');
-    var computed = el.css('transition');
-
-    // If computed is set to none, clear upstream
-    if (computed === transNone) {
-      computed = _tram.upstream = null;
-    }
-
-    // Set upstream transition to none temporarily
-    _tram.upstream = transNone;
-
-    // Set values immediately
-    _tram.set(tramify(data));
-
-    // Only restore upstream in preview mode
-    _tram.upstream = computed;
-  }
-
-  // (Published) Set styles immediately on specified jquery element
-  function stylePub(el, data) {
-    tram(el).set(tramify(data));
-  }
-
-  // Build a clean object for tram
-  function tramify(obj, meta) {
-    var omit3d = meta && meta.omit3d;
-    var result = {};
-    var found = false;
-    for (var key in obj) {
-      if (key === 'transition') {
-        continue;
-      }
-      if (key === 'keysort') {
-        continue;
-      }
-      if (omit3d) {
-        if (key === 'z' || key === 'rotateX' || key === 'rotateY' || key === 'scaleZ') {
-          continue;
-        }
-      }
-      result[key] = obj[key];
-      found = true;
-    }
-    // If empty, return null for tram.set/stop compliance
-    return found ? result : null;
-  }
-
-  // Export module
-  return api;
-});
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*eslint no-shadow: 0*/
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 
 /**
  * Webflow: Lightbox component
@@ -4456,131 +4838,14 @@ Webflow.define('lightbox', module.exports = function ($) {
 });
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-/**
- * Webflow: Auto-select links to current page or section
- */
-
-var Webflow = __webpack_require__(0);
-
-Webflow.define('links', module.exports = function ($, _) {
-  var api = {};
-  var $win = $(window);
-  var designer;
-  var inApp = Webflow.env();
-  var location = window.location;
-  var tempLink = document.createElement('a');
-  var linkCurrent = 'w--current';
-  var validHash = /^#[\w:.-]+$/;
-  var indexPage = /index\.(html|php)$/;
-  var dirList = /\/$/;
-  var anchors;
-  var slug;
-
-  // -----------------------------------
-  // Module methods
-
-  api.ready = api.design = api.preview = init;
-
-  // -----------------------------------
-  // Private methods
-
-  function init() {
-    designer = inApp && Webflow.env('design');
-    slug = Webflow.env('slug') || location.pathname || '';
-
-    // Reset scroll listener, init anchors
-    Webflow.scroll.off(scroll);
-    anchors = [];
-
-    // Test all links for a selectable href
-    var links = document.links;
-    for (var i = 0; i < links.length; ++i) {
-      select(links[i]);
-    }
-
-    // Listen for scroll if any anchors exist
-    if (anchors.length) {
-      Webflow.scroll.on(scroll);
-      scroll();
-    }
-  }
-
-  function select(link) {
-    var href = designer && link.getAttribute('href-disabled') || link.getAttribute('href');
-    tempLink.href = href;
-
-    // Ignore any hrefs with a colon to safely avoid all uri schemes
-    if (href.indexOf(':') >= 0) {
-      return;
-    }
-
-    var $link = $(link);
-
-    // Check for valid hash links w/ sections and use scroll anchor
-    if (href.indexOf('#') === 0 && validHash.test(href)) {
-      var $section = $(href);
-      $section.length && anchors.push({ link: $link, sec: $section, active: false });
-      return;
-    }
-
-    // Ignore empty # links
-    if (href === '#' || href === '') {
-      return;
-    }
-
-    // Determine whether the link should be selected
-    var match = tempLink.href === location.href || href === slug || indexPage.test(href) && dirList.test(slug);
-    setClass($link, linkCurrent, match);
-  }
-
-  function scroll() {
-    var viewTop = $win.scrollTop();
-    var viewHeight = $win.height();
-
-    // Check each anchor for a section in view
-    _.each(anchors, function (anchor) {
-      var $link = anchor.link;
-      var $section = anchor.sec;
-      var top = $section.offset().top;
-      var height = $section.outerHeight();
-      var offset = viewHeight * 0.5;
-      var active = $section.is(':visible') && top + height - offset >= viewTop && top + offset <= viewTop + viewHeight;
-      if (anchor.active === active) {
-        return;
-      }
-      anchor.active = active;
-      setClass($link, linkCurrent, active);
-    });
-  }
-
-  function setClass($elem, className, add) {
-    var exists = $elem.hasClass(className);
-    if (add && exists) {
-      return;
-    }
-    if (!add && !exists) {
-      return;
-    }
-    add ? $elem.addClass(className) : $elem.removeClass(className);
-  }
-
-  // Export module
-  return api;
-});
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 /**
  * Webflow: Navbar component
  */
@@ -4974,170 +5239,14 @@ Webflow.define('navbar', module.exports = function ($, _) {
 });
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Webflow: Smooth scroll
- */
-
-var Webflow = __webpack_require__(0);
-
-Webflow.define('scroll', module.exports = function ($) {
-  var $doc = $(document);
-  var win = window;
-  var loc = win.location;
-  var history = inIframe() ? null : win.history;
-  var validHash = /^[a-zA-Z0-9][\w:.-]*$/;
-
-  function inIframe() {
-    try {
-      return Boolean(win.frameElement);
-    } catch (e) {
-      return true;
-    }
-  }
-
-  function ready() {
-    // The current page url without the hash part.
-    var locHref = loc.href.split('#')[0];
-
-    // When clicking on a link, check if it links to another part of the page
-    $doc.on('click', 'a', function (e) {
-      if (Webflow.env('design')) {
-        return;
-      }
-
-      // Ignore links being used by jQuery mobile
-      if (window.$.mobile && $(e.currentTarget).hasClass('ui-link')) {
-        return;
-      }
-
-      // Ignore empty # links
-      if (this.getAttribute('href') === '#') {
-        e.preventDefault();
-        return;
-      }
-
-      // The href property always contains the full url so we can compare
-      // with the document’s location to only target links on this page.
-      var parts = this.href.split('#');
-      var hash = parts[0] === locHref ? parts[1] : null;
-      if (hash) {
-        findEl(hash, e);
-      }
-    });
-  }
-
-  function findEl(hash, e) {
-    if (!validHash.test(hash)) {
-      return;
-    }
-
-    var el = $('#' + hash);
-    if (!el.length) {
-      return;
-    }
-
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    // Push new history state
-    if (loc.hash !== hash && history && history.pushState &&
-    // Navigation breaks Chrome when the protocol is `file:`.
-    !(Webflow.env.chrome && loc.protocol === 'file:')) {
-      var oldHash = history.state && history.state.hash;
-      if (oldHash !== hash) {
-        history.pushState({ hash: hash }, '', '#' + hash);
-      }
-    }
-
-    // If a fixed header exists, offset for the height
-    var rootTag = Webflow.env('editor') ? '.w-editor-body' : 'body';
-    var header = $('header, ' + rootTag + ' > .header, ' + rootTag + ' > .w-nav:not([data-no-scroll])');
-    var offset = header.css('position') === 'fixed' ? header.outerHeight() : 0;
-
-    win.setTimeout(function () {
-      scroll(el, offset);
-    }, e ? 0 : 300);
-  }
-
-  function scroll(el, offset) {
-    var start = $(win).scrollTop();
-    var end = el.offset().top - offset;
-
-    // If specified, scroll so that the element ends up in the middle of the viewport
-    if (el.data('scroll') === 'mid') {
-      var available = $(win).height() - offset;
-      var elHeight = el.outerHeight();
-      if (elHeight < available) {
-        end -= Math.round((available - elHeight) / 2);
-      }
-    }
-
-    var mult = 1;
-
-    // Check for custom time multiplier on the body and the element
-    $('body').add(el).each(function () {
-      var time = parseFloat($(this).attr('data-scroll-time'), 10);
-      if (!isNaN(time) && (time === 0 || time > 0)) {
-        mult = time;
-      }
-    });
-
-    // Shim for IE8 and below
-    if (!Date.now) {
-      Date.now = function () {
-        return new Date().getTime();
-      };
-    }
-
-    var clock = Date.now();
-    var animate = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function (fn) {
-      win.setTimeout(fn, 15);
-    };
-    var duration = (472.143 * Math.log(Math.abs(start - end) + 125) - 2000) * mult;
-
-    var step = function step() {
-      var elapsed = Date.now() - clock;
-      win.scroll(0, getY(start, end, elapsed, duration));
-
-      if (elapsed <= duration) {
-        animate(step);
-      }
-    };
-
-    step();
-  }
-
-  function getY(start, end, elapsed, duration) {
-    if (elapsed > duration) {
-      return end;
-    }
-
-    return start + (end - start) * ease(elapsed / duration);
-  }
-
-  function ease(t) {
-    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-  }
-
-  // Export module
-  return { ready: ready };
-});
-
-/***/ }),
 /* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 /**
  * Webflow: Slider component
  */
@@ -5361,7 +5470,8 @@ Webflow.define('slider', module.exports = function ($, _) {
     // Select page based on slide element index
     var found = null;
     if (value === data.slides.length) {
-      init();layout(data); // Rebuild and find new slides
+      init();
+      layout(data); // Rebuild and find new slides
     }
     _.each(data.anchors, function (anchor, index) {
       $(anchor.els).each(function (i, el) {
@@ -5535,7 +5645,11 @@ Webflow.define('slider', module.exports = function ($, _) {
     if (animation === 'over') {
       resetConfig = { x: data.endX };
       tram(prevTargs).set({ visibility: '' }).stop();
-      tram(targets).set({ visibility: '', zIndex: data.depth++, x: offsetX + anchors[data.index].width * vector }).add(slideRule).start({ x: offsetX }).then(resetOthers);
+      tram(targets).set({
+        visibility: '',
+        zIndex: data.depth++,
+        x: offsetX + anchors[data.index].width * vector
+      }).add(slideRule).start({ x: offsetX }).then(resetOthers);
       return;
     }
 
@@ -5670,158 +5784,6 @@ Webflow.define('slider', module.exports = function ($, _) {
   return api;
 });
 
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Webflow: Touch events
- */
-
-var Webflow = __webpack_require__(0);
-
-Webflow.define('touch', module.exports = function ($) {
-  var api = {};
-  var fallback = !document.addEventListener;
-  var getSelection = window.getSelection;
-
-  // Fallback to click events in old IE
-  if (fallback) {
-    $.event.special.tap = { bindType: 'click', delegateType: 'click' };
-  }
-
-  api.init = function (el) {
-    if (fallback) {
-      return null;
-    }
-    el = typeof el === 'string' ? $(el).get(0) : el;
-    return el ? new Touch(el) : null;
-  };
-
-  function Touch(el) {
-    var active = false;
-    var dirty = false;
-    var useTouch = false;
-    var thresholdX = Math.min(Math.round(window.innerWidth * 0.04), 40);
-    var startX;
-    var startY;
-    var lastX;
-
-    el.addEventListener('touchstart', start, false);
-    el.addEventListener('touchmove', move, false);
-    el.addEventListener('touchend', end, false);
-    el.addEventListener('touchcancel', cancel, false);
-    el.addEventListener('mousedown', start, false);
-    el.addEventListener('mousemove', move, false);
-    el.addEventListener('mouseup', end, false);
-    el.addEventListener('mouseout', cancel, false);
-
-    function start(evt) {
-      // We don’t handle multi-touch events yet.
-      var touches = evt.touches;
-      if (touches && touches.length > 1) {
-        return;
-      }
-
-      active = true;
-      dirty = false;
-
-      if (touches) {
-        useTouch = true;
-        startX = touches[0].clientX;
-        startY = touches[0].clientY;
-      } else {
-        startX = evt.clientX;
-        startY = evt.clientY;
-      }
-
-      lastX = startX;
-    }
-
-    function move(evt) {
-      if (!active) {
-        return;
-      }
-
-      if (useTouch && evt.type === 'mousemove') {
-        evt.preventDefault();
-        evt.stopPropagation();
-        return;
-      }
-
-      var touches = evt.touches;
-      var x = touches ? touches[0].clientX : evt.clientX;
-      var y = touches ? touches[0].clientY : evt.clientY;
-
-      var velocityX = x - lastX;
-      lastX = x;
-
-      // Allow swipes while pointer is down, but prevent them during text selection
-      if (Math.abs(velocityX) > thresholdX && getSelection && String(getSelection()) === '') {
-        triggerEvent('swipe', evt, { direction: velocityX > 0 ? 'right' : 'left' });
-        cancel();
-      }
-
-      // If pointer moves more than 10px flag to cancel tap
-      if (Math.abs(x - startX) > 10 || Math.abs(y - startY) > 10) {
-        dirty = true;
-      }
-    }
-
-    function end(evt) {
-      if (!active) {
-        return;
-      }
-      active = false;
-
-      if (useTouch && evt.type === 'mouseup') {
-        evt.preventDefault();
-        evt.stopPropagation();
-        useTouch = false;
-        return;
-      }
-
-      if (!dirty) {
-        triggerEvent('tap', evt);
-      }
-    }
-
-    function cancel() {
-      active = false;
-    }
-
-    function destroy() {
-      el.removeEventListener('touchstart', start, false);
-      el.removeEventListener('touchmove', move, false);
-      el.removeEventListener('touchend', end, false);
-      el.removeEventListener('touchcancel', cancel, false);
-      el.removeEventListener('mousedown', start, false);
-      el.removeEventListener('mousemove', move, false);
-      el.removeEventListener('mouseup', end, false);
-      el.removeEventListener('mouseout', cancel, false);
-      el = null;
-    }
-
-    // Public instance methods
-    this.destroy = destroy;
-  }
-
-  // Wrap native event to supoprt preventdefault + stopPropagation
-  function triggerEvent(type, evt, data) {
-    var newEvent = $.Event(type, { originalEvent: evt });
-    $(evt.target).trigger(newEvent, data);
-  }
-
-  // Listen for touch events on all nodes by default.
-  api.instance = api.init(document);
-
-  // Export module
-  return api;
-});
-
 /***/ })
 /******/ ]);/**
  * ----------------------------------------------------------------------
@@ -5836,10 +5798,14 @@ Webflow.require('ix').init([
   {"slug":"hover-arrow-left","name":"hover-arrow-left","value":{"style":{},"triggers":[{"type":"hover","loopA":true,"stepsA":[{"transition":"transform 500ms ease 0","x":"-10px","y":"0px","z":"0px"},{"transition":"transform 500ms ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[{"transition":"transform 500ms ease 0","x":"0px","y":"0px","z":"0px"}]}]}},
   {"slug":"search-dropdown","name":"search dropdown","value":{"style":{},"triggers":[{"type":"click","selector":".dropdown-list-2","siblings":true,"stepsA":[{"display":"block"},{"opacity":1,"height":"auto","transition":"height 500ms ease 0, opacity 500ms ease 0"}],"stepsB":[{"opacity":0,"height":"0px","transition":"height 500ms ease 0, opacity 500ms ease 0"},{"display":"none"}]},{"type":"click","selector":".dropdown-icon","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-180deg"}],"stepsB":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}},
   {"slug":"appear-next","name":"Appear-next","value":{"style":{},"triggers":[{"type":"click","selector":".next","preserve3d":true,"stepsA":[{"opacity":1,"transition":"opacity 200 ease 0, transform 300ms ease-out-back 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
-  {"slug":"increase-size-filter","name":"increase-size-filter","value":{"style":{},"triggers":[{"type":"click","selector":".div-search-form","siblings":true,"stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"100px","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow-icon","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-90deg"}],"stepsB":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"90deg"}]}]}},
+  {"slug":"increase-size-filter","name":"increase-size-filter","value":{"style":{},"triggers":[{"type":"click","selector":".div-search-form","siblings":true,"stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"220px","transition":"height 200 ease 0"}]},{"type":"click","selector":".arrow-icon","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-90deg"}],"stepsB":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"90deg"}]}]}},
+  {"slug":"increase-size-filter-mobile","name":"increase-size-filter-mobile","value":{"style":{},"triggers":[{"type":"click","selector":".arrow-icon","descend":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-90deg"}],"stepsB":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"90deg"}]},{"type":"click","selector":".div-20","stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"40px","transition":"height 200 ease 0"}]}]}},
   {"slug":"close-item-added","name":"close-item-added","value":{"style":{},"triggers":[{"type":"click","selector":".div-added-to-cart","stepsA":[{"display":"none","opacity":0,"height":"0px","transition":"height 200 ease 0, opacity 200 ease 0"}],"stepsB":[]},{"type":"click","selector":".overlay-black","stepsA":[{"display":"none","opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}},
   {"slug":"close-modal-produits-2","name":"Close-modal-produits 2","value":{"style":{},"triggers":[]}},
   {"slug":"close-modal-produits","name":"Close-modal-produits","value":{"style":{},"triggers":[{"type":"click","selector":".overlay-black","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none"}],"stepsB":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none"}]},{"type":"click","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none"}],"stepsB":[]}]}},
   {"slug":"open-item-added","name":"Open-item-added","value":{"style":{},"triggers":[{"type":"click","selector":".div-added-to-cart","stepsA":[{"wait":"300ms"},{"display":"flex","opacity":1,"height":"300px","transition":"opacity 750ms ease 0, height 750ms ease 0"},{"wait":"2000ms"},{"opacity":0,"height":"0px","transition":"opacity 750ms ease 0, height 750ms ease 0"}],"stepsB":[]},{"type":"click","selector":".overlay-black","stepsA":[{"wait":"300ms"},{"display":"block","opacity":1,"transition":"opacity 750ms ease 0"},{"wait":"2000ms"},{"opacity":0,"transition":"opacity 750ms ease 0"},{"display":"none"}],"stepsB":[]}]}},
-  {"slug":"slider-anim","name":"Slider-anim","value":{"style":{"height":"0px"},"triggers":[{"type":"slider","stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]}]}}
+  {"slug":"slider-anim","name":"Slider-anim","value":{"style":{"height":"0px"},"triggers":[{"type":"slider","stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]}]}},
+  {"slug":"more-details","name":"more-details","value":{"style":{},"triggers":[{"type":"hover","selector":".smaller-explanation","descend":true,"stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]}]}},
+  {"slug":"scale-search","name":"scale-search","value":{"style":{},"triggers":[{"type":"click","selector":".search-field","stepsA":[{"opacity":0.95,"width":"auto","transition":"width 200 ease 0, opacity 200 ease 0"}],"stepsB":[]},{"type":"click","selector":".search-submit","stepsA":[{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]},{"type":"click","selector":".search-open-trigger","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}},
+  {"slug":"search-reset","name":"search-reset","value":{"style":{},"triggers":[{"type":"click","selector":".search-field","stepsA":[{"opacity":0.95,"width":"38px","transition":"width 200 ease 0, opacity 200 ease 0"}],"stepsB":[]},{"type":"click","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none"}],"stepsB":[]},{"type":"click","selector":".search-open","stepsA":[{"display":"block","opacity":0,"transition":"opacity 200 ease 0"},{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}}
 ]);
