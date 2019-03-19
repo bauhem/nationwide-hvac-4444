@@ -12,12 +12,12 @@ function systemTypeName(systemTypes, type) {
 
 export function unitImage(attachments, width = 300, height = 200, crop = 'fit') {
   if (attachments === undefined || attachments === null || attachments.length === 0) {
-    return config.get('no_image_path');
+    return noImageUrl;
   }
   let url = attachments[0]['url'];
 
   if (url === '') {
-    return config.get('no_image_path');
+    return noImageUrl;
   }
 
   return config.get('cloudinary_resize_url') + `/w_${width},h_${height},c_${crop},f_auto/${url}`;
