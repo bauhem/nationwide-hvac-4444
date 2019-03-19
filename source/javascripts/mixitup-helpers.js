@@ -116,6 +116,13 @@ function scrollToContainer(containerSelector = '.breadcrumbs') {
   }, 300);
 }
 
+// Used to sort results when an option is already selected
+function sortResults(mixer) {
+  jQuery('select.sort-filter').each(function() {
+    mixer.sort($(this).find(":selected").attr('data-sort'));
+  });
+}
+
 export function initializeMixitup(container, useSavedFilters = true) {
   let mixer = mixitup(container, {
     pagination: {
@@ -161,6 +168,12 @@ export function initializeMixitup(container, useSavedFilters = true) {
       mixer.parseFilterGroups();
     }
   }
+
+  sortResults(mixer);
+
+  jQuery('select.sort-filter').change(function() {
+    mixer.sort($(this).find(":selected").attr('data-sort'));
+  });
 
   return mixer;
 }

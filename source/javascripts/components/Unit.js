@@ -54,8 +54,9 @@ class Unit extends React.Component {
     let brand_img = brandLogoImage(unit);
     let zone_id = this.props.zone_num;
     let zone = `Installed Price Zone ${zone_id}`;
-    let model_name = unit['Brand Series'];
     let installation_price = unit[zone];
+
+    let model_name = unit['Brand Series'];
     let brand_filter_cls = this.brandFilterCls();
     let seer_filter_cls = this.seerFilterCls();
     let tonnage_filter_cls = this.tonnageFilterCls();
@@ -63,8 +64,7 @@ class Unit extends React.Component {
     return (
       <a href={"#next"}
          onClick={this.handleClick}
-         data-price={installation_price}
-         data-name={model_name}
+         data-price={unit['Shop Online Price']}
          className={`mix ${brand_filter_cls} ${seer_filter_cls} ${tonnage_filter_cls} w-inline-block`}>
         <div className="div-image">
           <img src={img_src} alt={model_name}/>
@@ -82,6 +82,7 @@ class Unit extends React.Component {
         {this.renderField('AHU Model', 'Air Handler', 'smaller')}
 
         {
+          // We show price only when we know the user's zone
           installation_price !== undefined && (
             <div className="div-product-details">
               <div className="blue-text-left">Price including
