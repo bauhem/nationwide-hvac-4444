@@ -11,6 +11,8 @@ import {brandsFilter} from "./UnitsFilter";
 import {withMixitup} from "./hoc/UseMixitup";
 import MixitupPaginationLayout from "./MixitupPaginationLayout";
 import TonnageFilters from "./TonnageFilters";
+import SortFilters from "./SortFilters";
+import MobileFilterBox from "./MobileFilterBox";
 
 const units = require('../../../data/products.json');
 
@@ -51,28 +53,25 @@ class Search extends React.Component {
     return this.state.loading;
   }
 
-  filterUnits(query) {
-    let results = units.filter((unit) => {
-      if (hasProperty(unit, 'CU Model') && unit['CU Model'].match(query) !== null) {
-        return true;
-      }
-
-      if (hasProperty(unit, 'AHU Model') && unit['AHU Model'].match(query) !== null) {
-        return true;
-      }
-
-      if (hasProperty(unit, 'Brand') && unit['Brand'].match(query) !== null) {
-        return true;
-      }
-
-      if (hasProperty(unit, 'Brand Series') && unit['Brand Series'].match(query) !== null) {
-        return true;
-      }
-
+  static findUnit(unit, key, query) {
+    if (!hasProperty(unit, key)) {
       return false;
-    });
+    }
 
-    return results;
+    let value = unit[key].toLowerCase();
+
+    return value.match(query) !== null;
+  }
+
+  filterUnits(query) {
+    query = query.toLowerCase();
+    
+    return units.filter((unit) => {
+      return Search.findUnit(unit, 'CU Model', query) ||
+        Search.findUnit(unit, 'AHU Model', query) ||
+        Search.findUnit(unit, 'Brand', query) ||
+        Search.findUnit(unit, 'Brand Series', query);
+    });
   }
 
   getResults(query) {
@@ -143,12 +142,15 @@ class Search extends React.Component {
         </div>
         <div className="div-flex-h align-start">
           <div className="div-20">
+            <MobileFilterBox numResults={this.state.results.length}/>
+            <SortFilters visibility={"hide-desktop"}/>
             <BrandFilters name="Brand" brands={brandsFilter()}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
             <TonnageFilters name="Tonnage" tonnages={config.get('tonnage')}/>
           </div>
-          {/* class container is used by HOC UseMixitup to start the filtering */}
+          {/* NOTE: class container is used by HOC UseMixitup to start the filtering */}
           <div className="div-flex-h justify-start _75-with container">
+            <SortFilters visibility={"hide-mobile"}/>
             {this.isLoading() && Search.printLoadingMsg()}
             {!this.isLoading() && this.renderResults()}
             <MixitupPaginationLayout/>

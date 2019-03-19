@@ -6,6 +6,8 @@ import Unit from "./Unit";
 import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
 import {withMixitup} from "./hoc/UseMixitup";
+import SortFilters from "./Search";
+import MobileFilterBox from "./MobileFilterBox";
 
 
 class Quote extends React.Component {
@@ -53,11 +55,13 @@ class Quote extends React.Component {
         </div>
         <div className="div-flex-h align-start">
           <div className="div-20">
-            {/*Add price and name filters*/}
+            <MobileFilterBox numResults={units.length}/>
+            <SortFilters visibility={"hide-desktop"}/>
             <BrandFilters name="Brand" brands={brands}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
           </div>
           <div className="div-flex-h justify-start _75-with container">
+            <SortFilters visibility={"hide-mobile"}/>
             {units}
           </div>
         </div>
