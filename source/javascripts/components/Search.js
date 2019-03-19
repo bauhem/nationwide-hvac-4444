@@ -36,13 +36,15 @@ class Search extends React.Component {
       return "";
     }
 
+    // Query is properly escaped and parsed here. If you change the process
+    // to get the query string, make sure to test for script injection
     let search_val = queryString.parse(location.search);
 
-    if (!hasProperty(search_val, 'query')) {
+    if (!hasProperty(search_val, 'q')) {
       return '';
     }
 
-    return search_val.query;
+    return search_val.q;
   }
 
   isLoading() {

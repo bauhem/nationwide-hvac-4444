@@ -1,0 +1,31 @@
+<div class="search-box" data-ix="scale-search">
+  <input type="text" class="search-field w-input" maxlength="256" name="Search" data-name="Search" placeholder="Search" id="Search">
+  <div class="search-open-trigger" data-ix="scale-search">
+    <img src="/images/magnifying-glass-sm.png" alt="">
+  </div>
+  <input type="submit" data-wait="Please wait..." value=" " class="search-submit w-button">
+</div>
+
+<% content_for(:footer_scripts) do %>
+  <script>
+    jQuery(document).ready(function ($) {
+      let searchBtn = $(".search-submit");
+      let searchField = $(".search-field");
+
+      searchField.keypress(function (e) {
+        let key = e.which;
+        if (key === 13) {
+          searchBtn.click();
+          return false;
+        }
+      });
+
+      searchBtn.click(function (e) {
+        e.stopPropagation();
+        const query_string = searchField.val();
+
+        window.location.href = "/search?q=" + query_string;
+      })
+    })
+  </script>
+<% end %>

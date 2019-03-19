@@ -24,13 +24,7 @@
     sizes="(max-width: 479px) 100vw, 200px"
     alt=""></a>
   <div class="div-spacer"></div>
-  <div class="search-box" data-ix="scale-search">
-    <input type="text" class="search-field w-input" maxlength="256" name="Search" data-name="Search" placeholder="Search" id="Search">
-    <div class="search-open-trigger" data-ix="scale-search">
-      <img src="/images/magnifying-glass-sm.png" alt="">
-    </div>
-    <input type="submit" data-wait="Please wait..." value=" " class="search-submit w-button">
-  </div>
+  <%= partial "/partials/search_box" %>
 
   <a href="#" class="shopping-cart snipcart-checkout w-hidden-main w-inline-block"><img src="/images/cart-icon.png" width="30" alt="">
     <div class="div-number-item snipcart-summary">
