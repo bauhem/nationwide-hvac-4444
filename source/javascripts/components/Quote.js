@@ -6,7 +6,7 @@ import Unit from "./Unit";
 import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
 import {withMixitup} from "./hoc/UseMixitup";
-import SortFilters from "./Search";
+import SortFilters from "./SortFilters";
 import MobileFilterBox from "./MobileFilterBox";
 
 
