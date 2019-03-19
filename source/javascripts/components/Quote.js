@@ -3,8 +3,6 @@ import config from "react-global-configuration";
 
 import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
-import MixitupFilter from "./MixitupFilter";
-import {initializeMixitup} from "../mixitup-helpers";
 import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
 import {withMixitup} from "./hoc/UseMixitup";
@@ -13,7 +11,6 @@ import {withMixitup} from "./hoc/UseMixitup";
 class Quote extends React.Component {
   constructor(props, context) {
     super(props);
-    // this.startMixitUp = this.startMixitUp.bind(this);
 
     this.state = {
       unitsFound: (context.units.length >= 1)
@@ -23,18 +20,6 @@ class Quote extends React.Component {
   static renderUnit(unit, props) {
     return <Unit key={unit['AHRI']} unit={unit} {...props} />;
   }
-
-  // startMixitUp() {
-  //   mixer = initializeMixitup('.container')
-  // }
-  //
-  // componentDidMount() {
-  //   this.state.unitsFound && this.startMixitUp();
-  // }
-  //
-  // componentDidUpdate() {
-  //   this.state.unitsFound && this.startMixitUp();
-  // }
 
   render() {
 
