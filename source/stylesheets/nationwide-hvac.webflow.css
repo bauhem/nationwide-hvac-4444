@@ -3529,6 +3529,37 @@ ul {
   opacity: 1;
 }
 
+.search-close-trigger {
+  position: absolute;
+  left: auto;
+  top: 0%;
+  right: 0%;
+  bottom: auto;
+  z-index: 1;
+  display: none;
+  width: 36px;
+  height: 36px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: hsla(0, 0%, 100%, .86);
+  background-image: url('../images/magnifying-glass-sm.png');
+  background-position: 50% 50%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
 html.w-mod-js *[data-ix="hero-appear-1"] {
   opacity: 0;
   -webkit-transform: translate(0px, 30px);
@@ -4930,6 +4961,9 @@ html.w-mod-js *[data-ix="slider-anim"] {
     margin-top: 16px;
     margin-right: 60px;
   }
+  .select-field {
+    height: 40px;
+  }
   .section-quote-builder {
     padding-right: 0%;
     padding-left: 0%;
@@ -5214,10 +5248,41 @@ html.w-mod-js *[data-ix="slider-anim"] {
     background-color: hsla(196.12334801762114, 81.48%, 85.60%, 1.00);
     opacity: 0;
   }
+  .search-close-trigger {
+    left: -38px;
+    top: 0%;
+    right: auto;
+    bottom: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 38px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b3b3b3;
+    border-radius: 4px 0px 0px 4px;
+    background-color: hsla(0, 0%, 91%, .86);
+    background-image: none;
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 991px) {
   #w-node-ec8688239c87-33000f20 {
+    -ms-grid-column: 1;
+    grid-column-start: 1;
+    -ms-grid-column-span: 1;
+    grid-column-end: 2;
+    -ms-grid-row: 1;
+    grid-row-start: 1;
+    -ms-grid-row-span: 1;
+    grid-row-end: 2;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  #w-node-ec8688239c87-5b9df603 {
     -ms-grid-column: 1;
     grid-column-start: 1;
     -ms-grid-column-span: 1;
