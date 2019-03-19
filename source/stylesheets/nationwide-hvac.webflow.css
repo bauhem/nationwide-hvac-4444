@@ -5239,32 +5239,37 @@ html.w-mod-js *[data-ix="slider-anim"] {
     background-image: none;
   }
   .search-submit {
+    display: none;
     width: 38px;
     border-style: solid solid solid none;
     border-width: 1px;
     border-color: #000;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-radius: 4px;
     background-color: hsla(196.12334801762114, 81.48%, 85.60%, 1.00);
     opacity: 0;
   }
   .search-close-trigger {
-    left: -38px;
+    left: 0%;
     top: 0%;
     right: auto;
     bottom: auto;
+    z-index: 2;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     width: 38px;
-    border-style: solid;
+    margin-left: -38px;
+    padding: 9px;
+    border-style: none;
     border-width: 1px;
     border-color: #b3b3b3;
     border-radius: 4px 0px 0px 4px;
-    background-color: hsla(0, 0%, 91%, .86);
+    background-color: rgba(0, 0, 0, .86);
     background-image: none;
     opacity: 0;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
   }
 }
 
