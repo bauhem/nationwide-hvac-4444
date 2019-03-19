@@ -32,6 +32,24 @@
 
       <!-- Search Filter View -->
       <div class="div-20">
+
+        <!-- Search Filter Trigger - Hide Desktop -->
+        <div class="div-search-filter mobile" data-ix="increase-size-filter-mobile">
+          <div class="button-filter" data-ix="increase-size-filter"><img src="images/arrow-right.svg" width="20" alt="" class="arrow-icon"></div>
+            <div class="div-search-filter-back">
+                <div><strong>Filter 1700 results</strong></div>
+          </div>
+        </div>
+        <!-- Search Filter - Hide Desktop -->
+        <div class="div-filter">
+            <div class="header-search-filter hide-desktop">
+              <div class="filter-div">
+                <div class="filter-name">Filter by price</div><select id="Pricing-3" name="Pricing-3" data-name="Pricing 3" class="select-field w-select"><option value="Low to high">Low to high</option><option value="High to low">High to low</option></select></div>
+              <div class="filter-div">
+                <div class="filter-name">Filter by name</div><select id="Pricing-2" name="Pricing-2" data-name="Pricing 2" class="select-field w-select"><option value="Asc">Asc</option><option value="Desc">Desc</option></select></div>
+            </div>
+          </div>
+
         <!-- Products -->
         <div class="div-search">
           <div class="div-search-header" data-ix="increase-size-filter">
@@ -103,6 +121,16 @@
 
       <!-- Search Results View -->
       <div class="div-flex-h justify-start _75-with">
+
+        <!-- Search Filter - Hide Mobile -->
+        <div class="div-filter">
+            <div class="header-search-filter hide-mobile">
+              <div class="filter-div">
+                <div class="filter-name">Filter by price</div><select id="Pricing" name="Pricing" data-name="Pricing" class="select-field w-select"><option value="Low to high">Low to high</option><option value="High to low">High to low</option></select></div>
+              <div class="filter-div">
+                <div class="filter-name">Filter by name</div><select id="Pricing-2" name="Pricing-2" data-name="Pricing 2" class="select-field w-select"><option value="Asc">Asc</option><option value="Desc">Desc</option></select></div>
+            </div>
+          </div>
 
         <% products.each do |unit| %>
           <%= partial "/partials/unit_thumbnail", locals: { unit: unit, mixit: true } %>
