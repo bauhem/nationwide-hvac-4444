@@ -53,6 +53,7 @@ class Quote extends React.Component {
         </div>
         <div className="div-flex-h align-start">
           <div className="div-20">
+            {/*Add price and name filters*/}
             <BrandFilters name="Brand" brands={brands}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
           </div>

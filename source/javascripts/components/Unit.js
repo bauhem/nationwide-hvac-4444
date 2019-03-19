@@ -43,7 +43,7 @@ class Unit extends React.Component {
   seerFilterCls() {
     return `seer-${seerRange(this.props.unit['SEER'])}`
   }
-  
+
   tonnageFilterCls() {
     return `ton-${this.props.unit['Tons'].toString().replace(/\./g, '-')}`
   }
@@ -63,6 +63,8 @@ class Unit extends React.Component {
     return (
       <a href={"#next"}
          onClick={this.handleClick}
+         data-price={installation_price}
+         data-name={model_name}
          className={`mix ${brand_filter_cls} ${seer_filter_cls} ${tonnage_filter_cls} w-inline-block`}>
         <div className="div-image">
           <img src={img_src} alt={model_name}/>

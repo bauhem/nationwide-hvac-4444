@@ -7,7 +7,7 @@
     css_class = "mix #{mixit_class(unit)}"
   end
 %>
-<a href="<%= product_uri(unit) %>" class="<%= css_class %> w-inline-block">
+<a href="<%= product_uri(unit) %>" data-price="<%= price(unit) %>" class="<%= css_class %> w-inline-block">
   <div class="div-image">
     <picture class="lazyload">
       <source srcset="<%= cloudinary_resize(product_image(unit), 300, 200, 'fit') %> 1x, <%= cloudinary_resize(product_image(unit), 600, 400, 'fit') %> 2x"
