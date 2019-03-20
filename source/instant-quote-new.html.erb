@@ -1,0 +1,75 @@
+<%=
+  content_for(:head) do
+    display_meta_tags title: "Instant Quote", description: "Get instant pricing for the unit you need."
+  end
+%>
+
+<div class="section-hero-interior">
+  <h1 class="cta-heading" data-ix="hero-appear-1"><strong>Instant </strong>Quote
+  </h1>
+</div>
+
+<div class="section-quote-builder">
+  <div class="msp-holder">
+    <div data-animation="slide" data-easing="ease-out-quart" data-hide-arrows="1" data-disable-swipe="1" data-duration="750" data-infinite="1" class="multi-step-form w-slider">
+      <div class="w-slider-mask">
+        <div class="slide w-slide" data-ix="slider-anim">
+          <div class="form-wrapper second">
+            <div class="form-full-width">
+              <div class="div-heading-slide">
+                <h3 class="titre-big">Split or packaged system?</h3>
+              </div>
+              <div class="div-flex-h">
+
+                <!-- Options-new View -->
+                <div class="options-new different-color-font pale-border top" data-ix="slider-next-back-appear" >
+                  <div class="radio-button-field-new grey-border w-radio">
+                    <div data-ix="appear-next" class="div-hover"></div>
+                    <input type="radio" id="radio-1" name="radio" value="Radio" data-name="Radio 1" class="radio-button-new w-radio-input">
+                    <label for="radio-1" class="form-label-trigger w-form-label">Split System</label>
+                    <div class="div-learn" data-ix="open-explanation">
+                      <div>Learn more</div>
+                      <div class="close" data-ix="open-explanation">Close</div>
+                    </div>
+                    <div class="form-label-new"><strong>Split System</strong></div>
+                    <p class="smaller-explanation-new">Split systems are made up of an inside unit (Air Handler) which is typically found inside the home in a closet, attic, garage, or sometimes drop ceiling. The outside unit (Condenser) will be on the ground in the back or side of your home, on the roof, or sometimes on a raised stand.</p>
+                  </div>
+                </div>
+                <!-- Options-new View -->
+                <!-- Options-new View -->
+                <div class="options-new different-color-font pale-border top" data-ix="slider-next-back-appear">
+                  <div class="radio-button-field-new grey-border w-radio">
+                    <div data-ix="appear-next" class="div-hover"></div>
+                    <input type="radio" id="radio-2" name="radio" value="Radio" data-name="Radio 2" class="radio-button-new w-radio-input">
+                    <label for="radio-2" class="form-label-trigger w-form-label">Split System</label>
+                    <div class="div-learn" data-ix="open-explanation">
+                      <div>Learn more</div>
+                      <div class="close" data-ix="open-explanation">Close</div>
+                    </div>
+                    <div class="form-label-new"><strong>Split System</strong></div>
+                    <p class="smaller-explanation-new">Split systems are made up of an inside unit (Air Handler) which is typically found inside the home in a closet, attic, garage, or sometimes drop ceiling. The outside unit (Condenser) will be on the ground in the back or side of your home, on the roof, or sometimes on a raised stand.</p>
+                  </div>
+                </div>
+                <!-- Options-new View -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="previous w-slider-arrow-left" data-ix="wait-on-load"><img src="https://daks2k3a4ib2z.cloudfront.net/585d5e2a7b64077507abdf08/58ab945ae3eb210a7dbbd7cc_arrow-left.gif" alt="">
+        <div class="previous-button">Back</div>
+      </div>
+      <div class="next w-slider-arrow-right" data-ix="wait-on-load">
+        <div>Next</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= partial "/partials/section-cta" %>
+
+<% content_for(:footer_scripts) do %>
+  <%= javascript_include_tag "mixitup-helpers" %>
+  <%= javascript_include_tag 'instant_quote' %>
+<% end %>

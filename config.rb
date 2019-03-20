@@ -82,6 +82,7 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page "/templates/*", :layout => "layout"
 page "/thank-you.html", :layout => "layout"
+page "/instant-quote-new.html", :layout => "layout"
 
 
 # Proxy pages
