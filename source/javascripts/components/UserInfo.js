@@ -100,7 +100,7 @@ class UserInfo extends React.Component {
                  id="Zipcode" required={true}
                  ref={this.zip} defaultValue={this.context.zip_code || ''}/>
         </div>
-        <div className="next-butto w-slider-arrow-right"
+        <div className="next-button w-slider-arrow-right"
              onClick={this.handleClick}>
           Get my quotes
         </div>
