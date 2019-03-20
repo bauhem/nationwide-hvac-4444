@@ -102,7 +102,7 @@ class QuoteBuilder extends React.Component {
 
   onOrderCompleted(data) {
     Snipcart.api.modal.close();
-    console.log('order completed: '  + data);
+    console.log('order completed: ' + data);
     this.transition({type: 'RESET'});
   }
 
@@ -197,6 +197,14 @@ class QuoteBuilder extends React.Component {
     )
   }
 
+  nextBtn() {
+    return (
+      <div className="next w-slider-arrow-right" onClick={this.saveAndContinue} data-ix="wait-on-load">
+        <div>Next</div>
+      </div>
+    );
+  }
+
   validateForm() {
     return this.form.current.reportValidity();
   }
@@ -213,6 +221,10 @@ class QuoteBuilder extends React.Component {
     if (this.state.currentState !== QuoteSM.initialState.value) {
       buttons.push(this.backBtn());
       second_slide = 'second'
+    }
+    
+    if (this.state.currentState) {
+      buttons.push(this.nextBtn());
     }
 
     return (

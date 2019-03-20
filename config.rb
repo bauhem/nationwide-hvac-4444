@@ -82,6 +82,8 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page "/templates/*", :layout => "layout"
 page "/thank-you.html", :layout => "layout"
+
+# TODO - REMOVE ME
 page "/instant-quote-new.html", :layout => "layout"
 
 
