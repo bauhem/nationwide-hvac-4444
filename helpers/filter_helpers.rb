@@ -1,8 +1,10 @@
 module FilterHelpers
-  def system_types_filter
+  def system_types_filter(current_st)
     filter_links = []
     system_types.each do |st|
-      filter_links << link_to(system_type_key_to_name(st), "/ac-units/#{system_type_key_to_slug(st)}", class: "type-link")
+      # class: "type-link"
+      checked = (st === current_st)
+      filter_links << filter_with_radio_link("/ac-units/#{system_type_key_to_slug(st)}", system_type_key_to_name(st), checked)
     end
 
     filter_links.join
@@ -42,6 +44,24 @@ module FilterHelpers
     link_to '#', class: "filter_button w-inline-block", 'data-toggle': filter do
       link_content.join
     end
+  end
+
+  def filter_with_radio_link(link, label, checked)
+    div_content = []
+    div_content << input_tag(:radio, alt: "", class: "checkbox-button radio-button-new w-radio-input", checked: checked)
+    div_content << content_tag(:div, class: "checkbox-label") do
+      label
+    end
+
+    link_content = []
+    link_content << content_tag(:div, class: "checkbox-field") do
+      div_content.join
+    end
+
+    link_to '#', class: "radio-link filter_button w-inline-block", 'data-link': link do
+      link_content.join
+    end
+
   end
 
   def tonnages_filter

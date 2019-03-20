@@ -58,7 +58,7 @@
           <div class="div-search-form w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2">
               <div class="div-search-dropdown bot-top-padding">
-                <%= system_types_filter %>
+                <%= system_types_filter(system_type_query) %>
               </div>
             </form>
           </div>
@@ -124,7 +124,7 @@
       <!-- End of Search Filter View -->
 
       <!-- Search Results View -->
-      <div class="div-flex-h justify-start _75-with">
+      <div class="results-list div-flex-h justify-start _75-with">
 
         <!-- Search Filter - Hide Mobile -->
         <%= partial "/partials/filters", locals: {cls: 'hide-mobile'} %>
