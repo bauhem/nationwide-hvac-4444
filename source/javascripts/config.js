@@ -56,8 +56,4 @@ const configuration = {
   seer_ranges: [{min: 14, max: 15}, {min: 15, max: 16}, {min: 16, max: 17}, {min: 17, max: 18}, {min: 18, max: 19}, {min: 19, max: 99999}]
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  console.log(`root url: ${configuration['root_url']}`);
-}
-
 export default configuration;
