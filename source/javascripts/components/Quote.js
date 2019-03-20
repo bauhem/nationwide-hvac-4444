@@ -5,7 +5,7 @@ import QuoteCtx from "./QuoteCtx";
 import Unit from "./Unit";
 import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
-import {withMixitup} from "./hoc/UseMixitup";
+import {withMixitup} from "./HOC/UseMixitup";
 import SortFilters from "./SortFilters";
 import MobileFilterBox from "./MobileFilterBox";
 

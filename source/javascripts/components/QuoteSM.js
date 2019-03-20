@@ -42,10 +42,10 @@ const QuoteSM = Machine({
             target: "AirSystemFilterLocation", cond: 'isWaterSystem'
           },
         ],
-        LOAD_MODEL: 'ModelNumber'
+        LOAD_MODEL: 'CondenserModelNumber'
       },
     },
-    ModelNumber: {
+    CondenserModelNumber: {
       on: {
         SUBMIT: [
           {target: "AirHandlerLocation", cond: 'isSplitSystem'},

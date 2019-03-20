@@ -8,7 +8,7 @@ import config from "react-global-configuration";
 import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
 import {brandsFilter} from "./UnitsFilter";
-import {withMixitup} from "./hoc/UseMixitup";
+import {withMixitup} from "./HOC/UseMixitup";
 import MixitupPaginationLayout from "./MixitupPaginationLayout";
 import TonnageFilters from "./TonnageFilters";
 import SortFilters from "./SortFilters";

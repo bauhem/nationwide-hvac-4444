@@ -1,6 +1,10 @@
 import React from "react";
-import SystemType from "./SystemType";
 import QuoteCtx from "./QuoteCtx";
+import SlideHeader from "./Layout/SlideHeader";
+import OptionsGroup from "./Layout/OptionsGroup";
+import config from 'react-global-configuration';
+import Option from "./Layout/Option";
+import {Slide} from "./HOC/Slide";
 
 
 class SystemTypes extends React.Component {
@@ -9,28 +13,22 @@ class SystemTypes extends React.Component {
   }
 
   render() {
+    let options = config.get(this.context.system_type_structure).map((type) => {
+      return <Option key={type.type} value={type.type} title={type.name} description={type.description}/>
+    });
+
     return (
-      <QuoteCtx.Consumer>
-        {context => (
-          <>
-            <div className="div-heading-slide">
-              <h3 className="titre-big">System Type</h3>
+      <>
+        <SlideHeader title={"System Type"}/>
 
-            </div>
-
-            <div className="div-flex-h">
-              {
-                context.system_types.map((type) => {
-                  return <SystemType key={type.type} {...type}
-                                     saveAndContinue={this.props.saveAndContinue}/>
-                })
-              }
-            </div>
-          </>
-        )}
-      </QuoteCtx.Consumer>
+        <OptionsGroup value={this.props.value} onChange={this.props.onChange}>
+          {options}
+        </OptionsGroup>
+      </>
     )
   }
 }
 
-export default SystemTypes;
+SystemTypes.contextType = QuoteCtx;
+
+export default Slide(SystemTypes);

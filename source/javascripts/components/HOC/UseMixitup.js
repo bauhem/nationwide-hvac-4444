@@ -2,7 +2,7 @@ import React from "react";
 import {initializeMixitup} from "../../mixitup-helpers";
 import {hasProperty} from "../../utils";
 
-export function withMixitup(WrappedComponent, ) {
+export function withMixitup(WrappedComponent) {
   let useSavedFilters = true;
 
   return class UseMixitup extends React.Component {

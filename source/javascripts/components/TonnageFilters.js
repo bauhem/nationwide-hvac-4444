@@ -1,6 +1,6 @@
 import MixitupFilter from "./MixitupFilter";
 import React from "react";
-import {withFilterLayout} from "./hoc/FilterLayout";
+import {withFilterLayout} from "./HOC/FilterLayout";
 
 const TonnageFilters = ({tonnages}) => {
   let filters = [];
