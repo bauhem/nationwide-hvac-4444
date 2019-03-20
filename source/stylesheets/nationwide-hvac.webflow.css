@@ -3877,6 +3877,11 @@ html.w-mod-js *[data-ix="slider-anim"] {
   height: 0px;
 }
 
+html.w-mod-js *[data-ix="wait-on-load"] {
+  display: none;
+  opacity: 0;
+}
+
 @media (max-width: 991px) {
   .navbar {
     padding-right: 0vw;
