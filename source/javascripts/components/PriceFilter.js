@@ -1,11 +1,11 @@
 import React from "react";
 
-const PriceFilter = ({visibility}) => {
+const PriceFilter = ({hideCls}) => {
 
   // TODO - Create a HOC for the sort filters layout if other sort filters are
   // required
   return (
-      <div className={"header-search-filter " + visibility}>
+      <div className={"header-search-filter " + hideCls}>
         <div className="filter-div">
           <div className="filter-name">Filter by price</div>
           <select id="sort-price" name="sort-price"

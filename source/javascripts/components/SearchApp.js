@@ -14,9 +14,9 @@ import TonnageFilters from "./TonnageFilters";
 import SortFilters from "./SortFilters";
 import MobileFilterBox from "./MobileFilterBox";
 
-const units = require('../../../data/products.json');
+var units = require('../../../data/products.json');
 
-class Search extends React.Component {
+class SearchApp extends React.Component {
   constructor(props) {
     super(props);
 
@@ -24,10 +24,10 @@ class Search extends React.Component {
     this.state = {
       results: [],
       loading: true,
-      query: Search.getQuery(),
+      query: SearchApp.getQuery(),
       errorMsg: '',
-      loadError: false
-    }
+      loadError: false,
+    };
 
     this.getResults = this.getResults.bind(this);
     this.renderResults = this.renderResults.bind(this);
@@ -40,13 +40,13 @@ class Search extends React.Component {
 
     // Query is properly escaped and parsed here. If you change the process
     // to get the query string, make sure to test for script injection
-    let search_val = queryString.parse(location.search);
+    let search_val = queryString.parse(location['search']);
 
     if (!hasProperty(search_val, 'q')) {
       return '';
     }
 
-    return search_val.q;
+    return search_val['q'];
   }
 
   isLoading() {
@@ -64,13 +64,13 @@ class Search extends React.Component {
   }
 
   filterUnits(query) {
-    query = query.toLowerCase();
+    let match_query = query.toLowerCase();
     
     return units.filter((unit) => {
-      return Search.findUnit(unit, 'CU Model', query) ||
-        Search.findUnit(unit, 'AHU Model', query) ||
-        Search.findUnit(unit, 'Brand', query) ||
-        Search.findUnit(unit, 'Brand Series', query);
+      return SearchApp.findUnit(unit, 'CU Model', match_query) ||
+        SearchApp.findUnit(unit, 'AHU Model', match_query) ||
+        SearchApp.findUnit(unit, 'Brand', match_query) ||
+        SearchApp.findUnit(unit, 'Brand Series', match_query);
     });
   }
 
@@ -114,16 +114,13 @@ class Search extends React.Component {
       )
     }
 
-    // TODO - Do we use UnitDetails or redirect the user to the ac-units page?
-    let units = this.state.results.map((result) => {
+    return this.state.results.map((result) => {
       return (
         <Unit key={result['AHRI']} unit={result} saveAndContinue={() => {
           window.location.href = `${unitURL(result)}`
         }}/>
       )
     });
-
-    return units;
   }
 
   componentDidUpdate() {
@@ -143,15 +140,15 @@ class Search extends React.Component {
         <div className="div-flex-h align-start">
           <div className="div-20">
             <MobileFilterBox numResults={this.state.results.length}/>
-            <SortFilters visibility={"hide-desktop"}/>
+            <SortFilters hideCls={"hide-desktop"}/>
             <BrandFilters name="Brand" brands={brandsFilter()}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
             <TonnageFilters name="Tonnage" tonnages={config.get('tonnage')}/>
           </div>
           {/* NOTE: class container is used by HOC UseMixitup to start the filtering */}
           <div className="div-flex-h justify-start _75-with container">
-            <SortFilters visibility={"hide-mobile"}/>
-            {this.isLoading() && Search.printLoadingMsg()}
+            <SortFilters hideCls={"hide-mobile"}/>
+            {this.isLoading() && SearchApp.printLoadingMsg()}
             {!this.isLoading() && this.renderResults()}
             <MixitupPaginationLayout/>
           </div>
@@ -161,4 +158,4 @@ class Search extends React.Component {
   }
 }
 
-export default withMixitup(Search);
+export default withMixitup(SearchApp);

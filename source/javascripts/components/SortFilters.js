@@ -1,10 +1,10 @@
 import React from "react";
 import PriceFilter from "./PriceFilter";
 
-const SortFilters = ({visibility}) => {
+const SortFilters = ({hideCls}) => {
   return (
     <div className="div-filter">
-      <PriceFilter visibility={visibility}/>
+      <PriceFilter hideCls={hideCls}/>
     </div>
   );
 };

@@ -56,12 +56,12 @@ class Quote extends React.Component {
         <div className="div-flex-h align-start">
           <div className="div-20">
             <MobileFilterBox numResults={units.length}/>
-            <SortFilters visibility={"hide-desktop"}/>
+            <SortFilters hideCls={"hide-desktop"}/>
             <BrandFilters name="Brand" brands={brands}/>
             <SEERFilters name="SEER" seers={config.get('seer_ranges')}/>
           </div>
           <div className="div-flex-h justify-start _75-with container">
-            <SortFilters visibility={"hide-mobile"}/>
+            <SortFilters hideCls={"hide-mobile"}/>
             {units}
           </div>
         </div>

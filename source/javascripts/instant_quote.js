@@ -18,7 +18,7 @@ onReady(function () {
 
   Snipcart.subscribe('item.added', itemAddedPopup);
 
-  let quote_builder = document.getElementById("quote_builder");
+  const quote_builder = document.getElementById("quote_builder");
   if (quote_builder) {
     ReactDOM.render(
       <QuoteBuilder/>,

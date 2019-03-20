@@ -1,8 +1,10 @@
 import React from "react";
 
 const MobileFilterBox = ({numResults}) => {
-  if (numResults === undefined) {
-    numResults = 0;
+  let results = 0;
+
+  if (numResults !== undefined) {
+    results = numResults;
   }
 
   return (
@@ -13,11 +15,11 @@ const MobileFilterBox = ({numResults}) => {
              className="arrow-icon" />
       </div>
       <div className="div-search-filter-back">
-        <div><strong>Filter {numResults} results</strong>
+        <div><strong>Filter {results} results</strong>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default MobileFilterBox;
