@@ -3,7 +3,7 @@ import React from 'react';
 export function OptionNotSure(props) {
   return (
     <Option key={'not-sure'} value={"Not Sure"} title={"I'm not sure"}
-                        onChange={() => props.notSure()}/>
+            onChange={() => props.notSure()} isChecked={props.isChecked}/>
   )
 }
 
@@ -24,7 +24,8 @@ class Option extends React.Component {
     const {value, title, description, image} = this.props;
 
     return (
-      <div className="options-new different-color-font pale-border top" onClick={this.handleClick}>
+      <div className="options-new different-color-font pale-border top"
+           onClick={this.handleClick}>
         <div className="radio-button-field-new grey-border w-radio">
           <div className="div-hover" data-ix="appear-next"></div>
           {
@@ -40,10 +41,15 @@ class Option extends React.Component {
           <label htmlFor={value} className="form-label-trigger w-form-label">
             <strong>{title}</strong>
           </label>
-          <div className="div-learn" data-ix="open-explanation">
-            <div>Learn more</div>
-            <div className="close" data-ix="open-explanation">Close</div>
-          </div>
+          {
+            (description !== undefined) &&
+            <>
+              <div className="div-learn" data-ix="open-explanation">
+                <div>Learn more</div>
+                <div className="close" data-ix="open-explanation">Close</div>
+              </div>
+            </>
+          }
           <div className="form-label-new"><strong>{title}</strong></div>
           <p className="smaller-explanation-new">{description}</p>
         </div>

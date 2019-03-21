@@ -1,5 +1,6 @@
 import React from 'react';
 import Option from './Option'
+import QuoteCtx from "../QuoteCtx";
 
 class OptionsGroup extends React.Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class OptionsGroup extends React.Component {
   handleChange(val) {
     this.props.onChange(val);
   }
-
+  
   render() {
     return (
-      <div className="div-flex-h">
+      <div className="div-flex-h options-group">
         {
           React.Children.map(this.props.children, child => {
                 if (child.type === Option) {
@@ -35,5 +36,7 @@ class OptionsGroup extends React.Component {
     )
   }
 };
+
+OptionsGroup.contextType = QuoteCtx;
 
 export default OptionsGroup;

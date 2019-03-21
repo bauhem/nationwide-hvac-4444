@@ -19,7 +19,7 @@ class AirHandlerLocation extends React.Component {
         <OptionsGroup value={this.props.value} onChange={this.props.onChange}>
           <Option key={'closet'} value={"closet"} title={"Closet"} image={'/images/door.png'} />
           <Option key={'garage'} value={"garage"} title={"Garage"} image={'/images/garage.png'} />
-          <Option key={'attic'} vaue={'attic'} title={'Attic'} image={'/images/roof.png'} />
+          <Option key={'attic'} value={'attic'} title={'Attic'} image={'/images/roof.png'} />
           <Option key={'other'} value={"other"} title={"Other"} />
         </OptionsGroup>
       </>

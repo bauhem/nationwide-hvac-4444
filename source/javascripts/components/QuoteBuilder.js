@@ -132,8 +132,10 @@ class QuoteBuilder extends React.Component {
       this.prevState();
     } else {
       // This verification allows us to use HTML5 field validation
-      if (!this.validateForm()) {
-        return false;
+      if (event.type === "SUBMIT") {
+        if (!this.validateForm()) {
+          return false;
+        }
       }
 
       if (event.value === undefined) {
@@ -232,6 +234,15 @@ class QuoteBuilder extends React.Component {
   }
 
   validateForm() {
+    let currStateKey = StatesComponents[this.state.currentState].ctx_key;
+    let validFormMsg = '';
+
+    if (!this.state[currStateKey] || this.state[currStateKey] == "Not Sure") {
+      validFormMsg = "Please select an option to continue";
+    }
+    
+    this.form.current[0].setCustomValidity(validFormMsg);
+
     return this.form.current.reportValidity();
   }
 

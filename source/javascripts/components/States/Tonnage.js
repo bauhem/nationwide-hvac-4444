@@ -14,7 +14,7 @@ class Tonnage extends React.Component {
   render() {
     const options = config.get('tonnage').map((tons) => {
       return (
-        <Option key={tons.toString().replace(/\./, '-')} value={tons} title={`${tons} ton`} description={''} />
+        <Option key={tons.toString().replace(/\./, '-')} value={tons} title={`${tons} ton`} />
       )
     });
 
