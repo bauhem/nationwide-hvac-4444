@@ -1,10 +1,10 @@
 import React from "react";
-import QuoteCtx from "./QuoteCtx";
-import SlideHeader from "./Layout/SlideHeader";
-import OptionsGroup from "./Layout/OptionsGroup";
+import QuoteCtx from "../QuoteCtx";
+import SlideHeader from "../Layout/SlideHeader";
+import OptionsGroup from "../Layout/OptionsGroup";
 import config from 'react-global-configuration';
-import Option from "./Layout/Option";
-import {Slide} from "./HOC/Slide";
+import Option from "../Layout/Option";
+import {SlideWithOptions} from "../HOC/SlideWithOptions";
 
 
 class SystemTypes extends React.Component {
@@ -31,4 +31,4 @@ class SystemTypes extends React.Component {
 
 SystemTypes.contextType = QuoteCtx;
 
-export default Slide(SystemTypes);
+export default SlideWithOptions(SystemTypes);

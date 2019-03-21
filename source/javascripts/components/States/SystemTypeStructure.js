@@ -1,8 +1,8 @@
 import React from "react";
-import Option from "./Layout/Option";
-import SlideHeader from "./Layout/SlideHeader";
-import OptionsGroup from "./Layout/OptionsGroup";
-import {Slide} from "./HOC/Slide";
+import Option from "../Layout/Option";
+import SlideHeader from "../Layout/SlideHeader";
+import OptionsGroup from "../Layout/OptionsGroup";
+import {SlideWithOptions} from "../HOC/SlideWithOptions";
 
 class SystemTypeStructure extends React.Component {
   constructor(props) {
@@ -25,4 +25,4 @@ class SystemTypeStructure extends React.Component {
   }
 }
 
-export default Slide(SystemTypeStructure);
+export default SlideWithOptions(SystemTypeStructure);

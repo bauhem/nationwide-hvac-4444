@@ -9,7 +9,6 @@ var log = require('gulplog');
 var envify = require('envify/custom');
 var changed = require('gulp-changed');
 
-
 var debug = (process.env.NODE_ENV !== 'production');
 
 var jsFiles = {

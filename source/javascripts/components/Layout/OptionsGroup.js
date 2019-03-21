@@ -24,7 +24,7 @@ class OptionsGroup extends React.Component {
                     onChange = this.handleChange;
                   }
                   return React.cloneElement(child, {
-                    isChecked: this.props.value === child.props.value,
+                    isChecked: this.props.value == child.props.value, // We use == instead of === because we can have a string and a numerical value
                     onChange: onChange
                   })
                 }

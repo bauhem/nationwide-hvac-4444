@@ -9,10 +9,10 @@ import BrandFilters from "./BrandFilters";
 import SEERFilters from "./SEERFilters";
 import {brandsFilter} from "./UnitsFilter";
 import {withMixitup} from "./HOC/UseMixitup";
-import MixitupPaginationLayout from "./MixitupPaginationLayout";
+import MixitupPaginationLayout from "./Layout/MixitupPaginationLayout";
 import TonnageFilters from "./TonnageFilters";
 import SortFilters from "./SortFilters";
-import MobileFilterBox from "./MobileFilterBox";
+import MobileFilterBox from "./Layout/MobileFilterBox";
 
 var units = require('../../../data/products.json');
 

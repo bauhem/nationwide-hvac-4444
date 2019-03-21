@@ -1,5 +1,12 @@
 import React from 'react';
 
+export function OptionNotSure(props) {
+  return (
+    <Option key={'not-sure'} value={"Not Sure"} title={"I'm not sure"}
+                        onChange={() => props.notSure()}/>
+  )
+}
+
 class Option extends React.Component {
   constructor(props) {
     super(props);
@@ -9,16 +16,20 @@ class Option extends React.Component {
   }
 
   handleClick() {
+    this.ref.current.checked = true;
     this.props.onChange(this.ref.current.value);
   }
 
   render() {
-    const {value, title, description} = this.props;
+    const {value, title, description, image} = this.props;
 
     return (
       <div className="options-new different-color-font pale-border top" onClick={this.handleClick}>
         <div className="radio-button-field-new grey-border w-radio">
           <div className="div-hover" data-ix="appear-next"></div>
+          {
+            (image !== undefined) && <img src={image} alt={title}/>
+          }
           <input type="radio" name="type"
                  value={value} data-name="type"
                  className="radio-button-new w-radio-input"

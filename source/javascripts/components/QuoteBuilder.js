@@ -2,40 +2,63 @@ import React from 'react';
 
 import QuoteSM from "./QuoteSM";
 import QuoteCtx from "./QuoteCtx";
-import SystemTypeStructure from "./SystemTypeStructure";
-import SystemTypes from "./SystemTypes";
-import Tonnage from "./Tonnage";
-import CondenserModelNumber from "./CondenserModelNumber";
-import AirHandlerLocation from "./AirHandlerLocation";
-import AirHandlerType from "./AirHandlerType";
-import RoofAccess from "./RoofAccess";
-import CondenserUnitLocation from "./CondenserUnitLocation";
-import SquareFootage from "./SquareFootage";
-import CallUs from "./CallUs";
-import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
-import PackagedSystemLocation from "./PackagedSystemLocation";
-import AirSystemFilterLocation from "./AirSystemFilterLocation";
-import Quote from "./Quote";
-import UserInfo from "./UserInfo";
-import Accessories from "./Accessories";
-import UnitDetails from "./UnitDetails";
+import SystemTypeStructure from "./States/SystemTypeStructure";
+import SystemTypes from "./States/SystemTypes";
+import Tonnage from "./States/Tonnage";
+import CondenserModelNumber from "./States/CondenserModelNumber";
+import AirHandlerLocation from "./States/AirHandlerLocation";
+import AirHandlerType from "./States/AirHandlerType";
+import RoofAccess from "./States/RoofAccess";
+import CondenserUnitLocation from "./States/CondenserUnitLocation";
+import SquareFootage from "./States/SquareFootage";
+import CallUs from "./States/CallUs";
+import WaterHeaterUnderAirHandler from "./States/WaterHeaterUnderAirHandler";
+import PackagedSystemLocation from "./States/PackagedSystemLocation";
+import AirSystemFilterLocation from "./States/AirSystemFilterLocation";
+import Quote from "./States/Quote";
+import UserInfo from "./States/UserInfo";
+import Accessories from "./States/Accessories";
+import UnitDetails from "./States/UnitDetails";
 
 import {unitsFilter, brandsFilter} from "./UnitsFilter";
-import InvalidZip from "./InvalidZip";
+import InvalidZip from "./States/InvalidZip";
+
+export const LOCAL_STORAGE_KEY = 'instantQuoteValues';
 
 const StatesComponents = {
-  SystemTypeStructure: {comp: SystemTypeStructure, ctx_key: 'system_type_structure'},
+  SystemTypeStructure: {
+    comp: SystemTypeStructure,
+    ctx_key: 'system_type_structure'
+  },
   SystemTypes: {comp: SystemTypes, ctx_key: 'system_type'},
   Tonnage: {comp: Tonnage, ctx_key: 'tonnage'},
-  CondenserModelNumber: {comp: CondenserModelNumber, ctx_key: 'condenser_model_number'},
+  CondenserModelNumber: {
+    comp: CondenserModelNumber,
+    ctx_key: 'condenser_model_number'
+  },
   SquareFootage: {comp: SquareFootage, ctx_key: 'sqft'},
-  AirHandlerLocation: {comp: AirHandlerLocation, ctx_key: 'air_handler_location'},
-  WaterHeaterUnderAirHandler: {comp: WaterHeaterUnderAirHandler, ctx_key: 'water_heater_under_air_handler'},
+  AirHandlerLocation: {
+    comp: AirHandlerLocation,
+    ctx_key: 'air_handler_location'
+  },
+  WaterHeaterUnderAirHandler: {
+    comp: WaterHeaterUnderAirHandler,
+    ctx_key: 'water_heater_under_air_handler'
+  },
   AirHandlerType: {comp: AirHandlerType, ctx_key: 'air_handler_type'},
-  CondenserUnitLocation: {comp: CondenserUnitLocation, ctx_key: 'condenser_unit_location'},
+  CondenserUnitLocation: {
+    comp: CondenserUnitLocation,
+    ctx_key: 'condenser_unit_location'
+  },
   RoofAccess: {comp: RoofAccess, ctx_key: 'roof_access'},
-  PackagedSystemLocation: {comp: PackagedSystemLocation, ctx_key: 'packaged_system_location'},
-  AirSystemFilterLocation: {comp: AirSystemFilterLocation, ctx_key: 'air_filter_side'},
+  PackagedSystemLocation: {
+    comp: PackagedSystemLocation,
+    ctx_key: 'packaged_system_location'
+  },
+  AirSystemFilterLocation: {
+    comp: AirSystemFilterLocation,
+    ctx_key: 'air_filter_side'
+  },
   CallUs: {comp: CallUs, ctx_key: ''},
   InvalidZip: {comp: InvalidZip, ctx_key: ''},
   UserInfo: {comp: UserInfo, ctx_key: ''},
@@ -46,7 +69,7 @@ const StatesComponents = {
   Warranty: {comp: Accessories, ctx_key: ''}
 };
 
-const saved_values = JSON.parse(localStorage.getItem('instantQuoteValues'));
+const saved_values = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 const stateMachine = QuoteSM;
 
 class QuoteBuilder extends React.Component {
@@ -114,7 +137,7 @@ class QuoteBuilder extends React.Component {
       }
 
       if (event.value === undefined) {
-        event.value = this.state.system_type;
+        event.value = this.state.system_type_structure;
       }
 
       const nextQuoteState = stateMachine.transition(this.state.currentState, event);
@@ -201,7 +224,8 @@ class QuoteBuilder extends React.Component {
 
   nextBtn() {
     return (
-      <div key="next-btn" className="next w-slider-arrow-right" onClick={() => this.transition({type: "SUBMIT"})}>
+      <div key="next-btn" className="next w-slider-arrow-right"
+           onClick={() => this.transition({type: "SUBMIT"})}>
         <div>Next</div>
       </div>
     );
@@ -212,7 +236,14 @@ class QuoteBuilder extends React.Component {
   }
 
   componentDidUpdate() {
-    localStorage.setItem('instantQuoteValues', JSON.stringify(this.state));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.state));
+  }
+
+  showNext() {
+    return QuoteSM.states[this.state.currentState].type !== 'final'
+      && this.state.currentState !== 'UserInfo'
+      && this.state.currentState !== 'Quote'
+      && this.state.currentState !== 'UnitDetails';
   }
 
   render() {
@@ -225,8 +256,8 @@ class QuoteBuilder extends React.Component {
       buttons.push(this.backBtn());
       second_slide = 'second'
     }
-    
-    if (this.state.currentState) {
+
+    if (this.showNext()) {
       buttons.push(this.nextBtn());
     }
 
@@ -242,6 +273,7 @@ class QuoteBuilder extends React.Component {
                     <SlideComponent value={this.state[ctx_key]}
                                     ctx_key={ctx_key}
                                     saveValues={this.saveValues}
+                                    saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}
                                     validateForm={this.validateForm}
                     />

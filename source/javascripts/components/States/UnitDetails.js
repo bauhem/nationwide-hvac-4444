@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  brandLogoImage, seerRange, unitBrochureURL, unitDescription, unitID,
+  brandLogoImage, unitBrochureURL, unitDescription, unitID,
   unitImage,
   unitURL,
   floatToPrice
-} from "./UnitHelpers";
-import QuoteCtx from "./QuoteCtx";
+} from "../UnitHelpers";
+import QuoteCtx from "../QuoteCtx";
 
 const META_EXCLUDED_KEYS = [
   "currentState",
@@ -91,7 +91,7 @@ class UnitDetails extends React.Component {
     let model_name = unit['Brand Series'];
     let price = unit['Shop Online Price'];
     let url = unitURL(unit);
-    let description = unitDescription(this.context.system_types, unit);
+    let description = unitDescription(this.context.system_type_structure, unit);
     let installation_price = unit[zone] - price;
     let installation_options = `Zone ${zone_id}[+${installation_price}]`;
     let brochure_url = unitBrochureURL(unit);
