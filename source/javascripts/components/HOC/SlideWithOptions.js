@@ -25,9 +25,8 @@ export function SlideWithOptions(WrappedComponent) {
       this.props.transition({type: "NOT_SURE"});
     }
 
-    // TODO - We need to block the next button if no options selected
     render() {
-      return <WrappedComponent onChange={this.handleChange} notSure={this.notSure} {...this.props}/>;
+      return <WrappedComponent onChange={this.handleChange} notSure={this.notSure} {...this.props} />;
     }
   }
 }
