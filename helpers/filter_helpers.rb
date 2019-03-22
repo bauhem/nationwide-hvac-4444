@@ -4,7 +4,7 @@ module FilterHelpers
     system_types.each do |st|
       # class: "type-link"
       checked = (st === current_st)
-      filter_links << filter_with_radio_link("/ac-units/#{system_type_key_to_slug(st)}", system_type_key_to_name(st), checked)
+      filter_links << filter_with_radio_link("/ac-units/#{system_type_key_to_slug(st)}", st, system_type_key_to_name(st), checked)
     end
 
     filter_links.join
@@ -46,20 +46,29 @@ module FilterHelpers
     end
   end
 
-  def filter_with_radio_link(link, label, checked)
+  # <div class="checkbox-field w-radio">
+  #   <img src="/images/checkbox-grey.png" alt="" class="checkbox-button-grey">
+  #   <img src="/images/checkbox.png" alt="" class="checkbox-button-grey">
+  #   <input type="radio" id="radio" name="radio" value="Radio" data-name="Radio" class="hide w-radio-input">
+  #   <label for="radio" class="checkbox-label w-form-label">Split System A/C</label>
+  # </div>
+
+  def filter_with_radio_link(link, name, label, checked)
     div_content = []
-    div_content << input_tag(:radio, alt: "", class: "checkbox-button radio-button-new w-radio-input", checked: checked)
-    div_content << content_tag(:div, class: "checkbox-label") do
+    div_content << tag(:img, src: '/images/checkbox-grey.png', alt: "", class: "checkbox-button-grey", style: "z-index: #{checked ? 0 : 1}")
+    div_content << tag(:img, src: '/images/checkbox.png', alt: "", class: "checkbox-button", style: "z-index: #{checked ? 1 : 0}")
+    div_content << input_tag(:radio, id: name, name: name, alt: "", class: "hide w-radio-input", checked: checked)
+    div_content << content_tag(:label, for: name, class: "checkbox-label w-form-label") do
       label
     end
 
-    link_content = []
-    link_content << content_tag(:div, class: "checkbox-field") do
+    div = []
+    div << content_tag(:div, class: "checkbox-field w-radio") do
       div_content.join
     end
 
     link_to '#', class: "radio-link filter_button w-inline-block", 'data-link': link do
-      link_content.join
+      div.join
     end
 
   end
@@ -80,8 +89,8 @@ module FilterHelpers
   end
 
   def seers_filter
-    seer_filters = []
-    ranges = seer_ranges
+    seer_filters  = []
+    ranges        = seer_ranges
     last_min_seer = ranges[-1][0]
 
     ranges.each do |min, max|
