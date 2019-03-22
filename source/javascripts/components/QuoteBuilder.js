@@ -237,11 +237,16 @@ class QuoteBuilder extends React.Component {
     let currStateKey = StatesComponents[this.state.currentState].ctx_key;
     let validFormMsg = '';
 
-    if (!this.state[currStateKey] || this.state[currStateKey] == "Not Sure") {
-      validFormMsg = "Please select an option to continue";
+    if (currStateKey !== '') {
+
+      // TODO - A bit sketchy. Should have a stronger mecanism to validate each
+      // slide
+      if (!this.state[currStateKey] || this.state[currStateKey] == "Not Sure") {
+        validFormMsg = "Please select an option to continue";
+      }
+
+      this.form.current[0].setCustomValidity(validFormMsg);
     }
-    
-    this.form.current[0].setCustomValidity(validFormMsg);
 
     return this.form.current.reportValidity();
   }
