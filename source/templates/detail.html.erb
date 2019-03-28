@@ -34,6 +34,29 @@ end
           <strong><%= brand(unit) %> - <%= model(unit) %> - <%= tons(unit) %>
             tons</strong></h1>
         <div>Up to <%= seer(unit) %> SEER Performance</div>
+        <div class="div-flex-h align-new">
+
+          <%# Button will be hidden until we have the user's zip code %>
+          <a data-item-id="<%= item_id(unit) %>"
+             data-item-name="<%= model(unit) %>"
+             data-item-price="<%= price(unit) %>"
+             data-item-url="<%= product_url(unit) %>"
+             data-item-description="<%= cart_description(unit) %>"
+             data-item-custom1-name="Installation Fees (based on zip code)"
+             data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
+             href="#" class="button-financing w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-button snipcart-add-item">
+            Buy now
+          </a>
+
+          <a href="#" id="get-installed-price" class="button w-button">Show
+            Installed Price</a>
+          <a href="tel:<%= dato.homepage.default_phone %>" class="button-phone w-button">Call
+            US <%= dato.homepage.default_phone %></a>
+          <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
+            View brochure
+          </a>
+
+        </div>
         <div class="more-spec">
           <div class="div-product-details smaller">
             <div class="blue-text">Tons</div>
@@ -91,39 +114,19 @@ end
           </div>
 
         </div>
-        <div class="div-flex-h align-new">
 
-          <%# Button will be hidden until we have the user's zip code %>
-          <a data-item-id="<%= item_id(unit) %>"
-             data-item-name="<%= model(unit) %>"
-             data-item-price="<%= price(unit) %>"
-             data-item-url="<%= product_url(unit) %>"
-             data-item-description="<%= cart_description(unit) %>"
-             data-item-custom1-name="Installation Fees (based on zip code)"
-             data-item-custom1-options="Zone 1[+<%= installation_price(unit, 1) %>]|Zone 2[+<%= installation_price(unit, 2) %>]"
-             href="#" class="button added-top-margin w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-button snipcart-add-item">
-            Buy now
-          </a>
-
-          <a href="#" id="get-installed-price" class="button added-top-margin w-button">Show
-            Installed Price</a>
-          <a href="tel:<%= dato.homepage.default_phone %>" class="button-phone w-button">Call
-            US <%= dato.homepage.default_phone %></a>
-          <a href="<%= brochure_url(unit) %>" target="_blank" class="button-underline left-margin w-button">
-            View brochure
-          </a>
-
-        </div>
         <div class="div-product-details smaller"><%= unit['Details'] %></div>
         <div class="div-product-details smaller">
-          <strong>Installation Includes:‍</strong><br/>• Removal of existing
-          system, Installation of new Air Handler Unit(AHU) and Condenser Unit
-          (CU), hurricane tie downs where required, purging and vacuum of
-          existing refrigeration (copper) lines, breaker upgrade where required‍<br/><br/>• Installation
-          of new digital thermostat<br/><br/>‍• Installation of a new float
-          switch (where required)<br/><br/>‍• Complete final cleanup and haul
-          away debris<br/><br/></div>
-
+          <p class="installation-header">Installation Includes:<br></p>
+          <div class="description-include w-richtext">
+            <ul>
+              <li>Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required</li>
+              <li>Installation of new digital thermostat</li>
+              <li>Installation of a new float switch (where required)</li>
+              <li>Complete final cleanup and haul away debris</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

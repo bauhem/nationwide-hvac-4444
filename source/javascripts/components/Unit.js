@@ -75,16 +75,10 @@ class Unit extends React.Component {
                alt={unit['Brand']}
                className="image-brand"/>
         </div>
-
-        {this.renderField('Tons')}
-        {this.renderField('SEER')}
-        {this.renderField('CU Model', 'Condenser', 'smaller')}
-        {this.renderField('AHU Model', 'Air Handler', 'smaller')}
-
         {
           // We show price only when we know the user's zone
           installation_price !== undefined && (
-            <div className="div-product-details">
+            <div className="div-product-details smaller">
               <div className="blue-text-left">Price including
                 installation
               </div>
@@ -92,6 +86,12 @@ class Unit extends React.Component {
             </div>
           )
         }
+        {this.renderField('Tons')}
+        {this.renderField('SEER')}
+        {this.renderField('CU Model', 'Condenser', 'smaller')}
+        {this.renderField('AHU Model', 'Air Handler', 'smaller')}
+
+
       </a>
     );
   }

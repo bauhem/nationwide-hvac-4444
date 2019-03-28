@@ -115,6 +115,25 @@ class UnitDetails extends React.Component {
           <div
             className="pricing smaller">${floatToPrice(price + installation_price)}</div>
           <div>Up to {unit['SEER']} SEER Performance</div>
+          <div className="div-flex-h align-new">
+            <a href="#"
+               data-item-id={item_id}
+               data-item-url={url}
+               data-item-name={model_name}
+               data-item-price={price}
+               data-item-description={description}
+               data-item-custom1-name="Installation Fees (based on zip code)"
+               data-item-custom1-options={installation_options}
+               data-item-metadata={JSON.stringify(metaData)}
+               className="button-financing w-button snipcart-add-item"
+               onClick={this.handleClick}>
+              Schedule Installation
+            </a>
+            <a href={brochure_url} target="_blank"
+               className="button-underline left-margin w-button">
+              Product Brochure
+            </a>
+          </div>
           <div className="more-spec">
             <div className="div-product-details smaller">
               <div><strong>Payment as low as ${financing_amount}</strong></div>
@@ -140,36 +159,17 @@ class UnitDetails extends React.Component {
           </div>
 
 
-          <div className="div-flex-h align-new">
-            <a href="#"
-               data-item-id={item_id}
-               data-item-url={url}
-               data-item-name={model_name}
-               data-item-price={price}
-               data-item-description={description}
-               data-item-custom1-name="Installation Fees (based on zip code)"
-               data-item-custom1-options={installation_options}
-               data-item-metadata={JSON.stringify(metaData)}
-               className="button added-top-margin  w-button snipcart-add-item"
-               onClick={this.handleClick}>
-              Schedule Installation
-            </a>
-            <a href={brochure_url} target="_blank"
-               className="button-underline left-margin w-button">
-              Product Brochure
-            </a>
-          </div>
-          <div className={"div-product-details smaller"}>{unit['Details']}</div>
-          <div className={"div-product-details smaller"}><br/><strong>Installation
-            Includes:‍</strong><br/>• Removal of existing system, Installation
-            of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie
-            downs where required, purging and vacuum of existing refrigeration
-            (copper) lines, breaker upgrade where required‍<br/><br/>•
-            Installation of new digital thermostat<br/><br/>‍• Installation of a
-            new float switch (where required)<br/><br/>‍• Complete final cleanup
-            and haul away debris
-          </div>
 
+          <div className={"div-product-details-text smaller"}>{unit['Details']}</div>
+          <p className={"installation-header"}>Installation Includes:<br/></p>
+          <div className={"description-include w-richtext"}>
+            <ul>
+              <li>Removal of existing system, Installation of new Air Handler Unit(AHU) and Condenser Unit (CU), hurricane tie downs where required, purging and vacuum of existing refrigeration (copper) lines, breaker upgrade where required</li>
+              <li>Installation of new digital thermostat</li>
+              <li>Installation of a new float switch (where required)</li>
+              <li>Complete final cleanup and haul away debris</li>
+            </ul>
+          </div>
         </div>
       </div>
     );
