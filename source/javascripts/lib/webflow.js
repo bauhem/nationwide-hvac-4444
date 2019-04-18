@@ -43,12 +43,32 @@
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -66,6 +86,7 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
@@ -76,6 +97,9 @@
 
 "use strict";
 
+
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 
 /**
  * Webflow: Core site library
@@ -203,7 +227,7 @@ Webflow.env = function (mode) {
     return window.WebflowEditor;
   }
   if (mode === 'test') {
-    return false || window.__wf_test;
+    return  false || window.__wf_test;
   }
   if (mode === 'frame') {
     return window !== window.top;
@@ -246,7 +270,6 @@ Webflow.redraw = eventProxy();
 
 // Create a proxy instance for throttled events
 function eventProxy(target, types) {
-
   // Set up throttled method (using custom frame-based _.throttle)
   var handlers = [];
   var proxy = {};
@@ -785,18 +808,22 @@ module.exports = api;
 "use strict";
 
 
-var _typeof2 = __webpack_require__(43);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 /*!
  * tram.js v0.8.2-global
  * Cross-browser CSS3 transitions in JavaScript
  * https://github.com/bkwld/tram
  * MIT License
  */
+/* prettier-ignore */
+
+var _typeof2 = __webpack_require__(43);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 window.tram = function (a) {
   function b(a, b) {
     var c = new M.Bare();return c.init(a, b);
@@ -1650,7 +1677,10 @@ Webflow.define('brand', module.exports = function ($) {
 "use strict";
 
 
+// @wf-will-never-add-flow-to-this-file
+/* eslint-disable */
 // Include tram for frame-throttling
+
 var $ = window.$;
 var tram = __webpack_require__(28) && $.tram;
 
@@ -5811,5 +5841,6 @@ Webflow.require('ix').init([
   {"slug":"close-search","name":"Close-search","value":{"style":{},"triggers":[{"type":"click","selector":".search-field","stepsA":[{"width":"38px","transition":"width 200 ease 0"}],"stepsB":[]},{"type":"click","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[]},{"type":"click","selector":".search-submit","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none","opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[]},{"type":"click","selector":".search-open-trigger","stepsA":[{"display":"flex","opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}},
   {"slug":"open-explanation","name":"open-explanation","value":{"style":{},"triggers":[{"type":"click","selector":".smaller-explanation-new","siblings":true,"stepsA":[{"height":"auto","transition":"height 200 ease 0"}],"stepsB":[{"height":"0px","transition":"height 200 ease 0"}]},{"type":"click","selector":".close","descend":true,"stepsA":[{"display":"block","opacity":0,"transition":"opacity 200 ease 0"},{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":0,"transition":"opacity 200 ease 0"},{"display":"none"}]}]}},
   {"slug":"wait-on-load","name":"Wait-on-load","value":{"style":{"display":"none","opacity":0},"triggers":[{"type":"load","stepsA":[{"wait":"4000ms"},{"display":"flex"},{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}},
-  {"slug":"slider-next-back-appear","name":"slider-next-back-appear","value":{"style":{},"triggers":[{"type":"click","selector":".next","stepsA":[{"display":"block","opacity":0,"transition":"opacity 200 ease 0"},{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}}
+  {"slug":"slider-next-back-appear","name":"slider-next-back-appear","value":{"style":{},"triggers":[{"type":"click","selector":".next","stepsA":[{"display":"block","opacity":0,"transition":"opacity 200 ease 0"},{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[]}]}},
+  {"slug":"check-box","name":"Check-box","value":{"style":{},"triggers":[{"type":"click","selector":".checkbox-button-grey","siblings":true,"stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}}
 ]);
