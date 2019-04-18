@@ -1468,6 +1468,9 @@ li {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  -webkit-flex-basis: 22%;
+  -ms-flex-preferred-size: 22%;
+  flex-basis: 22%;
 }
 
 .options.brand {
@@ -3596,10 +3599,14 @@ li {
   top: 0%;
   right: 0%;
   bottom: 0%;
+  z-index: 2;
   display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  font-size: 1.3vw;
 }
 
 .radio-button-field-new {
@@ -3634,10 +3641,10 @@ li {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   background-color: transparent;
   -webkit-transition-property: none;
   transition-property: none;
@@ -3656,12 +3663,12 @@ li {
   position: absolute;
   left: 0%;
   top: 0%;
-  right: 0%;
+  right: auto;
   bottom: 0%;
   display: block;
   width: 20px;
-  height: 20px;
-  margin-top: 5px;
+  height: 100%;
+  margin-top: 0px;
   margin-left: 0px;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
@@ -3783,11 +3790,14 @@ li {
 }
 
 .options-new.different-color-font.pale-border.top {
-  padding: 30px 24px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  padding: 30px 0px 30px 24px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-basis: 20%;
+  -ms-flex-preferred-size: 20%;
+  flex-basis: 20%;
 }
 
 .options-new.brand {
@@ -3841,8 +3851,8 @@ li {
 .smaller-explanation-new {
   overflow: hidden;
   height: auto;
-  margin-top: 20px;
   margin-bottom: 0px;
+  padding-right: 20px;
   font-size: 15px;
   line-height: 22px;
   text-align: left;
