@@ -38,4 +38,8 @@
 /airconditioningmaintenanceagreement	/ac-units/p-sc/	301
 /copy-of-nationwide-hvac-financing-a	/ac-units/p-sc/	301
 /york-heat-pumps	/ac-units/p-sc/	301
-/cms	https://nationwide-preview.ngrok.io/	301
+/preview	https://nationwide-preview.serveo.net/	301
+https://nationwide-hvac-prod.netlify.com/* https://www.nationwide-hvac.com/:splat 301!
+http://nationwide-hvac-prod.netlify.com/* https://www.nationwide-hvac.com/:splat 301!
+http://nationwide-preview.ngrok.io/* https://www.nationwide-hvac.com/:splat 301!
+https://nationwide-preview.ngrok.io/* https://www.nationwide-hvac.com/:splat 301!

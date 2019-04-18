@@ -19,7 +19,7 @@ exports.createOutputDir = function(dir, repositoryName) {
 
   if (!fs.existsSync(output_dir)) {
     fs.mkdirSync(output_dir, 0o0774);
-  }
+  } 
 
   let data_dir = path.join(output_dir, 'data');
 

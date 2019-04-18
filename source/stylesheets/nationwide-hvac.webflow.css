@@ -4942,7 +4942,6 @@ html.w-mod-js *[data-ix="wait-on-load"] {
     display: flex;
     overflow: hidden;
     width: 100%;
-    height: 40px;
     margin-top: 20px;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
@@ -6216,4 +6215,3 @@ html.w-mod-js *[data-ix="wait-on-load"] {
     grid-row-end: 2;
   }
 }
-

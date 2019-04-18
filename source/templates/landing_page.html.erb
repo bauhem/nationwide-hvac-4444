@@ -1,3 +1,8 @@
+<% if landing.dont_index %>
+---
+hidden: true
+---
+<% end %>
 
 <%= content_for(:head) do
   display_meta_tags title: "#{landing.title} - Nationwide HVAC"
