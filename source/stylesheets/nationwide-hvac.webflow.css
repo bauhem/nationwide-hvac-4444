@@ -3663,12 +3663,12 @@ li {
   position: absolute;
   left: 0%;
   top: 0%;
-  right: 0%;
+  right: auto;
   bottom: 0%;
   display: block;
   width: 20px;
-  height: 20px;
-  margin-top: 50%;
+  height: 100%;
+  margin-top: 0px;
   margin-left: 0px;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
