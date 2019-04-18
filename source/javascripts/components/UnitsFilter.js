@@ -7,7 +7,6 @@ export function unitsFilter(ctx) {
     .filter(filterOutByTons.bind(this, state.tonnage))
     .filter(filterOutClosetWaterUnderAirHandler.bind(this, state.air_handler_location, state.water_heater_under_air_handler))
     .filter(filterOutSingleStageFrontReturn.bind(this, state.air_handler_location))
-    .filter(filterOutByBrand.bind(this, state.selected_brands));
   return filtered_units;
 }
 
@@ -26,7 +25,7 @@ function filterOutBySystemType(type, unit) {
     return false;
   }
 
-  return type.trim() === unit['System Type'].trim();
+  return type.trim() === unitType.trim();
 }
 
 function filterOutByTons(tons, unit) {
@@ -36,7 +35,7 @@ function filterOutByTons(tons, unit) {
     return false;
   }
 
-  return tons === unitTons;
+  return tons == unitTons;
 }
 
 function filterOutClosetWaterUnderAirHandler(ah_loc, wh_under_ah, unit) {
