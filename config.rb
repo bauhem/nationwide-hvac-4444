@@ -149,9 +149,9 @@ end
 
 configure :build do
   activate :minify_css, inline: true
-  activate :minify_javascript, compressor: proc {
-      ::Uglifier.new(harmony: true)
-    }
+  # activate :minify_javascript, compressor: proc {
+  #     ::Uglifier.new(harmony: true)
+  #   }
   activate :minify_html
   activate :relative_assets
   activate :asset_hash, :ignore => [%r{#fonts/.*}, %r{#stylesheets/fonts/.*}]

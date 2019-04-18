@@ -1,18 +1,48 @@
 import React from 'react'
 import {Machine, actions} from 'xstate';
+import {LOCAL_STORAGE_KEY} from "./QuoteBuilder";
 
 const {assign} = actions;
 
+function getState() {
+  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+}
+
+function getSystemType() {
+  return getState().system_type_structure;
+}
+
+function getAirHandlerLocation() {
+  return getState().air_handler_location;
+}
+
+function getCondenserUnitLocation() {
+  return getState().condenser_unit_location;
+}
+
 function isSplitSystem(ctx, event) {
-  return event.value === 'split_system';
+  return getSystemType() === 'split_system';
 }
 
 function isPackagedSystem(ctx, event) {
-  return event.value === 'packaged_system';
+  return getSystemType() === 'packaged_system';
 }
 
 function isWaterSystem(ctx, event) {
-  return event.value === 'water_system';
+  return getSystemType() === 'water_system';
+}
+
+function showWaterHeater(ctx, event) {
+  return getAirHandlerLocation() == 'closet';
+}
+
+function showAirHandlerType(ctx, event) {
+  let airHandlerLoc = getAirHandlerLocation();
+  return airHandlerLoc == 'garage' || airHandlerLoc == 'other';
+}
+
+function showRoofAccess(ctx, event) {
+  return getCondenserUnitLocation() == 'roof';
 }
 
 const QuoteSM = Machine({
@@ -42,17 +72,17 @@ const QuoteSM = Machine({
             target: "AirSystemFilterLocation", cond: 'isWaterSystem'
           },
         ],
-        LOAD_MODEL: 'ModelNumber'
+        NOT_SURE: 'CondenserModelNumber'
       },
     },
-    ModelNumber: {
+    CondenserModelNumber: {
       on: {
         SUBMIT: [
           {target: "AirHandlerLocation", cond: 'isSplitSystem'},
           {target: "PackagedSystemLocation", cond: 'isPackagedSystem'},
           {target: "AirSystemFilterLocation", cond: 'isWaterSystem'},
         ],
-        LOAD_SQUARE_FOOTAGE: 'SquareFootage'
+        NOT_SURE: 'SquareFootage'
       }
     },
     SquareFootage: {
@@ -62,7 +92,7 @@ const QuoteSM = Machine({
           {target: "PackagedSystemLocation", cond: 'isPackagedSystem'},
           {target: "AirSystemFilterLocation", cond: 'isWaterSystem'},
         ],
-        CALL_US: 'CallUs'
+        NOT_SURE: 'CallUs'
       }
     },
     CallUs: {
@@ -79,9 +109,11 @@ const QuoteSM = Machine({
     },
     AirHandlerLocation: {
       on: {
-        LOAD_WATER_HEATER: 'WaterHeaterUnderAirHandler',
-        LOAD_AIR_HANDLER_TYPE: 'AirHandlerType',
-        SUBMIT: 'CondenserUnitLocation'
+        SUBMIT: [
+          {target: "WaterHeaterUnderAirHandler", cond: 'showWaterHeater'},
+          {target: "AirHandlerType", cond: 'showAirHandlerType'},
+          {target: 'CondenserUnitLocation'}
+        ]
       }
     },
     WaterHeaterUnderAirHandler: {
@@ -96,8 +128,10 @@ const QuoteSM = Machine({
     },
     CondenserUnitLocation: {
       on: {
-        SUBMIT: 'UserInfo',
-        LOAD_ROOF_ACCESS: 'RoofAccess'
+        SUBMIT: [
+          {target: 'RoofAccess', cond: 'showRoofAccess'},
+          {target: 'UserInfo'}
+        ]
       }
     },
     RoofAccess: {
@@ -159,7 +193,10 @@ const QuoteSM = Machine({
   guards: {
     isSplitSystem,
     isPackagedSystem,
-    isWaterSystem
+    isWaterSystem,
+    showAirHandlerType,
+    showWaterHeater,
+    showRoofAccess
   }
 });
 

@@ -1,11 +1,12 @@
 import React from "react";
 import config from "react-global-configuration";
-import QuoteCtx from "./QuoteCtx";
-import {unitImage} from "./UnitHelpers";
+import QuoteCtx from "../QuoteCtx";
+import {unitImage} from "../UnitHelpers";
+import SlideHeader from "../Layout/SlideHeader";
 
-const accessories = require('../../../data/accessories.json');
-const warranty = require('../../../data/warranty.json');
-const thermostats = require('../../../data/thermostats.json');
+const accessories = require('../../../../data/accessories.json');
+const warranty = require('../../../../data/warranty.json');
+const thermostats = require('../../../../data/thermostats.json');
 
 class Accessories extends React.Component {
   constructor(props) {
@@ -42,7 +43,6 @@ class Accessories extends React.Component {
     switch (this.context.currentState) {
       case 'Thermostats':
         items = thermostats;
-        actionBtn = this.nextBtn();
         title = 'Choose Thermostat';
         break;
       case 'Warranty':
@@ -51,7 +51,6 @@ class Accessories extends React.Component {
         title = 'Choose Warranty';
         break;
       case 'Accessories':
-        actionBtn = this.nextBtn();
       default:
         items = accessories;
         title = 'Choose Accessories';
@@ -96,9 +95,7 @@ class Accessories extends React.Component {
 
     return (
       <>
-        <div className="div-heading-slide">
-          <h3 className="titre-big">{title}</h3>
-        </div>
+        <SlideHeader title={title}/>
         <div className="div-full-height">
           {accComponents}
         </div>

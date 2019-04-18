@@ -1,8 +1,9 @@
 import React from "react";
-import QuoteCtx from './QuoteCtx';
-import {getZone} from './UnitHelpers';
+import QuoteCtx from '../QuoteCtx';
+import {getZone} from '../UnitHelpers';
+import SlideHeader from "../Layout/SlideHeader";
 
-const zipData = require('../../../data/zip_codes.json');
+const zipData = require('../../../../data/zip_codes.json');
 
 const encode = (data) => {
   return Object.keys(data)
@@ -56,6 +57,8 @@ class UserInfo extends React.Component {
       let zone = getZone(zip_code);
       state['zone_num'] = zone;
 
+      this.props.saveValues(state);
+
       if (zone === null) {
         // TODO - Add message why we got to contact us
         return this.props.transition({type: 'INVALID_ZIP'});
@@ -66,7 +69,7 @@ class UserInfo extends React.Component {
         UserInfo.sendUserInfo(state);
       }
 
-      return this.props.saveAndContinue(state);
+      return this.props.transition({type: 'SUBMIT'});
     }
 
     this.zip.current.reportValidity();
@@ -75,12 +78,8 @@ class UserInfo extends React.Component {
   render() {
     return (
       <>
-        <div className="div-heading-slide">
-          <h3 className="titre-big">
-            Send us your name, email address, phone number and zip code to get
-            your quotes
-          </h3>
-        </div>
+        <SlideHeader title={"Send us your name, email address, phone number and zip code to get your quotes"}/>
+
         <div className="div-flex-h">
           <input type="text" className="zipcode w-input" maxLength="256"
                  name="name" placeholder="Your name"

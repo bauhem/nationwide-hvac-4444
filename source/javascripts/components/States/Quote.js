@@ -1,13 +1,14 @@
 import React from "react";
 import config from "react-global-configuration";
 
-import QuoteCtx from "./QuoteCtx";
-import Unit from "./Unit";
-import BrandFilters from "./BrandFilters";
-import SEERFilters from "./SEERFilters";
-import {withMixitup} from "./hoc/UseMixitup";
-import SortFilters from "./SortFilters";
-import MobileFilterBox from "./MobileFilterBox";
+import QuoteCtx from "../QuoteCtx";
+import Unit from "../Unit";
+import BrandFilters from "../BrandFilters";
+import SEERFilters from "../SEERFilters";
+import {withMixitup} from "../HOC/UseMixitup";
+import SortFilters from "../SortFilters";
+import MobileFilterBox from "../Layout/MobileFilterBox";
+import SlideHeader from "../Layout/SlideHeader";
 
 
 class Quote extends React.Component {
@@ -50,9 +51,8 @@ class Quote extends React.Component {
 
     return (
       <>
-        <div className="div-heading-slide">
-          <h3 className="titre-big">Here are the best results for you:</h3>
-        </div>
+        <SlideHeader title={"Here are the best results for you:"}/>
+
         <div className="div-flex-h align-start">
           <div className="div-20">
             <MobileFilterBox numResults={units.length}/>

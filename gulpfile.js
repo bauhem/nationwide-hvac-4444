@@ -9,12 +9,11 @@ var log = require('gulplog');
 var envify = require('envify/custom');
 var changed = require('gulp-changed');
 
-
 var debug = (process.env.NODE_ENV !== 'production');
 
 var jsFiles = {
   source: [
-    "./source/javascripts/**/*.js",
+    "./source/javascripts/*.js",
     "!./source/javascripts/lib/**"
   ],
   no_browserify: [
@@ -47,7 +46,6 @@ gulp.task('data_files', function () {
 
 gulp.task("browserify", function () {
   return gulp.src(jsFiles.source, {read: false})
-    //.pipe(changed(dest))
     .pipe(tap(function (file) {
       if (debug) {
         log.info("bundling " + file.path);

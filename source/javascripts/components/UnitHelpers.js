@@ -2,8 +2,8 @@ import config from "react-global-configuration";
 
 const zipData = require('../../../data/zip_codes.json');
 
-function systemTypeName(systemTypes, type) {
-  let system_type_info = systemTypes.find((type_info) => {
+function systemTypeName(system_type_structure, type) {
+  let system_type_info = config.get(system_type_structure).find((type_info) => {
     return type_info.type === type
   });
 
@@ -30,9 +30,9 @@ export function brandLogoImage(unit) {
   });
 }
 
-export function unitDescription(systemTypes, unit) {
+export function unitDescription(system_type_structure, unit) {
   let st = unit['System Type'];
-  return `${systemTypeName(systemTypes, st)} ${unit['Brand Series']} by ${unit['Brand']}`;
+  return `${systemTypeName(system_type_structure, st)} ${unit['Brand Series']} by ${unit['Brand']}`;
 }
 
 export function unitID(unit) {

@@ -1,53 +1,75 @@
 import React from 'react';
-import config from 'react-global-configuration';
 
 import QuoteSM from "./QuoteSM";
 import QuoteCtx from "./QuoteCtx";
-import SystemTypeStructure from "./SystemTypeStructure";
-import SystemTypes from "./SystemTypes";
-import Tonnage from "./Tonnage";
-import ModelNumber from "./ModelNumber";
-import AirHandlerLocation from "./AirHandlerLocation";
-import AirHandlerType from "./AirHandlerType";
-import RoofAccess from "./RoofAccess";
-import CondenserUnitLocation from "./CondenserUnitLocation";
-import SquareFootage from "./SquareFootage";
-import CallUs from "./CallUs";
-import WaterHeaterUnderAirHandler from "./WaterHeaterUnderAirHandler";
-import PackagedSystemLocation from "./PackagedSystemLocation";
-import AirSystemFilterLocation from "./AirSystemFilterLocation";
-import Quote from "./Quote";
-import UserInfo from "./UserInfo";
-import Accessories from "./Accessories";
-import UnitDetails from "./UnitDetails";
+import SystemTypeStructure from "./States/SystemTypeStructure";
+import SystemTypes from "./States/SystemTypes";
+import Tonnage from "./States/Tonnage";
+import CondenserModelNumber from "./States/CondenserModelNumber";
+import AirHandlerLocation from "./States/AirHandlerLocation";
+import AirHandlerType from "./States/AirHandlerType";
+import RoofAccess from "./States/RoofAccess";
+import CondenserUnitLocation from "./States/CondenserUnitLocation";
+import SquareFootage from "./States/SquareFootage";
+import CallUs from "./States/CallUs";
+import WaterHeaterUnderAirHandler from "./States/WaterHeaterUnderAirHandler";
+import PackagedSystemLocation from "./States/PackagedSystemLocation";
+import AirSystemFilterLocation from "./States/AirSystemFilterLocation";
+import Quote from "./States/Quote";
+import UserInfo from "./States/UserInfo";
+import Accessories from "./States/Accessories";
+import UnitDetails from "./States/UnitDetails";
 
 import {unitsFilter, brandsFilter} from "./UnitsFilter";
-import InvalidZip from "./InvalidZip";
+import InvalidZip from "./States/InvalidZip";
+
+export const LOCAL_STORAGE_KEY = 'instantQuoteValues';
 
 const StatesComponents = {
-  SystemTypeStructure: SystemTypeStructure,
-  SystemTypes: SystemTypes,
-  Tonnage: Tonnage,
-  ModelNumber: ModelNumber,
-  SquareFootage: SquareFootage,
-  AirHandlerLocation: AirHandlerLocation,
-  WaterHeaterUnderAirHandler: WaterHeaterUnderAirHandler,
-  AirHandlerType: AirHandlerType,
-  CondenserUnitLocation: CondenserUnitLocation,
-  RoofAccess: RoofAccess,
-  PackagedSystemLocation: PackagedSystemLocation,
-  AirSystemFilterLocation: AirSystemFilterLocation,
-  CallUs: CallUs,
-  InvalidZip: InvalidZip,
-  UserInfo: UserInfo,
-  Quote: Quote,
-  UnitDetails: UnitDetails,
-  Thermostats: Accessories,
-  Accessories: Accessories,
-  Warranty: Accessories
+  SystemTypeStructure: {
+    comp: SystemTypeStructure,
+    ctx_key: 'system_type_structure'
+  },
+  SystemTypes: {comp: SystemTypes, ctx_key: 'system_type'},
+  Tonnage: {comp: Tonnage, ctx_key: 'tonnage'},
+  CondenserModelNumber: {
+    comp: CondenserModelNumber,
+    ctx_key: 'condenser_model_number'
+  },
+  SquareFootage: {comp: SquareFootage, ctx_key: 'sqft'},
+  AirHandlerLocation: {
+    comp: AirHandlerLocation,
+    ctx_key: 'air_handler_location'
+  },
+  WaterHeaterUnderAirHandler: {
+    comp: WaterHeaterUnderAirHandler,
+    ctx_key: 'water_heater_under_air_handler'
+  },
+  AirHandlerType: {comp: AirHandlerType, ctx_key: 'air_handler_type'},
+  CondenserUnitLocation: {
+    comp: CondenserUnitLocation,
+    ctx_key: 'condenser_unit_location'
+  },
+  RoofAccess: {comp: RoofAccess, ctx_key: 'roof_access'},
+  PackagedSystemLocation: {
+    comp: PackagedSystemLocation,
+    ctx_key: 'packaged_system_location'
+  },
+  AirSystemFilterLocation: {
+    comp: AirSystemFilterLocation,
+    ctx_key: 'air_filter_side'
+  },
+  CallUs: {comp: CallUs, ctx_key: ''},
+  InvalidZip: {comp: InvalidZip, ctx_key: ''},
+  UserInfo: {comp: UserInfo, ctx_key: ''},
+  Quote: {comp: Quote, ctx_key: ''},
+  UnitDetails: {comp: UnitDetails, ctx_key: ''},
+  Thermostats: {comp: Accessories, ctx_key: ''},
+  Accessories: {comp: Accessories, ctx_key: ''},
+  Warranty: {comp: Accessories, ctx_key: ''}
 };
 
-const saved_values = JSON.parse(localStorage.getItem('instantQuoteValues'));
+const saved_values = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 const stateMachine = QuoteSM;
 
 class QuoteBuilder extends React.Component {
@@ -74,7 +96,6 @@ class QuoteBuilder extends React.Component {
     return {
       currentState: stateMachine.initialState.value,
       system_type_structure: null,
-      system_types: null,
       system_type: null,
       tonnage: null,
       air_handler_location: null,
@@ -102,7 +123,7 @@ class QuoteBuilder extends React.Component {
 
   onOrderCompleted(data) {
     Snipcart.api.modal.close();
-    console.log('order completed: '  + data);
+    console.log('order completed: ' + data);
     this.transition({type: 'RESET'});
   }
 
@@ -111,8 +132,14 @@ class QuoteBuilder extends React.Component {
       this.prevState();
     } else {
       // This verification allows us to use HTML5 field validation
-      if (!this.validateForm()) {
-        return false;
+      if (event.type === "SUBMIT") {
+        if (!this.validateForm()) {
+          return false;
+        }
+      }
+
+      if (event.value === undefined) {
+        event.value = this.state.system_type_structure;
       }
 
       const nextQuoteState = stateMachine.transition(this.state.currentState, event);
@@ -197,22 +224,57 @@ class QuoteBuilder extends React.Component {
     )
   }
 
+  nextBtn() {
+    return (
+      <div key="next-btn" className="next w-slider-arrow-right"
+           onClick={() => this.transition({type: "SUBMIT"})}>
+        <div>Next</div>
+      </div>
+    );
+  }
+
   validateForm() {
+    let currStateKey = StatesComponents[this.state.currentState].ctx_key;
+    let validFormMsg = '';
+
+    if (currStateKey !== '') {
+
+      // TODO - A bit sketchy. Should have a stronger mecanism to validate each
+      // slide
+      if (!this.state[currStateKey] || this.state[currStateKey] == "Not Sure") {
+        validFormMsg = "Please select an option to continue";
+      }
+
+      this.form.current[0].setCustomValidity(validFormMsg);
+    }
+
     return this.form.current.reportValidity();
   }
 
   componentDidUpdate() {
-    localStorage.setItem('instantQuoteValues', JSON.stringify(this.state));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.state));
+  }
+
+  showNext() {
+    return QuoteSM.states[this.state.currentState].type !== 'final'
+      && this.state.currentState !== 'UserInfo'
+      && this.state.currentState !== 'Quote'
+      && this.state.currentState !== 'UnitDetails';
   }
 
   render() {
-    const SlideComponent = StatesComponents[this.state.currentState];
+    const SlideComponent = StatesComponents[this.state.currentState].comp;
+    const ctx_key = StatesComponents[this.state.currentState].ctx_key;
     let buttons = [];
     let second_slide = '';
 
     if (this.state.currentState !== QuoteSM.initialState.value) {
       buttons.push(this.backBtn());
       second_slide = 'second'
+    }
+
+    if (this.showNext()) {
+      buttons.push(this.nextBtn());
     }
 
     return (
@@ -224,7 +286,9 @@ class QuoteBuilder extends React.Component {
                 <div className="form-wrapper second w-form">
                   <form id="wf-form-msf" name="wf-form-msf"
                         className="form-full-width" ref={this.form}>
-                    <SlideComponent saveValues={this.saveValues}
+                    <SlideComponent value={this.state[ctx_key]}
+                                    ctx_key={ctx_key}
+                                    saveValues={this.saveValues}
                                     saveAndContinue={this.saveAndContinue}
                                     transition={this.transition}
                                     validateForm={this.validateForm}
