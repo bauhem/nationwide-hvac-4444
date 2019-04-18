@@ -3668,7 +3668,7 @@ li {
   display: block;
   width: 20px;
   height: 20px;
-  margin-top: 15px;
+  margin-top: 50%;
   margin-left: 0px;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
@@ -3791,10 +3791,10 @@ li {
 
 .options-new.different-color-font.pale-border.top {
   padding: 30px 0px 30px 24px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-flex-basis: 20%;
   -ms-flex-preferred-size: 20%;
   flex-basis: 20%;
