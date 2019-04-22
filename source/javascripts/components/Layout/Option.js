@@ -44,9 +44,9 @@ class Option extends React.Component {
           {
             (description !== undefined) &&
             <>
-              <div className="div-learn" data-ix="open-explanation">
+              <div className="div-learn" data-ix="open-explanation-2">
                 <div>Learn more</div>
-                <div className="close" data-ix="open-explanation">Close</div>
+                <div className="close">Close</div>
               </div>
             </>
           }

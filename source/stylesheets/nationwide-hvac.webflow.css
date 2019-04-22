@@ -6153,6 +6153,9 @@ html.w-mod-js *[data-ix="wait-on-load"] {
     background-color: #fff;
     opacity: 0;
   }
+  .form-label-trigger {
+    z-index: 0;
+  }
   .installation-header {
     font-size: 5.5vw;
     line-height: 7vw;
