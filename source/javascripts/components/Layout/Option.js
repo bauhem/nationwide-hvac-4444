@@ -68,7 +68,7 @@ class Option extends React.Component {
             <strong>{title}</strong>
           </label>
           {
-            (description !== undefined) &&
+            (description !== undefined && description != '') &&
             <div onClick={this.openExplanation} ref={this.openExplanationRef} className="div-learn">
               <div>Learn more</div>
               <div ref={this.closeExplanationRef} onClick={this.closeExplanation} className="close">Close</div>
