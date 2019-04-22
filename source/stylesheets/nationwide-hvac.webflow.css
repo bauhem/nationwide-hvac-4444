@@ -5614,8 +5614,8 @@ html.w-mod-js *[data-ix="wait-on-load"] {
     background-color: #fff;
   }
   .next {
-    margin-right: auto;
-    margin-left: 8%;
+    margin-right: 8%;
+    margin-left: auto;
   }
   .next.final {
     bottom: 5px;
@@ -5687,12 +5687,12 @@ html.w-mod-js *[data-ix="wait-on-load"] {
     padding-bottom: 30px;
   }
   .previous {
-    left: auto;
+    left: 0%;
     top: auto;
-    right: 0%;
+    right: auto;
     bottom: 0%;
-    margin-right: 8%;
-    margin-left: 0%;
+    margin-right: auto;
+    margin-left: 8%;
   }
   .titre-big {
     font-size: 20px;
