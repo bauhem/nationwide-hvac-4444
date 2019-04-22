@@ -193,7 +193,9 @@ class QuoteBuilder extends React.Component {
 
     // TODO - Best thing here would be to revert each field as we go back.
     if (history.length === 0) {
+      let curr_system_type_structure = this.state.system_type_structure;
       curr_obj_state = QuoteBuilder.defaultState();
+      curr_obj_state.system_type_structure = curr_system_type_structure;
       prevState = stateMachine.initialState.value;
     }
 
