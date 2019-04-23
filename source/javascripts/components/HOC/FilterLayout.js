@@ -19,7 +19,7 @@ export function withFilterLayout(FilterComponent) {
           <div className="div-search-header" data-ix="increase-size-filter">
             <div>{name}</div>
             <div
-              className="button-overlay-mobile" data-ix="increase-size-filter">
+              className="button-overlay-mobile " data-ix="increase-size-filter">
               <img src={arrowRightImgUrl} width="20" alt=""
                    className="arrow-icon" />
             </div>
