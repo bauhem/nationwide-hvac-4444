@@ -255,8 +255,11 @@ class QuoteBuilder extends React.Component {
 
   componentDidUpdate() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.state));
-    Webflow.destroy();
-    Webflow.ready();
+
+    if (Webflow) {
+      Webflow.destroy();
+      Webflow.ready();
+    }
   }
 
   showNext() {
