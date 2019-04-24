@@ -41,7 +41,7 @@ module FilterHelpers
       div_content.join
     end
 
-    link_to '#', class: "filter_button w-inline-block", 'data-toggle': filter do
+    link_to '#', class: "filter_button w-inline-block", 'data-ix': 'close-filter', 'data-toggle': filter do
       link_content.join
     end
   end
@@ -67,7 +67,7 @@ module FilterHelpers
       div_content.join
     end
 
-    link_to '#', class: "radio-link filter_button w-inline-block", 'data-link': link do
+    link_to '#', class: "radio-link filter_button w-inline-block", 'data-ix': 'close-filter', 'data-link': link do
       div.join
     end
 

@@ -33,7 +33,7 @@ class MixitupFilter extends React.Component {
       )
     } else {
       return (
-        <a href="#" className={filterCls} {...extraProps}>
+        <a href="#" data-ix="close-filter" className={filterCls} {...extraProps}>
           {filter_inner_content}
         </a>
       )
