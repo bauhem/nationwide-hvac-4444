@@ -13,7 +13,7 @@ const BrandFilters = ({brands}) => {
   });
 
   return (
-    <div className="dropdown" data-filter-group={'brand'}>
+    <div className="dropdown" data-ix="close-filter" data-filter-group={'brand'}>
       {filters}
     </div>
   );
